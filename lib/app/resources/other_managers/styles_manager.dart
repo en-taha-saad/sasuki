@@ -1,62 +1,70 @@
 // TODO : add text syles
-// TextStyle _getTextStyle(
-//   double fontSize,
-//   FontWeight fontWeight,
-//   Color color,
-// ) {
-//   return TextStyle(
-//     fontSize: fontSize,
-//     // fontFamily: FontConstants.fontFamily,
-//     color: color,
-//     fontWeight: fontWeight,
-//   );
-// }
+import 'package:flutter/material.dart';
+import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/resources/fonts_manager/fontweight_manager.dart';
 
-// // regular style
-// TextStyle getRegularStyle({
-//   double fontSize = FontSize.s12,
-//   required Color color,
-// }) {
-//   return _getTextStyle(
-//     fontSize,
-//     FontWeightManager.regular,
-//     color,
-//   );
-// }
+class StylesManager {
+  static TextStyle getTextStyle(
+    double fontSize,
+    FontWeight fontWeight,
+    Color color,
+  ) {
+    return TextStyle(
+      fontSize: fontSize,
+      fontFamily: Constants.fontFamily,
+      color: color,
+      fontWeight: fontWeight,
+    );
+  }
 
-// // medium style
-// TextStyle getMediumStyle({
-//   double fontSize = FontSize.s12,
-//   required Color color,
-// }) {
-//   return _getTextStyle(
-//     fontSize,
-//     FontWeightManager.medium,
-//     color,
-//   );
-// }
+// regular style
+  TextStyle getRegularStyle({
+    required double fontSize,
+    required Color color,
+  }) {
+    return getTextStyle(
+      fontSize,
+      FontWeightManager.regular,
+      color,
+    );
+  }
 
-// // medium style
-// TextStyle getLightStyle({
-//   double fontSize = FontSize.s12,
-//   required Color color,
-// }) {
-//   return _getTextStyle(
-//     fontSize,
-//     FontWeightManager.light,
-//     color,
-//   );
-// }
+// medium style
+  TextStyle getMediumStyle(
+    double fontSize,
+    FontWeight fontWeight,
+    Color color,
+  ) {
+    return getTextStyle(
+      fontSize,
+      FontWeightManager.medium,
+      color,
+    );
+  }
 
-// // bold style
-// TextStyle getBoldStyle({double fontSize = FontSize.s12, required Color color}) {
-//   return _getTextStyle(fontSize, FontWeightManager.bold, color);
-// }
+// semibold style
+  TextStyle getSemiBoldStyle(
+    double fontSize,
+    FontWeight fontWeight,
+    Color color,
+  ) {
+    return getTextStyle(
+      fontSize,
+      FontWeightManager.semiBold,
+      color,
+    );
+  }
 
-// // semibold style
-// TextStyle getSemiBoldStyle({
-//   double fontSize = FontSize.s12,
-//   required Color color,
-// }) {
-//   return _getTextStyle(fontSize, FontWeightManager.semiBold, color);
-// }
+// bold style
+  TextStyle getBoldStyle(
+    double fontSize,
+    FontWeight fontWeight,
+    Color color,
+  ) {
+    return getTextStyle(
+      fontSize,
+      FontWeightManager.bold,
+      color,
+    );
+  }
+}
