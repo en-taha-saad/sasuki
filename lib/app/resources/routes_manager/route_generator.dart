@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
@@ -11,7 +12,7 @@ class RouteGenerator {
           builder: (_) => const AppBackground(
             child: Center(
               child: Text(
-                Routes.splashRoute,
+                Routes.drawerRoute,
               ),
             ),
           ),
@@ -23,6 +24,11 @@ class RouteGenerator {
             child: Center(
               child: Text(
                 Routes.splashRoute,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontFamily: Constants.fontFamily,
+                ),
               ),
             ),
           ),

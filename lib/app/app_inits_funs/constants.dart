@@ -15,5 +15,5 @@ class Constants {
   static const double mobileScreenBreakpoint = 480;
   static const double tabletScreenBreakpoint = 800;
   static const double desktopScreenBreakpoint = 1000;
-  
+  static const String fontFamily = "IBMPlexSans";
 }
