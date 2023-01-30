@@ -20,11 +20,11 @@ flutter:
   fonts:
     - family: IBMPlexSans
       fonts:
-        - asset: assets/font/ibm_plex_sans/IBMPlexSans-Regular.ttf
+        - asset: assets/font/IBMPlexSans-Regular.ttf
           weight: 400
-        - asset: assets/font/ibm_plex_sans/IBMPlexSans-Medium.ttf
+        - asset: assets/font/IBMPlexSans-Medium.ttf
           weight: 500
-        - asset: assets/font/ibm_plex_sans/IBMPlexSans-SemiBold.ttf
+        - asset: assets/font/IBMPlexSans-SemiBold.ttf
           weight: 600
-        - asset: assets/font/ibm_plex_sans/IBMPlexSans-Bold.ttf
+        - asset: assets/font/IBMPlexSans-Bold.ttf
           weight: 700
