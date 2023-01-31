@@ -1,3 +1,3 @@
 class AppMargin {
-  // TODO : Add your margin here
+  static const double m25 = 25;
 }

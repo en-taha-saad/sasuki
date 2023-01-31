@@ -1,107 +1,110 @@
 import 'package:flutter/material.dart';
+import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
+import 'package:sasuki/app/resources/other_managers/color_manager.dart';
+import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
+import 'package:sasuki/app/resources/values_manager/app_padding.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
+import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
 ThemeData getApplicationTheme() {
-  /// TODO : add theme data
   return ThemeData(
-      // // main colors
-      // useMaterial3: true,
-      // colorScheme: ColorScheme.light(
-      //   primary: ColorManager.primary,
-      //   secondary: ColorManager.white,
-      // ),
-      // // app bar theme
-      // appBarTheme: AppBarTheme(
-      //   backgroundColor: ColorManager.primary,
-      //   centerTitle: true,
-      //   elevation: AppSize.s10,
-      //   shadowColor: ColorManager.black.withOpacity(AppOpacity.op25),
-      //   iconTheme: IconThemeData(
-      //     color: ColorManager.white,
-      //     size: AppSize.s36,
-      //   ),
-      //   actionsIconTheme: IconThemeData(
-      //     color: ColorManager.white,
-      //     size: AppSize.s36,
-      //   ),
-      //   systemOverlayStyle: const SystemUiOverlayStyle(
-      //     statusBarColor: Colors.transparent,
-      //     statusBarIconBrightness: Brightness.light,
-      //   ),
-      //   titleTextStyle: getSemiBoldStyle(
-      //     fontSize: FontSize.s28,
-      //     color: ColorManager.white.withOpacity(AppOpacity.op70),
-      //   ),
-      // ),
+    // base theme
+    useMaterial3: Constants.trueBool,
+    fontFamily: Constants.fontFamily,
+    colorScheme: const ColorScheme.light(
+      primary: ColorManager.primaryshade1,
+      secondary: ColorManager.secondary,
+    ),
 
-      // // elevated button theme
-      // elevatedButtonTheme: ElevatedButtonThemeData(
-      //   style: ElevatedButton.styleFrom(
-      //     padding: const EdgeInsets.symmetric(
-      //       horizontal: AppSize.s16,
-      //       vertical: AppSize.s10,
-      //     ),
-      //     textStyle: getRegularStyle(
-      //       color: ColorManager.primary,
-      //       fontSize: FontSize.s20,
-      //     ),
-      //     foregroundColor: ColorManager.primary,
-      //     backgroundColor: ColorManager.white,
-      //     shape: RoundedRectangleBorder(borderRadius: AppSize.radius10),
-      //     disabledBackgroundColor: ColorManager.disabledElevatedButton,
-      //     disabledForegroundColor: ColorManager.white.withOpacity(
-      //       AppOpacity.op20,
-      //     ),
-      //     elevation: AppSize.s4,
-      //   ),
-      // ),
+    // elevated button theme
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppPadding.p25,
+          vertical: AppPadding.p10Point5,
+        ),
+        foregroundColor: ColorManager.whiteNeutral,
+        backgroundColor: ColorManager.primaryshade1,
+        textStyle: StylesManager.getSemiBoldStyle(
+          fontSize: FontSize.sButton,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: RadiusSizes.radius12,
+        ),
+      ),
+    ),
 
-      // // text button theme
-      // textButtonTheme: TextButtonThemeData(
-      //   style: TextButton.styleFrom(
-      //     padding: const EdgeInsets.all(AppSize.s12),
-      //     textStyle: getRegularStyle(
-      //       color: ColorManager.white,
-      //       fontSize: FontSize.s15,
-      //     ),
-      //     foregroundColor: ColorManager.white,
-      //     shape: RoundedRectangleBorder(
-      //       borderRadius: AppSize.radius10,
-      //       side: BorderSide(
-      //         color: ColorManager.white,
-      //         width: AppSize.s1_5,
-      //       ),
-      //     ),
-      //     disabledBackgroundColor: ColorManager.primary.withOpacity(
-      //       AppOpacity.op05,
-      //     ),
-      //     disabledForegroundColor: ColorManager.white.withOpacity(
-      //       AppOpacity.op20,
-      //     ),
-      //     elevation: AppSize.s0,
-      //   ),
-      // ),
+    // text button theme
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          vertical: AppPadding.p10Point5,
+          horizontal: AppPadding.p25,
+        ),
+        textStyle: StylesManager.getSemiBoldStyle(
+          fontSize: FontSize.sButton,
+        ),
+        foregroundColor: ColorManager.whiteNeutral,
+      ),
+    ),
 
-      // textSelectionTheme: TextSelectionThemeData(
-      //   cursorColor: ColorManager.white,
-      //   selectionColor: ColorManager.white.withOpacity(AppOpacity.op20),
-      //   selectionHandleColor: ColorManager.transparent,
-      // ),
-      // // input decoration theme (text form field)
-      // inputDecorationTheme: InputDecorationTheme(
-      //   // content padding
-      //   contentPadding: const EdgeInsets.all(AppPadding.p8),
+    // text field cursor theme
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: ColorManager.whiteNeutral,
+      selectionColor: ColorManager.whiteNeutral,
+      selectionHandleColor: ColorManager.transparent,
+    ),
 
-      //   // hint style
-      //   hintStyle: getRegularStyle(
-      //     color: ColorManager.white.withOpacity(AppOpacity.op40),
-      //     fontSize: FontSize.s16,
-      //   ),
-      //   labelStyle: getMediumStyle(
-      //     color: ColorManager.white.withOpacity(AppOpacity.op40),
-      //     fontSize: FontSize.s16,
-      //   ),
-      //   errorStyle: getRegularStyle(color: ColorManager.orange),
+    textTheme: TextTheme(
+      bodyLarge: StylesManager.getRegularStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sInputText,
+      ),
+    ),
 
+    // input decoration theme (text form field)
+    inputDecorationTheme: InputDecorationTheme(
+      filled: Constants.trueBool,
+      isDense: Constants.trueBool,
+      fillColor: ColorManager.primaryshade3,
+      border: OutlineInputBorder(
+        borderRadius: RadiusSizes.radius12,
+        borderSide: BorderSide.none,
+      ),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p20,
+        vertical: AppPadding.p12,
+      ),
+      hintStyle: StylesManager.getRegularStyle(
+        color: ColorManager.greyNeutral,
+        fontSize: FontSize.sInputText,
+      ),
+      errorStyle: StylesManager.getRegularStyle(
+        color: ColorManager.orangeAnnotations,
+        fontSize: FontSize.sError,
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: RadiusSizes.radius12,
+        borderSide: const BorderSide(
+          color: ColorManager.orangeAnnotations,
+          width: AppSize.s1point5,
+        ),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: RadiusSizes.radius12,
+        borderSide: const BorderSide(
+          color: ColorManager.orangeAnnotations,
+          width: AppSize.s1point5,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: RadiusSizes.radius12,
+        borderSide: const BorderSide(
+          color: ColorManager.whiteNeutral,
+          width: AppSize.s1point5,
+        ),
+      ),
       //   // enabled border style
       //   enabledBorder: OutlineInputBorder(
       //     borderSide: BorderSide(
@@ -141,6 +144,7 @@ ThemeData getApplicationTheme() {
       // // dashboard  subtitles
 
       // textTheme: TextTheme(
+
       //   // dashboard header title
       //   displayLarge: getSemiBoldStyle(
       //     color: ColorManager.white.withOpacity(AppOpacity.op70),
@@ -223,5 +227,6 @@ ThemeData getApplicationTheme() {
       // ),
 
       // drawerTheme: const DrawerThemeData(),
-      );
+    ),
+  );
 }

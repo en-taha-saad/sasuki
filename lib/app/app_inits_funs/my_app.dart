@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     applyScreenSettings();
     return MaterialApp(
-      debugShowCheckedModeBanner: Constants.falseNum,
+      debugShowCheckedModeBanner: Constants.falseBool,
       onGenerateRoute: RouteGenerator.getRoute,
       initialRoute: Routes.splashRoute,
       navigatorKey: navigatorKey,
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         child,
         maxWidth: Constants.maxWidthScreen,
         minWidth: Constants.minWidthScreen,
-        defaultScale: Constants.falseNum,
+        defaultScale: Constants.falseBool,
         breakpoints: [
           const ResponsiveBreakpoint.resize(
             Constants.mobileScreenBreakpoint,

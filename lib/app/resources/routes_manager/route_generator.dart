@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
+import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
 
 class RouteGenerator {
@@ -20,14 +20,14 @@ class RouteGenerator {
         );
       case Routes.splashRoute:
         return MaterialPageRoute(
-          builder: (_) => const AppBackground(
+          builder: (_) => AppBackground(
             child: Center(
-              child: Text(
-                Routes.splashRoute,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontFamily: Constants.fontFamily,
+              child: Container(
+                margin: const EdgeInsets.all(AppMargin.m25),
+                child: const TextField(
+                  decoration: InputDecoration(
+                    hintText: AppStrings.noRouteFound,
+                  ),
                 ),
               ),
             ),

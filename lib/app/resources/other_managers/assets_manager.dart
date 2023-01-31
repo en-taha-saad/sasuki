@@ -1,11 +1,12 @@
 class ImagePaths {
   /// paths
   static const String assetsPath = "assets/";
-  static const String imagesPath = "$assetsPath/images/";
-  static const String iconsPath = "$assetsPath/icons/";
-  static const String drawerIconsPath = "$iconsPath/drawer/";
-  static const String specificScreenIconsPath = "$iconsPath/specific_screen/";
-  static const String sharedIconsPath = "$iconsPath/shared_icons/";
+  static const String imagesPath = "${assetsPath}images/";
+  static const String iconsPath = "${assetsPath}icons/";
+  static const String drawerIconsPath = "${iconsPath}drawer/";
+  static const String specificScreenIconsPath = "${iconsPath}specific_screen/";
+  static const String sharedIconsPath = "${iconsPath}shared_icons/";
+
 }
 
 class ImageAssets {
