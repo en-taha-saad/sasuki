@@ -12,11 +12,41 @@ ThemeData getApplicationTheme() {
     // base theme
     useMaterial3: Constants.trueBool,
     fontFamily: Constants.fontFamily,
-    colorScheme: const ColorScheme.light(
+    colorScheme: const ColorScheme.dark(
       primary: ColorManager.primaryshade1,
       secondary: ColorManager.secondary,
     ),
 
+    switchTheme: SwitchThemeData(),
+
+    snackBarTheme: const SnackBarThemeData(),
+
+    scrollbarTheme: const ScrollbarThemeData(),
+    menuTheme: const MenuThemeData(),
+
+    menuBarTheme: const MenuBarThemeData(),
+
+    iconTheme: const IconThemeData(),
+
+    listTileTheme: const ListTileThemeData(),
+
+    iconButtonTheme: const IconButtonThemeData(),
+
+    dropdownMenuTheme: DropdownMenuThemeData(),
+
+    dividerTheme: const DividerThemeData(),
+
+    dialogTheme: DialogTheme(),
+
+    cardTheme: CardTheme(
+      color: ColorManager.primaryshade3,
+      shape: RoundedRectangleBorder(
+        borderRadius: RadiusSizes.radius12,
+      ),
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p25,
+      ),
+    ),
     // elevated button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -54,13 +84,6 @@ ThemeData getApplicationTheme() {
       cursorColor: ColorManager.whiteNeutral,
       selectionColor: ColorManager.whiteNeutral,
       selectionHandleColor: ColorManager.transparent,
-    ),
-
-    textTheme: TextTheme(
-      bodyLarge: StylesManager.getRegularStyle(
-        color: ColorManager.whiteNeutral,
-        fontSize: FontSize.sInputText,
-      ),
     ),
 
     // input decoration theme (text form field)
@@ -105,128 +128,109 @@ ThemeData getApplicationTheme() {
           width: AppSize.s1point5,
         ),
       ),
-      //   // enabled border style
-      //   enabledBorder: OutlineInputBorder(
-      //     borderSide: BorderSide(
-      //       color: ColorManager.white,
-      //       width: AppSize.s1_5,
-      //     ),
-      //     borderRadius: AppSize.radius10,
-      //   ),
-
-      //   // focused border style
-      //   focusedBorder: OutlineInputBorder(
-      //     borderSide: BorderSide(
-      //       color: ColorManager.white,
-      //       width: AppSize.s1_5,
-      //     ),
-      //     borderRadius: AppSize.radius10,
-      //   ),
-
-      //   // error border style
-      //   errorBorder: OutlineInputBorder(
-      //     borderSide: BorderSide(
-      //       color: ColorManager.orange,
-      //       width: AppSize.s1_5,
-      //     ),
-      //     borderRadius: AppSize.radius10,
-      //   ),
-      //   // focused border style
-      //   focusedErrorBorder: OutlineInputBorder(
-      //     borderSide: BorderSide(
-      //       color: ColorManager.orange,
-      //       width: AppSize.s1_5,
-      //     ),
-      //     borderRadius: AppSize.radius10,
-      //   ),
-      // ),
-
-      // // dashboard  subtitles
-
-      // textTheme: TextTheme(
-
-      //   // dashboard header title
-      //   displayLarge: getSemiBoldStyle(
-      //     color: ColorManager.white.withOpacity(AppOpacity.op70),
-      //     fontSize: FontSize.s40,
-      //   ),
-
-      //   displayMedium: getSemiBoldStyle(
-      //     color: ColorManager.white.withOpacity(AppOpacity.op70),
-      //     fontSize: FontSize.s26,
-      //   ),
-
-      //   // dashboard title
-      //   headlineLarge: getMediumStyle(
-      //     color: ColorManager.white,
-      //     fontSize: FontSize.s25,
-      //   ),
-
-      //   // servTitle
-      //   headlineMedium: getMediumStyle(
-      //     color: ColorManager.white,
-      //     fontSize: FontSize.s20,
-      //   ),
-
-      //   // dashboard headers titles
-      //   headlineSmall: getRegularStyle(
-      //     color: ColorManager.white.withOpacity(AppOpacity.op70),
-      //     fontSize: FontSize.s20,
-      //   ),
-
-      //   // dashboard titles and values
-      //   titleLarge: getSemiBoldStyle(
-      //     color: ColorManager.white,
-      //     fontSize: FontSize.s16,
-      //   ),
-
-      //   // welcome && servCancel
-      //   titleMedium: getMediumStyle(
-      //     color: ColorManager.white.withOpacity(AppOpacity.op70),
-      //     fontSize: FontSize.s16,
-      //   ),
-
-      //   // headers labels
-      //   titleSmall: getMediumStyle(
-      //     color: ColorManager.white.withOpacity(AppOpacity.op70),
-      //     fontSize: FontSize.s12,
-      //   ),
-      //   // dashboard  subtitles
-      //   bodyLarge: getRegularStyle(
-      //     color: ColorManager.white.withOpacity(AppOpacity.op80),
-      //     fontSize: FontSize.s12,
-      //   ),
-
-      //   // dropdown menu items
-      //   bodyMedium: getBoldStyle(
-      //     color: ColorManager.primary,
-      //     fontSize: FontSize.s16,
-      //   ),
-
-      //   bodySmall: getRegularStyle(
-      //     color: ColorManager.primary,
-      //     fontSize: FontSize.s12,
-      //   ),
-      // ),
-
-      // ///
-      // listTileTheme: ListTileThemeData(
-      //   contentPadding: const EdgeInsets.symmetric(
-      //     horizontal: AppPadding.p20,
-      //     vertical: AppPadding.p4,
-      //   ),
-      //   dense: true,
-      //   shape: RoundedRectangleBorder(
-      //     side: BorderSide(
-      //       color: ColorManager.white.withOpacity(AppOpacity.op30),
-      //       width: AppSize.s0_5,
-      //     ),
-      //   ),
-      //   tileColor: ColorManager.black.withOpacity(AppOpacity.op30),
-      //   horizontalTitleGap: AppSize.s20,
-      // ),
-
-      // drawerTheme: const DrawerThemeData(),
     ),
+
+    textTheme: TextTheme(
+      // heading 1
+      displayLarge: StylesManager.getMediumStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sHeading1,
+      ),
+
+      // heading 2
+      displayMedium: StylesManager.getSemiBoldStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sHeading2,
+      ),
+
+      // heading 3
+      displaySmall: StylesManager.getBoldStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sHeading3,
+      ),
+
+      // heading 4
+      headlineMedium: StylesManager.getSemiBoldStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sHeading4,
+      ),
+
+      // heading 5
+      headlineSmall: StylesManager.getSemiBoldStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sHeading5,
+      ),
+
+      // heading 6
+      titleLarge: StylesManager.getSemiBoldStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sHeading6,
+      ),
+
+      // subtitle 1
+      titleMedium: StylesManager.getMediumStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sSubtitle1,
+      ),
+
+      // subtitle 2
+      titleSmall: StylesManager.getMediumStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sSubtitle2,
+      ),
+
+      // button
+      labelLarge: StylesManager.getSemiBoldStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sInputLabel,
+      ),
+
+      // badge 1
+      labelMedium: StylesManager.getRegularStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sBadge1,
+      ),
+
+      // badge 2
+      labelSmall: StylesManager.getSemiBoldStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sBadge1,
+      ),
+
+      // bodyText1 (input text)
+      bodyLarge: StylesManager.getRegularStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sInputText,
+      ),
+
+      // bodyText2
+      bodyMedium: StylesManager.getRegularStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sBadge1,
+      ),
+
+      // caption 1, 2
+      bodySmall: StylesManager.getSemiBoldStyle(
+        color: ColorManager.whiteNeutral,
+        fontSize: FontSize.sCaption1,
+      ),
+    ),
+
+    // ///
+    // listTileTheme: ListTileThemeData(
+    //   contentPadding: const EdgeInsets.symmetric(
+    //     horizontal: AppPadding.p20,
+    //     vertical: AppPadding.p4,
+    //   ),
+    //   dense: true,
+    //   shape: RoundedRectangleBorder(
+    //     side: BorderSide(
+    //       color: ColorManager.white.withOpacity(AppOpacity.op30),
+    //       width: AppSize.s0_5,
+    //     ),
+    //   ),
+    //   tileColor: ColorManager.black.withOpacity(AppOpacity.op30),
+    //   horizontalTitleGap: AppSize.s20,
+    // ),
   );
 }
