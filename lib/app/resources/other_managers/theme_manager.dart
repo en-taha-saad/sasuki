@@ -28,13 +28,9 @@ ThemeData getApplicationTheme() {
 
     iconTheme: const IconThemeData(),
 
-    listTileTheme: const ListTileThemeData(),
-
     iconButtonTheme: const IconButtonThemeData(),
 
     dropdownMenuTheme: DropdownMenuThemeData(),
-
-    dividerTheme: const DividerThemeData(),
 
     dialogTheme: DialogTheme(),
 
@@ -47,6 +43,7 @@ ThemeData getApplicationTheme() {
         horizontal: AppPadding.p25,
       ),
     ),
+
     // elevated button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -130,6 +127,7 @@ ThemeData getApplicationTheme() {
       ),
     ),
 
+    // text theme
     textTheme: TextTheme(
       // heading 1
       displayLarge: StylesManager.getMediumStyle(
@@ -173,7 +171,7 @@ ThemeData getApplicationTheme() {
         fontSize: FontSize.sSubtitle1,
       ),
 
-      // subtitle 2
+      // subtitle 2,
       titleSmall: StylesManager.getMediumStyle(
         color: ColorManager.whiteNeutral,
         fontSize: FontSize.sSubtitle2,
@@ -197,7 +195,7 @@ ThemeData getApplicationTheme() {
         fontSize: FontSize.sBadge1,
       ),
 
-      // bodyText1 (input text)
+      // bodyText1 (input text), body2
       bodyLarge: StylesManager.getRegularStyle(
         color: ColorManager.whiteNeutral,
         fontSize: FontSize.sInputText,
@@ -216,21 +214,19 @@ ThemeData getApplicationTheme() {
       ),
     ),
 
-    // ///
-    // listTileTheme: ListTileThemeData(
-    //   contentPadding: const EdgeInsets.symmetric(
-    //     horizontal: AppPadding.p20,
-    //     vertical: AppPadding.p4,
-    //   ),
-    //   dense: true,
-    //   shape: RoundedRectangleBorder(
-    //     side: BorderSide(
-    //       color: ColorManager.white.withOpacity(AppOpacity.op30),
-    //       width: AppSize.s0_5,
-    //     ),
-    //   ),
-    //   tileColor: ColorManager.black.withOpacity(AppOpacity.op30),
-    //   horizontalTitleGap: AppSize.s20,
-    // ),
+    // divider theme
+    dividerTheme: const DividerThemeData(
+      color: ColorManager.greyNeutral,
+      thickness: AppSize.s1,
+      space: AppSize.s25,
+    ),
+
+    // single dashboard inform
+    listTileTheme: const ListTileThemeData(
+      textColor: ColorManager.whiteNeutral,
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: AppPadding.p25,
+      ),
+    ),
   );
 }
