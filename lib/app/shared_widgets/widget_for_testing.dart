@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 
-class TestingComponents extends StatelessWidget {
+// ignore: must_be_immutable
+class TestingComponents extends StatefulWidget {
   const TestingComponents({Key? key}) : super(key: key);
+  @override
+  State<TestingComponents> createState() => _TestingComponentsState();
+}
+
+class _TestingComponentsState extends State<TestingComponents> {
+  final ScrollController _scrollController = ScrollController();
+  String? selectedItem = '';
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
-      items: const [
+    return DropdownButtonFormField<dynamic>(
+      items: [
         DropdownMenuItem<String>(
-          value: 'Item 1',
-          child: Text('Item 1'),
-        ),
-        DropdownMenuItem<String>(
-          value: 'Item 2',
-          child: Text('Item 2'),
+          child: Container(),
         ),
       ],
+      selectedItemBuilder: (context) {
+        return [];
+      },
       onTap: () {
         Navigator.pop(context);
         showDialog(
@@ -45,24 +49,29 @@ class TestingComponents extends StatelessWidget {
                 ),
                 child: Material(
                   type: MaterialType.transparency,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: const Text('Item 1'),
-                          onTap: () {
-                            // handle value change
-                            Navigator.of(context).pop();
-                          },
+                  child: Scrollbar(
+                    thumbVisibility: true,
+                    trackVisibility: true,
+                    radius: const Radius.circular(25.0),
+                    thickness: 5.0,
+                    interactive: true,
+                    controller: _scrollController,
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      itemCount: 20,
+                      itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: DropdownMenuItem<String>(
+                          value: 'Item $index',
+                          child: Text(
+                            'Item $index',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
                         ),
-                        ListTile(
-                          title: const Text('Item 2'),
-                          onTap: () {
-                            // handle value change
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
+                      ),
+                      shrinkWrap: true,
                     ),
                   ),
                 ),
@@ -71,50 +80,11 @@ class TestingComponents extends StatelessWidget {
           },
         );
       },
-      onChanged: (value) {},
-    );
-    DropdownButtonFormField(
-      // validator: ,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      hint: const Text('hint'),
-      icon: SvgPicture.asset(
-        IconsAssets.dropdown,
-        height: AppSize.s10,
-        width: AppSize.s10,
-      ),
-      menuMaxHeight: AppSize.s250,
-
-      // onSaved: ,
-      // selectedItemBuilder: ,
-      // style: ,
-      decoration: const InputDecoration(),
-
-      dropdownColor: ColorManager.secondary,
-
-      items: const [
-        DropdownMenuItem(
-          value: 1,
-          child: Text('Option 0'),
-        ),
-        DropdownMenuItem(
-          value: 2,
-          child: Text('Option 1'),
-        ),
-        DropdownMenuItem(
-          value: 3,
-          child: Text('Option 2'),
-        ),
-        DropdownMenuItem(
-          value: 4,
-          child: Text('Option 3'),
-        ),
-        DropdownMenuItem(
-          value: 5,
-          child: Text('Option 4'),
-        ),
-      ],
-      onChanged: (value) {},
-      value: null,
+      onChanged: (value) {
+        setState(() {
+          selectedItem = value;
+        });
+      },
     );
   }
 }

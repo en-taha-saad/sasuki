@@ -17,8 +17,6 @@ ThemeData getApplicationTheme() {
       secondary: ColorManager.secondary,
     ),
 
-    switchTheme: SwitchThemeData(),
-
     snackBarTheme: const SnackBarThemeData(),
 
     scrollbarTheme: const ScrollbarThemeData(),
@@ -29,6 +27,9 @@ ThemeData getApplicationTheme() {
     iconTheme: const IconThemeData(),
 
     iconButtonTheme: const IconButtonThemeData(),
+
+    // begin with it later
+    switchTheme: SwitchThemeData(),
 
     dropdownMenuTheme: DropdownMenuThemeData(),
 

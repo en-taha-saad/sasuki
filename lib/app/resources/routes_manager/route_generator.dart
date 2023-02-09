@@ -20,7 +20,7 @@ class RouteGenerator {
         );
       case Routes.splashRoute:
         return MaterialPageRoute(
-          builder: (_) => const AppBackground(
+          builder: (_) =>  AppBackground(
             child: Center(
               child: TestingComponents(),
             ),
