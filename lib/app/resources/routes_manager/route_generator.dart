@@ -20,11 +20,7 @@ class RouteGenerator {
         );
       case Routes.splashRoute:
         return MaterialPageRoute(
-          builder: (_) =>  AppBackground(
-            child: Center(
-              child: TestingComponents(),
-            ),
-          ),
+          builder: (_) => const AppBackground(),
           settings: settings,
         );
       // TODO add your routes here

@@ -28,13 +28,6 @@ ThemeData getApplicationTheme() {
 
     iconButtonTheme: const IconButtonThemeData(),
 
-    // begin with it later
-    switchTheme: SwitchThemeData(),
-
-    dropdownMenuTheme: DropdownMenuThemeData(),
-
-    dialogTheme: DialogTheme(),
-
     cardTheme: CardTheme(
       color: ColorManager.primaryshade3,
       shape: RoundedRectangleBorder(

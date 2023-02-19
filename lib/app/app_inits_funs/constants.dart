@@ -3,6 +3,7 @@ class Constants {
   static const bool falseBool = false;
   static const bool trueBool = true;
   static const double oneNum = 1;
+  static const nullValue = null;
   static const double sevenDouble = 0.7;
   static const double threeDouble = 0.3;
   static const double zeroDouble = 0.0;
