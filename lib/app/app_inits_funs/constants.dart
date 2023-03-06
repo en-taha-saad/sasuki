@@ -1,5 +1,7 @@
 class Constants {
   static const double zeroNum = 0;
+  static const List<String> emptyList = [];
+  static const String emptyStr = "";
   static const bool falseBool = false;
   static const bool trueBool = true;
   static const double oneNum = 1;
