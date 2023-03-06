@@ -11,7 +11,7 @@ dependencies:
   analyzer: ^5.0.0
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
-  dio: ^5.0.1
+  dio: ^4.0.6
   encrypt: ^5.0.1
   flutter_svg: ^2.0.2
   freezed: ^2.1.1
@@ -25,19 +25,18 @@ dependencies:
   pin_code_fields: ^7.4.0
   pretty_dio_logger: ^1.1.1
   responsive_framework: ^0.2.0
-  retrofit: ^4.0.1
+  retrofit: ^3.0.1+1
   rxdart: ^0.27.5
   shared_preferences: ^2.0.15
   shimmer: ^2.0.0
   uuid: ^3.0.6
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
   build_runner: ^2.2.1
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  retrofit_generator: ^5.0.0
-
+  retrofit_generator: ^4.0.3+2
 
 flutter:
   uses-material-design: true

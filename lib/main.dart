@@ -4,5 +4,8 @@ import 'package:sasuki/app/shared_funs/pre_init_app.dart';
 
 void main() async {
   await preRun();
+  // 
   runApp(MyApp());
+
 }
+

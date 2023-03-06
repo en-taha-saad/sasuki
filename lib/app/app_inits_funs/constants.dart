@@ -2,6 +2,7 @@ class Constants {
   static const double zeroNum = 0;
   static const List<String> emptyList = [];
   static const String emptyStr = "";
+  static const String dash = "-";
   static const bool falseBool = false;
   static const bool trueBool = true;
   static const double oneNum = 1;
@@ -18,4 +19,9 @@ class Constants {
   static const double tabletScreenBreakpoint = 800;
   static const double desktopScreenBreakpoint = 1000;
   static const String fontFamily = "IBMPlexSans";
+  static const String defaultServerName = "default";
+  static const String serverAddress = "snono.dyndns.org:55001";
+  static const String suffixUrl = "/admin/api/index.php/api/";
+  static const int apiTimeOut = 60000;
+  static const int splashDelay = 2;
 }
