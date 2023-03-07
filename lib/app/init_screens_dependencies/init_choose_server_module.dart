@@ -26,13 +26,13 @@ initChooseServerModule() {
     // choose server view model instance
   }
   // TODO check the model
-  if (!GetIt.I.isRegistered<ChooseServerViewModel>()) {
-    instance.registerFactory<ChooseServerViewModel>(
-      () => ChooseServerViewModel(
-        instance<ChooseServerUseCase>(),
-        instance<SelectedServerUsecase>(),
-        instance<RemoveServerUsecase>(),
-      ),
-    );
-  }
+  // if (!GetIt.I.isRegistered<ChooseServerViewModel>()) {
+  //   instance.registerFactory<ChooseServerViewModel>(
+  //     () => ChooseServerViewModel(
+  //       instance<ChooseServerUseCase>(),
+  //       instance<SelectedServerUsecase>(),
+  //       instance<RemoveServerUsecase>(),
+  //     ),
+  //   );
+  // }
 }

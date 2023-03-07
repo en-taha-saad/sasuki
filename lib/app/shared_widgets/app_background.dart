@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
+import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
 class AppBackground extends StatelessWidget {
   final Widget? child;
@@ -11,20 +12,16 @@ class AppBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: Constants.trueBool,
+      extendBodyBehindAppBar: Constants.trueBool,
+      appBar: Constants.nullValue,
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
-          gradient: RadialGradient(
-            radius: Constants.twoFiveDouble,
-            center: Alignment(
-              Constants.zeroDouble,
-              Constants.sevenDouble,
-            ),
-            focal: Alignment(
-              -Constants.oneNum,
-              Constants.sevenDouble,
-            ),
-            focalRadius: Constants.oneDouble,
-            stops: [Constants.twoDouble, Constants.sevenDouble],
+          gradient: LinearGradient(
+            begin: Alignment(-AppSize.s0point95, AppSize.s1),
+            end: Alignment(AppSize.s0point95, AppSize.s1),
             colors: [
               ColorManager.backgroundCenter,
               ColorManager.backgroundCorners,

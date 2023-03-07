@@ -60,14 +60,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<DashboardResponse> getDashboardData() async {
     // TODO" add token from login viewmodel
-    if (token != null) {
-      Dio dio = await instance<DioFactory>().getDio();
-      _appServiceClient = AppServiceClient(
-        dio,
-        baseUrl:
-            "https://${(await getSelectedServerFromLocal()).hostName}/${Constants.suffixUrl}",
-      );
-    }
+    // if (token != null) {
+    //   Dio dio = await instance<DioFactory>().getDio();
+    //   _appServiceClient = AppServiceClient(
+    //     dio,
+    //     baseUrl:
+    //         "https://${(await getSelectedServerFromLocal()).hostName}/${Constants.suffixUrl}",
+    //   );
+    // }
     return await _appServiceClient.getDashboardData();
   }
 

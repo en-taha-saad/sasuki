@@ -6,11 +6,15 @@ class ImagePaths {
   static const String drawerIconsPath = "${iconsPath}drawer/";
   static const String specificScreenIconsPath = "${iconsPath}specific_screen/";
   static const String sharedIconsPath = "${iconsPath}shared_icons/";
-
 }
 
 class ImageAssets {
   static const String emptyState = "${ImagePaths.imagesPath}empty_state.svg";
+  static const String mainLogo = "${ImagePaths.imagesPath}main_logo.png";
+  static const String secondaryLogo =
+      "${ImagePaths.imagesPath}secondary_logo.svg";
+  static const String teritaryLogo =
+      "${ImagePaths.imagesPath}teritary_logo.svg";
 }
 
 class IconsAssets {

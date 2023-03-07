@@ -3,6 +3,7 @@ import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
 import 'package:sasuki/app/shared_widgets/widget_for_testing.dart';
+import 'package:sasuki/presentation/splash/splash_view.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -20,7 +21,9 @@ class RouteGenerator {
         );
       case Routes.splashRoute:
         return MaterialPageRoute(
-          builder: (_) => const AppBackground(),
+          builder: (_) => const AppBackground(
+            child: SplashView(),
+          ),
           settings: settings,
         );
       // TODO add your routes here
