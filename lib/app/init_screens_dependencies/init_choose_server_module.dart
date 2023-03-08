@@ -4,6 +4,7 @@ import 'package:sasuki/domain/repository/repository.dart';
 import 'package:sasuki/domain/usecase/servers_usecase/remove_server_usecase.dart';
 import 'package:sasuki/domain/usecase/servers_usecase/selected_server_usecase.dart';
 import 'package:sasuki/domain/usecase/servers_usecase/servers_usecase.dart';
+import 'package:sasuki/presentation/choose_server/viewmodel/choose_server_viewmodel.dart';
 
 initChooseServerModule() {
   // choose server module, only login dependencies are here
@@ -25,14 +26,13 @@ initChooseServerModule() {
     );
     // choose server view model instance
   }
-  // TODO check the model
-  // if (!GetIt.I.isRegistered<ChooseServerViewModel>()) {
-  //   instance.registerFactory<ChooseServerViewModel>(
-  //     () => ChooseServerViewModel(
-  //       instance<ChooseServerUseCase>(),
-  //       instance<SelectedServerUsecase>(),
-  //       instance<RemoveServerUsecase>(),
-  //     ),
-  //   );
-  // }
+  if (!GetIt.I.isRegistered<ChooseServerViewModel>()) {
+    instance.registerFactory<ChooseServerViewModel>(
+      () => ChooseServerViewModel(
+        instance<ChooseServerUseCase>(),
+        instance<SelectedServerUsecase>(),
+        instance<RemoveServerUsecase>(),
+      ),
+    );
+  }
 }
