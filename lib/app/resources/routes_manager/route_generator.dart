@@ -29,7 +29,11 @@ class RouteGenerator {
         );
       case Routes.chooseServerRoute:
         initChooseServerModule();
-        return MaterialPageRoute(builder: (_) => const ChooseServerView());
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: ChooseServerView(),
+          ),
+        );
       // TODO add your routes here
       default:
         return unDefinedRoute();

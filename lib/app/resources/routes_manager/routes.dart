@@ -4,6 +4,4 @@ class Routes {
   static const String loginRoute = "/loginRoute";
   static const String dashboardRoute = "/dashboardRoute";
   static const String chooseServerRoute = "/chooseServerRoute";
-
-  // TODO add your routes here
 }

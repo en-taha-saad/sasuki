@@ -49,18 +49,6 @@ class _SplashViewState extends State<SplashView> {
     return;
   }
 
-  goToLoginIfExpire(bool isExpired) {
-    if (isExpired) {
-      _appPrefs.removeIsUserLoggedInStatus();
-      _appPrefs.removeToken();
-      initChooseServerModule();
-      // navigate to login
-      // TODO nav to the screen
-      // Nav.replaceTo(context, Routes.loginRoute);
-      return;
-    }
-  }
-
   reLogin() {
     _appPrefs.getSelectedServer().then((isChosedServer) {
       if (isChosedServer != Constants.nullValue) {
@@ -72,6 +60,18 @@ class _SplashViewState extends State<SplashView> {
         Nav.replaceTo(context, Routes.chooseServerRoute);
       }
     });
+  }
+
+  goToLoginIfExpire(bool isExpired) {
+    if (isExpired) {
+      _appPrefs.removeIsUserLoggedInStatus();
+      _appPrefs.removeToken();
+      initChooseServerModule();
+      // navigate to login
+      // TODO nav to the screen
+      // Nav.replaceTo(context, Routes.loginRoute);
+      return;
+    }
   }
 
   @override
