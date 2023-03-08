@@ -53,6 +53,10 @@ class IconsAssets {
       "${ImagePaths.specificScreenIconsPath}user_service_information.svg";
   static const String dashboardUserStatistics =
       "${ImagePaths.specificScreenIconsPath}dashboard_user_statistics.svg";
+
+  static const String chooseServer =
+      "${ImagePaths.specificScreenIconsPath}choose_server.svg";
+
 }
 
 class JsonAssets {
