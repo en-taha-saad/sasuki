@@ -60,7 +60,7 @@ class AppStrings {
   static const servInvalidPassword = "Invalid Password";
   static const servChangeServer = "Change Server";
   static const servAddServer = "Add Server";
-  static const servNoServersFound = "No Servers Found";
+  static const servNoServersFound = "No Servers Found.";
   static const servISPName = "ISP name";
   static const servServerAddress = "server address";
   static const servUsername = "username";
