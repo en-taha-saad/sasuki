@@ -45,6 +45,7 @@ flutter:
     - assets/icons/shared_icons/
     - assets/icons/specific_screen/
     - assets/images/
+    - assets/json/
   fonts:
     - family: IBMPlexSans
       fonts:

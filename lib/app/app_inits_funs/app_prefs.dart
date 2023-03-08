@@ -75,7 +75,6 @@ class AppPreferences {
     return _sharedPreferences.getBool(prefsKeyIsUserLoggedIn) ?? false;
   }
 
-  // TODO: get it from login usecase
   Future<void> setLoginObject(LoginUseCaseInput loginUseCaseInput) async {
     _sharedPreferences.setString(
       prefsKeyLoginObject,

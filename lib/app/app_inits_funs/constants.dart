@@ -24,4 +24,5 @@ class Constants {
   static const String suffixUrl = "/admin/api/index.php/api/";
   static const int apiTimeOut = 60000;
   static const int splashDelay = 2;
+  static const int snackBarDelay = 20;
 }

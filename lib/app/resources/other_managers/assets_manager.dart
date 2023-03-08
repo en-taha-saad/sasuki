@@ -2,6 +2,7 @@ class ImagePaths {
   /// paths
   static const String assetsPath = "assets/";
   static const String imagesPath = "${assetsPath}images/";
+  static const String jsonPath = "${assetsPath}json/";
   static const String iconsPath = "${assetsPath}icons/";
   static const String drawerIconsPath = "${iconsPath}drawer/";
   static const String specificScreenIconsPath = "${iconsPath}specific_screen/";
@@ -55,5 +56,8 @@ class IconsAssets {
 }
 
 class JsonAssets {
-  // TODO add your JsonAssets
+  static const String empty = "${ImagePaths.jsonPath}empty.json";
+  static const String error = "${ImagePaths.jsonPath}error.json";
+  static const String loading = "${ImagePaths.jsonPath}loading.json";
+  static const String success = "${ImagePaths.jsonPath}success.json";
 }

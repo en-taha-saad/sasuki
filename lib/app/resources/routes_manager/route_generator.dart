@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_choose_server_module.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
-import 'package:sasuki/app/shared_widgets/widget_for_testing.dart';
+import 'package:sasuki/presentation/choose_server/view/choose_server_view.dart';
 import 'package:sasuki/presentation/splash/splash_view.dart';
 
 class RouteGenerator {
@@ -26,6 +27,9 @@ class RouteGenerator {
           ),
           settings: settings,
         );
+      case Routes.chooseServerRoute:
+        initChooseServerModule();
+        return MaterialPageRoute(builder: (_) => const ChooseServerView());
       // TODO add your routes here
       default:
         return unDefinedRoute();
