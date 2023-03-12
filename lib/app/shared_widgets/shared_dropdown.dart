@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
+import 'package:sasuki/app/resources/other_managers/opacity_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
-import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
-import 'package:sasuki/app/shared_funs/screen_width.dart';
 
 // ignore: must_be_immutable
 class DropDownComponent<T> extends StatefulWidget {
   final List<T> items;
   final String Function(dynamic) displayFn;
-  final void Function() doOtherThings;
-  final T? selectedItem;
+  final void Function(dynamic) doOtherThings;
+  final bool isThisServersDropdown;
 
   const DropDownComponent({
     Key? key,
-    required this.selectedItem,
     required this.items,
     required this.displayFn,
     required this.doOtherThings,
+    required this.isThisServersDropdown,
   }) : super(key: key);
 
   @override
@@ -33,7 +33,6 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
 
   @override
   void initState() {
-    _selectedItem = widget.selectedItem;
     super.initState();
   }
 
@@ -41,18 +40,51 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
       value: _selectedItem,
-      onChanged: (val) {
-        setState(() {
-          _selectedItem = val;
-        });
-        widget.doOtherThings;
-      },
+      onChanged: (val) => widget.doOtherThings(val),
       items: widget.items
           .map<DropdownMenuItem<T>>(
             (item) => DropdownMenuItem<T>(
               value: item,
               alignment: Alignment.center,
-              child: Text(widget.displayFn(item)),
+              child: widget.isThisServersDropdown
+                  ? Center(
+                      child: Column(
+                        children: [
+                          Card(
+                            color: ColorManager.transparent,
+                            elevation: AppSize.s0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  widget.displayFn(item),
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                Opacity(
+                                  opacity: AppOpacity.op20,
+                                  child: IconButton(
+                                      icon: const Icon(
+                                        MdiIcons.delete,
+                                        color: ColorManager.whiteNeutral,
+                                      ),
+                                      onPressed: () {
+                                        // deleteServerDialog(value, context),
+                                      }),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (widget.items.last != item)
+                            Divider(
+                              color: ColorManager.whiteNeutral.withOpacity(
+                                AppOpacity.op70,
+                              ),
+                              height: AppSize.s1,
+                            ),
+                        ],
+                      ),
+                    )
+                  : Text(widget.displayFn(item)),
             ),
           )
           .toList(),

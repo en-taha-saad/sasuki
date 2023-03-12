@@ -9,6 +9,7 @@ import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/presentation/common/state_render/state_renderer.dart';
 import 'package:sasuki/presentation/common/state_render/states/content_state.dart';
@@ -178,7 +179,7 @@ extension FlowStateExtension on FlowState {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               shape: RoundedRectangleBorder(
-                borderRadius: AppSize.radius10,
+                borderRadius: RadiusSizes.radius12,
               ),
               elevation: AppSize.s1_5,
               backgroundColor: ColorManager.whiteNeutral,

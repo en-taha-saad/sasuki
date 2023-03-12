@@ -24,7 +24,9 @@ class CircleElevatedButton extends StatelessWidget {
         IconsAssets.add,
         height: FontSize.sHeading2,
         width: FontSize.sHeading2,
-        color: ColorManager.whiteNeutral,
+        theme: const SvgTheme(
+          currentColor: ColorManager.whiteNeutral,
+        ),
       ),
     );
   }

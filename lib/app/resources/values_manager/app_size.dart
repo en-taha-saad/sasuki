@@ -12,12 +12,14 @@ class AppSize {
   static const double s0point25 = 0.25;
   static const double s0point95 = 0.95;
   static const double s10 = 10;
+  static const double s10point5 = 10.5;
   static const double s12 = 12;
   static const double s15 = 15;
   static const double s18 = 18;
   static const double s20 = 20;
   static const double s24 = 24;
   static const double s25 = 25;
+  static const double s48 = 48;
   static const double s50 = 50;
   static const double s80 = 80;
   static const double s144 = 144;
@@ -63,7 +65,4 @@ class AppSize {
   static const double s440 = 440.0;
 
   static const double s500 = 500.0;
-  static BorderRadius radius25 = BorderRadius.circular(AppSize.s25);
-  static BorderRadius radius10 = BorderRadius.circular(AppSize.s10);
-  static BorderRadius radius0 = BorderRadius.circular(AppSize.s0);
 }

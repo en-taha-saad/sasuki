@@ -9,6 +9,7 @@ import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/presentation/common/state_render/states/mobile_module_screen.dart';
 import 'package:sasuki/presentation/common/state_render/states/state_renderer_type.dart';
@@ -83,7 +84,7 @@ class StateRenderer extends StatelessWidget {
   Widget _getPopUpDialog(BuildContext context, List<Widget> children) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: AppSize.radius10,
+        borderRadius: RadiusSizes.radius12,
       ),
       elevation: AppSize.s1_5,
       backgroundColor: Colors.transparent,
@@ -91,7 +92,7 @@ class StateRenderer extends StatelessWidget {
         decoration: BoxDecoration(
           color: ColorManager.whiteNeutral,
           shape: BoxShape.rectangle,
-          borderRadius: AppSize.radius10,
+          borderRadius: RadiusSizes.radius12,
           boxShadow: const [BoxShadow(color: Colors.black26)],
         ),
         child: _getDialogContent(context, children),

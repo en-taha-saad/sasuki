@@ -3,14 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
-class ElevatedButtonWidget extends StatelessWidget {
+class TextButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
   final String? assetName;
   final String? name;
   final MainAxisSize? mainAxisSize;
-  const ElevatedButtonWidget({
+  const TextButtonWidget({
     this.onPressed,
     this.assetName,
     this.name,
@@ -20,14 +21,16 @@ class ElevatedButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: AppSize.s48,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          disabledBackgroundColor: ColorManager.greyNeutral.withOpacity(
-            AppSize.s0point25,
-          ),
+      decoration: BoxDecoration(
+        borderRadius: RadiusSizes.radius12,
+        border: Border.all(
+          color: ColorManager.whiteNeutral,
+          width: AppSize.s1,
         ),
+      ),
+      child: TextButton(
         onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

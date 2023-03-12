@@ -59,12 +59,12 @@ ThemeData getApplicationTheme() {
     // text button theme
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppPadding.p10Point5,
-          horizontal: AppPadding.p25,
-        ),
+        padding: const EdgeInsets.symmetric(vertical: AppPadding.p10Point5),
         textStyle: StylesManager.getSemiBoldStyle(
           fontSize: FontSize.sButton,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: RadiusSizes.radius12,
         ),
         foregroundColor: ColorManager.whiteNeutral,
       ),
