@@ -37,18 +37,18 @@ class TextButtonWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: mainAxisSize ?? MainAxisSize.max,
           children: [
-            Text(name!),
-            const SizedBox(width: AppSize.s10),
             assetName != Constants.nullValue
                 ? SvgPicture.asset(
                     assetName!,
-                    height: FontSize.sButtonPill,
-                    width: FontSize.sButtonPill,
+                    height: FontSize.sButtonLink,
+                    width: FontSize.sButtonLink,
                     theme: const SvgTheme(
                       currentColor: ColorManager.whiteNeutral,
                     ),
                   )
                 : Container(),
+            const SizedBox(width: AppSize.s10),
+            Text(name!),
           ],
         ),
       ),

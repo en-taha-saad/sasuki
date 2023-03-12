@@ -102,6 +102,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
           const SizedBox(height: AppSize.s25),
           TextButtonWidget(
             name: AppStrings.servAddServer,
+            assetName: IconsAssets.add,
             onPressed: () {},
           ),
         ],
@@ -159,12 +160,14 @@ class _ChooseServerViewState extends State<ChooseServerView> {
                     isThisServersDropdown: Constants.trueBool,
                     items: serversList?.servers ?? [],
                     doOtherThings: (val) {
-                      selectedServer = val;
-                      _viewModel.inputIsNotSelectedServer
-                          .add(Constants.falseBool);
-                      _viewModel.inputIsSelectedServer.add(Constants.trueBool);
-                      _viewModel.inputSelectedServer.add(selectedServer);
-                      _viewModel.saveSelectedServer(selectedServer);
+                      setState(() {
+                        selectedServer = val;
+                      });
+                      // _viewModel.inputIsNotSelectedServer
+                      //     .add(Constants.falseBool);
+                      // _viewModel.inputIsSelectedServer.add(Constants.trueBool);
+                      // _viewModel.inputSelectedServer.add(selectedServer);
+                      // _viewModel.saveSelectedServer(selectedServer);
                     },
                     displayFn: (item) => (item as Server).name,
                   );
