@@ -10,17 +10,18 @@ import 'package:sasuki/app/shared_funs/screen_width.dart';
 
 // ignore: must_be_immutable
 class DropDownComponent<T> extends StatefulWidget {
-  const DropDownComponent({
-    required this.items,
-    required this.itemText,
-    this.onItemSelected,
-    this.selectedItem,
-    Key? key,
-  }) : super(key: key);
   final List<T> items;
-  final T Function(T) itemText;
-  final Function(T?)? onItemSelected;
+  final String Function(dynamic) displayFn;
+  final void Function(dynamic) onChanged;
   final T? selectedItem;
+
+  const DropDownComponent({
+    Key? key,
+    required this.selectedItem,
+    required this.items,
+    required this.displayFn,
+    required this.onChanged,
+  }) : super(key: key);
 
   @override
   State<DropDownComponent> createState() => _DropDownComponentState<T>();
@@ -32,27 +33,20 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
 
   @override
   void initState() {
-    super.initState();
     _selectedItem = widget.selectedItem;
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
       value: _selectedItem,
-      onChanged: (value) {
-        setState(() {
-          _selectedItem = value;
-        });
-        if (widget.onItemSelected != null) {
-          widget.onItemSelected!(value);
-        }
-      },
+      onChanged: (val) => widget.onChanged(val),
       items: widget.items
           .map<DropdownMenuItem<T>>(
             (item) => DropdownMenuItem<T>(
               value: item,
-              child: Text(widget.itemText(item)),
+              child: Text(widget.displayFn(item)),
             ),
           )
           .toList(),
@@ -108,17 +102,18 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                       itemBuilder: (context, index) => InkWell(
                         onTap: () {
                           Navigator.pop(context);
-                          setState(() {});
+                          debugPrint("_selectedItem: $_selectedItem");
+                          setState(() {
+                            _selectedItem = widget.items[index];
+                          });
+                          widget.onChanged(widget.items[index]);
                         },
-                        child: DropdownMenuItem<String>(
-                          value: 'Item $index',
-                          child: Text(
-                            'Item $index',
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
+                        child: Text(
+                          '${widget.items[index]}',
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ),
-                      shrinkWrap: true,
+                      shrinkWrap: Constants.trueBool,
                     ),
                   ),
                 ),
@@ -143,6 +138,45 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
               ),
             )
             .toList();
+      },
+    );
+  }
+}
+
+class GenericDropdown<T> extends StatefulWidget {
+  final List<T> items;
+  final String Function(T) displayFn;
+  final void Function(T) onChanged;
+
+  const GenericDropdown({
+    Key? key,
+    required this.items,
+    required this.displayFn,
+    required this.onChanged,
+  }) : super(key: key);
+
+  @override
+  _GenericDropdownState<T> createState() => _GenericDropdownState<T>();
+}
+
+class _GenericDropdownState<T> extends State<GenericDropdown<T>> {
+  T? _selectedItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<T>(
+      value: _selectedItem,
+      items: widget.items.map((item) {
+        return DropdownMenuItem<T>(
+          value: item,
+          child: Text(widget.displayFn(item)),
+        );
+      }).toList(),
+      onChanged: (value) {
+        setState(() {
+          _selectedItem = value;
+        });
+        widget.onChanged(value!);
       },
     );
   }
