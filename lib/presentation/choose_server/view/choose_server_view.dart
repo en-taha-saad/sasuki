@@ -79,206 +79,53 @@ class _ChooseServerViewState extends State<ChooseServerView> {
               ),
             ],
           ),
-          const SizedBox(width: AppSize.s25),
+          const SizedBox(height: AppSize.s25),
           _getDataContentWidget(),
+          
         ],
       ),
     );
   }
 
   Widget _getDataContentWidget() {
-    return
-        // StreamBuilder<FlowState>(
-        //   stream: _viewModel.outputState,
-        //   builder: (context, snapshot) {
-        //     return snapshot.data?.getScreenWidget(
-        //           context,
-        //           _getDropDown(context),
-        //           () {},
-        //         ) ??
-        _getDropDown(context);
-    //   },
-    // );
+    return StreamBuilder<FlowState>(
+      stream: _viewModel.outputState,
+      builder: (context, snapshot) {
+        return snapshot.data?.getScreenWidget(
+              context,
+              _getDropDown(context),
+              () {},
+            ) ??
+            _getDropDown(context);
+      },
+    );
   }
 
   Widget _getDropDown(BuildContext context) {
     return StreamBuilder<ServersList>(
       stream: _viewModel.outputGotListOfServers,
       builder: (_, snapshot0) {
-        // serversList = snapshot0.data;
-        serversList = ServersList(
-          [
-            Server(
-              'Server 1',
-              'https://www.google.com',
-              'https://www.google.com',
-              'https://www.google.com',
-            ),
-            Server(
-              'Server 2',
-              'https://www.google.com',
-              'https://www.google.com',
-              'https://www.google.com',
-            ),
-            Server(
-              'Server 3',
-              'https://www.google.com',
-              'https://www.google.com',
-              'https://www.google.com',
-            ),
-          ],
-        );
+        serversList = snapshot0.data;
         // ignore: prefer_is_empty
         return serversList?.servers?.length != 0
-            ?
-            // StreamBuilder<Server?>(
-            //     stream: _viewModel.outputSelectedServer,
-            //     builder: (context, snapshot) {
-            // return
-            DropDownComponent<Server?>(
-                items: (serversList?.servers)!,
-                selectedItem: selectedServer,
-                displayFn: (item) => (item?.name)!,
-                onChanged: (selectedServer0) {
-                  setState(() {
-                    selectedServer = selectedServer0;
-                  });
-                  debugPrint("1@selectedServer: ${selectedServer?.name}");
+            ? StreamBuilder<Server?>(
+                stream: _viewModel.outputSelectedServer,
+                builder: (context, snapshot) {
+                  return DropDownComponent<Server?>(
+                    items: serversList?.servers ?? [],
+                    doOtherThings: () {
+                      debugPrint("selectedServer = ${selectedServer?.name}");
+                    },
+                    displayFn: (item) => (item as Server).name,
+                    selectedItem: selectedServer,
+                  );
                 },
               )
-            // ;
-            // return DropdownButtonFormField<Server?>(
-            //   decoration: InputDecoration(
-            //     hintStyle: Theme.of(context).textTheme.titleMedium,
-            //     hintText: AppStrings.servChooseServerHint,
-            //     contentPadding: const EdgeInsets.symmetric(
-            //       horizontal: AppPadding.p16,
-            //     ),
-            //     iconColor: ColorManager.white,
-            //   ),
-            //   iconEnabledColor: ColorManager.white,
-            //   dropdownColor: ColorManager.white,
-            //   elevation: AppSize.s0.toInt(),
-            //   style: Theme.of(context).textTheme.titleMedium,
-            //   borderRadius: AppSize.radius10,
-            //   selectedItemBuilder: (context) {
-            //     return serversList?.servers
-            //             ?.map((e) => Text(
-            //                   e.name,
-            //                   style:
-            //                       Theme.of(context).textTheme.titleLarge,
-            //                 ))
-            //             .toList() ??
-            //         [];
-            //   },
-            //   onChanged: (selectedServer0) {
-            //     setState(() {
-            //       selectedServer = selectedServer0;
-            //     });
-            //     _viewModel.inputIsNotSelectedServer
-            //         .add(Constants.falseVal);
-            //     _viewModel.inputIsSelectedServer.add(Constants.trueVal);
-            //     _viewModel.inputSelectedServer.add(selectedServer);
-            //     _viewModel.saveSelectedServer(selectedServer);
-            //   },
-            //   items: serversList?.servers?.map((Server value) {
-            //         return _getMenuItemWidget(value, context);
-            //       }).toList() ??
-            //       [],
-            // );
-            //   },
-            // )
             : Text(
                 AppStrings.servNoServersFound,
                 style: Theme.of(context).textTheme.bodyLarge,
               );
       },
     );
-
-    // return StreamBuilder<ServersList>(
-    //   stream: _viewModel.outputGotListOfServers,
-    //   builder: (_, snapshot0) {
-    //     serversList = snapshot0.data;
-    //     // ignore: prefer_is_empty
-    //     return serversList?.servers?.length != 0
-    //         ? StreamBuilder<Server?>(
-    //             stream: _viewModel.outputSelectedServer,
-    //             builder: (context, snapshot) {
-    //               return DropDownComponent<Server?>(
-    //                 items: [
-    //                   Server(
-    //                     'Server 1',
-    //                     'Server 1',
-    //                     'Server 1',
-    //                     'Server 1',
-    //                   ),
-    //                   Server(
-    //                     'Server 2',
-    //                     'Server 2',
-    //                     'Server 2',
-    //                     'Server 2',
-    //                   ),
-    //                   Server(
-    //                     'Server 3',
-    //                     'Server 3',
-    //                     'Server 3',
-    //                     'Server 3',
-    //                   ),
-    //                 ],
-    //                 itemText: (item) => item,
-    //                 onItemSelected: (item) {
-    //                   setState(() {
-    //                     selectedServer = item;
-    //                   });
-    //                 },
-    //                 selectedItem: selectedServer,
-    //               );
-    //               // return DropdownButtonFormField<Server?>(
-    //               //   decoration: InputDecoration(
-    //               //     hintStyle: Theme.of(context).textTheme.titleMedium,
-    //               //     hintText: AppStrings.servChooseServerHint,
-    //               //     contentPadding: const EdgeInsets.symmetric(
-    //               //       horizontal: AppPadding.p16,
-    //               //     ),
-    //               //     iconColor: ColorManager.white,
-    //               //   ),
-    //               //   iconEnabledColor: ColorManager.white,
-    //               //   dropdownColor: ColorManager.white,
-    //               //   elevation: AppSize.s0.toInt(),
-    //               //   style: Theme.of(context).textTheme.titleMedium,
-    //               //   borderRadius: AppSize.radius10,
-    //               //   selectedItemBuilder: (context) {
-    //               //     return serversList?.servers
-    //               //             ?.map((e) => Text(
-    //               //                   e.name,
-    //               //                   style:
-    //               //                       Theme.of(context).textTheme.titleLarge,
-    //               //                 ))
-    //               //             .toList() ??
-    //               //         [];
-    //               //   },
-    //               //   onChanged: (selectedServer0) {
-    //               //     setState(() {
-    //               //       selectedServer = selectedServer0;
-    //               //     });
-    //               //     _viewModel.inputIsNotSelectedServer
-    //               //         .add(Constants.falseVal);
-    //               //     _viewModel.inputIsSelectedServer.add(Constants.trueVal);
-    //               //     _viewModel.inputSelectedServer.add(selectedServer);
-    //               //     _viewModel.saveSelectedServer(selectedServer);
-    //               //   },
-    //               //   items: serversList?.servers?.map((Server value) {
-    //               //         return _getMenuItemWidget(value, context);
-    //               //       }).toList() ??
-    //               //       [],
-    //               // );
-    //             },
-    //           )
-    //         : Text(
-    //             AppStrings.servNoServersFound,
-    //             style: Theme.of(context).textTheme.bodyLarge,
-    //           );
-    //   },
-    // );
   }
 }

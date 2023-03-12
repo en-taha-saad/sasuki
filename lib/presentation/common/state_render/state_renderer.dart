@@ -109,21 +109,24 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getEmptyServersList(BuildContext context, String message) {
-    return Container(
-      margin: const EdgeInsets.only(top: AppMargin.m22),
-      child: Center(
-        child: Column(
-          children: [
-            SvgPicture.asset(
-              ImageAssets.emptyState,
-              height: AppSize.s37,
-              width: AppSize.s37,
-            ),
-            const SizedBox(height: AppSize.s10),
-            _getMessage(message, context),
-          ],
-        ),
-      ),
+    return
+        // Container(
+        //   margin: const EdgeInsets.only(top: AppMargin.m22),
+        //   child:
+        Center(
+      child:
+          // Column(
+          //   children: [
+          // SvgPicture.asset(
+          //   ImageAssets.emptyState,
+          //   height: AppSize.s37,
+          //   width: AppSize.s37,
+          // ),
+          // const SizedBox(height: AppSize.s10),
+          _getMessage(message, context),
+      //   ],
+      // ),
+      // ),
     );
   }
 
