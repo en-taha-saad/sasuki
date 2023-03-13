@@ -279,4 +279,6 @@ class AppStrings {
   static const serverAddressError = "Invalid Server Address";
   static const hostNameRegex =
       r"^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])(:?\d{1,5})?$";
+
+  static const or = "Or";
 }

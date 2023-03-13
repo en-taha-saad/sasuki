@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
+import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
@@ -97,18 +98,62 @@ class _ChooseServerViewState extends State<ChooseServerView> {
           const SizedBox(height: AppSize.s50),
           ElevatedButtonWidget(
             name: AppStrings.servContinueToLogin,
-            onPressed: isThereServers ? () {} : Constants.nullValue,
+            onPressed: isThereServers ? _continueToLogin : Constants.nullValue,
           ),
-          const SizedBox(height: AppSize.s25),
+          isThereServers
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: AppSize.s10),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.39,
+                          child: Divider(
+                            color: ColorManager.greyNeutral.withOpacity(
+                              AppSize.s0point25,
+                            ),
+                            thickness: AppSize.s1,
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: AppSize.s10,
+                          ),
+                          child: Text(
+                            AppStrings.or,
+                            style: Theme.of(context).textTheme.labelSmall,
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.39,
+                          child: Divider(
+                            color: ColorManager.greyNeutral.withOpacity(
+                              AppSize.s0point25,
+                            ),
+                            thickness: AppSize.s1,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSize.s10),
+                  ],
+                )
+              : const SizedBox(height: AppSize.s25),
           TextButtonWidget(
             name: AppStrings.servAddServer,
             assetName: IconsAssets.add,
-            onPressed: () {},
+            onPressed: _addServer,
           ),
         ],
       ),
     );
   }
+
+  _continueToLogin() {}
+
+  void _addServer() {}
 
   Widget _getDataContentWidget() {
     return
@@ -160,9 +205,6 @@ class _ChooseServerViewState extends State<ChooseServerView> {
                     isThisServersDropdown: Constants.trueBool,
                     items: serversList?.servers ?? [],
                     doOtherThings: (val) {
-                      setState(() {
-                        selectedServer = val;
-                      });
                       // _viewModel.inputIsNotSelectedServer
                       //     .add(Constants.falseBool);
                       // _viewModel.inputIsSelectedServer.add(Constants.trueBool);

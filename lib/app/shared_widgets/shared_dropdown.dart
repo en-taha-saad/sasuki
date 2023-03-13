@@ -120,7 +120,6 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<T>(
       value: _selectedItem,
-      borderRadius: RadiusSizes.radius12,
       onChanged: (val) {
         setState(() {
           _selectedItem = val;
@@ -169,8 +168,8 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                           ),
                           if (widget.items.last != item)
                             Divider(
-                              color: ColorManager.whiteNeutral.withOpacity(
-                                AppOpacity.op10,
+                              color: ColorManager.greyNeutral.withOpacity(
+                                AppSize.s0point25,
                               ),
                               height: AppSize.s1,
                             ),
@@ -181,6 +180,7 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
             ),
           )
           .toList(),
+      borderRadius: RadiusSizes.radius12,
       icon: SvgPicture.asset(
         IconsAssets.dropdown,
         height: AppSize.s8,
