@@ -10,12 +10,14 @@ class TextButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
   final String? assetName;
   final String? name;
+  final bool? justText;
   final MainAxisSize? mainAxisSize;
   const TextButtonWidget({
     this.onPressed,
     this.assetName,
     this.name,
     this.mainAxisSize,
+    this.justText,
     super.key,
   });
 
@@ -23,13 +25,15 @@ class TextButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: AppSize.s48,
-      decoration: BoxDecoration(
-        borderRadius: RadiusSizes.radius12,
-        border: Border.all(
-          color: ColorManager.whiteNeutral,
-          width: AppSize.s1,
-        ),
-      ),
+      decoration: justText == Constants.trueBool
+          ? Constants.nullValue
+          : BoxDecoration(
+              borderRadius: RadiusSizes.radius12,
+              border: Border.all(
+                color: ColorManager.whiteNeutral,
+                width: AppSize.s1,
+              ),
+            ),
       child: TextButton(
         onPressed: onPressed,
         child: Row(

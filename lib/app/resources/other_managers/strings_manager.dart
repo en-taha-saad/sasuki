@@ -61,8 +61,8 @@ class AppStrings {
   static const servChangeServer = "Change Server";
   static const servAddServer = "Add Server";
   static const servNoServersFound = "No Servers Found.";
-  static const servISPName = "ISP name";
-  static const servServerAddress = "server address";
+  static const servISPName = "ISP Name";
+  static const servServerAddress = "Server Address";
   static const servUsername = "username";
   static const servPassword = "password";
   static const captchaInputHint = "Enter captcha text here";
@@ -281,4 +281,8 @@ class AppStrings {
       r"^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])(:?\d{1,5})?$";
 
   static const or = "Or";
+
+    static const servISPNameHint = "add isp name";
+    static const servServerAddressHint = "add server address";
+
 }

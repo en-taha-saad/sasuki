@@ -5,6 +5,8 @@ import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
+import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
+import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/footer.dart';
@@ -14,8 +16,8 @@ import 'package:sasuki/app/shared_widgets/text_button_widget.dart';
 import 'package:sasuki/domain/models/choosing_server/server.dart';
 import 'package:sasuki/domain/models/choosing_server/servers.dart';
 import 'package:sasuki/presentation/choose_server/viewmodel/choose_server_viewmodel.dart';
-// import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
-// import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
+import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
+import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
 
 class ChooseServerView extends StatefulWidget {
   const ChooseServerView({Key? key}) : super(key: key);
@@ -65,7 +67,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
       onWillPop: () async => Constants.falseBool,
       child: Column(
         children: [
-          const Spacer(),
+          const SizedBox(height: AppSize.s100),
           getScreenSmallLogo(),
           const SizedBox(height: AppSize.s50),
           getScreenContent(context),
@@ -151,53 +153,31 @@ class _ChooseServerViewState extends State<ChooseServerView> {
     );
   }
 
-  _continueToLogin() {}
+  _continueToLogin() {
+    // TODO continue to login
+  }
 
-  void _addServer() {}
+  void _addServer() => Nav.replaceTo(context, Routes.addServerRoute);
 
   Widget _getDataContentWidget() {
-    // TODO : uncomment this when the stream is ready to
-    return
-        // StreamBuilder<FlowState>(
-        //   stream: _viewModel.outputState,
-        //   builder: (context, snapshot) {
-        //     return snapshot.data?.getScreenWidget(
-        //           context,
-        //           _getDropDown(context),
-        //           () {},
-        //         ) ??
-
-        _getDropDown(context);
-    //   },
-    // );
+    return StreamBuilder<FlowState>(
+      stream: _viewModel.outputState,
+      builder: (context, snapshot) {
+        return snapshot.data?.getScreenWidget(
+              context,
+              _getDropDown(context),
+              () {},
+            ) ??
+            _getDropDown(context);
+      },
+    );
   }
 
   Widget _getDropDown(BuildContext context) {
     return StreamBuilder<ServersList>(
       stream: _viewModel.outputGotListOfServers,
       builder: (_, snapshot0) {
-        // TODO : remove this list
-        // serversList = snapshot0.data;
-        serversList = ServersList([
-          Server(
-            "Server 1",
-            "Server 1",
-            "Server 1",
-            "Server 1",
-          ),
-          Server(
-            "Server 2",
-            "Server 2",
-            "Server 2",
-            "Server 2",
-          ),
-          Server(
-            "Server 3",
-            "Server 3",
-            "Server 3",
-            "Server 3",
-          ),
-        ]);
+        serversList = snapshot0.data;
         _updateIfThereIsServers();
         return isThereServers
             ? StreamBuilder<Server?>(
@@ -207,12 +187,11 @@ class _ChooseServerViewState extends State<ChooseServerView> {
                     isThisServersDropdown: Constants.trueBool,
                     items: serversList?.servers ?? [],
                     doOtherThings: (val) {
-                      // TODO : do other things
-                      // _viewModel.inputIsNotSelectedServer
-                      //     .add(Constants.falseBool);
-                      // _viewModel.inputIsSelectedServer.add(Constants.trueBool);
-                      // _viewModel.inputSelectedServer.add(selectedServer);
-                      // _viewModel.saveSelectedServer(selectedServer);
+                      _viewModel.inputIsNotSelectedServer
+                          .add(Constants.falseBool);
+                      _viewModel.inputIsSelectedServer.add(Constants.trueBool);
+                      _viewModel.inputSelectedServer.add(selectedServer);
+                      _viewModel.saveSelectedServer(selectedServer);
                     },
                     displayFn: (item) => (item as Server).name,
                   );
