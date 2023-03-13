@@ -32,6 +32,7 @@ class DropDownComponent<T> extends StatefulWidget {
 }
 
 class _DropDownComponentState<T> extends State<DropDownComponent> {
+  // TODO : see if you can do the custom design for the dropdown
   // final ScrollController _scrollController = ScrollController();
   T? _selectedItem;
 
@@ -88,6 +89,7 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                   textStyle: Theme.of(context).textTheme.titleMedium,
                 ),
                 onPressed: () {
+                  // TODO delete server from list
                   // if (serversList?.servers?.length == Constants.oneNum) {
                   //   _viewModel.inputIsNotSelectedServer.add(Constants.trueVal);
                   //   _viewModel.inputIsSelectedServer.add(Constants.falseVal);
@@ -195,6 +197,7 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
       hint: const Text(AppStrings.dropDownHint),
 
       ///
+      // TODO : see if you can do the custom design for the dropdown
       /*
       // onTap: () {
       //   Navigator.pop(context);

@@ -14,8 +14,8 @@ import 'package:sasuki/app/shared_widgets/text_button_widget.dart';
 import 'package:sasuki/domain/models/choosing_server/server.dart';
 import 'package:sasuki/domain/models/choosing_server/servers.dart';
 import 'package:sasuki/presentation/choose_server/viewmodel/choose_server_viewmodel.dart';
-import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
-import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
+// import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
+// import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
 
 class ChooseServerView extends StatefulWidget {
   const ChooseServerView({Key? key}) : super(key: key);
@@ -156,6 +156,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
   void _addServer() {}
 
   Widget _getDataContentWidget() {
+    // TODO : uncomment this when the stream is ready to
     return
         // StreamBuilder<FlowState>(
         //   stream: _viewModel.outputState,
@@ -175,6 +176,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
     return StreamBuilder<ServersList>(
       stream: _viewModel.outputGotListOfServers,
       builder: (_, snapshot0) {
+        // TODO : remove this list
         // serversList = snapshot0.data;
         serversList = ServersList([
           Server(
@@ -205,6 +207,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
                     isThisServersDropdown: Constants.trueBool,
                     items: serversList?.servers ?? [],
                     doOtherThings: (val) {
+                      // TODO : do other things
                       // _viewModel.inputIsNotSelectedServer
                       //     .add(Constants.falseBool);
                       // _viewModel.inputIsSelectedServer.add(Constants.trueBool);
