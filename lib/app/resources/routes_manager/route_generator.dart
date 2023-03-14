@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_add_server_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_choose_server_module.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
@@ -40,6 +41,7 @@ class RouteGenerator {
         initAddServerModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
+            resizeToAvoidBottomInset: Constants.falseBool,
             child: AddServerView(),
           ),
         );

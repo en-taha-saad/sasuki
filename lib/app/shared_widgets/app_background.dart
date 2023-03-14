@@ -5,13 +5,16 @@ import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
 class AppBackground extends StatelessWidget {
   final Widget? child;
+  final bool? resizeToAvoidBottomInset;
   const AppBackground({
     this.child,
+    this.resizeToAvoidBottomInset,
     super.key,
   });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       extendBody: Constants.trueBool,
       extendBodyBehindAppBar: Constants.trueBool,
       appBar: Constants.nullValue,
