@@ -4,6 +4,8 @@ import 'package:sasuki/domain/repository/repository.dart';
 import 'package:sasuki/domain/usecase/captcha_usecase/captcha_usecase.dart';
 import 'package:sasuki/domain/usecase/captcha_usecase/responsecaptcha_usecase.dart';
 import 'package:sasuki/domain/usecase/login_usecase/login_usecase.dart';
+import 'package:sasuki/domain/usecase/servers_usecase/selected_server_usecase.dart';
+import 'package:sasuki/presentation/login/viewmodel/login_viewmodel.dart';
 
 initLoginModule() async {
   // login module, only login dependencies are here
@@ -25,16 +27,15 @@ initLoginModule() async {
       () => ResponseCaptchaUseCase(instance<Repository>()),
     );
   }
-  // TODO check the model
-  // if (!GetIt.I.isRegistered<LoginViewModel>()) {
-  //   // login view model instance
-  //   instance.registerFactory<LoginViewModel>(
-  //     () => LoginViewModel(
-  //       instance<LoginUseCase>(),
-  //       instance<CaptchaUseCase>(),
-  //       instance<ResponseCaptchaUseCase>(),
-  //       instance<SelectedServerUsecase>(),
-  //     ),
-  //   );
-  // }
+  if (!GetIt.I.isRegistered<LoginViewModel>()) {
+    // login view model instance
+    instance.registerFactory<LoginViewModel>(
+      () => LoginViewModel(
+        instance<LoginUseCase>(),
+        instance<CaptchaUseCase>(),
+        instance<ResponseCaptchaUseCase>(),
+        instance<SelectedServerUsecase>(),
+      ),
+    );
+  }
 }

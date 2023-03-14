@@ -25,4 +25,6 @@ class Constants {
   static const int apiTimeOut = 60000;
   static const int splashDelay = 2;
   static const int snackBarDelay = 20;
+  static const String en = "en";
+  static const String ar = "ar";
 }
