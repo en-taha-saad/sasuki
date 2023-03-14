@@ -57,6 +57,7 @@ class IconsAssets {
   static const String chooseServer =
       "${ImagePaths.specificScreenIconsPath}choose_server.svg";
 
+  static const String login = "${ImagePaths.specificScreenIconsPath}login.svg";
 }
 
 class JsonAssets {

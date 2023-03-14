@@ -56,6 +56,7 @@ class AppStrings {
   static const servContinueToLogin = "Continue To Login";
   static const servLogin = "Login";
   static const servContinue = "Continue";
+  static const servAuthenticate = "Authenticate";
   static const servInvalidUsername = "Invalid Username";
   static const servInvalidPassword = "Invalid Password";
   static const servChangeServer = "Change Server";
@@ -63,8 +64,10 @@ class AppStrings {
   static const servNoServersFound = "No Servers Found.";
   static const servISPName = "ISP Name";
   static const servServerAddress = "Server Address";
-  static const servUsername = "username";
-  static const servPassword = "password";
+  static const servUsername = "Username";
+  static const servUsernameHint = "add username";
+  static const servPassword = "Password";
+  static const servPasswordHint = "add password";
   static const captchaInputHint = "Enter captcha text here";
   static const captchaError = "Captcha is required";
 

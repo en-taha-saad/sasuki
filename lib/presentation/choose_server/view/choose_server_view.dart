@@ -156,9 +156,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
     );
   }
 
-  _continueToLogin() {
-    // TODO continue to login
-  }
+  _continueToLogin() => Nav.replaceTo(context, Routes.loginRoute);
 
   void _addServer() => Nav.replaceTo(context, Routes.addServerRoute);
 
@@ -182,12 +180,8 @@ class _ChooseServerViewState extends State<ChooseServerView> {
       builder: (_, snapshot0) {
         serversList = snapshot0.data;
         // ignore: prefer_is_empty
-        bool isThereServers = (serversList?.servers?.length != 0 ||
-            serversList?.servers?.length != Constants.nullValue);
-        if (isThereServers) {
-          _viewModel.inputIsNotSelectedServer.add(Constants.falseBool);
-        }
-        return isThereServers
+        return (serversList?.servers?.length != Constants.zeroNum &&
+                serversList?.servers?.length != Constants.nullValue)
             ? StreamBuilder<Server?>(
                 stream: _viewModel.outputSelectedServer,
                 builder: (context, snapshot) {
