@@ -45,6 +45,14 @@ class RouteGenerator {
             child: AddServerView(),
           ),
         );
+      case Routes.loginRoute:
+        initAddServerModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            resizeToAvoidBottomInset: Constants.falseBool,
+            child: AddServerView(),
+          ),
+        );
 
       // TODO add your routes here
       default:

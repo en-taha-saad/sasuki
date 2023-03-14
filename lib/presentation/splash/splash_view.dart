@@ -54,8 +54,7 @@ class _SplashViewState extends State<SplashView> {
       if (isChosedServer != Constants.nullValue) {
         initChooseServerModule();
         // navigate to login
-        // TODO nav to the screen
-        // Nav.replaceTo(context, Routes.loginRoute);
+        Nav.replaceTo(context, Routes.loginRoute);
       } else {
         Nav.replaceTo(context, Routes.chooseServerRoute);
       }
@@ -68,8 +67,7 @@ class _SplashViewState extends State<SplashView> {
       _appPrefs.removeToken();
       initChooseServerModule();
       // navigate to login
-      // TODO nav to the screen
-      // Nav.replaceTo(context, Routes.loginRoute);
+      Nav.replaceTo(context, Routes.loginRoute);
       return;
     }
   }

@@ -48,18 +48,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
 
   ///
   ServersList? serversList;
-  bool isThereServers = Constants.falseBool;
   Server? selectedServer;
-
-  void _updateIfThereIsServers() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
-        // ignore: prefer_is_empty
-        isThereServers = (serversList?.servers?.length != 0 ||
-            serversList?.servers?.length != Constants.nullValue);
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,51 +87,65 @@ class _ChooseServerViewState extends State<ChooseServerView> {
           const SizedBox(height: AppSize.s25),
           _getDataContentWidget(),
           const SizedBox(height: AppSize.s50),
-          ElevatedButtonWidget(
-            name: AppStrings.servContinueToLogin,
-            onPressed: isThereServers ? _continueToLogin : Constants.nullValue,
+          StreamBuilder<bool?>(
+            stream: _viewModel.outputIsNotSelectedServer,
+            builder: (context, snapshot) {
+              // ignore: prefer_is_empty
+              return ElevatedButtonWidget(
+                name: AppStrings.servContinueToLogin,
+                onPressed: (snapshot.data ?? Constants.trueBool)
+                    ? Constants.nullValue
+                    : _continueToLogin,
+              );
+            },
           ),
-          isThereServers
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: AppSize.s10),
-                    Row(
+          StreamBuilder<bool?>(
+            stream: _viewModel.outputIsNotSelectedServer,
+            builder: (context, snapshot) {
+              // ignore: prefer_is_empty
+              return (snapshot.data ?? Constants.trueBool)
+                  ? const SizedBox(height: AppSize.s25)
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.39,
-                          child: Divider(
-                            color: ColorManager.greyNeutral.withOpacity(
-                              AppSize.s0point25,
+                        const SizedBox(height: AppSize.s10),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.39,
+                              child: Divider(
+                                color: ColorManager.greyNeutral.withOpacity(
+                                  AppSize.s0point25,
+                                ),
+                                thickness: AppSize.s1,
+                              ),
                             ),
-                            thickness: AppSize.s1,
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: AppSize.s10,
-                          ),
-                          child: Text(
-                            AppStrings.or,
-                            style: Theme.of(context).textTheme.labelSmall,
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.39,
-                          child: Divider(
-                            color: ColorManager.greyNeutral.withOpacity(
-                              AppSize.s0point25,
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: AppSize.s10,
+                              ),
+                              child: Text(
+                                AppStrings.or,
+                                style: Theme.of(context).textTheme.labelSmall,
+                              ),
                             ),
-                            thickness: AppSize.s1,
-                          ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.39,
+                              child: Divider(
+                                color: ColorManager.greyNeutral.withOpacity(
+                                  AppSize.s0point25,
+                                ),
+                                thickness: AppSize.s1,
+                              ),
+                            ),
+                          ],
                         ),
+                        const SizedBox(height: AppSize.s10),
                       ],
-                    ),
-                    const SizedBox(height: AppSize.s10),
-                  ],
-                )
-              : const SizedBox(height: AppSize.s25),
+                    );
+            },
+          ),
           TextButtonWidget(
             name: AppStrings.servAddServer,
             assetName: IconsAssets.add,
@@ -178,7 +181,12 @@ class _ChooseServerViewState extends State<ChooseServerView> {
       stream: _viewModel.outputGotListOfServers,
       builder: (_, snapshot0) {
         serversList = snapshot0.data;
-        _updateIfThereIsServers();
+        // ignore: prefer_is_empty
+        bool isThereServers = (serversList?.servers?.length != 0 ||
+            serversList?.servers?.length != Constants.nullValue);
+        if (isThereServers) {
+          _viewModel.inputIsNotSelectedServer.add(Constants.falseBool);
+        }
         return isThereServers
             ? StreamBuilder<Server?>(
                 stream: _viewModel.outputSelectedServer,
@@ -186,7 +194,9 @@ class _ChooseServerViewState extends State<ChooseServerView> {
                   return DropDownComponent<Server?>(
                     isThisServersDropdown: Constants.trueBool,
                     items: serversList?.servers ?? [],
+                    viewModel: _viewModel,
                     doOtherThings: (val) {
+                      selectedServer = val;
                       _viewModel.inputIsNotSelectedServer
                           .add(Constants.falseBool);
                       _viewModel.inputIsSelectedServer.add(Constants.trueBool);
