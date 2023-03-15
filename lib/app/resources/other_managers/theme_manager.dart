@@ -17,17 +17,23 @@ ThemeData getApplicationTheme() {
       secondary: ColorManager.secondary,
     ),
 
-    snackBarTheme: const SnackBarThemeData(),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: MaterialStateProperty.all<Color>(ColorManager.whiteNeutral),
+      shape: RoundedRectangleBorder(borderRadius: RadiusSizes.radius6),
+      checkColor:
+          MaterialStateProperty.all<Color>(ColorManager.backgroundCenter),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    ),
 
-    scrollbarTheme: const ScrollbarThemeData(),
-    menuTheme: const MenuThemeData(),
+    // TODO : add all the theme data
+    // snackBarTheme: const SnackBarThemeData(),
+    // scrollbarTheme: const ScrollbarThemeData(),
+    // menuTheme: const MenuThemeData(),
+    // menuBarTheme: const MenuBarThemeData(),
+    // iconTheme: const IconThemeData(),
+    // iconButtonTheme: const IconButtonThemeData(),
 
-    menuBarTheme: const MenuBarThemeData(),
-
-    iconTheme: const IconThemeData(),
-
-    iconButtonTheme: const IconButtonThemeData(),
-
+    // card button theme
     cardTheme: CardTheme(
       color: ColorManager.primaryshade3,
       shape: RoundedRectangleBorder(
@@ -67,6 +73,7 @@ ThemeData getApplicationTheme() {
           borderRadius: RadiusSizes.radius12,
         ),
         foregroundColor: ColorManager.whiteNeutral,
+        disabledForegroundColor: ColorManager.greyNeutral,
       ),
     ),
 

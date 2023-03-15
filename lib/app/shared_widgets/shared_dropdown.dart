@@ -35,8 +35,6 @@ class DropDownComponent<T> extends StatefulWidget {
 }
 
 class _DropDownComponentState<T> extends State<DropDownComponent> {
-  // TODO : see if you can do the custom design for the dropdown
-  // final ScrollController _scrollController = ScrollController();
   T? _selectedItem;
 
   deleteServerDialog(Server? value, BuildContext context) {
@@ -202,69 +200,6 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
         return Constants.nullValue;
       },
       hint: const Text(AppStrings.dropDownHint),
-
-      ///
-      // TODO : see if you can do the custom design for the dropdown
-      /*
-      // onTap: () {
-      //   Navigator.pop(context);
-      //   showDialog(
-      //     context: context,
-      //     barrierColor: Colors.transparent,
-      //     builder: (context) {
-      //       return Dialog(
-      //         insetPadding: const EdgeInsets.symmetric(
-      //           horizontal: AppSize.s25,
-      //         ),
-      //         child: Container(
-      //           height: AppSize.s250,
-      //           width: getScreenWidth(context),
-      //           decoration: BoxDecoration(
-      //             color: ColorManager.secondary,
-      //             borderRadius: RadiusSizes.radius12,
-      //             border: Border.all(
-      //               color: ColorManager.whiteNeutral,
-      //               width: AppSize.s1,
-      //             ),
-      //           ),
-      //           child: Material(
-      //             type: MaterialType.transparency,
-      //             child: Scrollbar(
-      //               thumbVisibility: Constants.trueBool,
-      //               trackVisibility: Constants.trueBool,
-      //               radius: const Radius.circular(AppSize.s25),
-      //               thickness: AppSize.s5,
-      //               interactive: Constants.trueBool,
-      //               controller: _scrollController,
-      //               child: ListView.builder(
-      //                 controller: _scrollController,
-      //                 itemCount: widget.items.length,
-      //                 itemBuilder: (context, index) => InkWell(
-      //                   onTap: () {
-      //                     _selectedItem = widget.items
-      //                         .where((element) =>
-      //                             widget.items.indexOf(element) ==
-      //                             widget.items.indexOf(widget.items[index]))
-      //                         .first;
-      //                     widget.onChanged(widget.items[index]);
-      //                     Navigator.pop(context);
-      //                     debugPrint("_selectedItem: $_selectedItem");
-      //                   },
-      //                   child: Text(
-      //                     '${widget.items[index]}',
-      //                     style: Theme.of(context).textTheme.bodyLarge,
-      //                   ),
-      //                 ),
-      //                 shrinkWrap: Constants.trueBool,
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       );
-      //     },
-      //   );
-      // },
-      */
       alignment: Alignment.centerLeft,
       dropdownColor: ColorManager.backgroundCenter,
       style: Theme.of(context).textTheme.bodyLarge,

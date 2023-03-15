@@ -25,6 +25,7 @@ import 'package:sasuki/data/responses/user_action_response/user_action_response.
 import 'package:sasuki/data/responses/user_details_responses/user_overview_api_responses.dart';
 import 'package:sasuki/data/responses/user_details_responses/user_api_responses.dart';
 import 'package:sasuki/data/responses/users_list_responses/users_list_responses.dart';
+import 'package:sasuki/presentation/login/viewmodel/login_viewmodel.dart';
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   AppServiceClient _appServiceClient;
@@ -59,15 +60,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<DashboardResponse> getDashboardData() async {
-    // TODO" add token from login viewmodel
-    // if (token != null) {
-    //   Dio dio = await instance<DioFactory>().getDio();
-    //   _appServiceClient = AppServiceClient(
-    //     dio,
-    //     baseUrl:
-    //         "https://${(await getSelectedServerFromLocal()).hostName}/${Constants.suffixUrl}",
-    //   );
-    // }
+    if (token != Constants.nullValue) {
+      Dio dio = await instance<DioFactory>().getDio();
+      _appServiceClient = AppServiceClient(
+        dio,
+        baseUrl:
+            "https://${(await getSelectedServerFromLocal()).hostName}/${Constants.suffixUrl}",
+      );
+    }
     return await _appServiceClient.getDashboardData();
   }
 

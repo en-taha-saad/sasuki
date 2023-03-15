@@ -13,6 +13,7 @@ import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
+import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
@@ -43,6 +44,7 @@ class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   bool? rememberMe;
   bool showHidePassword = Constants.trueBool;
+  bool showPassword = Constants.falseBool;
   LoginUseCaseInput? savedUsernamePassword;
   _bind() {
     _viewModel.start();
@@ -73,8 +75,7 @@ class _LoginViewState extends State<LoginView> {
           SchedulerBinding.instance.addPostFrameCallback(
             (_) {
               _appPrefs.setIsUserLoggedIn();
-              // TODO : Navigate to dashboard
-              // Nav.replaceTo(context, Routes.dashboardRoute);
+              Nav.replaceTo(context, Routes.dashboardRoute);
             },
           );
         }
@@ -145,6 +146,7 @@ class _LoginViewState extends State<LoginView> {
               getScreenSmallLogo(),
               const SizedBox(height: AppSize.s25),
               getScreenContent(context),
+              const SizedBox(height: AppSize.s100),
             ],
           ),
         ),
@@ -165,7 +167,9 @@ class _LoginViewState extends State<LoginView> {
           StreamBuilder<bool>(
             stream: _viewModel.outputIs2AuthRequiredValid,
             builder: (context, snapshot) {
-              return (snapshot.data ?? false) ? _show2Auth() : _showLogin();
+              return (snapshot.data ?? Constants.falseBool)
+                  ? _show2Auth()
+                  : _showLogin();
             },
           ),
           const SizedBox(height: AppSize.s10),
@@ -201,7 +205,7 @@ class _LoginViewState extends State<LoginView> {
           ],
         ),
         const SizedBox(height: AppSize.s25),
-        _getDataContentWidget(),
+        _getLoginContentWidget(),
         const SizedBox(height: AppSize.s50),
         StreamBuilder<bool>(
           stream: _viewModel.outputAreAllInputsValid,
@@ -218,7 +222,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Widget _getDataContentWidget() {
+  Widget _getLoginContentWidget() {
     return Form(
       key: _formKey,
       child: Column(
@@ -244,10 +248,10 @@ class _LoginViewState extends State<LoginView> {
             inputHint: AppStrings.servPasswordHint,
             errorText: AppStrings.servInvalidPassword,
             autofocus: Constants.falseBool,
-            obscureText: Constants.trueBool,
+            showPassword: Constants.trueBool,
           ),
           const SizedBox(height: AppSize.s25),
-          _rememberMeCheckBox(),
+          _rememberMeCheckBoxWidget(),
         ],
       ),
     );
@@ -260,7 +264,7 @@ class _LoginViewState extends State<LoginView> {
     String? inputHint,
     String? errorText,
     bool? autofocus,
-    bool obscureText = Constants.falseBool,
+    bool showPassword = Constants.falseBool,
   }) {
     return StreamBuilder<bool>(
       stream: stream,
@@ -279,27 +283,50 @@ class _LoginViewState extends State<LoginView> {
             inputLabel != Constants.nullValue
                 ? const SizedBox(height: AppSize.s10)
                 : Container(),
-            TextFormField(
-              controller: controller,
-              decoration: InputDecoration(
-                hintText: inputHint,
-                errorText: (snapshot.data ?? Constants.trueBool)
-                    ? Constants.nullValue
-                    : errorText,
-                suffix: obscureText
-                    ? IconButton(
-                        icon: Icon(
-                          showHidePassword
-                              ? Icons.remove_red_eye_outlined
-                              : Icons.remove_red_eye,
-                          color: ColorManager.whiteNeutral,
+            Stack(
+              children: [
+                TextFormField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    hintText: inputHint,
+                    errorText: (snapshot.data ?? Constants.trueBool)
+                        ? Constants.nullValue
+                        : errorText,
+                  ),
+                  obscureText:
+                      showPassword ? showHidePassword : Constants.falseBool,
+                  autofocus: autofocus!,
+                ),
+                showPassword
+                    ? Container(
+                        margin: const EdgeInsets.only(
+                          top: AppMargin.m12,
+                          right: AppMargin.m12,
                         ),
-                        onPressed: () => setState(
-                            () => showHidePassword = !showHidePassword),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(),
+                            InkWell(
+                              child: SvgPicture.asset(
+                                showHidePassword
+                                    ? IconsAssets.eyeslash
+                                    : IconsAssets.eye,
+                                theme: const SvgTheme(
+                                  currentColor: ColorManager.whiteNeutral,
+                                ),
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  showHidePassword = !showHidePassword;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
                       )
-                    : null,
-              ),
-              autofocus: autofocus!,
+                    : Container(),
+              ],
             ),
           ],
         );
@@ -307,7 +334,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Widget _rememberMeCheckBox() {
+  Widget _rememberMeCheckBoxWidget() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -328,14 +355,11 @@ class _LoginViewState extends State<LoginView> {
             );
             _viewModel.setUnsetRememberMe(rememberMe ?? Constants.falseBool);
           },
-          fillColor: MaterialStateProperty.all(ColorManager.semiBlackNeutral),
-          activeColor: Colors.white,
-          checkColor: ColorManager.backgroundCenter,
         ),
         const SizedBox(width: AppSize.s15),
         Text(
           AppStrings.servRememberMe,
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
       ],
     );
@@ -360,7 +384,7 @@ class _LoginViewState extends State<LoginView> {
           backgroundColor: Colors.transparent,
           child: Container(
             decoration: BoxDecoration(
-              color: ColorManager.whiteNeutral,
+              color: ColorManager.backgroundCorners,
               shape: BoxShape.rectangle,
               borderRadius: RadiusSizes.radius12,
               boxShadow: const [BoxShadow(color: Colors.black26)],
@@ -471,12 +495,14 @@ class _LoginViewState extends State<LoginView> {
               length: AppSize.s6.toInt(),
               animationType: AnimationType.fade,
               pinTheme: PinTheme(
-                shape: PinCodeFieldShape.underline,
-                fieldHeight: AppSize.s46,
-                fieldWidth: AppSize.s40,
+                shape: PinCodeFieldShape.box,
+                borderRadius: RadiusSizes.radius12,
                 selectedColor: ColorManager.whiteNeutral,
-                activeColor: ColorManager.whiteNeutral,
-                inactiveColor: ColorManager.whiteNeutral,
+                activeColor: ColorManager.primaryshade3,
+                inactiveColor: ColorManager.backgroundCorners,
+                borderWidth: AppSize.s3,
+                fieldHeight: AppSize.s48,
+                fieldWidth: AppSize.s48,
               ),
               autoFocus: Constants.trueBool,
               autoDismissKeyboard: Constants.trueBool,
@@ -484,19 +510,9 @@ class _LoginViewState extends State<LoginView> {
               cursorColor: ColorManager.whiteNeutral,
               controller: _entered2AuthController,
               keyboardType: TextInputType.number,
-              // TODO : check if this is needed
-              // pastedTextStyle: TextStyle(
-              //   color: ColorManager.success,
-              //   fontWeight: FontWeight.bold,
-              // ),
               onCompleted: (v) {},
               onChanged: (v) {},
-              beforeTextPaste: (text) {
-                debugPrint("Allowing to paste $text");
-                //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                return Constants.falseBool;
-              },
+              beforeTextPaste: (text) => Constants.falseBool,
             );
           },
         ),

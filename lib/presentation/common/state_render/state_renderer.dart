@@ -254,25 +254,24 @@ class StateRenderer extends StatelessWidget {
 
   Widget _getFullScreenLoadingWidget(MobileModuleScreen? mobileModuleScreen) {
     // TODO : add shimmer loading for all screens
-    // switch (mobileModuleScreen) {
-    //   case MobileModuleScreen.dashboard:
-    //     return DashboardShimmerLoading();
-    //   case MobileModuleScreen.usersList:
-    //     return const UserListShimmerLoading();
-    //   case MobileModuleScreen.managersList:
-    //     return const ManagerListShimmerLoading();
-    //   case MobileModuleScreen.userDetails:
-    //     return const UserDetailsShimmerLoading();
-    //   case MobileModuleScreen.managerDetails:
-    //     return const ManagerDetailsShimmerLoading();
+    switch (mobileModuleScreen) {
+      // case MobileModuleScreen.dashboard:
+      //   return DashboardShimmerLoading();
+      // case MobileModuleScreen.usersList:
+      //   return const UserListShimmerLoading();
+      // case MobileModuleScreen.managersList:
+      //   return const ManagerListShimmerLoading();
+      // case MobileModuleScreen.userDetails:
+      //   return const UserDetailsShimmerLoading();
+      // case MobileModuleScreen.managerDetails:
+      //   return const ManagerDetailsShimmerLoading();
 
-    //   case MobileModuleScreen.activationInforms:
-    //     return const UserActivationInformsShimmerLoading();
+      // case MobileModuleScreen.activationInforms:
+      //   return const UserActivationInformsShimmerLoading();
 
-    //   default:
-    //     return Container();
-    // }
-    return Container();
+      default:
+        return Container();
+    }
   }
 
   Widget _getSnackBarErrorWidget(BuildContext context, List<Widget> children) {

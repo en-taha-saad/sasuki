@@ -44,8 +44,7 @@ class _SplashViewState extends State<SplashView> {
     if (token != Constants.nullValue) {
       goToLoginIfExpire(JwtDecoder.isExpired(token!));
     }
-    // TODO nav to the screen
-    // Nav.replaceTo(context, Routes.dashboardRoute);
+    Nav.replaceTo(context, Routes.dashboardRoute);
     return;
   }
 

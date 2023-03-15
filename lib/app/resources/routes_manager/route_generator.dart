@@ -51,12 +51,10 @@ class RouteGenerator {
         initLoginModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: Constants.falseBool,
+            resizeToAvoidBottomInset: Constants.trueBool,
             child: LoginView(),
           ),
         );
-
-      // TODO add your routes here
       default:
         return unDefinedRoute();
     }
