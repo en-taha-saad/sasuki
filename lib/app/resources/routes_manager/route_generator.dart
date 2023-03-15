@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_add_server_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_choose_server_module.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_dashboard_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_login_module.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
 import 'package:sasuki/presentation/add_server/view/add_server_view.dart';
 import 'package:sasuki/presentation/choose_server/view/choose_server_view.dart';
+import 'package:sasuki/presentation/dashboard/view/dashboard_view.dart';
 import 'package:sasuki/presentation/login/view/login_view.dart';
 import 'package:sasuki/presentation/splash/splash_view.dart';
 
@@ -47,6 +49,17 @@ class RouteGenerator {
             child: AddServerView(),
           ),
         );
+      case Routes.dashboardRoute:
+        initDashboardModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            resizeToAvoidBottomInset: Constants.trueBool,
+            isSecondAppBackground: Constants.falseBool,
+            child: DashboardView(),
+          ),
+          settings: settings,
+        );
+
       case Routes.loginRoute:
         initLoginModule();
         return MaterialPageRoute(

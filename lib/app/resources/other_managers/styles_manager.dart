@@ -9,6 +9,7 @@ class StylesManager {
     FontWeight? fontWeight,
     Color? color = ColorManager.whiteNeutral,
     TextDecoration? decoration,
+    double? height,
   }) {
     return TextStyle(
       fontFamily: Constants.fontFamily,
@@ -16,6 +17,7 @@ class StylesManager {
       color: color,
       fontSize: fontSize,
       decoration: decoration,
+      height: height,
       fontWeight: fontWeight,
     );
   }
@@ -38,12 +40,14 @@ class StylesManager {
   static TextStyle getMediumStyle({
     double? fontSize,
     Color? color,
+    double? height,
     TextDecoration? decoration,
   }) {
     return getTextStyle(
       fontSize: fontSize,
       fontWeight: FontWeightManager.medium,
       color: color,
+      height: height,
       decoration: decoration,
     );
   }
