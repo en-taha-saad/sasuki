@@ -35,6 +35,7 @@ class AppStrings {
   static const ok = "ok";
   static const success = "Success";
   static const emptyString = "Not Found";
+  static const admin = "admin";
 
   // header
   static const welcome = "Welcome";

@@ -20,12 +20,14 @@ class ImageAssets {
 
 class IconsAssets {
   /// Drawer Icons
+  static const String cancel = "${ImagePaths.drawerIconsPath}cancel.svg";
   static const String dashboard = "${ImagePaths.drawerIconsPath}dashboard.svg";
   static const String usersList = "${ImagePaths.drawerIconsPath}users_list.svg";
   static const String managers = "${ImagePaths.drawerIconsPath}managers.svg";
   static const String reports = "${ImagePaths.drawerIconsPath}reports.svg";
   static const String deposit = "${ImagePaths.drawerIconsPath}deposit.svg";
   static const String logout = "${ImagePaths.drawerIconsPath}logout.svg";
+  static const String activityLog = "${ImagePaths.drawerIconsPath}activity_log.svg";
 
   /// Shared Icons
   static const String actions = "${ImagePaths.sharedIconsPath}actions.svg";

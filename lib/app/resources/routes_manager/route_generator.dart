@@ -6,10 +6,12 @@ import 'package:sasuki/app/init_screens_dependencies/init_dashboard_module.dart'
 import 'package:sasuki/app/init_screens_dependencies/init_login_module.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
+import 'package:sasuki/app/shared_funs/create_route.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
 import 'package:sasuki/presentation/add_server/view/add_server_view.dart';
 import 'package:sasuki/presentation/choose_server/view/choose_server_view.dart';
 import 'package:sasuki/presentation/dashboard/view/dashboard_view.dart';
+import 'package:sasuki/presentation/drawer/drawer_view.dart';
 import 'package:sasuki/presentation/login/view/login_view.dart';
 import 'package:sasuki/presentation/splash/splash_view.dart';
 
@@ -17,16 +19,10 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.drawerRoute:
-        return MaterialPageRoute(
-          builder: (_) => const AppBackground(
-            child: Center(
-              child: Text(
-                Routes.drawerRoute,
-              ),
-            ),
-          ),
-          settings: settings,
+        return createRoute(
+          AppBackground(child: DrawerView(settings.arguments)),
         );
+
       case Routes.splashRoute:
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
@@ -68,6 +64,7 @@ class RouteGenerator {
             child: LoginView(),
           ),
         );
+
       default:
         return unDefinedRoute();
     }
