@@ -13,6 +13,8 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/app/shared_widgets/dashboard_list_tile.dart';
+import 'package:sasuki/app/shared_widgets/single_card_statistics.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/dashboard/auth.dart';
 import 'package:sasuki/domain/models/dashboard/dashboard.dart';
@@ -100,169 +102,174 @@ class _DashboardViewState extends State<DashboardView> {
   }
 
   Widget _getContentWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        AppSize.statusBarHeight(context),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  InkWell(
-                    child: SvgPicture.asset(IconsAssets.menu),
-                    onTap: () {
-                      // TODO : add logic to open drawer
-                      Nav.navTo(context, Routes.drawerRoute);
-                    },
-                  ),
-                  Text(
-                    _viewModel.selectedServer?.name ?? Constants.emptyStr,
-                    style: Theme.of(context).textTheme.displayLarge,
-                  ),
-                  Container(),
-                ],
-              ),
-              const SizedBox(height: AppSize.s20),
-              Text(
-                AppStrings.welcome,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color:
-                          ColorManager.whiteNeutral.withOpacity(AppSize.s0_5),
-                      height: AppSize.s1_5,
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          AppSize.statusBarHeight(context),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      child: SvgPicture.asset(IconsAssets.menu),
+                      onTap: () {
+                        // TODO : add logic to open drawer
+                        Nav.navTo(context, Routes.drawerRoute);
+                      },
                     ),
-              ),
-              StreamBuilder<Auth>(
-                stream: _viewModel.outputAuthData,
-                builder: (context, snapshot) {
-                  return Text(
-                    "${snapshot.data?.client?.firstname ?? Constants.dash} ${snapshot.data?.client?.lastname ?? Constants.dash}",
-                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                          color: ColorManager.whiteNeutral,
-                          height: AppSize.s1_5,
-                        ),
-                  );
-                },
-              ),
-              StreamBuilder<Dashboard>(
-                stream: _viewModel.outputDashboardData,
-                builder: (context, snapshot) {
-                  final balance = snapshot.data?.data?.balance;
-                  return StreamBuilder<Captcha>(
-                    stream: _viewModel.outputDataCaptcha,
-                    builder: (context, snapshot) {
-                      final currency = snapshot.data?.data?.siteCurrency;
-                      return Text(
-                        "${currency ?? Constants.dash} ${balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(balance) : Constants.dash}",
-                        style:
-                            Theme.of(context).textTheme.displaySmall?.copyWith(
-                                  color: ColorManager.whiteNeutral
-                                      .withOpacity(AppSize.s0_5),
-                                  height: AppSize.s1_5,
-                                ),
-                      );
-                    },
-                  );
-                },
-              ),
-              Text(
-                AppStrings.availableBalance,
-                style: StylesManager.getMediumStyle(
-                  color: ColorManager.whiteNeutral.withOpacity(AppSize.s0_5),
-                  height: AppSize.s1_5,
-                  fontSize: FontSize.sSubtitle5,
+                    Text(
+                      _viewModel.selectedServer?.name ?? Constants.emptyStr,
+                      style: Theme.of(context).textTheme.displayLarge,
+                    ),
+                    Container(),
+                  ],
                 ),
-              ),
-            ],
+                const SizedBox(height: AppSize.s20),
+                Text(
+                  AppStrings.welcome,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color:
+                            ColorManager.whiteNeutral.withOpacity(AppSize.s0_5),
+                        height: AppSize.s1_5,
+                      ),
+                ),
+                StreamBuilder<Auth>(
+                  stream: _viewModel.outputAuthData,
+                  builder: (context, snapshot) {
+                    return Text(
+                      "${snapshot.data?.client?.firstname ?? Constants.dash} ${snapshot.data?.client?.lastname ?? Constants.dash}",
+                      style:
+                          Theme.of(context).textTheme.displayMedium?.copyWith(
+                                color: ColorManager.whiteNeutral,
+                                height: AppSize.s1_5,
+                              ),
+                    );
+                  },
+                ),
+                StreamBuilder<Dashboard>(
+                  stream: _viewModel.outputDashboardData,
+                  builder: (context, snapshot) {
+                    final balance = snapshot.data?.data?.balance;
+                    return StreamBuilder<Captcha>(
+                      stream: _viewModel.outputDataCaptcha,
+                      builder: (context, snapshot) {
+                        final currency = snapshot.data?.data?.siteCurrency;
+                        return Text(
+                          "${currency ?? Constants.dash} ${balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(balance) : Constants.dash}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .displaySmall
+                              ?.copyWith(
+                                color: ColorManager.whiteNeutral
+                                    .withOpacity(AppSize.s0_5),
+                                height: AppSize.s1_5,
+                              ),
+                        );
+                      },
+                    );
+                  },
+                ),
+                Text(
+                  AppStrings.availableBalance,
+                  style: StylesManager.getMediumStyle(
+                    color: ColorManager.whiteNeutral.withOpacity(
+                      AppSize.s0_5,
+                    ),
+                    height: AppSize.s1_5,
+                    fontSize: FontSize.sSubtitle5,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+          const SizedBox(height: AppSize.s25),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: _getDashboardContent(),
+            decoration: const BoxDecoration(
+              color: ColorManager.secondary,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(AppSize.s35),
+                topRight: Radius.circular(AppSize.s35),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
-  // Widget _getContentWidget() {
-  //   return StreamBuilder<Dashboard>(
-  //       stream: _viewModel.outputDashboardData,
-  //       builder: (context, snapshot) {
-  //         return SingleChildScrollView(
-  //           physics: const AlwaysScrollableScrollPhysics(),
-  //           child: Container(
-  //             color: ColorManager.black.withOpacity(AppOpacity.op30),
-  //             child: Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               mainAxisAlignment: MainAxisAlignment.start,
-  //               mainAxisSize: MainAxisSize.min,
-  //               children: [
-  //                 const SizedBox(height: AppSize.s16),
-  //                 _getSingleCard(
-  //                   AppStrings.dashboardUsersStatistics,
-  //                   _viewModel.listOfUserStatistics(snapshot.data),
-  //                 ),
-  //                 const SizedBox(height: AppSize.s16),
-  //                 _getSingleCard(
-  //                   AppStrings.dashboardSalesFinance,
-  //                   _viewModel.listOfSalesAndFinance(snapshot.data),
-  //                 ),
-  //                 const SizedBox(height: AppSize.s46),
-  //               ],
-  //             ),
-  //           ),
-  //         );
-  //       });
-  // }
+  _getDashboardContent() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          _getCardTitle(
+            IconsAssets.dashboardUserStatistics,
+            AppStrings.dashboardUsersStatistics,
+          ),
+          StreamBuilder<Dashboard>(
+            stream: _viewModel.outputDashboardData,
+            builder: (context, snapshot) {
+              return DashboardListTile(
+                list: _viewModel.listOfUserStatistics(snapshot.data),
+              );
+            },
+          ),
+          _getCardTitle(
+            IconsAssets.dashboardSalesAndFinance,
+            AppStrings.dashboardSalesFinance,
+          ),
+          StreamBuilder<Dashboard>(
+            stream: _viewModel.outputDashboardData,
+            builder: (context, snapshot) {
+              return DashboardListTile(
+                list: _viewModel.listOfSalesAndFinance(snapshot.data),
+              );
+            },
+          ),
+          const SizedBox(height: AppSize.s50),
+        ],
+      ),
+    );
+  }
 
-  // Widget _getSingleCard(
-  //   String cardTitle,
-  //   List<CardElement> listOfCardElements,
-  // ) {
-  //   return Column(
-  //     mainAxisAlignment: MainAxisAlignment.start,
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     mainAxisSize: MainAxisSize.min,
-  //     children: [
-  //       Container(
-  //         margin: const EdgeInsets.only(left: AppMargin.m16),
-  //         child: Text(
-  //           cardTitle,
-  //           style: Theme.of(context).textTheme.headlineSmall,
-  //         ),
-  //       ),
-  //       Container(
-  //         margin: const EdgeInsets.only(top: AppMargin.m16),
-  //         child: Column(
-  //           children: listOfCardElements
-  //               .map(
-  //                 (element) => ListTile(
-  //                   leading: SvgPicture.asset(
-  //                     element.icon,
-  //                     color: ColorManager.white.withOpacity(AppOpacity.op70),
-  //                     height: AppSize.s28,
-  //                     width: AppSize.s28,
-  //                   ),
-  //                   title: Text(
-  //                     element.title,
-  //                     style: Theme.of(context).textTheme.titleLarge,
-  //                   ),
-  //                   subtitle: Text(
-  //                     element.subtitle,
-  //                     style: Theme.of(context).textTheme.titleSmall,
-  //                   ),
-  //                   trailing: Text(
-  //                     element.number,
-  //                     style: Theme.of(context).textTheme.headlineMedium,
-  //                   ),
-  //                 ),
-  //               )
-  //               .toList(),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
+  Widget _getCardTitle(icon, title) {
+    return Column(
+      children: [
+        const SizedBox(height: AppSize.s35),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SvgPicture.asset(icon),
+            const SizedBox(width: AppSize.s15),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color: ColorManager.greyNeutral,
+                  ),
+            ),
+          ],
+        ),
+        const SizedBox(height: AppSize.s10),
+        Divider(
+          color: ColorManager.greyNeutral.withOpacity(
+            AppSize.s0point25,
+          ),
+        ),
+        const SizedBox(height: AppSize.s25),
+      ],
+    );
+  }
 }
