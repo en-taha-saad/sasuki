@@ -9,6 +9,7 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/presentation/common/loading_shimmers_screens/dashboard_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/state_render/states/mobile_module_screen.dart';
 import 'package:sasuki/presentation/common/state_render/states/state_renderer_type.dart';
 
@@ -108,24 +109,8 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getEmptyServersList(BuildContext context, String message) {
-    return
-        // Container(
-        //   margin: const EdgeInsets.only(top: AppMargin.m22),
-        //   child:
-        Center(
-      child:
-          // Column(
-          //   children: [
-          // SvgPicture.asset(
-          //   ImageAssets.emptyState,
-          //   height: AppSize.s37,
-          //   width: AppSize.s37,
-          // ),
-          // const SizedBox(height: AppSize.s10),
-          _getMessage(message, context),
-      //   ],
-      // ),
-      // ),
+    return Center(
+      child: _getMessage(message, context),
     );
   }
 
@@ -255,8 +240,8 @@ class StateRenderer extends StatelessWidget {
   Widget _getFullScreenLoadingWidget(MobileModuleScreen? mobileModuleScreen) {
     // TODO : add shimmer loading for all screens
     switch (mobileModuleScreen) {
-      // case MobileModuleScreen.dashboard:
-      //   return DashboardShimmerLoading();
+      case MobileModuleScreen.dashboard:
+        return DashboardShimmerLoading();
       // case MobileModuleScreen.usersList:
       //   return const UserListShimmerLoading();
       // case MobileModuleScreen.managersList:

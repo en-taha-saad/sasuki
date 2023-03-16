@@ -226,7 +226,8 @@ ThemeData getApplicationTheme() {
     listTileTheme: const ListTileThemeData(
       textColor: ColorManager.whiteNeutral,
       contentPadding: EdgeInsets.symmetric(
-        horizontal: AppPadding.p25,
+        horizontal: AppPadding.p0,
+        vertical: AppPadding.p0,
       ),
     ),
   );

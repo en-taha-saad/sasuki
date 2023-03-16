@@ -14,7 +14,6 @@ import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/dashboard_list_tile.dart';
-import 'package:sasuki/app/shared_widgets/single_card_statistics.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/dashboard/auth.dart';
 import 'package:sasuki/domain/models/dashboard/dashboard.dart';
@@ -268,7 +267,7 @@ class _DashboardViewState extends State<DashboardView> {
             AppSize.s0point25,
           ),
         ),
-        const SizedBox(height: AppSize.s25),
+        const SizedBox(height: AppSize.s15),
       ],
     );
   }

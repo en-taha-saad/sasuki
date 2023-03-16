@@ -1,51 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/domain/models/dashboard_card_element.dart';
 
 class DashboardListTile extends StatelessWidget {
-  final List<CardElement> list;
+  final List<CardElement>? list;
+  final Widget? shimmerText;
   const DashboardListTile({
     super.key,
-    required this.list,
+    this.list,
+    this.shimmerText,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: list
+      children: list!
           .map(
             (e) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                ListTile(
-                  title: Text(
-                    e.title,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  subtitle: Text(
-                    e.subtitle,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: ColorManager.greyNeutral,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          e.title,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                  ),
-                  trailing: Text(
-                    e.number,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
+                        Text(
+                          e.subtitle,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: ColorManager.greyNeutral,
+                                  ),
+                        ),
+                      ],
+                    ),
+                    shimmerText != Constants.nullValue
+                        ? shimmerText ?? Container()
+                        : Text(
+                            e.number,
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                  ],
                 ),
-                if (e != list.last)
+                if (e != list?.last)
                   Column(
                     children: [
-                      const SizedBox(height: AppSize.s15),
                       Divider(
                         color: ColorManager.greyNeutral.withOpacity(
                           AppSize.s0point25,
                         ),
                       ),
-                      const SizedBox(height: AppSize.s15),
                     ],
                   ),
               ],
