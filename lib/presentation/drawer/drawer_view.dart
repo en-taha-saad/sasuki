@@ -100,10 +100,10 @@ class DrawerView extends StatelessWidget {
         case AppStrings.drawerDashboard:
           _manageDrawerNavigations(Routes.dashboardRoute, context);
           break;
+        case AppStrings.drawerUsersList:
+          _manageDrawerNavigations(Routes.usersListRoute, context);
+          break;
         // TODO add screen
-        // case AppStrings.drawerUsersList:
-        //   _manageDrawerNavigations(Routes.usersListRoute, context);
-        //   break;
         // case AppStrings.drawerManagers:
         //   _manageDrawerNavigations(Routes.managersListRoute, context);
         //   break;
@@ -168,6 +168,7 @@ class DrawerView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AppSize.statusBarHeight(context),
+          const SizedBox(height: AppSize.s20),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
             child: Column(

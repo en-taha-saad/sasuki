@@ -4,6 +4,7 @@ import 'package:sasuki/app/init_screens_dependencies/init_add_server_module.dart
 import 'package:sasuki/app/init_screens_dependencies/init_choose_server_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_dashboard_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_login_module.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_users_list_module.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/shared_funs/create_route.dart';
@@ -14,6 +15,7 @@ import 'package:sasuki/presentation/dashboard/view/dashboard_view.dart';
 import 'package:sasuki/presentation/drawer/drawer_view.dart';
 import 'package:sasuki/presentation/login/view/login_view.dart';
 import 'package:sasuki/presentation/splash/splash_view.dart';
+import 'package:sasuki/presentation/users_list/view/users_list_view.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -63,6 +65,16 @@ class RouteGenerator {
             resizeToAvoidBottomInset: Constants.trueBool,
             child: LoginView(),
           ),
+        );
+      case Routes.usersListRoute:
+        initUsersListModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            resizeToAvoidBottomInset: Constants.trueBool,
+            isSecondAppBackground: Constants.falseBool,
+            child: UsersListView(),
+          ),
+          settings: settings,
         );
 
       default:

@@ -21,7 +21,6 @@ class SingleCardStatistics extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSize.s15),
-      margin: const EdgeInsets.symmetric(horizontal: AppSize.s25),
       height: AppSize.s80,
       decoration: BoxDecoration(
         color: ColorManager.primaryshade1,

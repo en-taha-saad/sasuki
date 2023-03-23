@@ -1,7 +1,13 @@
 class Constants {
   static const double zeroNum = 0;
+  static const int twoNum = 2;
+  static const int threeNum = 3;
+  static const int fourNum = 4;
+  static const int fiveNum = 5;
+  static const int minusOne = 0;
   static const List<String> emptyList = [];
   static const String emptyStr = "";
+  static const int twintyNum = 20;
   static const String dash = "-";
   static const bool falseBool = false;
   static const bool trueBool = true;

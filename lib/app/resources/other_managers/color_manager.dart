@@ -15,5 +15,7 @@ class ColorManager {
   static const Color semiBlackNeutral = Color.fromRGBO(146, 158, 174, 0.25);
   static const Color semiWhiteNeutral = Color.fromRGBO(255, 255, 255, 0.5);
   static const Color transparent = Color.fromRGBO(0, 0, 0, 0);
+    static const Color greyshade1 = Color(0x41929EAE);
+
 
 }

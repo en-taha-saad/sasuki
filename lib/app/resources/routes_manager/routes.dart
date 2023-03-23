@@ -5,4 +5,5 @@ class Routes {
   static const String dashboardRoute = "/dashboardRoute";
   static const String chooseServerRoute = "/chooseServerRoute";
   static const String addServerRoute = "/addServer";
+  static const String usersListRoute = "/userslist";
 }

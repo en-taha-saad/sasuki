@@ -120,7 +120,7 @@ class AppStrings {
   static const usersExpired = "Expired";
   static const usersOnline = "Online";
   static const searchError = "Search is required";
-  static const usersSearchusers = "search users";
+  static const usersSearchusers = "Search users";
   static const usersSearchmanagers = "search managers";
   static const noUsersFound = "no records found";
 
