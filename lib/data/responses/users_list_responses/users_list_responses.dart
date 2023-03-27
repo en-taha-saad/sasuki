@@ -62,8 +62,8 @@ class UsersListDataResponse {
   // String? phone;
   // @JsonKey(name: 'profile_id')
   // int? profileId;
-  // @JsonKey(name: 'balance')
-  // String? balance;
+  @JsonKey(name: 'balance')
+  String? balance;
   @JsonKey(name: 'expiration')
   String? expiration;
   // @JsonKey(name: 'parent_id')
@@ -103,7 +103,7 @@ class UsersListDataResponse {
     // this.city,
     // this.phone,
     // this.profileId,
-    // this.balance,
+    this.balance,
     this.expiration,
     // this.parentId,
     this.enabled,

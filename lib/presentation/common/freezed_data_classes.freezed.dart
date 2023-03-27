@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'freezed_data_classes.dart';
 
@@ -32,7 +32,8 @@ mixin _$LoginObject {
 abstract class $LoginObjectCopyWith<$Res> {
   factory $LoginObjectCopyWith(
           LoginObject value, $Res Function(LoginObject) then) =
-      _$LoginObjectCopyWithImpl<$Res>;
+      _$LoginObjectCopyWithImpl<$Res, LoginObject>;
+  @useResult
   $Res call(
       {String username,
       String password,
@@ -43,48 +44,51 @@ abstract class $LoginObjectCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LoginObjectCopyWithImpl<$Res> implements $LoginObjectCopyWith<$Res> {
+class _$LoginObjectCopyWithImpl<$Res, $Val extends LoginObject>
+    implements $LoginObjectCopyWith<$Res> {
   _$LoginObjectCopyWithImpl(this._value, this._then);
 
-  final LoginObject _value;
   // ignore: unused_field
-  final $Res Function(LoginObject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? password = freezed,
-    Object? language = freezed,
-    Object? otp = freezed,
-    Object? captchaText = freezed,
-    Object? sessionId = freezed,
+    Object? username = null,
+    Object? password = null,
+    Object? language = null,
+    Object? otp = null,
+    Object? captchaText = null,
+    Object? sessionId = null,
   }) {
     return _then(_value.copyWith(
-      username: username == freezed
+      username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      language: language == freezed
+      language: null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      otp: otp == freezed
+      otp: null == otp
           ? _value.otp
           : otp // ignore: cast_nullable_to_non_nullable
               as String,
-      captchaText: captchaText == freezed
+      captchaText: null == captchaText
           ? _value.captchaText
           : captchaText // ignore: cast_nullable_to_non_nullable
               as String,
-      sessionId: sessionId == freezed
+      sessionId: null == sessionId
           ? _value.sessionId
           : sessionId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -95,6 +99,7 @@ abstract class _$$_LoginObjectCopyWith<$Res>
           _$_LoginObject value, $Res Function(_$_LoginObject) then) =
       __$$_LoginObjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String username,
       String password,
@@ -105,46 +110,45 @@ abstract class _$$_LoginObjectCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoginObjectCopyWithImpl<$Res> extends _$LoginObjectCopyWithImpl<$Res>
+class __$$_LoginObjectCopyWithImpl<$Res>
+    extends _$LoginObjectCopyWithImpl<$Res, _$_LoginObject>
     implements _$$_LoginObjectCopyWith<$Res> {
   __$$_LoginObjectCopyWithImpl(
       _$_LoginObject _value, $Res Function(_$_LoginObject) _then)
-      : super(_value, (v) => _then(v as _$_LoginObject));
+      : super(_value, _then);
 
-  @override
-  _$_LoginObject get _value => super._value as _$_LoginObject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = freezed,
-    Object? password = freezed,
-    Object? language = freezed,
-    Object? otp = freezed,
-    Object? captchaText = freezed,
-    Object? sessionId = freezed,
+    Object? username = null,
+    Object? password = null,
+    Object? language = null,
+    Object? otp = null,
+    Object? captchaText = null,
+    Object? sessionId = null,
   }) {
     return _then(_$_LoginObject(
-      username == freezed
+      null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      password == freezed
+      null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      language == freezed
+      null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
               as String,
-      otp == freezed
+      null == otp
           ? _value.otp
           : otp // ignore: cast_nullable_to_non_nullable
               as String,
-      captchaText == freezed
+      null == captchaText
           ? _value.captchaText
           : captchaText // ignore: cast_nullable_to_non_nullable
               as String,
-      sessionId == freezed
+      null == sessionId
           ? _value.sessionId
           : sessionId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -181,27 +185,26 @@ class _$_LoginObject implements _LoginObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoginObject &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality().equals(other.language, language) &&
-            const DeepCollectionEquality().equals(other.otp, otp) &&
-            const DeepCollectionEquality()
-                .equals(other.captchaText, captchaText) &&
-            const DeepCollectionEquality().equals(other.sessionId, sessionId));
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            (identical(other.otp, otp) || other.otp == otp) &&
+            (identical(other.captchaText, captchaText) ||
+                other.captchaText == captchaText) &&
+            (identical(other.sessionId, sessionId) ||
+                other.sessionId == sessionId));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(language),
-      const DeepCollectionEquality().hash(otp),
-      const DeepCollectionEquality().hash(captchaText),
-      const DeepCollectionEquality().hash(sessionId));
+      runtimeType, username, password, language, otp, captchaText, sessionId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LoginObjectCopyWith<_$_LoginObject> get copyWith =>
       __$$_LoginObjectCopyWithImpl<_$_LoginObject>(this, _$identity);
 }
@@ -259,7 +262,8 @@ mixin _$UserRequestObject {
 abstract class $UserRequestObjectCopyWith<$Res> {
   factory $UserRequestObjectCopyWith(
           UserRequestObject value, $Res Function(UserRequestObject) then) =
-      _$UserRequestObjectCopyWithImpl<$Res>;
+      _$UserRequestObjectCopyWithImpl<$Res, UserRequestObject>;
+  @useResult
   $Res call(
       {int page,
       int count,
@@ -278,89 +282,91 @@ abstract class $UserRequestObjectCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserRequestObjectCopyWithImpl<$Res>
+class _$UserRequestObjectCopyWithImpl<$Res, $Val extends UserRequestObject>
     implements $UserRequestObjectCopyWith<$Res> {
   _$UserRequestObjectCopyWithImpl(this._value, this._then);
 
-  final UserRequestObject _value;
   // ignore: unused_field
-  final $Res Function(UserRequestObject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = freezed,
-    Object? count = freezed,
-    Object? sortBy = freezed,
-    Object? direction = freezed,
-    Object? search = freezed,
-    Object? columns = freezed,
-    Object? status = freezed,
-    Object? connection = freezed,
-    Object? profileId = freezed,
-    Object? parentId = freezed,
-    Object? groupId = freezed,
-    Object? siteId = freezed,
-    Object? subUsers = freezed,
-    Object? mac = freezed,
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+    Object? status = null,
+    Object? connection = null,
+    Object? profileId = null,
+    Object? parentId = null,
+    Object? groupId = null,
+    Object? siteId = null,
+    Object? subUsers = null,
+    Object? mac = null,
   }) {
     return _then(_value.copyWith(
-      page: page == freezed
+      page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
-      count: count == freezed
+      count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
-      sortBy: sortBy == freezed
+      sortBy: null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
               as String,
-      direction: direction == freezed
+      direction: null == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as String,
-      search: search == freezed
+      search: null == search
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
               as String,
-      columns: columns == freezed
+      columns: null == columns
           ? _value.columns
           : columns // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
-      connection: connection == freezed
+      connection: null == connection
           ? _value.connection
           : connection // ignore: cast_nullable_to_non_nullable
               as int,
-      profileId: profileId == freezed
+      profileId: null == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
               as int,
-      parentId: parentId == freezed
+      parentId: null == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int,
-      groupId: groupId == freezed
+      groupId: null == groupId
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
               as int,
-      siteId: siteId == freezed
+      siteId: null == siteId
           ? _value.siteId
           : siteId // ignore: cast_nullable_to_non_nullable
               as int,
-      subUsers: subUsers == freezed
+      subUsers: null == subUsers
           ? _value.subUsers
           : subUsers // ignore: cast_nullable_to_non_nullable
               as int,
-      mac: mac == freezed
+      mac: null == mac
           ? _value.mac
           : mac // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -371,6 +377,7 @@ abstract class _$$_UserRequestObjectCopyWith<$Res>
           $Res Function(_$_UserRequestObject) then) =
       __$$_UserRequestObjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int page,
       int count,
@@ -390,86 +397,84 @@ abstract class _$$_UserRequestObjectCopyWith<$Res>
 
 /// @nodoc
 class __$$_UserRequestObjectCopyWithImpl<$Res>
-    extends _$UserRequestObjectCopyWithImpl<$Res>
+    extends _$UserRequestObjectCopyWithImpl<$Res, _$_UserRequestObject>
     implements _$$_UserRequestObjectCopyWith<$Res> {
   __$$_UserRequestObjectCopyWithImpl(
       _$_UserRequestObject _value, $Res Function(_$_UserRequestObject) _then)
-      : super(_value, (v) => _then(v as _$_UserRequestObject));
+      : super(_value, _then);
 
-  @override
-  _$_UserRequestObject get _value => super._value as _$_UserRequestObject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = freezed,
-    Object? count = freezed,
-    Object? sortBy = freezed,
-    Object? direction = freezed,
-    Object? search = freezed,
-    Object? columns = freezed,
-    Object? status = freezed,
-    Object? connection = freezed,
-    Object? profileId = freezed,
-    Object? parentId = freezed,
-    Object? groupId = freezed,
-    Object? siteId = freezed,
-    Object? subUsers = freezed,
-    Object? mac = freezed,
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+    Object? status = null,
+    Object? connection = null,
+    Object? profileId = null,
+    Object? parentId = null,
+    Object? groupId = null,
+    Object? siteId = null,
+    Object? subUsers = null,
+    Object? mac = null,
   }) {
     return _then(_$_UserRequestObject(
-      page == freezed
+      null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
-      count == freezed
+      null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
-      sortBy == freezed
+      null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
               as String,
-      direction == freezed
+      null == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as String,
-      search == freezed
+      null == search
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
               as String,
-      columns == freezed
+      null == columns
           ? _value._columns
           : columns // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      status == freezed
+      null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
-      connection == freezed
+      null == connection
           ? _value.connection
           : connection // ignore: cast_nullable_to_non_nullable
               as int,
-      profileId == freezed
+      null == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
               as int,
-      parentId == freezed
+      null == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int,
-      groupId == freezed
+      null == groupId
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
               as int,
-      siteId == freezed
+      null == siteId
           ? _value.siteId
           : siteId // ignore: cast_nullable_to_non_nullable
               as int,
-      subUsers == freezed
+      null == subUsers
           ? _value.subUsers
           : subUsers // ignore: cast_nullable_to_non_nullable
               as int,
-      mac == freezed
+      null == mac
           ? _value.mac
           : mac // ignore: cast_nullable_to_non_nullable
               as String,
@@ -510,6 +515,7 @@ class _$_UserRequestObject implements _UserRequestObject {
   final List<String> _columns;
   @override
   List<String> get columns {
+    if (_columns is EqualUnmodifiableListView) return _columns;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_columns);
   }
@@ -541,43 +547,48 @@ class _$_UserRequestObject implements _UserRequestObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserRequestObject &&
-            const DeepCollectionEquality().equals(other.page, page) &&
-            const DeepCollectionEquality().equals(other.count, count) &&
-            const DeepCollectionEquality().equals(other.sortBy, sortBy) &&
-            const DeepCollectionEquality().equals(other.direction, direction) &&
-            const DeepCollectionEquality().equals(other.search, search) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
+            (identical(other.search, search) || other.search == search) &&
             const DeepCollectionEquality().equals(other._columns, _columns) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.connection, connection) &&
-            const DeepCollectionEquality().equals(other.profileId, profileId) &&
-            const DeepCollectionEquality().equals(other.parentId, parentId) &&
-            const DeepCollectionEquality().equals(other.groupId, groupId) &&
-            const DeepCollectionEquality().equals(other.siteId, siteId) &&
-            const DeepCollectionEquality().equals(other.subUsers, subUsers) &&
-            const DeepCollectionEquality().equals(other.mac, mac));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.connection, connection) ||
+                other.connection == connection) &&
+            (identical(other.profileId, profileId) ||
+                other.profileId == profileId) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId) &&
+            (identical(other.siteId, siteId) || other.siteId == siteId) &&
+            (identical(other.subUsers, subUsers) ||
+                other.subUsers == subUsers) &&
+            (identical(other.mac, mac) || other.mac == mac));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(page),
-      const DeepCollectionEquality().hash(count),
-      const DeepCollectionEquality().hash(sortBy),
-      const DeepCollectionEquality().hash(direction),
-      const DeepCollectionEquality().hash(search),
+      page,
+      count,
+      sortBy,
+      direction,
+      search,
       const DeepCollectionEquality().hash(_columns),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(connection),
-      const DeepCollectionEquality().hash(profileId),
-      const DeepCollectionEquality().hash(parentId),
-      const DeepCollectionEquality().hash(groupId),
-      const DeepCollectionEquality().hash(siteId),
-      const DeepCollectionEquality().hash(subUsers),
-      const DeepCollectionEquality().hash(mac));
+      status,
+      connection,
+      profileId,
+      parentId,
+      groupId,
+      siteId,
+      subUsers,
+      mac);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserRequestObjectCopyWith<_$_UserRequestObject> get copyWith =>
       __$$_UserRequestObjectCopyWithImpl<_$_UserRequestObject>(
           this, _$identity);
@@ -655,7 +666,8 @@ mixin _$ActivationRequestObject {
 abstract class $ActivationRequestObjectCopyWith<$Res> {
   factory $ActivationRequestObjectCopyWith(ActivationRequestObject value,
           $Res Function(ActivationRequestObject) then) =
-      _$ActivationRequestObjectCopyWithImpl<$Res>;
+      _$ActivationRequestObjectCopyWithImpl<$Res, ActivationRequestObject>;
+  @useResult
   $Res call(
       {String? method,
       String? pin,
@@ -669,14 +681,17 @@ abstract class $ActivationRequestObjectCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ActivationRequestObjectCopyWithImpl<$Res>
+class _$ActivationRequestObjectCopyWithImpl<$Res,
+        $Val extends ActivationRequestObject>
     implements $ActivationRequestObjectCopyWith<$Res> {
   _$ActivationRequestObjectCopyWithImpl(this._value, this._then);
 
-  final ActivationRequestObject _value;
   // ignore: unused_field
-  final $Res Function(ActivationRequestObject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? method = freezed,
@@ -690,43 +705,43 @@ class _$ActivationRequestObjectCopyWithImpl<$Res>
     Object? activationUnits = freezed,
   }) {
     return _then(_value.copyWith(
-      method: method == freezed
+      method: freezed == method
           ? _value.method
           : method // ignore: cast_nullable_to_non_nullable
               as String?,
-      pin: pin == freezed
+      pin: freezed == pin
           ? _value.pin
           : pin // ignore: cast_nullable_to_non_nullable
               as String?,
-      userId: userId == freezed
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      moneyCollected: moneyCollected == freezed
+      moneyCollected: freezed == moneyCollected
           ? _value.moneyCollected
           : moneyCollected // ignore: cast_nullable_to_non_nullable
               as int?,
-      comments: comments == freezed
+      comments: freezed == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
               as String?,
-      userPrice: userPrice == freezed
+      userPrice: freezed == userPrice
           ? _value.userPrice
           : userPrice // ignore: cast_nullable_to_non_nullable
               as int?,
-      issueInvoice: issueInvoice == freezed
+      issueInvoice: freezed == issueInvoice
           ? _value.issueInvoice
           : issueInvoice // ignore: cast_nullable_to_non_nullable
               as bool?,
-      transactionId: transactionId == freezed
+      transactionId: freezed == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String?,
-      activationUnits: activationUnits == freezed
+      activationUnits: freezed == activationUnits
           ? _value.activationUnits
           : activationUnits // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -737,6 +752,7 @@ abstract class _$$_ActivationRequestObjectCopyWith<$Res>
           $Res Function(_$_ActivationRequestObject) then) =
       __$$_ActivationRequestObjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? method,
       String? pin,
@@ -751,16 +767,14 @@ abstract class _$$_ActivationRequestObjectCopyWith<$Res>
 
 /// @nodoc
 class __$$_ActivationRequestObjectCopyWithImpl<$Res>
-    extends _$ActivationRequestObjectCopyWithImpl<$Res>
+    extends _$ActivationRequestObjectCopyWithImpl<$Res,
+        _$_ActivationRequestObject>
     implements _$$_ActivationRequestObjectCopyWith<$Res> {
   __$$_ActivationRequestObjectCopyWithImpl(_$_ActivationRequestObject _value,
       $Res Function(_$_ActivationRequestObject) _then)
-      : super(_value, (v) => _then(v as _$_ActivationRequestObject));
+      : super(_value, _then);
 
-  @override
-  _$_ActivationRequestObject get _value =>
-      super._value as _$_ActivationRequestObject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? method = freezed,
@@ -774,39 +788,39 @@ class __$$_ActivationRequestObjectCopyWithImpl<$Res>
     Object? activationUnits = freezed,
   }) {
     return _then(_$_ActivationRequestObject(
-      method == freezed
+      freezed == method
           ? _value.method
           : method // ignore: cast_nullable_to_non_nullable
               as String?,
-      pin == freezed
+      freezed == pin
           ? _value.pin
           : pin // ignore: cast_nullable_to_non_nullable
               as String?,
-      userId == freezed
+      freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      moneyCollected == freezed
+      freezed == moneyCollected
           ? _value.moneyCollected
           : moneyCollected // ignore: cast_nullable_to_non_nullable
               as int?,
-      comments == freezed
+      freezed == comments
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
               as String?,
-      userPrice == freezed
+      freezed == userPrice
           ? _value.userPrice
           : userPrice // ignore: cast_nullable_to_non_nullable
               as int?,
-      issueInvoice == freezed
+      freezed == issueInvoice
           ? _value.issueInvoice
           : issueInvoice // ignore: cast_nullable_to_non_nullable
               as bool?,
-      transactionId == freezed
+      freezed == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String?,
-      activationUnits == freezed
+      freezed == activationUnits
           ? _value.activationUnits
           : activationUnits // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -857,36 +871,39 @@ class _$_ActivationRequestObject implements _ActivationRequestObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ActivationRequestObject &&
-            const DeepCollectionEquality().equals(other.method, method) &&
-            const DeepCollectionEquality().equals(other.pin, pin) &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
-            const DeepCollectionEquality()
-                .equals(other.moneyCollected, moneyCollected) &&
-            const DeepCollectionEquality().equals(other.comments, comments) &&
-            const DeepCollectionEquality().equals(other.userPrice, userPrice) &&
-            const DeepCollectionEquality()
-                .equals(other.issueInvoice, issueInvoice) &&
-            const DeepCollectionEquality()
-                .equals(other.transactionId, transactionId) &&
-            const DeepCollectionEquality()
-                .equals(other.activationUnits, activationUnits));
+            (identical(other.method, method) || other.method == method) &&
+            (identical(other.pin, pin) || other.pin == pin) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.moneyCollected, moneyCollected) ||
+                other.moneyCollected == moneyCollected) &&
+            (identical(other.comments, comments) ||
+                other.comments == comments) &&
+            (identical(other.userPrice, userPrice) ||
+                other.userPrice == userPrice) &&
+            (identical(other.issueInvoice, issueInvoice) ||
+                other.issueInvoice == issueInvoice) &&
+            (identical(other.transactionId, transactionId) ||
+                other.transactionId == transactionId) &&
+            (identical(other.activationUnits, activationUnits) ||
+                other.activationUnits == activationUnits));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(method),
-      const DeepCollectionEquality().hash(pin),
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(moneyCollected),
-      const DeepCollectionEquality().hash(comments),
-      const DeepCollectionEquality().hash(userPrice),
-      const DeepCollectionEquality().hash(issueInvoice),
-      const DeepCollectionEquality().hash(transactionId),
-      const DeepCollectionEquality().hash(activationUnits));
+      method,
+      pin,
+      userId,
+      moneyCollected,
+      comments,
+      userPrice,
+      issueInvoice,
+      transactionId,
+      activationUnits);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ActivationRequestObjectCopyWith<_$_ActivationRequestObject>
       get copyWith =>
           __$$_ActivationRequestObjectCopyWithImpl<_$_ActivationRequestObject>(
@@ -971,7 +988,8 @@ mixin _$AddUserRequestObject {
 abstract class $AddUserRequestObjectCopyWith<$Res> {
   factory $AddUserRequestObjectCopyWith(AddUserRequestObject value,
           $Res Function(AddUserRequestObject) then) =
-      _$AddUserRequestObjectCopyWithImpl<$Res>;
+      _$AddUserRequestObjectCopyWithImpl<$Res, AddUserRequestObject>;
+  @useResult
   $Res call(
       {String? username,
       int? enabled,
@@ -1006,14 +1024,17 @@ abstract class $AddUserRequestObjectCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AddUserRequestObjectCopyWithImpl<$Res>
+class _$AddUserRequestObjectCopyWithImpl<$Res,
+        $Val extends AddUserRequestObject>
     implements $AddUserRequestObjectCopyWith<$Res> {
   _$AddUserRequestObjectCopyWithImpl(this._value, this._then);
 
-  final AddUserRequestObject _value;
   // ignore: unused_field
-  final $Res Function(AddUserRequestObject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? username = freezed,
@@ -1048,127 +1069,127 @@ class _$AddUserRequestObjectCopyWithImpl<$Res>
     Object? restricted = freezed,
   }) {
     return _then(_value.copyWith(
-      username: username == freezed
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      enabled: enabled == freezed
+      enabled: freezed == enabled
           ? _value.enabled
           : enabled // ignore: cast_nullable_to_non_nullable
               as int?,
-      password: password == freezed
+      password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      confirmPassword: confirmPassword == freezed
+      confirmPassword: freezed == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
               as String?,
-      profileId: profileId == freezed
+      profileId: freezed == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
               as int?,
-      parentId: parentId == freezed
+      parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      siteId: siteId == freezed
+      siteId: freezed == siteId
           ? _value.siteId
           : siteId // ignore: cast_nullable_to_non_nullable
               as int?,
-      macAuth: macAuth == freezed
+      macAuth: freezed == macAuth
           ? _value.macAuth
           : macAuth // ignore: cast_nullable_to_non_nullable
               as int?,
-      allowedMacs: allowedMacs == freezed
+      allowedMacs: freezed == allowedMacs
           ? _value.allowedMacs
           : allowedMacs // ignore: cast_nullable_to_non_nullable
               as int?,
-      useSeparatePortalPassword: useSeparatePortalPassword == freezed
+      useSeparatePortalPassword: freezed == useSeparatePortalPassword
           ? _value.useSeparatePortalPassword
           : useSeparatePortalPassword // ignore: cast_nullable_to_non_nullable
               as int?,
-      portalPassword: portalPassword == freezed
+      portalPassword: freezed == portalPassword
           ? _value.portalPassword
           : portalPassword // ignore: cast_nullable_to_non_nullable
               as String?,
-      groupId: groupId == freezed
+      groupId: freezed == groupId
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
               as int?,
-      firstname: firstname == freezed
+      firstname: freezed == firstname
           ? _value.firstname
           : firstname // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastname: lastname == freezed
+      lastname: freezed == lastname
           ? _value.lastname
           : lastname // ignore: cast_nullable_to_non_nullable
               as String?,
-      company: company == freezed
+      company: freezed == company
           ? _value.company
           : company // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      phone: phone == freezed
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
-      city: city == freezed
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      address: address == freezed
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      apartment: apartment == freezed
+      apartment: freezed == apartment
           ? _value.apartment
           : apartment // ignore: cast_nullable_to_non_nullable
               as String?,
-      street: street == freezed
+      street: freezed == street
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
               as String?,
-      contractId: contractId == freezed
+      contractId: freezed == contractId
           ? _value.contractId
           : contractId // ignore: cast_nullable_to_non_nullable
               as int?,
-      nationalId: nationalId == freezed
+      nationalId: freezed == nationalId
           ? _value.nationalId
           : nationalId // ignore: cast_nullable_to_non_nullable
               as int?,
-      notes: notes == freezed
+      notes: freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as String?,
-      autoRenew: autoRenew == freezed
+      autoRenew: freezed == autoRenew
           ? _value.autoRenew
           : autoRenew // ignore: cast_nullable_to_non_nullable
               as int?,
-      expiration: expiration == freezed
+      expiration: freezed == expiration
           ? _value.expiration
           : expiration // ignore: cast_nullable_to_non_nullable
               as String?,
-      simultaneousSessions: simultaneousSessions == freezed
+      simultaneousSessions: freezed == simultaneousSessions
           ? _value.simultaneousSessions
           : simultaneousSessions // ignore: cast_nullable_to_non_nullable
               as int?,
-      staticIp: staticIp == freezed
+      staticIp: freezed == staticIp
           ? _value.staticIp
           : staticIp // ignore: cast_nullable_to_non_nullable
               as int?,
-      userType: userType == freezed
+      userType: freezed == userType
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as String?,
-      restricted: restricted == freezed
+      restricted: freezed == restricted
           ? _value.restricted
           : restricted // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1179,6 +1200,7 @@ abstract class _$$_AddUserRequestObjectCopyWith<$Res>
           $Res Function(_$_AddUserRequestObject) then) =
       __$$_AddUserRequestObjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? username,
       int? enabled,
@@ -1214,15 +1236,13 @@ abstract class _$$_AddUserRequestObjectCopyWith<$Res>
 
 /// @nodoc
 class __$$_AddUserRequestObjectCopyWithImpl<$Res>
-    extends _$AddUserRequestObjectCopyWithImpl<$Res>
+    extends _$AddUserRequestObjectCopyWithImpl<$Res, _$_AddUserRequestObject>
     implements _$$_AddUserRequestObjectCopyWith<$Res> {
   __$$_AddUserRequestObjectCopyWithImpl(_$_AddUserRequestObject _value,
       $Res Function(_$_AddUserRequestObject) _then)
-      : super(_value, (v) => _then(v as _$_AddUserRequestObject));
+      : super(_value, _then);
 
-  @override
-  _$_AddUserRequestObject get _value => super._value as _$_AddUserRequestObject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? username = freezed,
@@ -1257,123 +1277,123 @@ class __$$_AddUserRequestObjectCopyWithImpl<$Res>
     Object? restricted = freezed,
   }) {
     return _then(_$_AddUserRequestObject(
-      username == freezed
+      freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      enabled == freezed
+      freezed == enabled
           ? _value.enabled
           : enabled // ignore: cast_nullable_to_non_nullable
               as int?,
-      password == freezed
+      freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      confirmPassword == freezed
+      freezed == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
               as String?,
-      profileId == freezed
+      freezed == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
               as int?,
-      parentId == freezed
+      freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      siteId == freezed
+      freezed == siteId
           ? _value.siteId
           : siteId // ignore: cast_nullable_to_non_nullable
               as int?,
-      macAuth == freezed
+      freezed == macAuth
           ? _value.macAuth
           : macAuth // ignore: cast_nullable_to_non_nullable
               as int?,
-      allowedMacs == freezed
+      freezed == allowedMacs
           ? _value.allowedMacs
           : allowedMacs // ignore: cast_nullable_to_non_nullable
               as int?,
-      useSeparatePortalPassword == freezed
+      freezed == useSeparatePortalPassword
           ? _value.useSeparatePortalPassword
           : useSeparatePortalPassword // ignore: cast_nullable_to_non_nullable
               as int?,
-      portalPassword == freezed
+      freezed == portalPassword
           ? _value.portalPassword
           : portalPassword // ignore: cast_nullable_to_non_nullable
               as String?,
-      groupId == freezed
+      freezed == groupId
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
               as int?,
-      firstname == freezed
+      freezed == firstname
           ? _value.firstname
           : firstname // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastname == freezed
+      freezed == lastname
           ? _value.lastname
           : lastname // ignore: cast_nullable_to_non_nullable
               as String?,
-      company == freezed
+      freezed == company
           ? _value.company
           : company // ignore: cast_nullable_to_non_nullable
               as String?,
-      email == freezed
+      freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      phone == freezed
+      freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
-      city == freezed
+      freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      address == freezed
+      freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      apartment == freezed
+      freezed == apartment
           ? _value.apartment
           : apartment // ignore: cast_nullable_to_non_nullable
               as String?,
-      street == freezed
+      freezed == street
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
               as String?,
-      contractId == freezed
+      freezed == contractId
           ? _value.contractId
           : contractId // ignore: cast_nullable_to_non_nullable
               as int?,
-      nationalId == freezed
+      freezed == nationalId
           ? _value.nationalId
           : nationalId // ignore: cast_nullable_to_non_nullable
               as int?,
-      notes == freezed
+      freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as String?,
-      autoRenew == freezed
+      freezed == autoRenew
           ? _value.autoRenew
           : autoRenew // ignore: cast_nullable_to_non_nullable
               as int?,
-      expiration == freezed
+      freezed == expiration
           ? _value.expiration
           : expiration // ignore: cast_nullable_to_non_nullable
               as String?,
-      simultaneousSessions == freezed
+      freezed == simultaneousSessions
           ? _value.simultaneousSessions
           : simultaneousSessions // ignore: cast_nullable_to_non_nullable
               as int?,
-      staticIp == freezed
+      freezed == staticIp
           ? _value.staticIp
           : staticIp // ignore: cast_nullable_to_non_nullable
               as int?,
-      userType == freezed
+      freezed == userType
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as String?,
-      restricted == freezed
+      freezed == restricted
           ? _value.restricted
           : restricted // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -1487,84 +1507,96 @@ class _$_AddUserRequestObject implements _AddUserRequestObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddUserRequestObject &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.enabled, enabled) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality()
-                .equals(other.confirmPassword, confirmPassword) &&
-            const DeepCollectionEquality().equals(other.profileId, profileId) &&
-            const DeepCollectionEquality().equals(other.parentId, parentId) &&
-            const DeepCollectionEquality().equals(other.siteId, siteId) &&
-            const DeepCollectionEquality().equals(other.macAuth, macAuth) &&
-            const DeepCollectionEquality()
-                .equals(other.allowedMacs, allowedMacs) &&
-            const DeepCollectionEquality().equals(
-                other.useSeparatePortalPassword, useSeparatePortalPassword) &&
-            const DeepCollectionEquality()
-                .equals(other.portalPassword, portalPassword) &&
-            const DeepCollectionEquality().equals(other.groupId, groupId) &&
-            const DeepCollectionEquality().equals(other.firstname, firstname) &&
-            const DeepCollectionEquality().equals(other.lastname, lastname) &&
-            const DeepCollectionEquality().equals(other.company, company) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.phone, phone) &&
-            const DeepCollectionEquality().equals(other.city, city) &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality().equals(other.apartment, apartment) &&
-            const DeepCollectionEquality().equals(other.street, street) &&
-            const DeepCollectionEquality()
-                .equals(other.contractId, contractId) &&
-            const DeepCollectionEquality()
-                .equals(other.nationalId, nationalId) &&
-            const DeepCollectionEquality().equals(other.notes, notes) &&
-            const DeepCollectionEquality().equals(other.autoRenew, autoRenew) &&
-            const DeepCollectionEquality()
-                .equals(other.expiration, expiration) &&
-            const DeepCollectionEquality()
-                .equals(other.simultaneousSessions, simultaneousSessions) &&
-            const DeepCollectionEquality().equals(other.staticIp, staticIp) &&
-            const DeepCollectionEquality().equals(other.userType, userType) &&
-            const DeepCollectionEquality()
-                .equals(other.restricted, restricted));
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.enabled, enabled) || other.enabled == enabled) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword) &&
+            (identical(other.profileId, profileId) ||
+                other.profileId == profileId) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
+            (identical(other.siteId, siteId) || other.siteId == siteId) &&
+            (identical(other.macAuth, macAuth) || other.macAuth == macAuth) &&
+            (identical(other.allowedMacs, allowedMacs) ||
+                other.allowedMacs == allowedMacs) &&
+            (identical(other.useSeparatePortalPassword,
+                    useSeparatePortalPassword) ||
+                other.useSeparatePortalPassword == useSeparatePortalPassword) &&
+            (identical(other.portalPassword, portalPassword) ||
+                other.portalPassword == portalPassword) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId) &&
+            (identical(other.firstname, firstname) ||
+                other.firstname == firstname) &&
+            (identical(other.lastname, lastname) ||
+                other.lastname == lastname) &&
+            (identical(other.company, company) || other.company == company) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.apartment, apartment) ||
+                other.apartment == apartment) &&
+            (identical(other.street, street) || other.street == street) &&
+            (identical(other.contractId, contractId) ||
+                other.contractId == contractId) &&
+            (identical(other.nationalId, nationalId) ||
+                other.nationalId == nationalId) &&
+            (identical(other.notes, notes) || other.notes == notes) &&
+            (identical(other.autoRenew, autoRenew) ||
+                other.autoRenew == autoRenew) &&
+            (identical(other.expiration, expiration) ||
+                other.expiration == expiration) &&
+            (identical(other.simultaneousSessions, simultaneousSessions) ||
+                other.simultaneousSessions == simultaneousSessions) &&
+            (identical(other.staticIp, staticIp) ||
+                other.staticIp == staticIp) &&
+            (identical(other.userType, userType) ||
+                other.userType == userType) &&
+            (identical(other.restricted, restricted) ||
+                other.restricted == restricted));
   }
 
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(username),
-        const DeepCollectionEquality().hash(enabled),
-        const DeepCollectionEquality().hash(password),
-        const DeepCollectionEquality().hash(confirmPassword),
-        const DeepCollectionEquality().hash(profileId),
-        const DeepCollectionEquality().hash(parentId),
-        const DeepCollectionEquality().hash(siteId),
-        const DeepCollectionEquality().hash(macAuth),
-        const DeepCollectionEquality().hash(allowedMacs),
-        const DeepCollectionEquality().hash(useSeparatePortalPassword),
-        const DeepCollectionEquality().hash(portalPassword),
-        const DeepCollectionEquality().hash(groupId),
-        const DeepCollectionEquality().hash(firstname),
-        const DeepCollectionEquality().hash(lastname),
-        const DeepCollectionEquality().hash(company),
-        const DeepCollectionEquality().hash(email),
-        const DeepCollectionEquality().hash(phone),
-        const DeepCollectionEquality().hash(city),
-        const DeepCollectionEquality().hash(address),
-        const DeepCollectionEquality().hash(apartment),
-        const DeepCollectionEquality().hash(street),
-        const DeepCollectionEquality().hash(contractId),
-        const DeepCollectionEquality().hash(nationalId),
-        const DeepCollectionEquality().hash(notes),
-        const DeepCollectionEquality().hash(autoRenew),
-        const DeepCollectionEquality().hash(expiration),
-        const DeepCollectionEquality().hash(simultaneousSessions),
-        const DeepCollectionEquality().hash(staticIp),
-        const DeepCollectionEquality().hash(userType),
-        const DeepCollectionEquality().hash(restricted)
+        username,
+        enabled,
+        password,
+        confirmPassword,
+        profileId,
+        parentId,
+        siteId,
+        macAuth,
+        allowedMacs,
+        useSeparatePortalPassword,
+        portalPassword,
+        groupId,
+        firstname,
+        lastname,
+        company,
+        email,
+        phone,
+        city,
+        address,
+        apartment,
+        street,
+        contractId,
+        nationalId,
+        notes,
+        autoRenew,
+        expiration,
+        simultaneousSessions,
+        staticIp,
+        userType,
+        restricted
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AddUserRequestObjectCopyWith<_$_AddUserRequestObject> get copyWith =>
       __$$_AddUserRequestObjectCopyWithImpl<_$_AddUserRequestObject>(
           this, _$identity);
@@ -1685,7 +1717,8 @@ mixin _$ExtendUserRequestObject {
 abstract class $ExtendUserRequestObjectCopyWith<$Res> {
   factory $ExtendUserRequestObjectCopyWith(ExtendUserRequestObject value,
           $Res Function(ExtendUserRequestObject) then) =
-      _$ExtendUserRequestObjectCopyWithImpl<$Res>;
+      _$ExtendUserRequestObjectCopyWithImpl<$Res, ExtendUserRequestObject>;
+  @useResult
   $Res call(
       {String? userId,
       String? profileId,
@@ -1694,14 +1727,17 @@ abstract class $ExtendUserRequestObjectCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ExtendUserRequestObjectCopyWithImpl<$Res>
+class _$ExtendUserRequestObjectCopyWithImpl<$Res,
+        $Val extends ExtendUserRequestObject>
     implements $ExtendUserRequestObjectCopyWith<$Res> {
   _$ExtendUserRequestObjectCopyWithImpl(this._value, this._then);
 
-  final ExtendUserRequestObject _value;
   // ignore: unused_field
-  final $Res Function(ExtendUserRequestObject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? userId = freezed,
@@ -1710,23 +1746,23 @@ class _$ExtendUserRequestObjectCopyWithImpl<$Res>
     Object? transactionId = freezed,
   }) {
     return _then(_value.copyWith(
-      userId: userId == freezed
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      profileId: profileId == freezed
+      profileId: freezed == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
               as String?,
-      method: method == freezed
+      method: freezed == method
           ? _value.method
           : method // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionId: transactionId == freezed
+      transactionId: freezed == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1737,6 +1773,7 @@ abstract class _$$_ExtendUserRequestObjectCopyWith<$Res>
           $Res Function(_$_ExtendUserRequestObject) then) =
       __$$_ExtendUserRequestObjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? userId,
       String? profileId,
@@ -1746,16 +1783,14 @@ abstract class _$$_ExtendUserRequestObjectCopyWith<$Res>
 
 /// @nodoc
 class __$$_ExtendUserRequestObjectCopyWithImpl<$Res>
-    extends _$ExtendUserRequestObjectCopyWithImpl<$Res>
+    extends _$ExtendUserRequestObjectCopyWithImpl<$Res,
+        _$_ExtendUserRequestObject>
     implements _$$_ExtendUserRequestObjectCopyWith<$Res> {
   __$$_ExtendUserRequestObjectCopyWithImpl(_$_ExtendUserRequestObject _value,
       $Res Function(_$_ExtendUserRequestObject) _then)
-      : super(_value, (v) => _then(v as _$_ExtendUserRequestObject));
+      : super(_value, _then);
 
-  @override
-  _$_ExtendUserRequestObject get _value =>
-      super._value as _$_ExtendUserRequestObject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? userId = freezed,
@@ -1764,19 +1799,19 @@ class __$$_ExtendUserRequestObjectCopyWithImpl<$Res>
     Object? transactionId = freezed,
   }) {
     return _then(_$_ExtendUserRequestObject(
-      userId == freezed
+      freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      profileId == freezed
+      freezed == profileId
           ? _value.profileId
           : profileId // ignore: cast_nullable_to_non_nullable
               as String?,
-      method == freezed
+      freezed == method
           ? _value.method
           : method // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionId == freezed
+      freezed == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -1809,23 +1844,21 @@ class _$_ExtendUserRequestObject implements _ExtendUserRequestObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ExtendUserRequestObject &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
-            const DeepCollectionEquality().equals(other.profileId, profileId) &&
-            const DeepCollectionEquality().equals(other.method, method) &&
-            const DeepCollectionEquality()
-                .equals(other.transactionId, transactionId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.profileId, profileId) ||
+                other.profileId == profileId) &&
+            (identical(other.method, method) || other.method == method) &&
+            (identical(other.transactionId, transactionId) ||
+                other.transactionId == transactionId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(profileId),
-      const DeepCollectionEquality().hash(method),
-      const DeepCollectionEquality().hash(transactionId));
+  int get hashCode =>
+      Object.hash(runtimeType, userId, profileId, method, transactionId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ExtendUserRequestObjectCopyWith<_$_ExtendUserRequestObject>
       get copyWith =>
           __$$_ExtendUserRequestObjectCopyWithImpl<_$_ExtendUserRequestObject>(
@@ -1871,7 +1904,9 @@ abstract class $DepositWithdrawUserRequestObjectCopyWith<$Res> {
   factory $DepositWithdrawUserRequestObjectCopyWith(
           DepositWithdrawUserRequestObject value,
           $Res Function(DepositWithdrawUserRequestObject) then) =
-      _$DepositWithdrawUserRequestObjectCopyWithImpl<$Res>;
+      _$DepositWithdrawUserRequestObjectCopyWithImpl<$Res,
+          DepositWithdrawUserRequestObject>;
+  @useResult
   $Res call(
       {String? userId,
       String? userUsername,
@@ -1881,14 +1916,17 @@ abstract class $DepositWithdrawUserRequestObjectCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DepositWithdrawUserRequestObjectCopyWithImpl<$Res>
+class _$DepositWithdrawUserRequestObjectCopyWithImpl<$Res,
+        $Val extends DepositWithdrawUserRequestObject>
     implements $DepositWithdrawUserRequestObjectCopyWith<$Res> {
   _$DepositWithdrawUserRequestObjectCopyWithImpl(this._value, this._then);
 
-  final DepositWithdrawUserRequestObject _value;
   // ignore: unused_field
-  final $Res Function(DepositWithdrawUserRequestObject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? userId = freezed,
@@ -1898,27 +1936,27 @@ class _$DepositWithdrawUserRequestObjectCopyWithImpl<$Res>
     Object? transactionId = freezed,
   }) {
     return _then(_value.copyWith(
-      userId: userId == freezed
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      userUsername: userUsername == freezed
+      userUsername: freezed == userUsername
           ? _value.userUsername
           : userUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount: amount == freezed
+      amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int?,
-      comment: comment == freezed
+      comment: freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionId: transactionId == freezed
+      transactionId: freezed == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1930,6 +1968,7 @@ abstract class _$$_DepositWithdrawUserRequestObjectCopyWith<$Res>
           $Res Function(_$_DepositWithdrawUserRequestObject) then) =
       __$$_DepositWithdrawUserRequestObjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? userId,
       String? userUsername,
@@ -1940,17 +1979,15 @@ abstract class _$$_DepositWithdrawUserRequestObjectCopyWith<$Res>
 
 /// @nodoc
 class __$$_DepositWithdrawUserRequestObjectCopyWithImpl<$Res>
-    extends _$DepositWithdrawUserRequestObjectCopyWithImpl<$Res>
+    extends _$DepositWithdrawUserRequestObjectCopyWithImpl<$Res,
+        _$_DepositWithdrawUserRequestObject>
     implements _$$_DepositWithdrawUserRequestObjectCopyWith<$Res> {
   __$$_DepositWithdrawUserRequestObjectCopyWithImpl(
       _$_DepositWithdrawUserRequestObject _value,
       $Res Function(_$_DepositWithdrawUserRequestObject) _then)
-      : super(_value, (v) => _then(v as _$_DepositWithdrawUserRequestObject));
+      : super(_value, _then);
 
-  @override
-  _$_DepositWithdrawUserRequestObject get _value =>
-      super._value as _$_DepositWithdrawUserRequestObject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? userId = freezed,
@@ -1960,23 +1997,23 @@ class __$$_DepositWithdrawUserRequestObjectCopyWithImpl<$Res>
     Object? transactionId = freezed,
   }) {
     return _then(_$_DepositWithdrawUserRequestObject(
-      userId == freezed
+      freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      userUsername == freezed
+      freezed == userUsername
           ? _value.userUsername
           : userUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount == freezed
+      freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int?,
-      comment == freezed
+      freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionId == freezed
+      freezed == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -2012,26 +2049,22 @@ class _$_DepositWithdrawUserRequestObject
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DepositWithdrawUserRequestObject &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
-            const DeepCollectionEquality()
-                .equals(other.userUsername, userUsername) &&
-            const DeepCollectionEquality().equals(other.amount, amount) &&
-            const DeepCollectionEquality().equals(other.comment, comment) &&
-            const DeepCollectionEquality()
-                .equals(other.transactionId, transactionId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.userUsername, userUsername) ||
+                other.userUsername == userUsername) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.transactionId, transactionId) ||
+                other.transactionId == transactionId));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(userUsername),
-      const DeepCollectionEquality().hash(amount),
-      const DeepCollectionEquality().hash(comment),
-      const DeepCollectionEquality().hash(transactionId));
+      runtimeType, userId, userUsername, amount, comment, transactionId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DepositWithdrawUserRequestObjectCopyWith<
           _$_DepositWithdrawUserRequestObject>
       get copyWith => __$$_DepositWithdrawUserRequestObjectCopyWithImpl<
@@ -2084,7 +2117,8 @@ mixin _$PayDebtRequestObject {
 abstract class $PayDebtRequestObjectCopyWith<$Res> {
   factory $PayDebtRequestObjectCopyWith(PayDebtRequestObject value,
           $Res Function(PayDebtRequestObject) then) =
-      _$PayDebtRequestObjectCopyWithImpl<$Res>;
+      _$PayDebtRequestObjectCopyWithImpl<$Res, PayDebtRequestObject>;
+  @useResult
   $Res call(
       {int? userId,
       String? username,
@@ -2097,14 +2131,17 @@ abstract class $PayDebtRequestObjectCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PayDebtRequestObjectCopyWithImpl<$Res>
+class _$PayDebtRequestObjectCopyWithImpl<$Res,
+        $Val extends PayDebtRequestObject>
     implements $PayDebtRequestObjectCopyWith<$Res> {
   _$PayDebtRequestObjectCopyWithImpl(this._value, this._then);
 
-  final PayDebtRequestObject _value;
   // ignore: unused_field
-  final $Res Function(PayDebtRequestObject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? userId = freezed,
@@ -2117,39 +2154,39 @@ class _$PayDebtRequestObjectCopyWithImpl<$Res>
     Object? debt = freezed,
   }) {
     return _then(_value.copyWith(
-      userId: userId == freezed
+      userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int?,
-      username: username == freezed
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount: amount == freezed
+      amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int?,
-      comment: comment == freezed
+      comment: freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionId: transactionId == freezed
+      transactionId: freezed == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as int?,
-      isLoan: isLoan == freezed
+      isLoan: freezed == isLoan
           ? _value.isLoan
           : isLoan // ignore: cast_nullable_to_non_nullable
               as bool?,
-      debtForMe: debtForMe == freezed
+      debtForMe: freezed == debtForMe
           ? _value.debtForMe
           : debtForMe // ignore: cast_nullable_to_non_nullable
               as int?,
-      debt: debt == freezed
+      debt: freezed == debt
           ? _value.debt
           : debt // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -2160,6 +2197,7 @@ abstract class _$$_PayDebtRequestObjectCopyWith<$Res>
           $Res Function(_$_PayDebtRequestObject) then) =
       __$$_PayDebtRequestObjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? userId,
       String? username,
@@ -2173,15 +2211,13 @@ abstract class _$$_PayDebtRequestObjectCopyWith<$Res>
 
 /// @nodoc
 class __$$_PayDebtRequestObjectCopyWithImpl<$Res>
-    extends _$PayDebtRequestObjectCopyWithImpl<$Res>
+    extends _$PayDebtRequestObjectCopyWithImpl<$Res, _$_PayDebtRequestObject>
     implements _$$_PayDebtRequestObjectCopyWith<$Res> {
   __$$_PayDebtRequestObjectCopyWithImpl(_$_PayDebtRequestObject _value,
       $Res Function(_$_PayDebtRequestObject) _then)
-      : super(_value, (v) => _then(v as _$_PayDebtRequestObject));
+      : super(_value, _then);
 
-  @override
-  _$_PayDebtRequestObject get _value => super._value as _$_PayDebtRequestObject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? userId = freezed,
@@ -2194,35 +2230,35 @@ class __$$_PayDebtRequestObjectCopyWithImpl<$Res>
     Object? debt = freezed,
   }) {
     return _then(_$_PayDebtRequestObject(
-      userId == freezed
+      freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int?,
-      username == freezed
+      freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount == freezed
+      freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int?,
-      comment == freezed
+      freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionId == freezed
+      freezed == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as int?,
-      isLoan == freezed
+      freezed == isLoan
           ? _value.isLoan
           : isLoan // ignore: cast_nullable_to_non_nullable
               as bool?,
-      debtForMe == freezed
+      freezed == debtForMe
           ? _value.debtForMe
           : debtForMe // ignore: cast_nullable_to_non_nullable
               as int?,
-      debt == freezed
+      freezed == debt
           ? _value.debt
           : debt // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -2263,31 +2299,26 @@ class _$_PayDebtRequestObject implements _PayDebtRequestObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PayDebtRequestObject &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.amount, amount) &&
-            const DeepCollectionEquality().equals(other.comment, comment) &&
-            const DeepCollectionEquality()
-                .equals(other.transactionId, transactionId) &&
-            const DeepCollectionEquality().equals(other.isLoan, isLoan) &&
-            const DeepCollectionEquality().equals(other.debtForMe, debtForMe) &&
-            const DeepCollectionEquality().equals(other.debt, debt));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.transactionId, transactionId) ||
+                other.transactionId == transactionId) &&
+            (identical(other.isLoan, isLoan) || other.isLoan == isLoan) &&
+            (identical(other.debtForMe, debtForMe) ||
+                other.debtForMe == debtForMe) &&
+            (identical(other.debt, debt) || other.debt == debt));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(amount),
-      const DeepCollectionEquality().hash(comment),
-      const DeepCollectionEquality().hash(transactionId),
-      const DeepCollectionEquality().hash(isLoan),
-      const DeepCollectionEquality().hash(debtForMe),
-      const DeepCollectionEquality().hash(debt));
+  int get hashCode => Object.hash(runtimeType, userId, username, amount,
+      comment, transactionId, isLoan, debtForMe, debt);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PayDebtRequestObjectCopyWith<_$_PayDebtRequestObject> get copyWith =>
       __$$_PayDebtRequestObjectCopyWithImpl<_$_PayDebtRequestObject>(
           this, _$identity);
@@ -2349,7 +2380,8 @@ mixin _$ManagersListRequestObject {
 abstract class $ManagersListRequestObjectCopyWith<$Res> {
   factory $ManagersListRequestObjectCopyWith(ManagersListRequestObject value,
           $Res Function(ManagersListRequestObject) then) =
-      _$ManagersListRequestObjectCopyWithImpl<$Res>;
+      _$ManagersListRequestObjectCopyWithImpl<$Res, ManagersListRequestObject>;
+  @useResult
   $Res call(
       {int? page,
       int? count,
@@ -2365,14 +2397,17 @@ abstract class $ManagersListRequestObjectCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ManagersListRequestObjectCopyWithImpl<$Res>
+class _$ManagersListRequestObjectCopyWithImpl<$Res,
+        $Val extends ManagersListRequestObject>
     implements $ManagersListRequestObjectCopyWith<$Res> {
   _$ManagersListRequestObjectCopyWithImpl(this._value, this._then);
 
-  final ManagersListRequestObject _value;
   // ignore: unused_field
-  final $Res Function(ManagersListRequestObject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? page = freezed,
@@ -2388,51 +2423,51 @@ class _$ManagersListRequestObjectCopyWithImpl<$Res>
     Object? groupId = freezed,
   }) {
     return _then(_value.copyWith(
-      page: page == freezed
+      page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int?,
-      count: count == freezed
+      count: freezed == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int?,
-      sortBy: sortBy == freezed
+      sortBy: freezed == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      direction: direction == freezed
+      direction: freezed == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as String?,
-      search: search == freezed
+      search: freezed == search
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
               as String?,
-      columns: columns == freezed
+      columns: freezed == columns
           ? _value.columns
           : columns // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      parentId: parentId == freezed
+      parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      subManagers: subManagers == freezed
+      subManagers: freezed == subManagers
           ? _value.subManagers
           : subManagers // ignore: cast_nullable_to_non_nullable
               as int?,
-      siteId: siteId == freezed
+      siteId: freezed == siteId
           ? _value.siteId
           : siteId // ignore: cast_nullable_to_non_nullable
               as int?,
-      aclGroupId: aclGroupId == freezed
+      aclGroupId: freezed == aclGroupId
           ? _value.aclGroupId
           : aclGroupId // ignore: cast_nullable_to_non_nullable
               as int?,
-      groupId: groupId == freezed
+      groupId: freezed == groupId
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -2444,6 +2479,7 @@ abstract class _$$_ManagersListRequestObjectCopyWith<$Res>
           $Res Function(_$_ManagersListRequestObject) then) =
       __$$_ManagersListRequestObjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? page,
       int? count,
@@ -2460,17 +2496,15 @@ abstract class _$$_ManagersListRequestObjectCopyWith<$Res>
 
 /// @nodoc
 class __$$_ManagersListRequestObjectCopyWithImpl<$Res>
-    extends _$ManagersListRequestObjectCopyWithImpl<$Res>
+    extends _$ManagersListRequestObjectCopyWithImpl<$Res,
+        _$_ManagersListRequestObject>
     implements _$$_ManagersListRequestObjectCopyWith<$Res> {
   __$$_ManagersListRequestObjectCopyWithImpl(
       _$_ManagersListRequestObject _value,
       $Res Function(_$_ManagersListRequestObject) _then)
-      : super(_value, (v) => _then(v as _$_ManagersListRequestObject));
+      : super(_value, _then);
 
-  @override
-  _$_ManagersListRequestObject get _value =>
-      super._value as _$_ManagersListRequestObject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? page = freezed,
@@ -2486,47 +2520,47 @@ class __$$_ManagersListRequestObjectCopyWithImpl<$Res>
     Object? groupId = freezed,
   }) {
     return _then(_$_ManagersListRequestObject(
-      page == freezed
+      freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int?,
-      count == freezed
+      freezed == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int?,
-      sortBy == freezed
+      freezed == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
               as String?,
-      direction == freezed
+      freezed == direction
           ? _value.direction
           : direction // ignore: cast_nullable_to_non_nullable
               as String?,
-      search == freezed
+      freezed == search
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
               as String?,
-      columns == freezed
+      freezed == columns
           ? _value._columns
           : columns // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      parentId == freezed
+      freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      subManagers == freezed
+      freezed == subManagers
           ? _value.subManagers
           : subManagers // ignore: cast_nullable_to_non_nullable
               as int?,
-      siteId == freezed
+      freezed == siteId
           ? _value.siteId
           : siteId // ignore: cast_nullable_to_non_nullable
               as int?,
-      aclGroupId == freezed
+      freezed == aclGroupId
           ? _value.aclGroupId
           : aclGroupId // ignore: cast_nullable_to_non_nullable
               as int?,
-      groupId == freezed
+      freezed == groupId
           ? _value.groupId
           : groupId // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -2566,6 +2600,7 @@ class _$_ManagersListRequestObject implements _ManagersListRequestObject {
   List<String>? get columns {
     final value = _columns;
     if (value == null) return null;
+    if (_columns is EqualUnmodifiableListView) return _columns;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -2591,38 +2626,41 @@ class _$_ManagersListRequestObject implements _ManagersListRequestObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ManagersListRequestObject &&
-            const DeepCollectionEquality().equals(other.page, page) &&
-            const DeepCollectionEquality().equals(other.count, count) &&
-            const DeepCollectionEquality().equals(other.sortBy, sortBy) &&
-            const DeepCollectionEquality().equals(other.direction, direction) &&
-            const DeepCollectionEquality().equals(other.search, search) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
+            (identical(other.search, search) || other.search == search) &&
             const DeepCollectionEquality().equals(other._columns, _columns) &&
-            const DeepCollectionEquality().equals(other.parentId, parentId) &&
-            const DeepCollectionEquality()
-                .equals(other.subManagers, subManagers) &&
-            const DeepCollectionEquality().equals(other.siteId, siteId) &&
-            const DeepCollectionEquality()
-                .equals(other.aclGroupId, aclGroupId) &&
-            const DeepCollectionEquality().equals(other.groupId, groupId));
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
+            (identical(other.subManagers, subManagers) ||
+                other.subManagers == subManagers) &&
+            (identical(other.siteId, siteId) || other.siteId == siteId) &&
+            (identical(other.aclGroupId, aclGroupId) ||
+                other.aclGroupId == aclGroupId) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(page),
-      const DeepCollectionEquality().hash(count),
-      const DeepCollectionEquality().hash(sortBy),
-      const DeepCollectionEquality().hash(direction),
-      const DeepCollectionEquality().hash(search),
+      page,
+      count,
+      sortBy,
+      direction,
+      search,
       const DeepCollectionEquality().hash(_columns),
-      const DeepCollectionEquality().hash(parentId),
-      const DeepCollectionEquality().hash(subManagers),
-      const DeepCollectionEquality().hash(siteId),
-      const DeepCollectionEquality().hash(aclGroupId),
-      const DeepCollectionEquality().hash(groupId));
+      parentId,
+      subManagers,
+      siteId,
+      aclGroupId,
+      groupId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ManagersListRequestObjectCopyWith<_$_ManagersListRequestObject>
       get copyWith => __$$_ManagersListRequestObjectCopyWithImpl<
           _$_ManagersListRequestObject>(this, _$identity);
@@ -2690,7 +2728,9 @@ abstract class $DepositWithdrawPayDebtManagerRequestObjectCopyWith<$Res> {
   factory $DepositWithdrawPayDebtManagerRequestObjectCopyWith(
           DepositWithdrawPayDebtManagerRequestObject value,
           $Res Function(DepositWithdrawPayDebtManagerRequestObject) then) =
-      _$DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl<$Res>;
+      _$DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl<$Res,
+          DepositWithdrawPayDebtManagerRequestObject>;
+  @useResult
   $Res call(
       {int? managerId,
       String? managerUsername,
@@ -2701,15 +2741,18 @@ abstract class $DepositWithdrawPayDebtManagerRequestObjectCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl<$Res>
+class _$DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl<$Res,
+        $Val extends DepositWithdrawPayDebtManagerRequestObject>
     implements $DepositWithdrawPayDebtManagerRequestObjectCopyWith<$Res> {
   _$DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl(
       this._value, this._then);
 
-  final DepositWithdrawPayDebtManagerRequestObject _value;
   // ignore: unused_field
-  final $Res Function(DepositWithdrawPayDebtManagerRequestObject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? managerId = freezed,
@@ -2720,31 +2763,31 @@ class _$DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl<$Res>
     Object? isLoan = freezed,
   }) {
     return _then(_value.copyWith(
-      managerId: managerId == freezed
+      managerId: freezed == managerId
           ? _value.managerId
           : managerId // ignore: cast_nullable_to_non_nullable
               as int?,
-      managerUsername: managerUsername == freezed
+      managerUsername: freezed == managerUsername
           ? _value.managerUsername
           : managerUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount: amount == freezed
+      amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int?,
-      comment: comment == freezed
+      comment: freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionId: transactionId == freezed
+      transactionId: freezed == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isLoan: isLoan == freezed
+      isLoan: freezed == isLoan
           ? _value.isLoan
           : isLoan // ignore: cast_nullable_to_non_nullable
               as bool?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -2756,6 +2799,7 @@ abstract class _$$_DepositWithdrawPayDebtManagerRequestObjectCopyWith<$Res>
           $Res Function(_$_DepositWithdrawPayDebtManagerRequestObject) then) =
       __$$_DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? managerId,
       String? managerUsername,
@@ -2767,18 +2811,15 @@ abstract class _$$_DepositWithdrawPayDebtManagerRequestObjectCopyWith<$Res>
 
 /// @nodoc
 class __$$_DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl<$Res>
-    extends _$DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl<$Res>
+    extends _$DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl<$Res,
+        _$_DepositWithdrawPayDebtManagerRequestObject>
     implements _$$_DepositWithdrawPayDebtManagerRequestObjectCopyWith<$Res> {
   __$$_DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl(
       _$_DepositWithdrawPayDebtManagerRequestObject _value,
       $Res Function(_$_DepositWithdrawPayDebtManagerRequestObject) _then)
-      : super(_value,
-            (v) => _then(v as _$_DepositWithdrawPayDebtManagerRequestObject));
+      : super(_value, _then);
 
-  @override
-  _$_DepositWithdrawPayDebtManagerRequestObject get _value =>
-      super._value as _$_DepositWithdrawPayDebtManagerRequestObject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? managerId = freezed,
@@ -2789,27 +2830,27 @@ class __$$_DepositWithdrawPayDebtManagerRequestObjectCopyWithImpl<$Res>
     Object? isLoan = freezed,
   }) {
     return _then(_$_DepositWithdrawPayDebtManagerRequestObject(
-      managerId == freezed
+      freezed == managerId
           ? _value.managerId
           : managerId // ignore: cast_nullable_to_non_nullable
               as int?,
-      managerUsername == freezed
+      freezed == managerUsername
           ? _value.managerUsername
           : managerUsername // ignore: cast_nullable_to_non_nullable
               as String?,
-      amount == freezed
+      freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int?,
-      comment == freezed
+      freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
               as String?,
-      transactionId == freezed
+      freezed == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isLoan == freezed
+      freezed == isLoan
           ? _value.isLoan
           : isLoan // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -2852,28 +2893,24 @@ class _$_DepositWithdrawPayDebtManagerRequestObject
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DepositWithdrawPayDebtManagerRequestObject &&
-            const DeepCollectionEquality().equals(other.managerId, managerId) &&
-            const DeepCollectionEquality()
-                .equals(other.managerUsername, managerUsername) &&
-            const DeepCollectionEquality().equals(other.amount, amount) &&
-            const DeepCollectionEquality().equals(other.comment, comment) &&
-            const DeepCollectionEquality()
-                .equals(other.transactionId, transactionId) &&
-            const DeepCollectionEquality().equals(other.isLoan, isLoan));
+            (identical(other.managerId, managerId) ||
+                other.managerId == managerId) &&
+            (identical(other.managerUsername, managerUsername) ||
+                other.managerUsername == managerUsername) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.transactionId, transactionId) ||
+                other.transactionId == transactionId) &&
+            (identical(other.isLoan, isLoan) || other.isLoan == isLoan));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(managerId),
-      const DeepCollectionEquality().hash(managerUsername),
-      const DeepCollectionEquality().hash(amount),
-      const DeepCollectionEquality().hash(comment),
-      const DeepCollectionEquality().hash(transactionId),
-      const DeepCollectionEquality().hash(isLoan));
+  int get hashCode => Object.hash(runtimeType, managerId, managerUsername,
+      amount, comment, transactionId, isLoan);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DepositWithdrawPayDebtManagerRequestObjectCopyWith<
           _$_DepositWithdrawPayDebtManagerRequestObject>
       get copyWith =>
@@ -2937,7 +2974,9 @@ abstract class $AddEditManagerRequestObjectCopyWith<$Res> {
   factory $AddEditManagerRequestObjectCopyWith(
           AddEditManagerRequestObject value,
           $Res Function(AddEditManagerRequestObject) then) =
-      _$AddEditManagerRequestObjectCopyWithImpl<$Res>;
+      _$AddEditManagerRequestObjectCopyWithImpl<$Res,
+          AddEditManagerRequestObject>;
+  @useResult
   $Res call(
       {String? username,
       int? enabled,
@@ -2956,14 +2995,17 @@ abstract class $AddEditManagerRequestObjectCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AddEditManagerRequestObjectCopyWithImpl<$Res>
+class _$AddEditManagerRequestObjectCopyWithImpl<$Res,
+        $Val extends AddEditManagerRequestObject>
     implements $AddEditManagerRequestObjectCopyWith<$Res> {
   _$AddEditManagerRequestObjectCopyWithImpl(this._value, this._then);
 
-  final AddEditManagerRequestObject _value;
   // ignore: unused_field
-  final $Res Function(AddEditManagerRequestObject) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? username = freezed,
@@ -2982,63 +3024,63 @@ class _$AddEditManagerRequestObjectCopyWithImpl<$Res>
     Object? notes = freezed,
   }) {
     return _then(_value.copyWith(
-      username: username == freezed
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      enabled: enabled == freezed
+      enabled: freezed == enabled
           ? _value.enabled
           : enabled // ignore: cast_nullable_to_non_nullable
               as int?,
-      password: password == freezed
+      password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      confirmPassword: confirmPassword == freezed
+      confirmPassword: freezed == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
               as String?,
-      aclGroupId: aclGroupId == freezed
+      aclGroupId: freezed == aclGroupId
           ? _value.aclGroupId
           : aclGroupId // ignore: cast_nullable_to_non_nullable
               as int?,
-      parentId: parentId == freezed
+      parentId: freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      firstname: firstname == freezed
+      firstname: freezed == firstname
           ? _value.firstname
           : firstname // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastname: lastname == freezed
+      lastname: freezed == lastname
           ? _value.lastname
           : lastname // ignore: cast_nullable_to_non_nullable
               as String?,
-      company: company == freezed
+      company: freezed == company
           ? _value.company
           : company // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      phone: phone == freezed
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
-      city: city == freezed
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      address: address == freezed
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      notes: notes == freezed
+      notes: freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -3050,6 +3092,7 @@ abstract class _$$_AddEditManagerRequestObjectCopyWith<$Res>
           $Res Function(_$_AddEditManagerRequestObject) then) =
       __$$_AddEditManagerRequestObjectCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? username,
       int? enabled,
@@ -3069,17 +3112,15 @@ abstract class _$$_AddEditManagerRequestObjectCopyWith<$Res>
 
 /// @nodoc
 class __$$_AddEditManagerRequestObjectCopyWithImpl<$Res>
-    extends _$AddEditManagerRequestObjectCopyWithImpl<$Res>
+    extends _$AddEditManagerRequestObjectCopyWithImpl<$Res,
+        _$_AddEditManagerRequestObject>
     implements _$$_AddEditManagerRequestObjectCopyWith<$Res> {
   __$$_AddEditManagerRequestObjectCopyWithImpl(
       _$_AddEditManagerRequestObject _value,
       $Res Function(_$_AddEditManagerRequestObject) _then)
-      : super(_value, (v) => _then(v as _$_AddEditManagerRequestObject));
+      : super(_value, _then);
 
-  @override
-  _$_AddEditManagerRequestObject get _value =>
-      super._value as _$_AddEditManagerRequestObject;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? username = freezed,
@@ -3098,59 +3139,59 @@ class __$$_AddEditManagerRequestObjectCopyWithImpl<$Res>
     Object? notes = freezed,
   }) {
     return _then(_$_AddEditManagerRequestObject(
-      username == freezed
+      freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      enabled == freezed
+      freezed == enabled
           ? _value.enabled
           : enabled // ignore: cast_nullable_to_non_nullable
               as int?,
-      password == freezed
+      freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      confirmPassword == freezed
+      freezed == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
               as String?,
-      aclGroupId == freezed
+      freezed == aclGroupId
           ? _value.aclGroupId
           : aclGroupId // ignore: cast_nullable_to_non_nullable
               as int?,
-      parentId == freezed
+      freezed == parentId
           ? _value.parentId
           : parentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      firstname == freezed
+      freezed == firstname
           ? _value.firstname
           : firstname // ignore: cast_nullable_to_non_nullable
               as String?,
-      lastname == freezed
+      freezed == lastname
           ? _value.lastname
           : lastname // ignore: cast_nullable_to_non_nullable
               as String?,
-      company == freezed
+      freezed == company
           ? _value.company
           : company // ignore: cast_nullable_to_non_nullable
               as String?,
-      email == freezed
+      freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      phone == freezed
+      freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
-      city == freezed
+      freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
               as String?,
-      address == freezed
+      freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      notes == freezed
+      freezed == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -3216,44 +3257,50 @@ class _$_AddEditManagerRequestObject implements _AddEditManagerRequestObject {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddEditManagerRequestObject &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.enabled, enabled) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality()
-                .equals(other.confirmPassword, confirmPassword) &&
-            const DeepCollectionEquality()
-                .equals(other.aclGroupId, aclGroupId) &&
-            const DeepCollectionEquality().equals(other.parentId, parentId) &&
-            const DeepCollectionEquality().equals(other.firstname, firstname) &&
-            const DeepCollectionEquality().equals(other.lastname, lastname) &&
-            const DeepCollectionEquality().equals(other.company, company) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.phone, phone) &&
-            const DeepCollectionEquality().equals(other.city, city) &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality().equals(other.notes, notes));
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.enabled, enabled) || other.enabled == enabled) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword) &&
+            (identical(other.aclGroupId, aclGroupId) ||
+                other.aclGroupId == aclGroupId) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
+            (identical(other.firstname, firstname) ||
+                other.firstname == firstname) &&
+            (identical(other.lastname, lastname) ||
+                other.lastname == lastname) &&
+            (identical(other.company, company) || other.company == company) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.notes, notes) || other.notes == notes));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(enabled),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(confirmPassword),
-      const DeepCollectionEquality().hash(aclGroupId),
-      const DeepCollectionEquality().hash(parentId),
-      const DeepCollectionEquality().hash(firstname),
-      const DeepCollectionEquality().hash(lastname),
-      const DeepCollectionEquality().hash(company),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(phone),
-      const DeepCollectionEquality().hash(city),
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(notes));
+      username,
+      enabled,
+      password,
+      confirmPassword,
+      aclGroupId,
+      parentId,
+      firstname,
+      lastname,
+      company,
+      email,
+      phone,
+      city,
+      address,
+      notes);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AddEditManagerRequestObjectCopyWith<_$_AddEditManagerRequestObject>
       get copyWith => __$$_AddEditManagerRequestObjectCopyWithImpl<
           _$_AddEditManagerRequestObject>(this, _$identity);

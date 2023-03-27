@@ -55,7 +55,8 @@ class UsersListViewModel extends BaseViewModel
   ];
   List<ConnectionFilterList>? listOfConnection = [
     ConnectionFilterList(Constants.minusOne, AppStrings.usersConnectionAny),
-    ConnectionFilterList(Constants.oneNum.toInt(), AppStrings.usersConnectionOffline),
+    ConnectionFilterList(
+        Constants.oneNum.toInt(), AppStrings.usersConnectionOffline),
     ConnectionFilterList(Constants.twoNum, AppStrings.usersConnectionOnline),
   ];
 
@@ -107,7 +108,7 @@ class UsersListViewModel extends BaseViewModel
     return (await _usersListUseCase.execute(userRequest)).fold(
       (failure) {
         // left -> failure
-        debugPrint("getUsersListData failure = ${failure.message}");
+        debugPrint("failure getUsersListData failure = ${failure.message}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -116,6 +117,8 @@ class UsersListViewModel extends BaseViewModel
         );
       },
       (usersList0) async {
+        debugPrint("getUsersListData failure = ${usersList0.total}");
+
         // right -> success (data)
         usersList = usersList0;
         inputState.add(ContentState());

@@ -34,7 +34,7 @@ class UsersListData {
   // String city;
   // String phone;
   // int profileId;
-  // String balance;
+  String balance;
   String expiration;
   // int parentId;
   int enabled;
@@ -59,7 +59,7 @@ class UsersListData {
     // this.city,
     // this.phone,
     // this.profileId,
-    // this.balance,
+    this.balance,
     this.expiration,
     // this.parentId,
     this.enabled,

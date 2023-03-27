@@ -11,6 +11,7 @@ class ItemCard extends StatelessWidget {
   final String? status;
   final String? profileName;
   final String? fullName;
+  final String? expireOn;
   final String? username;
   final String? balance;
   final Color? statusColor;
@@ -20,6 +21,7 @@ class ItemCard extends StatelessWidget {
     this.username = "taha_saad",
     this.fullName = "Taha Saad",
     this.balance = "IQD 25,000",
+    this.expireOn = "2021-09-09",
     this.statusColor = ColorManager.greenAnnotations,
     super.key,
   });
@@ -102,6 +104,14 @@ class ItemCard extends StatelessWidget {
                 const SizedBox(height: AppSize.s10),
                 Text(
                   balance!,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: ColorManager.greyNeutral,
+                      ),
+                ),
+                const SizedBox(height: AppSize.s10),
+                Text(
+                  "Expires on $expireOn",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.w500,
                         color: ColorManager.greyNeutral,

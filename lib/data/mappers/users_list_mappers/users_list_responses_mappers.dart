@@ -33,7 +33,7 @@ extension UsersListDataResponseMapper on UsersListDataResponse? {
       // this?.city.orEmpty() ?? Constants.emptyStr,
       // this?.phone.orEmpty() ?? Constants.emptyStr,
       // this?.profileId.orZero() ?? Constants.zeroNum.toInt(),
-      // this?.balance.orEmpty() ?? Constants.emptyStr,
+      this?.balance.orEmpty() ?? Constants.emptyStr,
       this?.expiration.orEmpty() ?? Constants.emptyStr,
       // this?.parentId.orZero() ?? Constants.zeroNum.toInt(),
       this?.enabled.orZero() ?? Constants.zeroNum.toInt(),

@@ -4,7 +4,7 @@ class Constants {
   static const int threeNum = 3;
   static const int fourNum = 4;
   static const int fiveNum = 5;
-  static const int minusOne = 0;
+  static const int minusOne = -1;
   static const List<String> emptyList = [];
   static const String emptyStr = "";
   static const int twintyNum = 20;

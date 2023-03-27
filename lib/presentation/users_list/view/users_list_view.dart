@@ -12,6 +12,7 @@ import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
+import 'package:sasuki/app/shared_widgets/item_card.dart';
 import 'package:sasuki/app/shared_widgets/single_card_statistics.dart';
 import 'package:sasuki/domain/models/dashboard/dashboard.dart';
 import 'package:sasuki/domain/models/filter_lists/connection_list.dart';
@@ -125,97 +126,103 @@ class _UsersListViewState extends State<UsersListView> {
   }
 
   Widget _getContentWidget() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          AppSize.statusBarHeight(context),
-          const SizedBox(height: AppSize.s20),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      child: SvgPicture.asset(IconsAssets.menu),
-                      onTap: () {
-                        Nav.navTo(context, Routes.drawerRoute);
-                      },
-                    ),
-                    Text(
-                      AppStrings.usersUsersList,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    Container(),
-                  ],
-                ),
-                const SizedBox(height: AppSize.s20),
-                StreamBuilder<UsersList>(
-                  stream: _usersListViewModel.outputUsersListData,
-                  builder: (context, outputUsersListData) {
-                    return StreamBuilder<Dashboard>(
-                        stream: _dashboardViewModel.outputDashboardData,
-                        builder: (context, outputDashboardData) {
-                          return SingleCardStatistics(
-                            totalUsers:
-                                "${outputUsersListData.data?.total ?? Constants.dash}",
-                            activeUsers:
-                                "${outputDashboardData.data?.data?.activeUsersCount ?? Constants.dash}",
-                            expiredUsers:
-                                "${outputDashboardData.data?.data?.expiredUsersCount ?? Constants.dash}",
-                            onlineUsers:
-                                "${outputDashboardData.data?.data?.usersOnlineCount ?? Constants.dash}",
-                          );
-                        });
-                  },
-                ),
-                const SizedBox(height: AppSize.s15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: getScreenWidth(context) * 0.6,
-                      child: _getSearchTextField(),
-                    ),
-                    InkWell(
-                      onTap: _showFilterDialog,
-                      child: SvgPicture.asset(
-                        IconsAssets.filter,
-                        width: AppSize.s18,
-                        height: AppSize.s18,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        AppSize.statusBarHeight(context),
+        const SizedBox(height: AppSize.s20),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        child: SvgPicture.asset(IconsAssets.menu),
+                        onTap: () {
+                          Nav.navTo(context, Routes.drawerRoute);
+                        },
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        // TODO : Add code for add user
-                        // Nav.navTo(context, Routes.addUserRoute);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(AppPadding.p7),
-                        decoration: const BoxDecoration(
-                          color: ColorManager.primaryshade1,
-                          shape: BoxShape.circle,
-                        ),
+                      Text(
+                        AppStrings.usersUsersList,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      Container(),
+                    ],
+                  ),
+                  const SizedBox(height: AppSize.s20),
+                  StreamBuilder<UsersList>(
+                    stream: _usersListViewModel.outputUsersListData,
+                    builder: (context, outputUsersListData) {
+                      return StreamBuilder<Dashboard>(
+                          stream: _dashboardViewModel.outputDashboardData,
+                          builder: (context, outputDashboardData) {
+                            return SingleCardStatistics(
+                              totalUsers:
+                                  "${outputUsersListData.data?.total ?? Constants.dash}",
+                              activeUsers:
+                                  "${outputDashboardData.data?.data?.activeUsersCount ?? Constants.dash}",
+                              expiredUsers:
+                                  "${outputDashboardData.data?.data?.expiredUsersCount ?? Constants.dash}",
+                              onlineUsers:
+                                  "${outputDashboardData.data?.data?.usersOnlineCount ?? Constants.dash}",
+                            );
+                          });
+                    },
+                  ),
+                  const SizedBox(height: AppSize.s15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: getScreenWidth(context) * 0.6,
+                        child: _getSearchTextField(),
+                      ),
+                      InkWell(
+                        onTap: _showFilterDialog,
                         child: SvgPicture.asset(
-                          IconsAssets.add,
-                          width: AppSize.s24,
-                          height: AppSize.s24,
+                          IconsAssets.filter,
+                          width: AppSize.s18,
+                          height: AppSize.s18,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      InkWell(
+                        onTap: () {
+                          // TODO : Add code for add user
+                          // Nav.navTo(context, Routes.addUserRoute);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(AppPadding.p7),
+                          decoration: const BoxDecoration(
+                            color: ColorManager.primaryshade1,
+                            shape: BoxShape.circle,
+                          ),
+                          child: SvgPicture.asset(
+                            IconsAssets.add,
+                            width: AppSize.s24,
+                            height: AppSize.s24,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSize.s15),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+            _getUsersList(),
+          ],
+        ),
+      ],
     );
   }
 
@@ -277,189 +284,117 @@ class _UsersListViewState extends State<UsersListView> {
     _usersListViewModel.getUserFromSearch();
   }
 
-  // Widget _getContentWidget0() {
-  //   return StreamBuilder<List<UsersListData>?>(
-  //     stream: _usersListViewModel.outputUsersList,
-  //     builder: (context, snapshot) {
-  //       // ignore: prefer_is_empty
-  //       if (snapshot.data?.length == Constants.oneNum ||
-  //           snapshot.data?.length == Constants.zero) {
-  //         WidgetsBinding.instance.addPostFrameCallback((_) {
-  //           Future.delayed(
-  //             Duration(seconds: Constants.oneNum.toInt()),
-  //             () => setState(() => loadFilteredUsers = Constants.falseBool),
-  //           );
-  //         });
-  //       }
-  //       return !loadFilteredUsers
-  //           // ignore: prefer_is_empty
-  //           ? snapshot.data?.length != Constants.zeroNum
-  //               ? SingleChildScrollView(
-  //                   physics: const AlwaysScrollableScrollPhysics(),
-  //                   controller: _scrollController,
-  //                   child: Container(
-  //                     color: ColorManager.blackNeutral
-  //                         .withOpacity(AppOpacity.op30),
-  //                     child: loadingMoreUsers
-  //                         ? Column(
-  //                             children: [
-  //                               _singleUser(snapshot.data, context),
-  //                               const SizedBox(height: AppSize.s20),
-  //                               const Center(
-  //                                 child: CircularProgressIndicator(
-  //                                   valueColor: AlwaysStoppedAnimation<Color>(
-  //                                     ColorManager.whiteNeutral,
-  //                                   ),
-  //                                 ),
-  //                               ),
-  //                             ],
-  //                           )
-  //                         : _singleUser(snapshot.data, context),
-  //                   ),
-  //                 )
-  //               : Center(
-  //                   child: Column(
-  //                     mainAxisAlignment: MainAxisAlignment.center,
-  //                     crossAxisAlignment: CrossAxisAlignment.center,
-  //                     children: [
-  //                       SvgPicture.asset(ImageAssets.emptyUsers),
-  //                       const SizedBox(height: AppSize.s20),
-  //                       Text(
-  //                         AppStrings.noUsersFound,
-  //                         style: Theme.of(context).textTheme.titleMedium,
-  //                       ),
-  //                       const SizedBox(height: AppSize.s10),
-  //                       IconButton(
-  //                         onPressed: () {
-  //                           FocusScope.of(context).unfocus();
-  //                           setState(() => loadFilteredUsers = true);
-  //                           _usersListViewModel.refreshUsersList();
-  //                         },
-  //                         icon: Icon(
-  //                           Icons.refresh,
-  //                           color: ColorManager.grey1,
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 )
-  //           : Center(
-  //               child: CircularProgressIndicator(
-  //                 valueColor: AlwaysStoppedAnimation<Color>(
-  //                   ColorManager.white,
-  //                 ),
-  //               ),
-  //             );
-  //     },
-  //   );
-  // }
+  Widget _getUsersList() {
+    return StreamBuilder<List<UsersListData>?>(
+      stream: _usersListViewModel.outputUsersList,
+      builder: (context, snapshot) {
+        // ignore: prefer_is_empty
+        if (snapshot.data?.length == Constants.oneNum ||
+            snapshot.data?.length == Constants.zeroNum) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Future.delayed(
+              Duration(seconds: Constants.oneNum.toInt()),
+              () => setState(() => loadFilteredUsers = Constants.falseBool),
+            );
+          });
+        }
+        return !loadFilteredUsers
+            // ignore: prefer_is_empty
+            ? snapshot.data?.length != Constants.zeroNum
+                ? SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    controller: _scrollController,
+                    child: loadingMoreUsers
+                        ? Column(
+                            children: [
+                              _singleUser(snapshot.data, context),
+                              const SizedBox(height: AppSize.s20),
+                              const Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    ColorManager.whiteNeutral,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : _singleUser(snapshot.data, context),
+                  )
+                : Container(
+                    margin: const EdgeInsets.only(top: AppMargin.m38),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(ImageAssets.emptyState),
+                          const SizedBox(height: AppSize.s20),
+                          Text(
+                            AppStrings.noUsersFound,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          const SizedBox(height: AppSize.s10),
+                          IconButton(
+                            onPressed: () {
+                              FocusScope.of(context).unfocus();
+                              setState(() => loadFilteredUsers = true);
+                              _usersListViewModel.refreshUsersList();
+                            },
+                            icon: const Icon(
+                              Icons.refresh,
+                              size: AppSize.s32,
+                              color: ColorManager.greyNeutral,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+            : const Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    ColorManager.whiteNeutral,
+                  ),
+                ),
+              );
+      },
+    );
+  }
 
-  // Widget _singleUser(List<UsersListData>? listOfUsers, BuildContext context) {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.center,
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     mainAxisSize: MainAxisSize.min,
-  //     children: listOfUsers?.map(
-  //           (usersListData) {
-  //             return InkWell(
-  //               onTap: () {
-  //                 Nav.navTo(context, Routes.userDetailsRoute);
-  //                 instance<UserDetailsViewModel>()
-  //                     .getUserApiOverview(usersListData.id);
-  //               },
-  //               child: Container(
-  //                 padding: const EdgeInsets.symmetric(
-  //                   horizontal: AppPadding.p24,
-  //                   vertical: AppPadding.p6,
-  //                 ),
-  //                 decoration: BoxDecoration(
-  //                   border: usersListData != listOfUsers.last
-  //                       ? Border(
-  //                           bottom: BorderSide(
-  //                             color: ColorManager.white.withOpacity(
-  //                               AppOpacity.op30,
-  //                             ),
-  //                             width: AppSize.s1.toDouble(),
-  //                           ),
-  //                         )
-  //                       : null,
-  //                 ),
-  //                 child: Row(
-  //                   children: [
-  //                     Column(
-  //                       children: [
-  //                         SvgPicture.asset(
-  //                           _getUserStatus(usersListData),
-  //                           width: AppSize.s60,
-  //                           height: AppSize.s60,
-  //                         ),
-  //                         const SizedBox(height: AppSize.s4),
-  //                         if (usersListData.onlineStatus == 1)
-  //                           Text(
-  //                             AppStrings.usersOnline,
-  //                             style: Theme.of(context).textTheme.titleMedium,
-  //                           ),
-  //                       ],
-  //                     ),
-  //                     Container(
-  //                       margin: const EdgeInsets.only(
-  //                         left: AppMargin.m16,
-  //                       ),
-  //                       child: Column(
-  //                         mainAxisAlignment: MainAxisAlignment.start,
-  //                         crossAxisAlignment: CrossAxisAlignment.start,
-  //                         children: [
-  //                           SizedBox(
-  //                             width: AppSize.s230,
-  //                             child: Text(
-  //                               usersListData.username,
-  //                               style:
-  //                                   Theme.of(context).textTheme.headlineMedium,
-  //                               maxLines: 2,
-  //                               softWrap: true,
-  //                             ),
-  //                           ),
-  //                           const SizedBox(height: AppSize.s4),
-  //                           if (usersListData.firstname.isNotEmpty)
-  //                             SizedBox(
-  //                               width: AppSize.s230,
-  //                               child: Text(
-  //                                 "${usersListData.firstname} ${usersListData.lastname}",
-  //                                 style:
-  //                                     Theme.of(context).textTheme.titleMedium,
-  //                                 maxLines: 2,
-  //                                 softWrap: true,
-  //                               ),
-  //                             ),
-  //                           const SizedBox(height: AppSize.s4),
-  //                           if (usersListData.profileDetails?.name != null)
-  //                             SizedBox(
-  //                               width: AppSize.s230,
-  //                               child: Text(
-  //                                 (usersListData.profileDetails?.name)!,
-  //                                 style: Theme.of(context).textTheme.bodyMedium,
-  //                                 maxLines: 2,
-  //                                 softWrap: true,
-  //                               ),
-  //                             ),
-  //                           const SizedBox(height: AppSize.s4),
-  //                           if (usersListData.expiration.isNotEmpty)
-  //                             Text(
-  //                               "Expires on ${usersListData.expiration}",
-  //                               style: Theme.of(context).textTheme.bodyLarge,
-  //                             ),
-  //                         ],
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ),
-  //             );
-  //           },
-  //         ).toList() ??
-  //         [],
-  //   );
-  // }
+  Widget _singleUser(List<UsersListData>? listOfUsers, BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: listOfUsers?.map(
+            (usersListData) {
+              return InkWell(
+                onTap: () {
+                  // TODO: Add code for user details
+                  // Nav.navTo(context, Routes.userDetailsRoute);
+                  // instance<UserDetailsViewModel>()
+                  //     .getUserApiOverview(usersListData.id);
+                },
+                child: ItemCard(
+                  fullName: usersListData.firstname.isNotEmpty
+                      ? "${usersListData.firstname} ${usersListData.lastname}"
+                      : Constants.dash,
+                  profileName:
+                      usersListData.profileDetails?.name ?? Constants.dash,
+                  balance: usersListData.balance.isNotEmpty
+                      ? usersListData.balance
+                      : Constants.dash,
+                  expireOn: "Expires on ${usersListData.expiration}",
+                  status: _getUserStatusString(usersListData),
+                  statusColor: _getUserStatusColor(usersListData),
+                  username: usersListData.username,
+                ),
+              );
+            },
+          ).toList() ??
+          [],
+    );
+  }
 
   _showFilterDialog() async {
     // TODO : add filter logic
@@ -1073,19 +1008,19 @@ class _UsersListViewState extends State<UsersListView> {
   //   );
   // }
 
-  // String _getUserStatus(UsersListData usersListData) {
-  //   int onlineStatus = usersListData.onlineStatus;
-  //   bool? status = usersListData.status?.status;
-  //   return usersListData.enabled == Constants.zero
-  //       ? onlineStatus == Constants.zero
-  //           ? ImageAssets.unenabledOffline
-  //           : ImageAssets.unenabledOnline
-  //       : status == Constants.trueVal
-  //           ? onlineStatus == Constants.zero
-  //               ? ImageAssets.enabledActiveOffline
-  //               : ImageAssets.enabledActiveOnline
-  //           : onlineStatus == Constants.zero
-  //               ? ImageAssets.enabledUnactiveOffline
-  //               : ImageAssets.enabledUnactiveOnline;
-  // }
+  _getUserStatusString(UsersListData usersListData) {
+    return usersListData.enabled == Constants.zeroNum
+        ? AppStrings.disabledUser
+        : usersListData.status?.status == Constants.trueBool
+            ? AppStrings.activeUsers
+            : AppStrings.expiredUsers;
+  }
+
+  _getUserStatusColor(UsersListData usersListData) {
+    return usersListData.enabled == Constants.zeroNum
+        ? ColorManager.redAnnotations
+        : usersListData.status?.status == Constants.trueBool
+            ? ColorManager.greenAnnotations
+            : ColorManager.orangeAnnotations;
+  }
 }
