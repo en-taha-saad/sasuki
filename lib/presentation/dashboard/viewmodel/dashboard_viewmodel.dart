@@ -3,7 +3,6 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
-import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/choosing_server/server.dart';

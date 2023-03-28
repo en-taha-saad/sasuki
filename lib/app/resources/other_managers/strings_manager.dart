@@ -256,7 +256,7 @@ class AppStrings {
   static const activationMethod4 = "Reward Points";
   static const activationMethodRequiredSentString4 = "reward_points";
 
-  static const usersAdvancedFilter = "Advanced Filter";
+  static const usersAdvancedFilter = "Filter";
   static const usersParent = "Parent";
   static const usersParentHint = "All";
   static const usersStatus = "Status";

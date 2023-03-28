@@ -31,6 +31,7 @@ class DashboardShimmerLoading extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AppSize.statusBarHeight(context),
+          const SizedBox(height: AppSize.s20),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
             child: Column(

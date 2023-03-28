@@ -18,6 +18,7 @@ import 'package:sasuki/presentation/choose_server/viewmodel/choose_server_viewmo
 class DropDownComponent<T> extends StatefulWidget {
   final List<T> items;
   final String Function(dynamic) displayFn;
+  final String? hintStr;
   final void Function(dynamic) doOtherThings;
   final bool isThisServersDropdown;
   final ChooseServerViewModel? viewModel;
@@ -27,6 +28,7 @@ class DropDownComponent<T> extends StatefulWidget {
     required this.displayFn,
     required this.doOtherThings,
     required this.isThisServersDropdown,
+    this.hintStr,
     this.viewModel,
   }) : super(key: key);
 
@@ -199,7 +201,9 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
         }
         return Constants.nullValue;
       },
-      hint: const Text(AppStrings.dropDownHint),
+      hint: Text(widget.isThisServersDropdown
+          ? AppStrings.dropDownHint
+          : widget.hintStr ?? AppStrings.emptyString),
       alignment: Alignment.centerLeft,
       dropdownColor: ColorManager.backgroundCenter,
       style: Theme.of(context).textTheme.bodyLarge,

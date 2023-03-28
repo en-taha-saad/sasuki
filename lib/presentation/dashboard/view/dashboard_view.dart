@@ -121,7 +121,6 @@ class _DashboardViewState extends State<DashboardView> {
                     InkWell(
                       child: SvgPicture.asset(IconsAssets.menu),
                       onTap: () {
-                        // TODO : add logic to open drawer
                         Nav.navTo(context, Routes.drawerRoute);
                       },
                     ),

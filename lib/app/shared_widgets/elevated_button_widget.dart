@@ -35,7 +35,9 @@ class ElevatedButtonWidget extends StatelessWidget {
           mainAxisSize: mainAxisSize ?? MainAxisSize.max,
           children: [
             Text(name!),
-            const SizedBox(width: AppSize.s10),
+            assetName != Constants.nullValue
+                ? const SizedBox(width: AppSize.s10)
+                : Container(),
             assetName != Constants.nullValue
                 ? SvgPicture.asset(
                     assetName!,
