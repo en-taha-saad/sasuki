@@ -418,9 +418,7 @@ class _UsersListViewState extends State<UsersListView> {
   _filterDialog(BuildContext context) {
     return Dialog(
       insetAnimationCurve: Curves.fastLinearToSlowEaseIn,
-      insetPadding: EdgeInsets.only(
-        top: getScreenHeight(context).toInt() * AppSize.s0point2,
-        bottom: getScreenHeight(context).toInt() * AppSize.s0point2,
+      insetPadding: const EdgeInsets.only(
         left: Constants.zeroDouble,
         right: Constants.zeroDouble,
       ),
