@@ -127,100 +127,94 @@ class _UsersListViewState extends State<UsersListView> {
 
   Widget _getContentWidget() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         AppSize.statusBarHeight(context),
         const SizedBox(height: AppSize.s20),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        child: SvgPicture.asset(IconsAssets.menu),
-                        onTap: () {
-                          Nav.navTo(context, Routes.drawerRoute);
-                        },
-                      ),
-                      Text(
-                        AppStrings.usersUsersList,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      Container(),
-                    ],
-                  ),
-                  const SizedBox(height: AppSize.s20),
-                  StreamBuilder<UsersList>(
-                    stream: _usersListViewModel.outputUsersListData,
-                    builder: (context, outputUsersListData) {
-                      return StreamBuilder<Dashboard>(
-                          stream: _dashboardViewModel.outputDashboardData,
-                          builder: (context, outputDashboardData) {
-                            return SingleCardStatistics(
-                              totalUsers:
-                                  "${outputUsersListData.data?.total ?? Constants.dash}",
-                              activeUsers:
-                                  "${outputDashboardData.data?.data?.activeUsersCount ?? Constants.dash}",
-                              expiredUsers:
-                                  "${outputDashboardData.data?.data?.expiredUsersCount ?? Constants.dash}",
-                              onlineUsers:
-                                  "${outputDashboardData.data?.data?.usersOnlineCount ?? Constants.dash}",
-                            );
-                          });
+                  InkWell(
+                    child: SvgPicture.asset(IconsAssets.menu),
+                    onTap: () {
+                      Nav.navTo(context, Routes.drawerRoute);
                     },
                   ),
-                  const SizedBox(height: AppSize.s15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: getScreenWidth(context) * 0.6,
-                        child: _getSearchTextField(),
-                      ),
-                      InkWell(
-                        onTap: _showFilterDialog,
-                        child: SvgPicture.asset(
-                          IconsAssets.filter,
-                          width: AppSize.s18,
-                          height: AppSize.s18,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          // TODO : Add code for add user
-                          // Nav.navTo(context, Routes.addUserRoute);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(AppPadding.p7),
-                          decoration: const BoxDecoration(
-                            color: ColorManager.primaryshade1,
-                            shape: BoxShape.circle,
-                          ),
-                          child: SvgPicture.asset(
-                            IconsAssets.add,
-                            width: AppSize.s24,
-                            height: AppSize.s24,
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    AppStrings.usersUsersList,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  const SizedBox(height: AppSize.s15),
+                  Container(),
                 ],
               ),
-            ),
-            _getUsersList(),
-          ],
+              const SizedBox(height: AppSize.s20),
+              StreamBuilder<UsersList>(
+                stream: _usersListViewModel.outputUsersListData,
+                builder: (context, outputUsersListData) {
+                  return StreamBuilder<Dashboard>(
+                      stream: _dashboardViewModel.outputDashboardData,
+                      builder: (context, outputDashboardData) {
+                        return SingleCardStatistics(
+                          totalUsers:
+                              "${outputUsersListData.data?.total ?? Constants.dash}",
+                          activeUsers:
+                              "${outputDashboardData.data?.data?.activeUsersCount ?? Constants.dash}",
+                          expiredUsers:
+                              "${outputDashboardData.data?.data?.expiredUsersCount ?? Constants.dash}",
+                          onlineUsers:
+                              "${outputDashboardData.data?.data?.usersOnlineCount ?? Constants.dash}",
+                        );
+                      });
+                },
+              ),
+              const SizedBox(height: AppSize.s15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: getScreenWidth(context) * 0.6,
+                    child: _getSearchTextField(),
+                  ),
+                  InkWell(
+                    onTap: _showFilterDialog,
+                    child: SvgPicture.asset(
+                      IconsAssets.filter,
+                      width: AppSize.s18,
+                      height: AppSize.s18,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      // TODO : Add code for add user
+                      // Nav.navTo(context, Routes.addUserRoute);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(AppPadding.p7),
+                      decoration: const BoxDecoration(
+                        color: ColorManager.primaryshade1,
+                        shape: BoxShape.circle,
+                      ),
+                      child: SvgPicture.asset(
+                        IconsAssets.add,
+                        width: AppSize.s24,
+                        height: AppSize.s24,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSize.s15),
+            ],
+          ),
+        ),
+        Expanded(
+          child: _getUsersList(),
         ),
       ],
     );
@@ -384,7 +378,7 @@ class _UsersListViewState extends State<UsersListView> {
                   balance: usersListData.balance.isNotEmpty
                       ? usersListData.balance
                       : Constants.dash,
-                  expireOn: "Expires on ${usersListData.expiration}",
+                  expireOn: usersListData.expiration,
                   status: _getUserStatusString(usersListData),
                   statusColor: _getUserStatusColor(usersListData),
                   username: usersListData.username,

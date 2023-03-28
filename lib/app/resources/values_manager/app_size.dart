@@ -10,7 +10,11 @@ class AppSize {
   static const double s7 = 7;
   static const double s8 = 8;
   static const double s1point5 = 1.5;
+  static const double s0point2 = 0.2;
+  static const double s0point3 = 0.3;
+  static const double s0point4 = 0.4;
   static const double s0point6 = 0.6;
+  static const double s0point7 = 0.7;
   static const double s0point25 = 0.25;
   static const double s0point95 = 0.95;
   static const double s10 = 10;
@@ -30,6 +34,8 @@ class AppSize {
   static const double s50 = 50;
   static const double s80 = 80;
   static const double s144 = 144;
+  static const double s150 = 150;
+  static const double s210 = 210;
   static const double s250 = 250;
 
   static const double s0dot253 = 0.253;
