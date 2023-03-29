@@ -4,6 +4,7 @@ import 'package:sasuki/app/init_screens_dependencies/init_add_server_module.dart
 import 'package:sasuki/app/init_screens_dependencies/init_choose_server_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_dashboard_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_login_module.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_user_details_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_users_list_module.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
@@ -15,6 +16,7 @@ import 'package:sasuki/presentation/dashboard/view/dashboard_view.dart';
 import 'package:sasuki/presentation/drawer/drawer_view.dart';
 import 'package:sasuki/presentation/login/view/login_view.dart';
 import 'package:sasuki/presentation/splash/splash_view.dart';
+import 'package:sasuki/presentation/user_details/view/user_details.dart';
 import 'package:sasuki/presentation/users_list/view/users_list_view.dart';
 
 class RouteGenerator {
@@ -73,6 +75,16 @@ class RouteGenerator {
             resizeToAvoidBottomInset: Constants.trueBool,
             isSecondAppBackground: Constants.falseBool,
             child: UsersListView(),
+          ),
+          settings: settings,
+        );
+      case Routes.userDetailsRoute:
+        initUserDetailsModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            resizeToAvoidBottomInset: Constants.trueBool,
+            isSecondAppBackground: Constants.falseBool,
+            child: UserDetailsView(),
           ),
           settings: settings,
         );

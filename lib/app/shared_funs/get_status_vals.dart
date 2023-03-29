@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 
 String getStatusString(status) {
@@ -12,8 +13,8 @@ String getStatusString(status) {
 
 Color getStatusColor(String statusString) {
   return statusString == AppStrings.activeUsers
-      ? const Color.fromARGB(255, 126, 247, 130)
+      ? ColorManager.greenAnnotations
       : statusString == AppStrings.expiredUsers
-          ? Colors.orange
+          ? ColorManager.orangeAnnotations
           : Colors.white;
 }

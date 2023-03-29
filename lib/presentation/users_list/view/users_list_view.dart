@@ -164,6 +164,7 @@ class _UsersListViewState extends State<UsersListView> {
                       stream: _dashboardViewModel.outputDashboardData,
                       builder: (context, outputDashboardData) {
                         return SingleCardStatistics(
+                          isShimmer: Constants.falseBool,
                           totalUsers:
                               "${outputUsersListData.data?.total ?? Constants.dash}",
                           activeUsers:
