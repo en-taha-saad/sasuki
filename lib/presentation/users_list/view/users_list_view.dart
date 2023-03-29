@@ -12,7 +12,6 @@ import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
-import 'package:sasuki/app/shared_funs/screen_hieght.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/item_card.dart';
@@ -442,57 +441,55 @@ class _UsersListViewState extends State<UsersListView> {
           bottom: AppMargin.m35,
           top: AppMargin.m20,
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(width: AppSize.s25),
-                  Text(
-                    AppStrings.usersAdvancedFilter,
-                    style: Theme.of(context).textTheme.titleLarge,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(width: AppSize.s25),
+                Text(
+                  AppStrings.usersAdvancedFilter,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                InkWell(
+                  child: SvgPicture.asset(
+                    IconsAssets.cancel,
+                    height: AppSize.s24,
+                    width: AppSize.s24,
                   ),
-                  InkWell(
-                    child: SvgPicture.asset(
-                      IconsAssets.cancel,
-                      height: AppSize.s24,
-                      width: AppSize.s24,
-                    ),
-                    onTap: () {
-                      setState(() => showFilterWidget = !showFilterWidget);
-                      Nav.popRoute(context);
-                    },
-                  ),
-                ],
-              ),
-              _getParentDropdown(AppStrings.usersParent, context),
-              _getStatusDropdown(AppStrings.usersStatus, context),
-              _getConnectionDropdown(AppStrings.usersConnection, context),
-              _getProfileDropdown(AppStrings.usersProfile, context),
-              const SizedBox(height: AppSize.s35),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: _resetFilters,
-                    child: Text(
-                      AppStrings.usersReset,
-                      style: StylesManager.getSemiBoldStyle(
-                        fontSize: FontSize.sButton,
-                        decoration: TextDecoration.underline,
-                      ),
+                  onTap: () {
+                    setState(() => showFilterWidget = !showFilterWidget);
+                    Nav.popRoute(context);
+                  },
+                ),
+              ],
+            ),
+            _getParentDropdown(AppStrings.usersParent, context),
+            _getStatusDropdown(AppStrings.usersStatus, context),
+            _getConnectionDropdown(AppStrings.usersConnection, context),
+            _getProfileDropdown(AppStrings.usersProfile, context),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: _resetFilters,
+                  child: Text(
+                    AppStrings.usersReset,
+                    style: StylesManager.getSemiBoldStyle(
+                      fontSize: FontSize.sButton,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
-                  ElevatedButtonWidget(
-                    name: AppStrings.usersApply,
-                    onPressed: _applyFilters,
-                  ),
-                ],
-              ),
-            ],
-          ),
+                ),
+                ElevatedButtonWidget(
+                  name: AppStrings.usersApply,
+                  onPressed: _applyFilters,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -551,7 +548,7 @@ class _UsersListViewState extends State<UsersListView> {
             debugPrint("parentList: $parentList");
             // ignore: prefer_is_empty
             return Container(
-              margin: const EdgeInsets.only(top: AppMargin.m10),
+              margin: const EdgeInsets.only(top: AppMargin.m15),
               child: DropDownComponent<SingleParentData?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,
@@ -589,7 +586,7 @@ class _UsersListViewState extends State<UsersListView> {
             }
             // ignore: prefer_is_empty
             return Container(
-              margin: const EdgeInsets.only(top: AppMargin.m10),
+              margin: const EdgeInsets.only(top: AppMargin.m15),
               child: DropDownComponent<StatusFilterList?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersStatusAny,
@@ -627,7 +624,7 @@ class _UsersListViewState extends State<UsersListView> {
             }
             // ignore: prefer_is_empty
             return Container(
-              margin: const EdgeInsets.only(top: AppMargin.m10),
+              margin: const EdgeInsets.only(top: AppMargin.m15),
               child: DropDownComponent<ConnectionFilterList?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersStatusAny,
@@ -666,7 +663,7 @@ class _UsersListViewState extends State<UsersListView> {
             debugPrint("profileList: $profileList");
             // ignore: prefer_is_empty
             return Container(
-              margin: const EdgeInsets.only(top: AppMargin.m10),
+              margin: const EdgeInsets.only(top: AppMargin.m15),
               child: DropDownComponent<ProfileData?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,

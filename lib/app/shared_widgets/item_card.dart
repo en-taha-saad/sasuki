@@ -8,6 +8,7 @@ import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
+import 'package:sasuki/app/shared_widgets/text_shimmer.dart';
 
 class ItemCard extends StatelessWidget {
   final String? status;
@@ -17,6 +18,7 @@ class ItemCard extends StatelessWidget {
   final String? username;
   final String? balance;
   final Color? statusColor;
+  final bool? isShimmer;
   const ItemCard({
     this.status = "active",
     this.profileName = "group",
@@ -25,6 +27,7 @@ class ItemCard extends StatelessWidget {
     this.balance = "IQD 25,000",
     this.expireOn = "2021-09-09",
     this.statusColor = ColorManager.greenAnnotations,
+    this.isShimmer,
     super.key,
   });
   @override
@@ -69,16 +72,23 @@ class ItemCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: AppSize.s150,
-                    child: Text(
-                      fullName!,
-                      style: Theme.of(context).textTheme.titleLarge,
-                      maxLines: Constants.oneNum.toInt(),
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: Constants.trueBool,
-                    ),
-                  ),
+                  isShimmer != Constants.nullValue &&
+                          isShimmer != Constants.falseBool
+                      ? const ShimmerText(
+                          baseColor: ColorManager.whiteNeutral,
+                          highlightColor: ColorManager.backgroundCenter,
+                          width: AppSize.s50,
+                        )
+                      : SizedBox(
+                          width: AppSize.s150,
+                          child: Text(
+                            fullName!,
+                            style: Theme.of(context).textTheme.titleLarge,
+                            maxLines: Constants.oneNum.toInt(),
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: Constants.trueBool,
+                          ),
+                        ),
                   SizedBox(width: getScreenWidth(context) * 0.05),
                   Container(
                     padding: const EdgeInsets.symmetric(
@@ -89,22 +99,36 @@ class ItemCard extends StatelessWidget {
                       color: statusColor,
                       borderRadius: RadiusSizes.radius15,
                     ),
-                    child: Text(
-                      status!,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
+                    child: isShimmer != Constants.nullValue &&
+                            isShimmer != Constants.falseBool
+                        ? const ShimmerText(
+                            baseColor: ColorManager.whiteNeutral,
+                            highlightColor: ColorManager.backgroundCenter,
+                            width: AppSize.s20,
+                          )
+                        : Text(
+                            status!,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
                   ),
                 ],
               ),
               SizedBox(
                 width: AppSize.s150,
-                child: Text(
-                  username!,
-                  style: Theme.of(context).textTheme.bodySmall,
-                  maxLines: Constants.oneNum.toInt(),
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: Constants.trueBool,
-                ),
+                child: isShimmer != Constants.nullValue &&
+                        isShimmer != Constants.falseBool
+                    ? const ShimmerText(
+                        baseColor: ColorManager.whiteNeutral,
+                        highlightColor: ColorManager.backgroundCenter,
+                        width: AppSize.s30,
+                      )
+                    : Text(
+                        username!,
+                        style: Theme.of(context).textTheme.bodySmall,
+                        maxLines: Constants.oneNum.toInt(),
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: Constants.trueBool,
+                      ),
               ),
               const SizedBox(height: AppSize.s10),
               Container(
@@ -119,17 +143,31 @@ class ItemCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppSize.s10),
-              Text(
-                balance!,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: ColorManager.greyNeutral,
+              isShimmer != Constants.nullValue &&
+                      isShimmer != Constants.falseBool
+                  ? const ShimmerText(
+                      baseColor: ColorManager.whiteNeutral,
+                      highlightColor: ColorManager.backgroundCenter,
+                      width: AppSize.s35,
+                    )
+                  : Text(
+                      balance!,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: ColorManager.greyNeutral,
+                          ),
                     ),
-              ),
               const SizedBox(height: AppSize.s10),
               SizedBox(
                 width: AppSize.s210,
-                child: Text(
+                child: isShimmer != Constants.nullValue &&
+                      isShimmer != Constants.falseBool
+                  ? const ShimmerText(
+                      baseColor: ColorManager.whiteNeutral,
+                      highlightColor: ColorManager.backgroundCenter,
+                      width: AppSize.s50,
+                    )
+                  :Text(
                   "Expires on $expireOn",
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.w500,
@@ -154,7 +192,14 @@ class ItemCard extends StatelessWidget {
                     width: AppSize.s1,
                   ),
                 ),
-                child: Text(
+                child: isShimmer != Constants.nullValue &&
+                      isShimmer != Constants.falseBool
+                  ? const ShimmerText(
+                      baseColor: ColorManager.whiteNeutral,
+                      highlightColor: ColorManager.backgroundCenter,
+                      width: AppSize.s20,
+                    )
+                  :Text(
                   profileName!,
                   style: Theme.of(context).textTheme.labelSmall,
                 ),

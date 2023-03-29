@@ -11,6 +11,7 @@ class AppStrings {
   static const expiredUsers = "Expired";
   static const disabledUser = "Disabled";
   static const onlineUsers = "Online";
+  static const shimmer = "shimmer";
 
   ///
   static const serInvalidUsernameError = "rsp_invalid_username_or_password";
