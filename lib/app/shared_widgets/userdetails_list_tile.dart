@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
@@ -51,7 +52,7 @@ class UserDetailsListTile extends StatelessWidget {
                         ),
                         const SizedBox(height: AppSize.s5),
                         Text(
-                          e.subtitle,
+                          e.subtitle.isNotEmpty ? e.subtitle : Constants.none,
                           style: StylesManager.getRegularStyle(
                             color: ColorManager.whiteNeutral,
                             fontSize: FontSize.sSubtitle1,

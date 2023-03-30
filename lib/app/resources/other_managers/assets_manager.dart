@@ -49,6 +49,27 @@ class IconsAssets {
   static const String search = "${ImagePaths.sharedIconsPath}search.svg";
 
   /// Specific Screen Icons
+  static const String editUserAction =
+      "${ImagePaths.specificScreenIconsPath}edit.svg";
+  static const String checkUserAction =
+      "${ImagePaths.specificScreenIconsPath}check.svg";
+  static const String tickcircleUserAction =
+      "${ImagePaths.specificScreenIconsPath}tickcircle.svg";
+  static const String maximizecircleUserAction =
+      "${ImagePaths.specificScreenIconsPath}maximizecircle.svg";
+
+  static const String profileUserAction =
+      "${ImagePaths.specificScreenIconsPath}profile.svg";
+
+  static const String arrowrightUserAction =
+      "${ImagePaths.specificScreenIconsPath}arrowright.svg";
+  static const String arrowleftUserAction =
+      "${ImagePaths.specificScreenIconsPath}arrowleft.svg";
+  static const String moneyUserAction =
+      "${ImagePaths.specificScreenIconsPath}money.svg";
+  static const String trashUserAction =
+      "${ImagePaths.specificScreenIconsPath}trash.svg";
+
   static const String activateUserService =
       "${ImagePaths.specificScreenIconsPath}activate_user_service.svg";
   static const String extendUserService =

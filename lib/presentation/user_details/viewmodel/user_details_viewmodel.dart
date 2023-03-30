@@ -4,6 +4,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
+import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/get_status_vals.dart';
@@ -99,7 +100,7 @@ class UserDetailsViewModel extends BaseViewModel
         ),
         CardElement(
           AppStrings.userOverviewProfile,
-          userOverviewApi?.data?.profileName ?? Constants.emptyStr,
+          userOverviewApi?.data?.profileName ?? Constants.none,
           Constants.emptyStr,
         ),
         CardElement(
@@ -157,7 +158,7 @@ class UserDetailsViewModel extends BaseViewModel
         ),
       ];
 
-  List<String> userActions = [];
+  List<SingleUserAction> userActions = [];
   @override
   void start() {}
 
@@ -221,31 +222,76 @@ class UserDetailsViewModel extends BaseViewModel
   void _getPermissionsList(List<String> permissions) {
     // for (var singlePerm in permissions) {
     if (permissions.contains(AppStrings.userPermissionEdit)) {
-      userActions.add(AppStrings.userActionEdit);
+      userActions.add(
+        SingleUserAction(
+          AppStrings.userActionEdit,
+          IconsAssets.editUserAction,
+        ),
+      );
     }
     if (permissions.contains(AppStrings.userPermissionRename)) {
-      userActions.add(AppStrings.userActionRename);
+      userActions.add(
+        SingleUserAction(
+          AppStrings.userActionRename,
+          IconsAssets.checkUserAction,
+        ),
+      );
     }
     if (permissions.contains(AppStrings.userPermissionActivate)) {
-      userActions.add(AppStrings.userActionActivate);
+      userActions.add(
+        SingleUserAction(
+          AppStrings.userActionActivate,
+          IconsAssets.tickcircleUserAction,
+        ),
+      );
     }
     if (permissions.contains(AppStrings.userPermissionExtend)) {
-      userActions.add(AppStrings.userActionExtend);
+      userActions.add(
+        SingleUserAction(
+          AppStrings.userActionExtend,
+          IconsAssets.maximizecircleUserAction,
+        ),
+      );
     }
     if (permissions.contains(AppStrings.userPermissionChangeProfile)) {
-      userActions.add(AppStrings.userActionChangeProfile);
+      userActions.add(
+        SingleUserAction(
+          AppStrings.userActionChangeProfile,
+          IconsAssets.profileUserAction,
+        ),
+      );
     }
     if (permissions.contains(AppStrings.userPermissionDeposit)) {
-      userActions.add(AppStrings.userActionDeposit);
+      userActions.add(
+        SingleUserAction(
+          AppStrings.userActionDeposit,
+          IconsAssets.arrowrightUserAction,
+        ),
+      );
     }
     if (permissions.contains(AppStrings.userPermissionWithdrawal)) {
-      userActions.add(AppStrings.userActionWithdrawal);
+      userActions.add(
+        SingleUserAction(
+          AppStrings.userActionWithdrawal,
+          IconsAssets.arrowleftUserAction,
+        ),
+      );
     }
     if (permissions.contains(AppStrings.userPermissionPay)) {
-      userActions.add(AppStrings.userActionPay);
+      userActions.add(
+        SingleUserAction(
+          AppStrings.userActionPay,
+          IconsAssets.moneyUserAction,
+        ),
+      );
     }
     if (permissions.contains(AppStrings.userPermissionDelete)) {
-      userActions.add(AppStrings.userActionDelete);
+      userActions.add(
+        SingleUserAction(
+          AppStrings.userActionDelete,
+          IconsAssets.trashUserAction,
+        ),
+      );
     }
   }
 
@@ -607,4 +653,13 @@ class UserDetailsViewModel extends BaseViewModel
       },
     );
   }
+}
+
+class SingleUserAction {
+  final String? text;
+  final String? icon;
+  SingleUserAction(
+    this.text,
+    this.icon,
+  );
 }

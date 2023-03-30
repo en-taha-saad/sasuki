@@ -11,6 +11,7 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/get_status_vals.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
@@ -95,26 +96,129 @@ class _UserDetailsViewState extends State<UserDetailsView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      child: SvgPicture.asset(IconsAssets.back),
-                      onTap: () => Nav.popRoute(context),
-                    ),
-                    Text(
-                      AppStrings.userOverviewTitle,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    InkWell(
-                      child: SvgPicture.asset(IconsAssets.actions),
-                      onTap: () {
-                        // TODO : Add code for actions
+                AppBar(
+                  elevation: AppSize.s0,
+                  backgroundColor: Colors.transparent,
+                  centerTitle: Constants.trueBool,
+                  leadingWidth: AppSize.s10,
+                  titleTextStyle: Theme.of(context).textTheme.headlineMedium,
+                  leading: InkWell(
+                    child: SvgPicture.asset(IconsAssets.back),
+                    onTap: () => Nav.popRoute(context),
+                  ),
+                  title: Text(
+                    AppStrings.userOverviewTitle,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  actions: [
+                    PopupMenuButton<SingleUserAction>(
+                      onSelected: (SingleUserAction choice) =>
+                          _openActions(choice, context),
+                      color: ColorManager.secondary,
+                      elevation: Constants.zeroDouble,
+                      icon: Container(
+                        margin: const EdgeInsets.only(left: AppMargin.m20),
+                        child: SvgPicture.asset(
+                          IconsAssets.actions,
+                          theme: const SvgTheme(
+                            currentColor: ColorManager.whiteNeutral,
+                          ),
+                        ),
+                      ),
+                      enabled: Constants.trueBool,
+                      surfaceTintColor: ColorManager.primaryshade3,
+                      padding: const EdgeInsets.all(AppPadding.p10),
+                      splashRadius: AppSize.s20,
+                      position: PopupMenuPosition.over,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: RadiusSizes.radius12,
+                      ),
+                      itemBuilder: (BuildContext context) {
+                        return _viewModel.userActions.map(
+                          (SingleUserAction choice) {
+                            return PopupMenuItem<SingleUserAction>(
+                              value: choice,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: AppPadding.p5,
+                                horizontal: AppPadding.p10,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    choice.text!,
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  SvgPicture.asset(
+                                    choice.icon!,
+                                    height: AppSize.s20,
+                                    width: AppSize.s20,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ).toList();
                       },
                     ),
                   ],
                 ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     // InkWell(
+                //     //   child: SvgPicture.asset(IconsAssets.actions),
+                //     //   onTap: () {
+                //     //     // TODO : Add code for actions
+                //     //     final RenderBox appBar =
+                //     //         context.findRenderObject() as RenderBox;
+                //     //     final RenderBox overlay = Overlay.of(context)
+                //     //         .context
+                //     //         .findRenderObject() as RenderBox;
+                //     //     final Offset overlayTopRight = Offset(
+                //     //       overlay.size.width,
+                //     //       kToolbarHeight,
+                //     //     );
+                //     //     final Offset appBarTopRight =
+                //     //         appBar.localToGlobal(overlayTopRight);
+                //     //     final Rect rect = Rect.fromLTWH(
+                //     //       appBarTopRight.dx - kToolbarHeight,
+                //     //       appBarTopRight.dy + appBar.size.height,
+                //     //       0,
+                //     //       0,
+                //     //     );
+                //     //     showMenu(
+                //     //       context: context,
+                //     //       position: RelativeRect.fromLTRB(
+                //     //         rect.right,
+                //     //         rect.top,
+                //     //         rect.right + 1,
+                //     //         rect.top + 1,
+                //     //       ),
+                //     //       items: [
+                //     //         const PopupMenuItem(
+                //     //           value: 1,
+                //     //           child: Text('Option 1'),
+                //     //         ),
+                //     //         const PopupMenuItem(
+                //     //           value: 2,
+                //     //           child: Text('Option 2'),
+                //     //         ),
+                //     //         const PopupMenuItem(
+                //     //           value: 3,
+                //     //           child: Text('Option 3'),
+                //     //         ),
+                //     //       ],
+                //     //     ).then((value) {
+                //     //       // Handle the selected item here
+                //     //     });
+                //     //   },
+                //     // ),
+                //   ],
+                // ),
                 const SizedBox(height: AppSize.s20),
                 Container(
                   padding: const EdgeInsets.symmetric(
@@ -227,122 +331,82 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             context,
           ),
           UserDetailsListTile(
-                list: _viewModel.listOfUserInforms(userOverviewApiVar),
-              ),
+            list: _viewModel.listOfUserInforms(userOverviewApiVar),
+          ),
           getCardTitle(
             IconsAssets.userServiceInformation,
             AppStrings.userOverviewServiceInformation,
             context,
           ),
           UserDetailsListTile(
-                list: _viewModel.listOfServiceInforms(userOverviewApiVar),
-              ),
+            list: _viewModel.listOfServiceInforms(userOverviewApiVar),
+          ),
         ],
       ),
     );
   }
 
-  // Widget _getScreenView0(context) {
-  //   return Scaffold(
-  //     appBar: CustomAppBar(
-  //       actions: [
-  //         PopupMenuButton<String>(
-  //           onSelected: (String choice) => _openActions(choice, context),
-  //           color: ColorManager.white,
-  //           elevation: Constants.zeroDouble,
-  //           enabled: Constants.trueVal,
-  //           icon: SvgPicture.asset(
-  //             ImageAssets.userDetailsActions,
-  //             color: ColorManager.white,
-  //           ),
-  //           padding: const EdgeInsets.all(AppPadding.p12),
-  //           position: PopupMenuPosition.under,
-  //           shape: RoundedRectangleBorder(
-  //             borderRadius: AppSize.radius10,
-  //           ),
-  //           itemBuilder: (BuildContext context) {
-  //             return _viewModel.userActions.map(
-  //               (String choice) {
-  //                 return PopupMenuItem<String>(
-  //                   value: choice,
-  //                   child: Text(
-  //                     choice,
-  //                     style: getRegularStyle(
-  //                       color: ColorManager.primary,
-  //                       fontSize: FontSize.s16,
-  //                     ),
-  //                   ),
-  //                 );
-  //               },
-  //             ).toList();
-  //           },
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // void _openActions(String selectedAction, context) async {
-  //   if (selectedAction == AppStrings.userActionDelete) {
-  //     _showDialog(
-  //       context,
-  //       _getDeleteDialogContent(context),
-  //       Colors.white,
-  //     );
-  //   }
-  //   if (selectedAction == AppStrings.userActionRename) {
-  //     _showDialog(
-  //       context,
-  //       _getRenameUsernameDialogContent(context),
-  //       ColorManager.backgroundCenter,
-  //     );
-  //   }
-  //   if (selectedAction == AppStrings.userActionChangeProfile) {
-  //     selectedprofile = Constants.nullValue;
-  //     _showDialog(
-  //       context,
-  //       _getChangeProfileDialogContent(context),
-  //       ColorManager.backgroundCenter,
-  //     );
-  //     if (profileList == Constants.nullValue ||
-  //         profileList?.length == Constants.zeroNum) {
-  //       await _viewModel.getProfileList();
-  //     }
-  //   }
-  //   if (selectedAction == AppStrings.userActionActivate) {
-  //     // TODO: implement activate user
-  //     // Nav.navTo(context, Routes.userActivationInformsRoute);
-  //   }
-  //   if (selectedAction == AppStrings.userActionEdit) {
-  //     // TODO: implement edit user
-  //     // Nav.navTo(context, Routes.editUserRoute);
-  //   }
-  //   if (selectedAction == AppStrings.userActionExtend) {
-  //     // TODO: implement extend user
-  //     // Nav.navTo(context, Routes.extendUserRoute);
-  //   }
-  //   if (selectedAction == AppStrings.userActionDeposit) {
-  //     _showDialog(
-  //       context,
-  //       _getDepositDialogContent(context),
-  //       ColorManager.backgroundCenter,
-  //     );
-  //   }
-  //   if (selectedAction == AppStrings.userActionWithdrawal) {
-  //     _showDialog(
-  //       context,
-  //       _getWithdrawDialogContent(context),
-  //       ColorManager.backgroundCenter,
-  //     );
-  //   }
-  //   if (selectedAction == AppStrings.userActionPay) {
-  //     _showDialog(
-  //       context,
-  //       _getPayDebtDialogContent(context),
-  //       ColorManager.backgroundCenter,
-  //     );
-  //   }
-  // }
+  void _openActions(SingleUserAction selectedAction, context) async {
+    // if (selectedAction == AppStrings.userActionDelete) {
+    //   _showDialog(
+    //     context,
+    //     _getDeleteDialogContent(context),
+    //     Colors.white,
+    //   );
+    // }
+    // if (selectedAction == AppStrings.userActionRename) {
+    //   _showDialog(
+    //     context,
+    //     _getRenameUsernameDialogContent(context),
+    //     ColorManager.backgroundCenter,
+    //   );
+    // }
+    // if (selectedAction == AppStrings.userActionChangeProfile) {
+    //   selectedprofile = Constants.nullValue;
+    //   _showDialog(
+    //     context,
+    //     _getChangeProfileDialogContent(context),
+    //     ColorManager.backgroundCenter,
+    //   );
+    //   if (profileList == Constants.nullValue ||
+    //       profileList?.length == Constants.zeroNum) {
+    //     await _viewModel.getProfileList();
+    //   }
+    // }
+    // if (selectedAction == AppStrings.userActionActivate) {
+    //   // TODO: implement activate user
+    //   // Nav.navTo(context, Routes.userActivationInformsRoute);
+    // }
+    // if (selectedAction == AppStrings.userActionEdit) {
+    //   // TODO: implement edit user
+    //   // Nav.navTo(context, Routes.editUserRoute);
+    // }
+    // if (selectedAction == AppStrings.userActionExtend) {
+    //   // TODO: implement extend user
+    //   // Nav.navTo(context, Routes.extendUserRoute);
+    // }
+    // if (selectedAction == AppStrings.userActionDeposit) {
+    //   _showDialog(
+    //     context,
+    //     _getDepositDialogContent(context),
+    //     ColorManager.backgroundCenter,
+    //   );
+    // }
+    // if (selectedAction == AppStrings.userActionWithdrawal) {
+    //   _showDialog(
+    //     context,
+    //     _getWithdrawDialogContent(context),
+    //     ColorManager.backgroundCenter,
+    //   );
+    // }
+    // if (selectedAction == AppStrings.userActionPay) {
+    //   _showDialog(
+    //     context,
+    //     _getPayDebtDialogContent(context),
+    //     ColorManager.backgroundCenter,
+    //   );
+    // }
+  }
 
   // Widget _getContentWidget() {
   //   return SingleChildScrollView(
@@ -962,4 +1026,58 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   //     ),
   //   );
   // }
+}
+
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            onPressed: () {
+              //*get the render box from the context
+              final RenderBox renderBox =
+                  context.findRenderObject() as RenderBox;
+              //*get the global position, from the widget local position
+              final offset = renderBox.localToGlobal(Offset.zero);
+
+              //*calculate the start point in this case, below the button
+              final left = offset.dx;
+              final top = offset.dy + renderBox.size.height;
+              //*The right does not indicates the width
+              final right = left + renderBox.size.width;
+
+              showMenu(
+                context: context,
+                position: const RelativeRect.fromLTRB(1.0, 0.0, 0.0, 1.0),
+                items: [
+                  const PopupMenuItem(
+                    value: 1,
+                    child: Text('Option 1'),
+                  ),
+                  const PopupMenuItem(
+                    value: 2,
+                    child: Text('Option 2'),
+                  ),
+                  const PopupMenuItem(
+                    value: 3,
+                    child: Text('Option 3'),
+                  ),
+                ],
+              ).then((value) {
+                // Handle the selected item here
+              });
+            },
+          ),
+        ],
+      ),
+      body: const Center(
+        child: Text('Hello World!'),
+      ),
+    );
+  }
 }
