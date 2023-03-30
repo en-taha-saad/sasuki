@@ -13,7 +13,9 @@ import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/get_status_vals.dart';
+import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/single_card_statistics.dart';
+import 'package:sasuki/app/shared_widgets/userdetails_list_tile.dart';
 import 'package:sasuki/domain/models/dashboard_card_element.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
 import 'package:sasuki/domain/models/user_details/user_overview_api.dart';
@@ -82,176 +84,165 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   }
 
   Widget _getScreenView(context) {
-    return Container();
-    // return SingleChildScrollView(
-    //   child: Column(
-    //     children: [
-    //       AppSize.statusBarHeight(context),
-    //       const SizedBox(height: AppSize.s20),
-    //       Container(
-    //         margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-    //         child: Column(
-    //           crossAxisAlignment: CrossAxisAlignment.start,
-    //           mainAxisAlignment: MainAxisAlignment.start,
-    //           children: [
-    //             Row(
-    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //               crossAxisAlignment: CrossAxisAlignment.center,
-    //               children: [
-    //                 InkWell(
-    //                   child: SvgPicture.asset(IconsAssets.back),
-    //                   onTap: () => Nav.popRoute(context),
-    //                 ),
-    //                 Text(
-    //                   AppStrings.userOverviewTitle,
-    //                   style: Theme.of(context).textTheme.headlineMedium,
-    //                 ),
-    //                 InkWell(
-    //                   child: SvgPicture.asset(IconsAssets.actions),
-    //                   onTap: () {
-    //                     // TODO : Add code for actions
-    //                   },
-    //                 ),
-    //               ],
-    //             ),
-    //             const SizedBox(height: AppSize.s20),
-    //             Container(
-    //               padding: const EdgeInsets.symmetric(
-    //                 vertical: AppSize.s15,
-    //                 horizontal: AppSize.s20,
-    //               ),
-    //               height: AppSize.s72,
-    //               decoration: BoxDecoration(
-    //                 color: ColorManager.primaryshade1,
-    //                 borderRadius: BorderRadius.circular(AppSize.s12),
-    //               ),
-    //               child: Row(
-    //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //                 children: [
-    //                   Column(
-    //                     crossAxisAlignment: CrossAxisAlignment.start,
-    //                     children: [
-    //                       Text(
-    //                         AppStrings.userOverviewStatus,
-    //                         style: Theme.of(context).textTheme.titleLarge,
-    //                       ),
-    //                       Row(
-    //                         children: [
-    //                           Container(
-    //                             width: AppSize.s8,
-    //                             height: AppSize.s8,
-    //                             margin: const EdgeInsets.only(
-    //                               right: AppSize.s5,
-    //                             ),
-    //                             decoration: BoxDecoration(
-    //                               color: getStatusColor(
-    //                                 getStatusString(
-    //                                     userOverviewApiVar?.data?.status),
-    //                               ),
-    //                               shape: BoxShape.circle,
-    //                             ),
-    //                           ),
-    //                           Text(
-    //                             getStatusString(
-    //                                 userOverviewApiVar?.data?.status),
-    //                             style: Theme.of(context).textTheme.labelSmall,
-    //                           ),
-    //                         ],
-    //                       ),
-    //                     ],
-    //                   ),
-    //                   singleCardStatisticsInform(
-    //                     context,
-    //                     totalUsers,
-    //                     AppStrings.totalUsers,
-    //                   ),
-    //                   singleCardStatisticsInform(
-    //                     context,
-    //                     activeUsers,
-    //                     AppStrings.activeUsers,
-    //                   ),
-    //                 ],
-    //               ),
-    //             ),
-    //             const SizedBox(height: AppSize.s15),
-    //           ],
-    //         ),
-    //       ),
-    //       _getUsersList(),
-    //     ],
-    //   ),
-    // );
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          AppSize.statusBarHeight(context),
+          const SizedBox(height: AppSize.s20),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      child: SvgPicture.asset(IconsAssets.back),
+                      onTap: () => Nav.popRoute(context),
+                    ),
+                    Text(
+                      AppStrings.userOverviewTitle,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    InkWell(
+                      child: SvgPicture.asset(IconsAssets.actions),
+                      onTap: () {
+                        // TODO : Add code for actions
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSize.s20),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppSize.s15,
+                    horizontal: AppSize.s20,
+                  ),
+                  height: AppSize.s72,
+                  decoration: BoxDecoration(
+                    color: ColorManager.primaryshade1,
+                    borderRadius: BorderRadius.circular(AppSize.s12),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppStrings.userOverviewStatus,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                width: AppSize.s8,
+                                height: AppSize.s8,
+                                margin: const EdgeInsets.only(
+                                  right: AppSize.s5,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: getStatusColor(
+                                    getStatusString(
+                                        userOverviewApiVar?.data?.status),
+                                  ),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              Text(
+                                getStatusString(
+                                    userOverviewApiVar?.data?.status),
+                                style: Theme.of(context).textTheme.labelSmall,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppStrings.userOverviewDailyTaffic,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          Text(
+                            "${userOverviewApiVar?.data?.remainingRxtx ?? Constants.dash}",
+                            style: Theme.of(context).textTheme.labelSmall,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppStrings.userOverviewUptime,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          Text(
+                            "${userOverviewApiVar?.data?.remainingUptime ?? Constants.dash}",
+                            style: Theme.of(context).textTheme.labelSmall,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: AppSize.s15),
+              ],
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: _getUserDetailsContent(),
+            decoration: const BoxDecoration(
+              color: ColorManager.secondary,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(AppSize.s35),
+                topRight: Radius.circular(AppSize.s35),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _getUserDetailsContent() {
+    return Container(
+      margin: const EdgeInsets.only(
+        right: AppMargin.m25,
+        left: AppMargin.m25,
+        bottom: AppMargin.m50,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          getCardTitle(
+            IconsAssets.information,
+            AppStrings.userOverviewUserInformation,
+            context,
+          ),
+          UserDetailsListTile(
+                list: _viewModel.listOfUserInforms(userOverviewApiVar),
+              ),
+          getCardTitle(
+            IconsAssets.userServiceInformation,
+            AppStrings.userOverviewServiceInformation,
+            context,
+          ),
+          UserDetailsListTile(
+                list: _viewModel.listOfServiceInforms(userOverviewApiVar),
+              ),
+        ],
+      ),
+    );
   }
 
   // Widget _getScreenView0(context) {
-  //   final appBarContent = Container(
-  //     margin: const EdgeInsets.only(
-  //       top: AppMargin.m8,
-  //     ),
-  //     padding: const EdgeInsets.only(
-  //       left: AppPadding.p12,
-  //       // bottom: AppPadding.p12,
-  //     ),
-  //     child: Column(
-  //       mainAxisAlignment: MainAxisAlignment.end,
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         // TODO
-  //         Row(
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: [
-  //             Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: [
-  //                 Text(
-  //                   AppStrings.userOverviewDailyTaffic,
-  //                   style: Theme.of(context).textTheme.titleMedium,
-  //                 ),
-  //                 Text(
-  //                   "${userOverviewApiVar?.data?.remainingRxtx ?? Constants.zeroNum}",
-  //                   style: Theme.of(context).textTheme.headlineMedium,
-  //                 ),
-  //               ],
-  //             ),
-  //             Container(
-  //               width: AppSize.s10,
-  //               height: AppSize.s46,
-  //               margin: const EdgeInsets.only(
-  //                 left: AppMargin.m22,
-  //                 top: AppMargin.m4,
-  //                 bottom: AppMargin.m4,
-  //               ),
-  //               padding: const EdgeInsets.only(left: AppPadding.p12),
-  //               decoration: BoxDecoration(
-  //                 border: Border(
-  //                   left: BorderSide(
-  //                     color: ColorManager.whiteNeutral
-  //                         .withOpacity(AppOpacity.op70),
-  //                     width: AppSize.s2.toDouble(),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //             Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: [
-  //                 Text(
-  //                   AppStrings.userOverviewUptime,
-  //                   style: Theme.of(context).textTheme.titleMedium,
-  //                 ),
-  //                 Text(
-  //                   "${userOverviewApiVar?.data?.remainingUptime ?? Constants.zeroNum}",
-  //                   style: Theme.of(context).textTheme.headlineMedium,
-  //                 ),
-  //               ],
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
   //   return Scaffold(
   //     appBar: CustomAppBar(
   //       actions: [
@@ -288,7 +279,6 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   //         ),
   //       ],
   //     ),
-  //     body: _getContentWidget(),
   //   );
   // }
 

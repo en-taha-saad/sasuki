@@ -13,6 +13,7 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/dashboard_list_tile.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/dashboard/auth.dart';
@@ -213,9 +214,10 @@ class _DashboardViewState extends State<DashboardView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          _getCardTitle(
+          getCardTitle(
             IconsAssets.dashboardUserStatistics,
             AppStrings.dashboardUsersStatistics,
+            context,
           ),
           StreamBuilder<Dashboard>(
             stream: _viewModel.outputDashboardData,
@@ -225,9 +227,10 @@ class _DashboardViewState extends State<DashboardView> {
               );
             },
           ),
-          _getCardTitle(
+          getCardTitle(
             IconsAssets.dashboardSalesAndFinance,
             AppStrings.dashboardSalesFinance,
+                        context,
           ),
           StreamBuilder<Dashboard>(
             stream: _viewModel.outputDashboardData,
@@ -243,32 +246,4 @@ class _DashboardViewState extends State<DashboardView> {
     );
   }
 
-  Widget _getCardTitle(icon, title) {
-    return Column(
-      children: [
-        const SizedBox(height: AppSize.s35),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SvgPicture.asset(icon),
-            const SizedBox(width: AppSize.s15),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: ColorManager.greyNeutral,
-                  ),
-            ),
-          ],
-        ),
-        const SizedBox(height: AppSize.s10),
-        Divider(
-          color: ColorManager.greyNeutral.withOpacity(
-            AppSize.s0point25,
-          ),
-        ),
-        const SizedBox(height: AppSize.s15),
-      ],
-    );
-  }
 }

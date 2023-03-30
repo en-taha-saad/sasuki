@@ -26,6 +26,7 @@ import 'package:sasuki/domain/models/users_list/users_list.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/presentation/dashboard/viewmodel/dashboard_viewmodel.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
+import 'package:sasuki/presentation/user_details/viewmodel/user_details_viewmodel.dart';
 import 'package:sasuki/presentation/users_list/viewmodel/users_list_viewmodel.dart';
 
 class UsersListView extends StatefulWidget {
@@ -369,9 +370,9 @@ class _UsersListViewState extends State<UsersListView> {
               return InkWell(
                 onTap: () {
                   // TODO: Add code for user details
-                  // Nav.navTo(context, Routes.userDetailsRoute);
-                  // instance<UserDetailsViewModel>()
-                  //     .getUserApiOverview(usersListData.id);
+                  Nav.navTo(context, Routes.userDetailsRoute);
+                  instance<UserDetailsViewModel>()
+                      .getUserApiOverview(usersListData.id);
                 },
                 child: ItemCard(
                   fullName: usersListData.firstname.isNotEmpty

@@ -9,6 +9,7 @@ class Constants {
   static const String emptyStr = "";
   static const int twintyNum = 20;
   static const String dash = "-";
+  static const String none = "N/A";
   static const bool falseBool = false;
   static const bool trueBool = true;
   static const double oneNum = 1;

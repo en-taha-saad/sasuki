@@ -89,12 +89,12 @@ class UserDetailsViewModel extends BaseViewModel
   List<CardElement> listOfUserInforms(UserOverviewApi? userOverviewApi) => [
         CardElement(
           AppStrings.userOverviewusername,
-          userOverviewApi?.data?.username ?? Constants.emptyStr,
+          userOverviewApi?.data?.username ?? Constants.none,
           Constants.emptyStr,
         ),
         CardElement(
           AppStrings.userOverviewFullName,
-          "${userOverviewApi?.data?.firstname ?? Constants.emptyStr} ${userOverviewApi?.data?.lastname ?? Constants.emptyStr}",
+          "${userOverviewApi?.data?.firstname ?? Constants.none} ${userOverviewApi?.data?.lastname ?? Constants.emptyStr}",
           Constants.emptyStr,
         ),
         CardElement(
@@ -104,22 +104,22 @@ class UserDetailsViewModel extends BaseViewModel
         ),
         CardElement(
           AppStrings.userOverviewPassword,
-          userOverviewApi?.data?.password ?? Constants.emptyStr,
+          userOverviewApi?.data?.password ?? Constants.none,
           Constants.emptyStr,
         ),
         CardElement(
           AppStrings.userOverviewowner,
-          userOverviewApi?.data?.parentUsername ?? Constants.emptyStr,
+          userOverviewApi?.data?.parentUsername ?? Constants.none,
           Constants.emptyStr,
         ),
         CardElement(
           AppStrings.userOverviewExpirationDate,
-          userOverviewApi?.data?.expiration ?? Constants.emptyStr,
+          userOverviewApi?.data?.expiration ?? Constants.none,
           Constants.emptyStr,
         ),
         CardElement(
           AppStrings.userOverviewEmail,
-          userOverviewApi?.data?.email ?? Constants.emptyStr,
+          userOverviewApi?.data?.email ?? Constants.none,
           Constants.emptyStr,
         ),
       ];
@@ -152,7 +152,7 @@ class UserDetailsViewModel extends BaseViewModel
         ),
         CardElement(
           AppStrings.userOverviewLastLogin,
-          userOverviewApi?.data?.lastOnline ?? Constants.emptyStr,
+          userOverviewApi?.data?.lastOnline ?? Constants.none,
           Constants.emptyStr,
         ),
       ];
