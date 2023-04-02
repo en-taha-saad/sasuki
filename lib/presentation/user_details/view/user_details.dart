@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lottie/lottie.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
-import 'package:sasuki/app/resources/other_managers/opacity_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
-import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/get_status_vals.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
-import 'package:sasuki/app/shared_widgets/single_card_statistics.dart';
+import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
+import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
 import 'package:sasuki/app/shared_widgets/userdetails_list_tile.dart';
-import 'package:sasuki/domain/models/dashboard_card_element.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
 import 'package:sasuki/domain/models/user_details/user_overview_api.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
@@ -38,7 +35,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   List<ProfileData>? profileList;
   ProfileData? selectedprofile;
 
-  final TextEditingController _newUsernameController = TextEditingController();
+  TextEditingController _newUsernameController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
 
@@ -96,204 +93,9 @@ class _UserDetailsViewState extends State<UserDetailsView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppBar(
-                  elevation: AppSize.s0,
-                  backgroundColor: Colors.transparent,
-                  centerTitle: Constants.trueBool,
-                  leadingWidth: AppSize.s10,
-                  titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-                  leading: InkWell(
-                    child: SvgPicture.asset(IconsAssets.back),
-                    onTap: () => Nav.popRoute(context),
-                  ),
-                  title: Text(
-                    AppStrings.userOverviewTitle,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  actions: [
-                    PopupMenuButton<SingleUserAction>(
-                      onSelected: (SingleUserAction choice) =>
-                          _openActions(choice, context),
-                      color: ColorManager.secondary,
-                      elevation: Constants.zeroDouble,
-                      icon: Container(
-                        margin: const EdgeInsets.only(left: AppMargin.m20),
-                        child: SvgPicture.asset(
-                          IconsAssets.actions,
-                          theme: const SvgTheme(
-                            currentColor: ColorManager.whiteNeutral,
-                          ),
-                        ),
-                      ),
-                      enabled: Constants.trueBool,
-                      surfaceTintColor: ColorManager.primaryshade3,
-                      padding: const EdgeInsets.all(AppPadding.p10),
-                      splashRadius: AppSize.s20,
-                      position: PopupMenuPosition.over,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: RadiusSizes.radius12,
-                      ),
-                      itemBuilder: (BuildContext context) {
-                        return _viewModel.userActions.map(
-                          (SingleUserAction choice) {
-                            return PopupMenuItem<SingleUserAction>(
-                              value: choice,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: AppPadding.p5,
-                                horizontal: AppPadding.p10,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    choice.text!,
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                  SvgPicture.asset(
-                                    choice.icon!,
-                                    height: AppSize.s20,
-                                    width: AppSize.s20,
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ).toList();
-                      },
-                    ),
-                  ],
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                //   children: [
-                //     // InkWell(
-                //     //   child: SvgPicture.asset(IconsAssets.actions),
-                //     //   onTap: () {
-                //     //     // TODO : Add code for actions
-                //     //     final RenderBox appBar =
-                //     //         context.findRenderObject() as RenderBox;
-                //     //     final RenderBox overlay = Overlay.of(context)
-                //     //         .context
-                //     //         .findRenderObject() as RenderBox;
-                //     //     final Offset overlayTopRight = Offset(
-                //     //       overlay.size.width,
-                //     //       kToolbarHeight,
-                //     //     );
-                //     //     final Offset appBarTopRight =
-                //     //         appBar.localToGlobal(overlayTopRight);
-                //     //     final Rect rect = Rect.fromLTWH(
-                //     //       appBarTopRight.dx - kToolbarHeight,
-                //     //       appBarTopRight.dy + appBar.size.height,
-                //     //       0,
-                //     //       0,
-                //     //     );
-                //     //     showMenu(
-                //     //       context: context,
-                //     //       position: RelativeRect.fromLTRB(
-                //     //         rect.right,
-                //     //         rect.top,
-                //     //         rect.right + 1,
-                //     //         rect.top + 1,
-                //     //       ),
-                //     //       items: [
-                //     //         const PopupMenuItem(
-                //     //           value: 1,
-                //     //           child: Text('Option 1'),
-                //     //         ),
-                //     //         const PopupMenuItem(
-                //     //           value: 2,
-                //     //           child: Text('Option 2'),
-                //     //         ),
-                //     //         const PopupMenuItem(
-                //     //           value: 3,
-                //     //           child: Text('Option 3'),
-                //     //         ),
-                //     //       ],
-                //     //     ).then((value) {
-                //     //       // Handle the selected item here
-                //     //     });
-                //     //   },
-                //     // ),
-                //   ],
-                // ),
+                _getUserActions(context),
                 const SizedBox(height: AppSize.s20),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppSize.s15,
-                    horizontal: AppSize.s20,
-                  ),
-                  height: AppSize.s72,
-                  decoration: BoxDecoration(
-                    color: ColorManager.primaryshade1,
-                    borderRadius: BorderRadius.circular(AppSize.s12),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppStrings.userOverviewStatus,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: AppSize.s8,
-                                height: AppSize.s8,
-                                margin: const EdgeInsets.only(
-                                  right: AppSize.s5,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: getStatusColor(
-                                    getStatusString(
-                                        userOverviewApiVar?.data?.status),
-                                  ),
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                              Text(
-                                getStatusString(
-                                    userOverviewApiVar?.data?.status),
-                                style: Theme.of(context).textTheme.labelSmall,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppStrings.userOverviewDailyTaffic,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          Text(
-                            "${userOverviewApiVar?.data?.remainingRxtx ?? Constants.dash}",
-                            style: Theme.of(context).textTheme.labelSmall,
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppStrings.userOverviewUptime,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          Text(
-                            "${userOverviewApiVar?.data?.remainingUptime ?? Constants.dash}",
-                            style: Theme.of(context).textTheme.labelSmall,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                _getStatisticsCard(context),
                 const SizedBox(height: AppSize.s15),
               ],
             ),
@@ -308,6 +110,151 @@ class _UserDetailsViewState extends State<UserDetailsView> {
                 topRight: Radius.circular(AppSize.s35),
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  AppBar _getUserActions(context) {
+    return AppBar(
+      elevation: AppSize.s0,
+      backgroundColor: Colors.transparent,
+      centerTitle: Constants.trueBool,
+      leadingWidth: AppSize.s10,
+      titleTextStyle: Theme.of(context).textTheme.headlineMedium,
+      leading: InkWell(
+        child: SvgPicture.asset(IconsAssets.back),
+        onTap: () => Nav.popRoute(context),
+      ),
+      title: Text(
+        AppStrings.userOverviewTitle,
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+      actions: [
+        PopupMenuButton<SingleUserAction>(
+          onSelected: (SingleUserAction choice) =>
+              _openActions(choice, context),
+          color: ColorManager.secondary,
+          elevation: Constants.zeroDouble,
+          icon: Container(
+            margin: const EdgeInsets.only(left: AppMargin.m20),
+            child: SvgPicture.asset(
+              IconsAssets.actions,
+              theme: const SvgTheme(
+                currentColor: ColorManager.whiteNeutral,
+              ),
+            ),
+          ),
+          enabled: Constants.trueBool,
+          surfaceTintColor: ColorManager.primaryshade3,
+          padding: const EdgeInsets.all(AppPadding.p10),
+          splashRadius: AppSize.s20,
+          position: PopupMenuPosition.under,
+          shape: RoundedRectangleBorder(
+            borderRadius: RadiusSizes.radius12,
+          ),
+          itemBuilder: (BuildContext context) {
+            return _viewModel.userActions.map(
+              (SingleUserAction choice) {
+                return PopupMenuItem<SingleUserAction>(
+                  value: choice,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppPadding.p5,
+                    horizontal: AppPadding.p10,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        choice.text!,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      SvgPicture.asset(
+                        choice.icon!,
+                        height: AppSize.s20,
+                        width: AppSize.s20,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ).toList();
+          },
+        ),
+      ],
+    );
+  }
+
+  Container _getStatisticsCard(context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: AppSize.s15,
+        horizontal: AppSize.s20,
+      ),
+      height: AppSize.s72,
+      decoration: BoxDecoration(
+        color: ColorManager.primaryshade1,
+        borderRadius: BorderRadius.circular(AppSize.s12),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppStrings.userOverviewStatus,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              Row(
+                children: [
+                  Container(
+                    width: AppSize.s8,
+                    height: AppSize.s8,
+                    margin: const EdgeInsets.only(
+                      right: AppSize.s5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: getStatusColor(
+                        getStatusString(userOverviewApiVar?.data?.status),
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  Text(
+                    getStatusString(userOverviewApiVar?.data?.status),
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppStrings.userOverviewDailyTaffic,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              Text(
+                "${userOverviewApiVar?.data?.remainingRxtx ?? Constants.dash}",
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                AppStrings.userOverviewUptime,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              Text(
+                "${userOverviewApiVar?.data?.remainingUptime ?? Constants.dash}",
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ],
           ),
         ],
       ),
@@ -346,738 +293,432 @@ class _UserDetailsViewState extends State<UserDetailsView> {
     );
   }
 
-  void _openActions(SingleUserAction selectedAction, context) async {
-    // if (selectedAction == AppStrings.userActionDelete) {
-    //   _showDialog(
-    //     context,
-    //     _getDeleteDialogContent(context),
-    //     Colors.white,
-    //   );
-    // }
-    // if (selectedAction == AppStrings.userActionRename) {
-    //   _showDialog(
-    //     context,
-    //     _getRenameUsernameDialogContent(context),
-    //     ColorManager.backgroundCenter,
-    //   );
-    // }
-    // if (selectedAction == AppStrings.userActionChangeProfile) {
-    //   selectedprofile = Constants.nullValue;
-    //   _showDialog(
-    //     context,
-    //     _getChangeProfileDialogContent(context),
-    //     ColorManager.backgroundCenter,
-    //   );
-    //   if (profileList == Constants.nullValue ||
-    //       profileList?.length == Constants.zeroNum) {
-    //     await _viewModel.getProfileList();
-    //   }
-    // }
-    // if (selectedAction == AppStrings.userActionActivate) {
-    //   // TODO: implement activate user
-    //   // Nav.navTo(context, Routes.userActivationInformsRoute);
-    // }
-    // if (selectedAction == AppStrings.userActionEdit) {
-    //   // TODO: implement edit user
-    //   // Nav.navTo(context, Routes.editUserRoute);
-    // }
-    // if (selectedAction == AppStrings.userActionExtend) {
-    //   // TODO: implement extend user
-    //   // Nav.navTo(context, Routes.extendUserRoute);
-    // }
-    // if (selectedAction == AppStrings.userActionDeposit) {
-    //   _showDialog(
-    //     context,
-    //     _getDepositDialogContent(context),
-    //     ColorManager.backgroundCenter,
-    //   );
-    // }
-    // if (selectedAction == AppStrings.userActionWithdrawal) {
-    //   _showDialog(
-    //     context,
-    //     _getWithdrawDialogContent(context),
-    //     ColorManager.backgroundCenter,
-    //   );
-    // }
-    // if (selectedAction == AppStrings.userActionPay) {
-    //   _showDialog(
-    //     context,
-    //     _getPayDebtDialogContent(context),
-    //     ColorManager.backgroundCenter,
-    //   );
-    // }
+  _showDialog(BuildContext context, Widget? child) {
+    return showDialog(
+      context: context,
+      barrierColor: ColorManager.primaryshade1.withOpacity(AppSize.s0point4),
+      barrierDismissible: Constants.falseBool,
+      builder: (BuildContext context) {
+        return Dialog(
+          insetPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p15),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppPadding.p15,
+              vertical: AppPadding.p48,
+            ),
+            decoration: BoxDecoration(
+              color: ColorManager.secondary,
+              shape: BoxShape.rectangle,
+              borderRadius: RadiusSizes.radius35,
+            ),
+            child: child,
+          ),
+        );
+      },
+    );
   }
 
-  // Widget _getContentWidget() {
-  //   return SingleChildScrollView(
-  //     physics: const AlwaysScrollableScrollPhysics(),
-  //     child: Container(
-  //       color: ColorManager.black.withOpacity(AppOpacity.op30),
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         mainAxisSize: MainAxisSize.min,
-  //         children: [
-  //           const SizedBox(height: AppSize.s16),
-  //           _getSingleCard(
-  //             AppStrings.userOverviewUserInformation,
-  //             ImageAssets.userInformationIcon,
-  //             _viewModel.listOfUserInforms(userOverviewApiVar),
-  //           ),
-  //           const SizedBox(height: AppSize.s16),
-  //           _getSingleCard(
-  //             AppStrings.userOverviewServiceInformation,
-  //             ImageAssets.serviceInformationIcon,
-  //             _viewModel.listOfServiceInforms(userOverviewApiVar),
-  //           ),
-  //           const SizedBox(height: AppSize.s46),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Widget _getSingleCard(
-  //   String cardTitle,
-  //   String titleIcon,
-  //   List<CardElement> listOfCardElements,
-  // ) {
-  //   return Column(
-  //     mainAxisAlignment: MainAxisAlignment.start,
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     mainAxisSize: MainAxisSize.min,
-  //     children: [
-  //       Container(
-  //         margin: const EdgeInsets.symmetric(horizontal: AppMargin.m16),
-  //         child: Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //           children: [
-  //             Text(
-  //               cardTitle,
-  //               style: Theme.of(context).textTheme.titleMedium,
-  //             ),
-  //             SvgPicture.asset(
-  //               titleIcon,
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //       Container(
-  //         margin: const EdgeInsets.only(top: AppMargin.m16),
-  //         child: Column(
-  //           children: listOfCardElements
-  //               .map(
-  //                 (element) => ListTile(
-  //                   leading: SvgPicture.asset(
-  //                     element.icon,
-  //                     color: ColorManager.white.withOpacity(AppOpacity.op70),
-  //                     height: AppSize.s28,
-  //                     width: AppSize.s28,
-  //                   ),
-  //                   title: Text(
-  //                     element.title,
-  //                     style: Theme.of(context).textTheme.titleMedium,
-  //                   ),
-  //                   subtitle: Text(
-  //                     element.subtitle,
-  //                     style: Theme.of(context).textTheme.headlineMedium,
-  //                   ),
-  //                 ),
-  //               )
-  //               .toList(),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
-
-  // _showDialog(BuildContext context, Widget? child, Color color) {
-  //   return showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return Dialog(
-  //         insetPadding: const EdgeInsets.all(AppPadding.p16),
-  //         shape: RoundedRectangleBorder(borderRadius: AppSize.radius10),
-  //         elevation: AppSize.s1_5,
-  //         backgroundColor: Colors.transparent,
-  //         child: Container(
-  //           decoration: BoxDecoration(
-  //             color: color,
-  //             shape: BoxShape.rectangle,
-  //             borderRadius: AppSize.radius10,
-  //             boxShadow: const [BoxShadow(color: Colors.black26)],
-  //           ),
-  //           child: child,
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
-  // Widget _getDeleteDialogContent(BuildContext context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(AppPadding.p16),
-  //     child: Column(
-  //       mainAxisSize: MainAxisSize.min,
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         SizedBox(
-  //           height: AppSize.s100,
-  //           width: AppSize.s100,
-  //           child: Lottie.asset(JsonAssets.error),
-  //         ),
-  //         Text(
-  //           "${AppStrings.actionDeleteUserdialogTitle} ${userOverviewApiVar?.data?.username} ?",
-  //           textAlign: TextAlign.center,
-  //         ),
-  //         const SizedBox(height: AppSize.s16),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: [
-  //             ElevatedButton(
-  //               style: ElevatedButton.styleFrom(
-  //                 backgroundColor: ColorManager.primary,
-  //                 foregroundColor: ColorManager.white,
-  //                 textStyle: Theme.of(context).textTheme.titleMedium,
-  //               ),
-  //               onPressed: () => Nav.popRoute(context),
-  //               child: const Text(AppStrings.cancelButton),
-  //             ),
-  //             TextButton(
-  //               style: TextButton.styleFrom(
-  //                 foregroundColor: ColorManager.primary,
-  //               ),
-  //               onPressed: () {
-  //                 Nav.popRoute(context);
-  //                 _viewModel.deleteUser(context);
-  //               },
-  //               child: const Text(AppStrings.deleteButton),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _getRenameUsernameDialogContent(BuildContext context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(AppPadding.p16),
-  //     child: Column(
-  //       mainAxisSize: MainAxisSize.min,
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         Text(
-  //           AppStrings.usernameInputDialogtitle,
-  //           style: Theme.of(context).textTheme.headlineMedium,
-  //           textAlign: TextAlign.center,
-  //         ),
-  //         const SizedBox(height: AppSize.s20),
-  //         _getTextFieldInput(
-  //           AppStrings.usernameInputtitle,
-  //           _newUsernameController,
-  //           TextInputType.text,
-  //           Constants.trueVal,
-  //         ),
-  //         const SizedBox(height: AppSize.s16),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: [
-  //             TextButton(
-  //               style: TextButton.styleFrom(side: BorderSide.none),
-  //               onPressed: () => Nav.popRoute(context),
-  //               child: Text(
-  //                 AppStrings.cancelButton,
-  //                 style: Theme.of(context).textTheme.headlineSmall,
-  //               ),
-  //             ),
-  //             TextButton(
-  //               style: TextButton.styleFrom(side: BorderSide.none),
-  //               onPressed: () {
-  //                 if (_newUsernameController.text.isNotEmpty) {
-  //                   FocusScope.of(context).unfocus();
-  //                   Nav.popRoute(context);
-  //                   _viewModel.renameUsername(_newUsernameController.text);
-  //                 }
-  //               },
-  //               child: Text(
-  //                 AppStrings.userActionSubmitButton,
-  //                 style: Theme.of(context).textTheme.headlineMedium,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _getChangeProfileDialogContent(BuildContext context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(AppPadding.p16),
-  //     child: Column(
-  //       mainAxisSize: MainAxisSize.min,
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         Text(
-  //           AppStrings.profileInputDialogtitle,
-  //           style: Theme.of(context).textTheme.headlineMedium,
-  //           textAlign: TextAlign.center,
-  //         ),
-  //         const SizedBox(height: AppSize.s16),
-  //         SizedBox(
-  //           width: MediaQuery.of(context).size.width - AppSize.s20,
-  //           child: StreamBuilder<List<ProfileData>>(
-  //             stream: _viewModel.outputProfileList,
-  //             builder: (_, snapshot0) {
-  //               debugPrint("1@snapshot0.data: ${snapshot0.data}");
-  //               if (profileList == Constants.nullValue ||
-  //                   profileList?.length == Constants.zero) {
-  //                 debugPrint("1@profileList: $profileList");
-  //                 profileList = snapshot0.data;
-  //               }
-  //               debugPrint("2@profileList: $profileList");
-  //               // ignore: prefer_is_empty
-  //               return Container(
-  //                 margin: const EdgeInsets.only(top: AppMargin.m12),
-  //                 child: DropdownButtonFormField<ProfileData>(
-  //                   hint: Text(
-  //                     AppStrings.usersParentHint,
-  //                     style: getRegularStyle(
-  //                       color: ColorManager.white.withOpacity(
-  //                         AppOpacity.op60,
-  //                       ),
-  //                       fontSize: FontSize.s16,
-  //                     ),
-  //                   ),
-  //                   iconSize: AppSize.s36,
-  //                   menuMaxHeight: AppSize.s300,
-  //                   borderRadius: AppSize.radius10,
-  //                   value: selectedprofile,
-  //                   iconDisabledColor: ColorManager.white,
-  //                   decoration: InputDecoration(
-  //                     border: _filterTextFieldBorderProperties(),
-  //                     enabledBorder: _filterTextFieldBorderProperties(),
-  //                     focusedBorder: _filterTextFieldBorderProperties(),
-  //                     hintStyle: Theme.of(context).textTheme.titleMedium,
-  //                     hintText: AppStrings.usersParentHint,
-  //                     contentPadding: const EdgeInsets.symmetric(
-  //                       horizontal: AppPadding.p20,
-  //                     ),
-  //                     iconColor: ColorManager.white,
-  //                   ),
-  //                   iconEnabledColor: ColorManager.white,
-  //                   dropdownColor: ColorManager.white,
-  //                   elevation: AppSize.s0.toInt(),
-  //                   style: Theme.of(context).textTheme.titleMedium,
-  //                   selectedItemBuilder: (context) {
-  //                     return profileList
-  //                             ?.map(
-  //                               (e) => SizedBox(
-  //                                 width: AppSize.s250,
-  //                                 child: Text(
-  //                                   e.name,
-  //                                   style:
-  //                                       Theme.of(context).textTheme.titleMedium,
-  //                                   overflow: TextOverflow.fade,
-  //                                   textAlign: TextAlign.left,
-  //                                 ),
-  //                               ),
-  //                             )
-  //                             .toList() ??
-  //                         [];
-  //                   },
-  //                   onChanged: (singleProfileData) {
-  //                     selectedprofile = singleProfileData;
-  //                   },
-  //                   items: profileList?.map(
-  //                     (ProfileData value) {
-  //                       return DropdownMenuItem<ProfileData>(
-  //                         value: value,
-  //                         child: Center(
-  //                           child: Column(
-  //                             children: [
-  //                               Card(
-  //                                 color: ColorManager.transparent,
-  //                                 elevation: AppSize.s0,
-  //                                 child: Text(
-  //                                   value.name,
-  //                                   style:
-  //                                       Theme.of(context).textTheme.bodyMedium,
-  //                                   textAlign: TextAlign.center,
-  //                                 ),
-  //                               ),
-  //                               if (profileList?.last != value)
-  //                                 Divider(
-  //                                   color: ColorManager.primary.withOpacity(
-  //                                     AppOpacity.op70,
-  //                                   ),
-  //                                   height: AppSize.s1,
-  //                                 ),
-  //                             ],
-  //                           ),
-  //                         ),
-  //                       );
-  //                     },
-  //                   ).toList(),
-  //                 ),
-  //               );
-  //             },
-  //           ),
-  //         ),
-  //         const SizedBox(height: AppSize.s16),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: [
-  //             TextButton(
-  //               style: TextButton.styleFrom(side: BorderSide.none),
-  //               onPressed: () => Nav.popRoute(context),
-  //               child: Text(
-  //                 AppStrings.cancelButton,
-  //                 style: Theme.of(context).textTheme.headlineSmall,
-  //               ),
-  //             ),
-  //             TextButton(
-  //               style: TextButton.styleFrom(side: BorderSide.none),
-  //               onPressed: () {
-  //                 if (selectedprofile != Constants.nullValue) {
-  //                   Nav.popRoute(context);
-  //                   _viewModel.changeProfile(selectedprofile?.id);
-  //                 }
-  //               },
-  //               child: Text(
-  //                 AppStrings.userActionSubmitButton,
-  //                 style: Theme.of(context).textTheme.headlineMedium,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _getDepositDialogContent(BuildContext context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(AppPadding.p16),
-  //     child: Column(
-  //       mainAxisSize: MainAxisSize.min,
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         Text(
-  //           AppStrings.depositAmountInputDialogtitle,
-  //           style: Theme.of(context).textTheme.headlineMedium,
-  //           textAlign: TextAlign.center,
-  //         ),
-  //         const SizedBox(height: AppSize.s20),
-  //         _getTextFieldInput(
-  //           AppStrings.amount,
-  //           _amountController,
-  //           TextInputType.number,
-  //           Constants.trueVal,
-  //         ),
-  //         const SizedBox(height: AppSize.s16),
-  //         _getTextFieldInput(AppStrings.comment, _commentController),
-  //         const SizedBox(height: AppSize.s16),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: [
-  //             TextButton(
-  //               style: TextButton.styleFrom(side: BorderSide.none),
-  //               onPressed: () => Nav.popRoute(context),
-  //               child: Text(
-  //                 AppStrings.cancelButton,
-  //                 style: Theme.of(context).textTheme.headlineSmall,
-  //               ),
-  //             ),
-  //             TextButton(
-  //               style: TextButton.styleFrom(side: BorderSide.none),
-  //               onPressed: () {
-  //                 if (_amountController.text.isNotEmpty) {
-  //                   FocusScope.of(context).unfocus();
-  //                   Nav.popRoute(context);
-  //                   _viewModel.depositAction(
-  //                     _amountController.text,
-  //                     _commentController.text,
-  //                   );
-  //                   _amountController.clear();
-  //                   _commentController.clear();
-  //                 }
-  //               },
-  //               child: Text(
-  //                 AppStrings.userActionSubmitButton,
-  //                 style: Theme.of(context).textTheme.headlineMedium,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _getWithdrawDialogContent(BuildContext context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(AppPadding.p16),
-  //     child: Column(
-  //       mainAxisSize: MainAxisSize.min,
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         Text(
-  //           AppStrings.deductAmountInputDialogtitle,
-  //           style: Theme.of(context).textTheme.headlineMedium,
-  //           textAlign: TextAlign.center,
-  //         ),
-  //         const SizedBox(height: AppSize.s20),
-  //         _getTextFieldInput(
-  //           AppStrings.amount,
-  //           _amountController,
-  //           TextInputType.number,
-  //           Constants.trueVal,
-  //         ),
-  //         const SizedBox(height: AppSize.s16),
-  //         _getTextFieldInput(AppStrings.comment, _commentController),
-  //         const SizedBox(height: AppSize.s16),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: [
-  //             TextButton(
-  //               style: TextButton.styleFrom(side: BorderSide.none),
-  //               onPressed: () => Nav.popRoute(context),
-  //               child: Text(
-  //                 AppStrings.cancelButton,
-  //                 style: Theme.of(context).textTheme.headlineSmall,
-  //               ),
-  //             ),
-  //             TextButton(
-  //               style: TextButton.styleFrom(side: BorderSide.none),
-  //               onPressed: () {
-  //                 if (_amountController.text.isNotEmpty) {
-  //                   FocusScope.of(context).unfocus();
-  //                   Nav.popRoute(context);
-  //                   _viewModel.withdrawAction(
-  //                     _amountController.text,
-  //                     _commentController.text,
-  //                   );
-  //                   _amountController.clear();
-  //                   _commentController.clear();
-  //                 }
-  //               },
-  //               child: Text(
-  //                 AppStrings.userActionSubmitButton,
-  //                 style: Theme.of(context).textTheme.headlineMedium,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // _filterTextFieldBorderProperties() {
-  //   return OutlineInputBorder(
-  //     borderRadius: AppSize.radius10,
-  //     borderSide: BorderSide(
-  //       color: ColorManager.white,
-  //       width: AppSize.s1_5,
-  //     ),
-  //   );
-  // }
-
-  // Widget _getTextFieldInput(hintText, controller, [type, bool? autoFocus]) {
-  //   return SizedBox(
-  //     width: AppSize.s265,
-  //     height: AppSize.s50,
-  //     child: Directionality(
-  //       textDirection: TextDirection.ltr,
-  //       child: TextFormField(
-  //         controller: controller,
-  //         autofocus: autoFocus ?? Constants.falseVal,
-  //         textDirection: TextDirection.rtl,
-  //         textAlign: TextAlign.left,
-  //         keyboardType: type ?? TextInputType.text,
-  //         onEditingComplete: () {
-  //           FocusScope.of(context).unfocus();
-  //         },
-  //         onFieldSubmitted: (val) {
-  //           FocusScope.of(context).unfocus();
-  //           if (hintText == AppStrings.usernameInputtitle) {
-  //             if (val.isNotEmpty) {
-  //               Nav.popRoute(context);
-  //               _viewModel.renameUsername(_newUsernameController.text);
-  //               _newUsernameController.clear();
-  //             }
-  //           }
-  //         },
-  //         style: Theme.of(context).textTheme.titleLarge,
-  //         decoration: InputDecoration(
-  //           labelStyle: getMediumStyle(
-  //             color: ColorManager.white.withOpacity(AppOpacity.op40),
-  //             fontSize: FontSize.s16,
-  //           ),
-  //           contentPadding: const EdgeInsets.symmetric(
-  //             horizontal: AppPadding.p12,
-  //             vertical: AppPadding.p12,
-  //           ),
-  //           labelText: hintText,
-  //           hintTextDirection: TextDirection.ltr,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Widget? _getPayDebtDialogContent(context) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(AppPadding.p16),
-  //     child: Column(
-  //       mainAxisSize: MainAxisSize.min,
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       children: [
-  //         Text(
-  //           AppStrings.payDebtInputDialogtitle,
-  //           style: Theme.of(context).textTheme.headlineMedium,
-  //           textAlign: TextAlign.center,
-  //         ),
-  //         const SizedBox(height: AppSize.s20),
-  //         _getTextFieldInput(
-  //           AppStrings.amount,
-  //           _amountController,
-  //           TextInputType.number,
-  //           Constants.trueVal,
-  //         ),
-  //         const SizedBox(height: AppSize.s16),
-  //         _getTextFieldInput(AppStrings.comment, _commentController),
-  //         const SizedBox(height: AppSize.s16),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           children: [
-  //             Text(
-  //               AppStrings.totaldebtDialogText,
-  //               style: Theme.of(context).textTheme.headlineMedium,
-  //               textAlign: TextAlign.center,
-  //             ),
-  //             Text(
-  //               "${_viewModel.paydebtInforms?.data?.total}",
-  //               style: Theme.of(context).textTheme.headlineMedium,
-  //               textAlign: TextAlign.center,
-  //             ),
-  //           ],
-  //         ),
-  //         const SizedBox(height: AppSize.s16),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: [
-  //             TextButton(
-  //               style: TextButton.styleFrom(side: BorderSide.none),
-  //               onPressed: () => Nav.popRoute(context),
-  //               child: Text(
-  //                 AppStrings.cancelButton,
-  //                 style: Theme.of(context).textTheme.headlineSmall,
-  //               ),
-  //             ),
-  //             TextButton(
-  //               style: TextButton.styleFrom(side: BorderSide.none),
-  //               onPressed: () {
-  //                 if (_amountController.text.isNotEmpty) {
-  //                   if (_viewModel.paydebtInforms?.data?.total !=
-  //                           Constants.nullValue &&
-  //                       // ignore: unrelated_type_equality_checks
-  //                       _viewModel.paydebtInforms?.data?.total !=
-  //                           Constants.zero) {
-  //                     FocusScope.of(context).unfocus();
-  //                     Nav.popRoute(context);
-  //                     _viewModel.payDebtAction(
-  //                       _amountController.text,
-  //                       _commentController.text,
-  //                     );
-  //                     _amountController.clear();
-  //                     _commentController.clear();
-  //                   }
-  //                 }
-  //               },
-  //               child: Text(
-  //                 AppStrings.userActionSubmitButton,
-  //                 style: _viewModel.paydebtInforms?.data?.total !=
-  //                             Constants.nullValue &&
-  //                         // ignore: unrelated_type_equality_checks
-  //                         _viewModel.paydebtInforms?.data?.total !=
-  //                             Constants.zero
-  //                     ? Theme.of(context).textTheme.headlineMedium
-  //                     : Theme.of(context).textTheme.headlineSmall,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-}
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {
-              //*get the render box from the context
-              final RenderBox renderBox =
-                  context.findRenderObject() as RenderBox;
-              //*get the global position, from the widget local position
-              final offset = renderBox.localToGlobal(Offset.zero);
-
-              //*calculate the start point in this case, below the button
-              final left = offset.dx;
-              final top = offset.dy + renderBox.size.height;
-              //*The right does not indicates the width
-              final right = left + renderBox.size.width;
-
-              showMenu(
-                context: context,
-                position: const RelativeRect.fromLTRB(1.0, 0.0, 0.0, 1.0),
-                items: [
-                  const PopupMenuItem(
-                    value: 1,
-                    child: Text('Option 1'),
-                  ),
-                  const PopupMenuItem(
-                    value: 2,
-                    child: Text('Option 2'),
-                  ),
-                  const PopupMenuItem(
-                    value: 3,
-                    child: Text('Option 3'),
-                  ),
-                ],
-              ).then((value) {
-                // Handle the selected item here
-              });
-            },
+  Widget _getDialogContent(
+    BuildContext context,
+    Widget child,
+    String buttonText,
+    String dialogTitle,
+    String dialogTitleIcon,
+    Function()? onPressed,
+  ) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m25),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(right: AppMargin.m10),
+                child: SvgPicture.asset(
+                  dialogTitleIcon,
+                  height: AppSize.s20,
+                  width: AppSize.s20,
+                ),
+              ),
+              Text(
+                dialogTitle,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
           ),
-        ],
+        ),
+        child,
+        Container(
+          margin: const EdgeInsets.only(top: AppMargin.m40),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () => Nav.popRoute(context),
+                child: Text(
+                  AppStrings.cancelButton,
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+              ),
+              ElevatedButtonWidget(
+                name: buttonText,
+                onPressed: onPressed,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _getTextFieldInput(
+    controller,
+    Function(String)? onFieldSubmitted,
+    String textFieldLabel, [
+    bool? autoFocus,
+    TextInputType? keyboardType,
+  ]) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m10),
+          child: Text(
+            textFieldLabel,
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+        ),
+        TextFormField(
+          controller: controller,
+          keyboardType: keyboardType ?? TextInputType.text,
+          autofocus: autoFocus ?? Constants.falseBool,
+          onEditingComplete: () => FocusScope.of(context).unfocus(),
+          onFieldSubmitted: onFieldSubmitted,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      ],
+    );
+  }
+
+  void _openActions(SingleUserAction selectedAction, context) async {
+    switch (selectedAction.text) {
+      case AppStrings.userActionDelete:
+        _makeDeleteAction(context);
+        break;
+      case AppStrings.userActionRename:
+        _makeRenameAction(context);
+        break;
+      case AppStrings.userActionChangeProfile:
+        await _makeChangingProfileAction(context);
+        break;
+      case AppStrings.userActionDeposit:
+        _makeDepositAction(context);
+        break;
+      case AppStrings.userActionWithdrawal:
+        _makeWithdrawalAction(context);
+        break;
+      case AppStrings.userActionPay:
+        _makePayAction(context);
+        break;
+      case AppStrings.userActionActivate:
+        // TODO: implement activate user
+        // Nav.navTo(context, Routes.userActivationInformsRoute);
+        break;
+      case AppStrings.userActionEdit:
+        // TODO: implement edit user
+        // Nav.navTo(context, Routes.editUserRoute);
+        break;
+      case AppStrings.userActionExtend:
+        // TODO: implement extend user
+        // Nav.navTo(context, Routes.extendUserRoute);
+        break;
+    }
+  }
+
+  void _makeRenameAction(context) {
+    _newUsernameController = TextEditingController(
+      text: userOverviewApiVar?.data?.username,
+    );
+    _showDialog(
+      context,
+      _getDialogContent(
+        context,
+        _getRenameUsernameDialogContent(),
+        AppStrings.userActionRename,
+        AppStrings.userActionRenameDialogTitle,
+        IconsAssets.checkUserAction,
+        () {
+          if (_newUsernameController.text.isNotEmpty) {
+            FocusScope.of(context).unfocus();
+            Nav.popRoute(context);
+            _viewModel.renameUsername(_newUsernameController.text);
+          }
+        },
       ),
-      body: const Center(
-        child: Text('Hello World!'),
+    );
+  }
+
+  Widget _getRenameUsernameDialogContent() {
+    return _getTextFieldInput(
+      _newUsernameController,
+      (val) {
+        FocusScope.of(context).unfocus();
+        if (val.isNotEmpty) {
+          Nav.popRoute(context);
+          _viewModel.renameUsername(_newUsernameController.text);
+          _newUsernameController.clear();
+        }
+      },
+      AppStrings.usernameInputtitle,
+      Constants.trueBool,
+    );
+  }
+
+  Future<void> _makeChangingProfileAction(context) async {
+    selectedprofile = Constants.nullValue;
+    _showDialog(
+      context,
+      _getDialogContent(
+        context,
+        _getChangeProfileDialogContent(),
+        AppStrings.userActionChangeProfile,
+        AppStrings.userActionProfileDialogTitle,
+        IconsAssets.profileUserAction,
+        () {
+          if (selectedprofile != Constants.nullValue) {
+            Nav.popRoute(context);
+            _viewModel.changeProfile(selectedprofile?.id);
+          }
+        },
       ),
+    );
+    if (profileList == Constants.nullValue ||
+        profileList?.length == Constants.zeroNum) {
+      await _viewModel.getProfileList();
+    }
+  }
+
+  Widget _getChangeProfileDialogContent() {
+    return StreamBuilder<List<ProfileData>>(
+      stream: _viewModel.outputProfileList,
+      builder: (context, snapshot0) {
+        if (profileList == Constants.nullValue ||
+            profileList?.length == Constants.zeroNum) {
+          profileList = snapshot0.data;
+        }
+        return DropDownComponent<ProfileData>(
+          isThisServersDropdown: Constants.falseBool,
+          hintStr: AppStrings.changeProfileHint,
+          items: profileList ?? [],
+          doOtherThings: (val) {
+            selectedprofile = val;
+          },
+          displayFn: (item) => (item as ProfileData).name,
+        );
+      },
+    );
+  }
+
+  void _makeDeleteAction(context) {
+    _showDialog(
+      context,
+      _getDialogContent(
+        context,
+        _getDeleteDialogContent(),
+        AppStrings.userActionDelete,
+        AppStrings.userActionDeleteDialogTitle,
+        IconsAssets.trashUserAction,
+        () {
+          Nav.popRoute(context);
+          _viewModel.deleteUser(context);
+        },
+      ),
+    );
+  }
+
+  Widget _getDeleteDialogContent() {
+    return Text(
+      "${AppStrings.actionDeleteUserdialogTitle} ${userOverviewApiVar?.data?.username}?",
+      style: Theme.of(context).textTheme.titleMedium,
+    );
+  }
+
+  void _makeDepositAction(context) {
+    _showDialog(
+      context,
+      _getDialogContent(
+        context,
+        _getDepositDialogContent(),
+        AppStrings.userActionDeposit,
+        AppStrings.depositAmountInputDialogtitle,
+        IconsAssets.arrowrightUserAction,
+        () {
+          if (_amountController.text.isNotEmpty) {
+            FocusScope.of(context).unfocus();
+            Nav.popRoute(context);
+            _viewModel.withdrawAction(
+              _amountController.text,
+              _commentController.text,
+            );
+            _amountController.clear();
+            _commentController.clear();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _getDepositDialogContent() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m25),
+          child: _getTextFieldInput(
+            _amountController,
+            (val) {},
+            AppStrings.amountInputtitle,
+            Constants.trueBool,
+            TextInputType.number,
+          ),
+        ),
+        _getTextFieldInput(
+          _commentController,
+          (val) {},
+          AppStrings.commentInputtitle,
+          Constants.falseBool,
+        )
+      ],
+    );
+  }
+
+  void _makeWithdrawalAction(context) {
+    _showDialog(
+      context,
+      _getDialogContent(
+        context,
+        _getWithdrawDialogContent(),
+        AppStrings.userActionWithdrawal,
+        AppStrings.deductAmountInputDialogtitle,
+        IconsAssets.arrowleftUserAction,
+        () {
+          if (_amountController.text.isNotEmpty) {
+            FocusScope.of(context).unfocus();
+            Nav.popRoute(context);
+            _viewModel.withdrawAction(
+              _amountController.text,
+              _commentController.text,
+            );
+            _amountController.clear();
+            _commentController.clear();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _getWithdrawDialogContent() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m25),
+          child: _getTextFieldInput(
+            _amountController,
+            (val) {},
+            AppStrings.amountInputtitle,
+            Constants.trueBool,
+            TextInputType.number,
+          ),
+        ),
+        _getTextFieldInput(
+          _commentController,
+          (val) {},
+          AppStrings.commentInputtitle,
+          Constants.falseBool,
+        )
+      ],
+    );
+  }
+
+  void _makePayAction(context) {
+    _showDialog(
+      context,
+      _getDialogContent(
+        context,
+        _getPayDebtDialogContent(),
+        AppStrings.userActionPayDebt,
+        AppStrings.payDebtInputDialogtitle,
+        IconsAssets.moneyUserAction,
+        _viewModel.paydebtInforms?.data?.total != Constants.nullValue &&
+                _viewModel.paydebtInforms?.data?.total != Constants.zeroNum
+            ? () {
+                if (_amountController.text.isNotEmpty) {
+                  if (_viewModel.paydebtInforms?.data?.total !=
+                          Constants.nullValue &&
+                      _viewModel.paydebtInforms?.data?.total !=
+                          Constants.zeroNum) {
+                    FocusScope.of(context).unfocus();
+                    Nav.popRoute(context);
+                    _viewModel.payDebtAction(
+                      _amountController.text,
+                      _commentController.text,
+                    );
+                    _amountController.clear();
+                    _commentController.clear();
+                  }
+                }
+              }
+            : Constants.nullValue,
+      ),
+    );
+  }
+
+  Widget _getPayDebtDialogContent() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m25),
+          child: _getTextFieldInput(
+            _amountController,
+            (val) {},
+            AppStrings.amountInputtitle,
+            Constants.trueBool,
+            TextInputType.number,
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m25),
+          child: _getTextFieldInput(
+            _commentController,
+            (val) {},
+            AppStrings.commentInputtitle,
+            Constants.falseBool,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              AppStrings.totaldebtDialogText,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            Text(
+              "${_viewModel.paydebtInforms?.data?.total}",
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

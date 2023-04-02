@@ -180,13 +180,17 @@ class AppStrings {
 
   static const userActionEdit = "Edit";
   static const userActionRename = "Rename";
+  static const userActionRenameDialogTitle = "Rename Username";
+  static const userActionProfileDialogTitle = "Change Profile";
   static const userActionActivate = "Activate";
   static const userActionExtend = "Extend";
   static const userActionSubmitButton = "Submit";
   static const userActionChangeProfile = "Change Profile";
   static const userActionDeposit = "Deposit";
   static const userActionWithdrawal = "Withdrawal";
+  static const userActionPayDebt = "Pay";
   static const userActionPay = "Pay Debt";
+  static const userActionDeleteDialogTitle = "Delete Username";
   static const userActionDelete = "Delete";
 
   static const actionDeleteUserdialogTitle =
@@ -199,6 +203,8 @@ class AppStrings {
   static const addManagerTitle = "Manager Form";
 
   static const usernameInputtitle = "New Username";
+  static const amountInputtitle = "Amount";
+  static const commentInputtitle = "Comment";
   static const usernameInputDialogtitle = "Rename Username";
   static const depositAmountInputDialogtitle = "Deposit Amount";
   static const deductAmountInputDialogtitle = "Deduct Amount";
@@ -260,6 +266,7 @@ class AppStrings {
   static const usersAdvancedFilter = "Filter";
   static const usersParent = "Parent";
   static const usersParentHint = "All";
+  static const changeProfileHint = "Select Option";
   static const usersStatus = "Status";
   static const usersStatusAny = "Any";
   static const usersStatusActive = "Active";
