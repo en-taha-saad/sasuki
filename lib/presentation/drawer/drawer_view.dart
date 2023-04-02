@@ -261,7 +261,10 @@ class DrawerView extends StatelessWidget {
                           const SizedBox(width: AppSize.s20),
                           Text(
                             element.title,
-                            style: Theme.of(context).textTheme.headlineMedium,
+                            style: StylesManager.getRegularStyle(
+                              color: ColorManager.whiteNeutral,
+                              fontSize: FontSize.sButtonLink,
+                            ),
                           ),
                         ],
                       ),
