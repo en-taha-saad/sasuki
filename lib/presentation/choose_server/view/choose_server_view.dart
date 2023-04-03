@@ -76,11 +76,18 @@ class _ChooseServerViewState extends State<ChooseServerView> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SvgPicture.asset(IconsAssets.chooseServer),
+              SvgPicture.asset(
+                IconsAssets.chooseServer,
+                theme: const SvgTheme(
+                  currentColor: ColorManager.greyNeutral,
+                ),
+              ),
               const SizedBox(width: AppSize.s10),
               Text(
                 AppStrings.servChooseServer,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: ColorManager.greyNeutral,
+                    ),
               ),
             ],
           ),

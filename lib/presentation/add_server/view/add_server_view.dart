@@ -4,6 +4,7 @@ import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
+import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
@@ -84,11 +85,18 @@ class _AddServerViewState extends State<AddServerView> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SvgPicture.asset(IconsAssets.add),
+              SvgPicture.asset(
+                IconsAssets.add,
+                theme: const SvgTheme(
+                  currentColor: ColorManager.greyNeutral,
+                ),
+              ),
               const SizedBox(width: AppSize.s10),
               Text(
                 AppStrings.servAddServer,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: ColorManager.greyNeutral,
+                    ),
               ),
             ],
           ),

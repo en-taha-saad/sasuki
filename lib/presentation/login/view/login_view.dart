@@ -196,11 +196,18 @@ class _LoginViewState extends State<LoginView> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(IconsAssets.login),
+            SvgPicture.asset(
+              IconsAssets.login,
+              theme: const SvgTheme(
+                currentColor: ColorManager.greyNeutral,
+              ),
+            ),
             const SizedBox(width: AppSize.s10),
             Text(
               AppStrings.servLoginToServer,
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: ColorManager.greyNeutral,
+                  ),
             ),
           ],
         ),
