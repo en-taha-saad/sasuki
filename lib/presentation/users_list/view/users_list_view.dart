@@ -386,6 +386,7 @@ class _UsersListViewState extends State<UsersListView> {
                   expireOn: usersListData.expiration,
                   status: _getUserStatusString(usersListData),
                   statusColor: _getUserStatusColor(usersListData),
+                  isOnline: usersListData.onlineStatus == Constants.oneNum,
                   username: usersListData.username,
                 ),
               );

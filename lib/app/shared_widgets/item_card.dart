@@ -3,10 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
+import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/app/shared_funs/screen_hieght.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/text_shimmer.dart';
 
@@ -19,6 +21,7 @@ class ItemCard extends StatelessWidget {
   final String? balance;
   final Color? statusColor;
   final bool? isShimmer;
+  final bool? isOnline;
   const ItemCard({
     this.status = "active",
     this.profileName = "group",
@@ -26,6 +29,7 @@ class ItemCard extends StatelessWidget {
     this.fullName = "Taha Saad",
     this.balance = "IQD 25,000",
     this.expireOn = "2021-09-09",
+    this.isOnline,
     this.statusColor = ColorManager.greenAnnotations,
     this.isShimmer,
     super.key,
@@ -43,34 +47,32 @@ class ItemCard extends StatelessWidget {
         bottom: AppMargin.m10,
       ),
       padding: const EdgeInsets.all(AppPadding.p15),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
+        alignment: Alignment.centerRight,
         children: [
-          Container(
-            padding: const EdgeInsets.all(AppPadding.p12),
-            decoration: BoxDecoration(
-              color: ColorManager.secondary,
-              borderRadius: RadiusSizes.radius12,
-            ),
-            child: SvgPicture.asset(
-              IconsAssets.person,
-              height: AppSize.s24,
-              width: AppSize.s24,
-              theme: const SvgTheme(
-                currentColor: ColorManager.whiteNeutral,
-              ),
-            ),
-          ),
-          const SizedBox(width: AppSize.s15),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+          Row(
+            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              Container(
+                padding: const EdgeInsets.all(AppPadding.p12),
+                decoration: BoxDecoration(
+                  color: ColorManager.secondary,
+                  borderRadius: RadiusSizes.radius12,
+                ),
+                child: SvgPicture.asset(
+                  IconsAssets.person,
+                  height: AppSize.s24,
+                  width: AppSize.s24,
+                  theme: const SvgTheme(
+                    currentColor: ColorManager.whiteNeutral,
+                  ),
+                ),
+              ),
+              const SizedBox(width: AppSize.s15),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   isShimmer != Constants.nullValue &&
                           isShimmer != Constants.falseBool
@@ -89,15 +91,86 @@ class ItemCard extends StatelessWidget {
                             softWrap: Constants.trueBool,
                           ),
                         ),
-                  SizedBox(width: getScreenWidth(context) * 0.05),
+                  SizedBox(
+                    width: AppSize.s150,
+                    child: isShimmer != Constants.nullValue &&
+                            isShimmer != Constants.falseBool
+                        ? const ShimmerText(
+                            baseColor: ColorManager.whiteNeutral,
+                            highlightColor: ColorManager.backgroundCenter,
+                            width: AppSize.s30,
+                          )
+                        : Text(
+                            username!,
+                            style: Theme.of(context).textTheme.bodySmall,
+                            maxLines: Constants.oneNum.toInt(),
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: Constants.trueBool,
+                          ),
+                  ),
+                  const SizedBox(height: AppSize.s10),
+                  Container(
+                    width: getScreenWidth(context) * AppSize.s0point6,
+                    decoration: BoxDecoration(
+                      color: ColorManager.transparent,
+                      borderRadius: RadiusSizes.radius15,
+                      border: Border.all(
+                        color: ColorManager.primaryshade1,
+                        width: AppSize.s0point6,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: AppSize.s10),
+                  isShimmer != Constants.nullValue &&
+                          isShimmer != Constants.falseBool
+                      ? const ShimmerText(
+                          baseColor: ColorManager.whiteNeutral,
+                          highlightColor: ColorManager.backgroundCenter,
+                          width: AppSize.s35,
+                        )
+                      : Text(
+                          balance!,
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: ColorManager.greyNeutral,
+                                  ),
+                        ),
+                  const SizedBox(height: AppSize.s10),
+                  SizedBox(
+                    width: AppSize.s210,
+                    child: isShimmer != Constants.nullValue &&
+                            isShimmer != Constants.falseBool
+                        ? const ShimmerText(
+                            baseColor: ColorManager.whiteNeutral,
+                            highlightColor: ColorManager.backgroundCenter,
+                            width: AppSize.s50,
+                          )
+                        : Text(
+                            "Expires on $expireOn",
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: ColorManager.greyNeutral,
+                                    ),
+                            maxLines: Constants.oneNum.toInt(),
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: Constants.trueBool,
+                          ),
+                  ),
+                  const SizedBox(height: AppSize.s10),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppPadding.p15,
-                      vertical: AppPadding.p3Point5,
+                      vertical: AppPadding.p3,
                     ),
                     decoration: BoxDecoration(
-                      color: statusColor,
+                      color: ColorManager.transparent,
                       borderRadius: RadiusSizes.radius15,
+                      border: Border.all(
+                        color: ColorManager.primaryshade1,
+                        width: AppSize.s1,
+                      ),
                     ),
                     child: isShimmer != Constants.nullValue &&
                             isShimmer != Constants.falseBool
@@ -107,102 +180,64 @@ class ItemCard extends StatelessWidget {
                             width: AppSize.s20,
                           )
                         : Text(
-                            status!,
-                            style: Theme.of(context).textTheme.bodySmall,
+                            profileName!,
+                            style: Theme.of(context).textTheme.labelSmall,
                           ),
                   ),
                 ],
               ),
-              SizedBox(
-                width: AppSize.s150,
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p15,
+                  vertical: AppPadding.p3Point5,
+                ),
+                decoration: BoxDecoration(
+                  color: statusColor,
+                  borderRadius: RadiusSizes.radius15,
+                ),
                 child: isShimmer != Constants.nullValue &&
                         isShimmer != Constants.falseBool
                     ? const ShimmerText(
                         baseColor: ColorManager.whiteNeutral,
                         highlightColor: ColorManager.backgroundCenter,
-                        width: AppSize.s30,
+                        width: AppSize.s20,
                       )
                     : Text(
-                        username!,
+                        status!,
                         style: Theme.of(context).textTheme.bodySmall,
-                        maxLines: Constants.oneNum.toInt(),
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: Constants.trueBool,
                       ),
               ),
-              const SizedBox(height: AppSize.s10),
-              Container(
-                width: getScreenWidth(context) * AppSize.s0point6,
-                decoration: BoxDecoration(
-                  color: ColorManager.transparent,
-                  borderRadius: RadiusSizes.radius15,
-                  border: Border.all(
-                    color: ColorManager.primaryshade1,
-                    width: AppSize.s0point6,
-                  ),
-                ),
-              ),
-              const SizedBox(height: AppSize.s10),
-              isShimmer != Constants.nullValue &&
-                      isShimmer != Constants.falseBool
-                  ? const ShimmerText(
-                      baseColor: ColorManager.whiteNeutral,
-                      highlightColor: ColorManager.backgroundCenter,
-                      width: AppSize.s35,
-                    )
-                  : Text(
-                      balance!,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: ColorManager.greyNeutral,
-                          ),
+              SizedBox(height: getScreenHeight(context) * 0.1),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: AppSize.s8,
+                    height: AppSize.s8,
+                    margin: const EdgeInsets.only(right: AppSize.s5),
+                    decoration: BoxDecoration(
+                      color: isOnline != Constants.nullValue &&
+                              isOnline != Constants.falseBool
+                          ? ColorManager.greenAnnotations2
+                          : ColorManager.greyNeutral,
+                      shape: BoxShape.circle,
                     ),
-              const SizedBox(height: AppSize.s10),
-              SizedBox(
-                width: AppSize.s210,
-                child: isShimmer != Constants.nullValue &&
-                      isShimmer != Constants.falseBool
-                  ? const ShimmerText(
-                      baseColor: ColorManager.whiteNeutral,
-                      highlightColor: ColorManager.backgroundCenter,
-                      width: AppSize.s50,
-                    )
-                  :Text(
-                  "Expires on $expireOn",
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: ColorManager.greyNeutral,
-                      ),
-                  maxLines: Constants.oneNum.toInt(),
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: Constants.trueBool,
-                ),
-              ),
-              const SizedBox(height: AppSize.s10),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.p15,
-                  vertical: AppPadding.p3,
-                ),
-                decoration: BoxDecoration(
-                  color: ColorManager.transparent,
-                  borderRadius: RadiusSizes.radius15,
-                  border: Border.all(
-                    color: ColorManager.primaryshade1,
-                    width: AppSize.s1,
                   ),
-                ),
-                child: isShimmer != Constants.nullValue &&
-                      isShimmer != Constants.falseBool
-                  ? const ShimmerText(
-                      baseColor: ColorManager.whiteNeutral,
-                      highlightColor: ColorManager.backgroundCenter,
-                      width: AppSize.s20,
-                    )
-                  :Text(
-                  profileName!,
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
+                  Text(
+                    isOnline != Constants.nullValue &&
+                            isOnline != Constants.falseBool
+                        ? AppStrings.usersConnectionOnline
+                        : AppStrings.usersConnectionOffline,
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ],
               ),
             ],
           ),
