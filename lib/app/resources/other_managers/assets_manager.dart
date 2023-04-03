@@ -37,6 +37,7 @@ class IconsAssets {
   static const String edit = "${ImagePaths.sharedIconsPath}edit.svg";
   static const String filter = "${ImagePaths.sharedIconsPath}filter.svg";
   static const String clearInput = "${ImagePaths.sharedIconsPath}clear.svg";
+  static const String statusup = "${ImagePaths.sharedIconsPath}statusup.svg";
 
   static const String information =
       "${ImagePaths.sharedIconsPath}information.svg";
