@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
+import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
+import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
@@ -88,7 +90,12 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           AppSize.statusBarHeight(context),
           const SizedBox(height: AppSize.s20),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+            margin: const EdgeInsets.only(
+              right: AppMargin.m25,
+              left: AppMargin.m25,
+              top: AppMargin.m20,
+              bottom: AppMargin.m15,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -103,13 +110,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           Container(
             width: MediaQuery.of(context).size.width,
             child: _getUserDetailsContent(),
-            decoration: const BoxDecoration(
-              color: ColorManager.secondary,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(AppSize.s35),
-                topRight: Radius.circular(AppSize.s35),
-              ),
-            ),
+            color: ColorManager.secondary,
           ),
         ],
       ),
@@ -144,15 +145,21 @@ class _UserDetailsViewState extends State<UserDetailsView> {
               theme: const SvgTheme(
                 currentColor: ColorManager.whiteNeutral,
               ),
+              // ignore: deprecated_member_use
+              color: ColorManager.whiteNeutral,
             ),
           ),
           enabled: Constants.trueBool,
           surfaceTintColor: ColorManager.primaryshade3,
           padding: const EdgeInsets.all(AppPadding.p10),
           splashRadius: AppSize.s20,
-          position: PopupMenuPosition.under,
+          position: PopupMenuPosition.over,
           shape: RoundedRectangleBorder(
             borderRadius: RadiusSizes.radius12,
+            side: const BorderSide(
+              color: ColorManager.greyNeutral,
+              width: AppSize.s1,
+            ),
           ),
           itemBuilder: (BuildContext context) {
             return _viewModel.userActions.map(
@@ -192,7 +199,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         vertical: AppSize.s15,
         horizontal: AppSize.s20,
       ),
-      height: AppSize.s72,
+      height: AppSize.s80,
       decoration: BoxDecoration(
         color: ColorManager.primaryshade1,
         borderRadius: BorderRadius.circular(AppSize.s12),
@@ -205,7 +212,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             children: [
               Text(
                 AppStrings.userOverviewStatus,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               Row(
                 children: [
@@ -213,7 +220,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
                     width: AppSize.s8,
                     height: AppSize.s8,
                     margin: const EdgeInsets.only(
-                      right: AppSize.s5,
+                      right: AppSize.s6,
                     ),
                     decoration: BoxDecoration(
                       color: getStatusColor(
@@ -224,22 +231,38 @@ class _UserDetailsViewState extends State<UserDetailsView> {
                   ),
                   Text(
                     getStatusString(userOverviewApiVar?.data?.status),
-                    style: Theme.of(context).textTheme.labelSmall,
+                    style: StylesManager.getSemiBoldStyle(
+                      color: ColorManager.greyNeutral3,
+                      fontSize: FontSize.sSubtitle5,
+                    ),
                   ),
                 ],
               ),
             ],
           ),
+          Container(
+            height: AppSize.s30,
+            width: AppSize.s1,
+            decoration: BoxDecoration(
+              color: ColorManager.greyNeutral.withOpacity(0.25),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(AppSize.s15),
+              ),
+            ),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppStrings.userOverviewDailyTaffic,
-                style: Theme.of(context).textTheme.titleLarge,
+                "${userOverviewApiVar?.data?.remainingRxtx ?? Constants.dash}",
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               Text(
-                "${userOverviewApiVar?.data?.remainingRxtx ?? Constants.dash}",
-                style: Theme.of(context).textTheme.labelSmall,
+                AppStrings.userOverviewDailyTaffic,
+                style: StylesManager.getSemiBoldStyle(
+                  color: ColorManager.greyNeutral3,
+                  fontSize: FontSize.sSubtitle5,
+                ),
               ),
             ],
           ),
@@ -247,12 +270,15 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppStrings.userOverviewUptime,
-                style: Theme.of(context).textTheme.titleLarge,
+                "${userOverviewApiVar?.data?.remainingUptime ?? Constants.dash}",
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               Text(
-                "${userOverviewApiVar?.data?.remainingUptime ?? Constants.dash}",
-                style: Theme.of(context).textTheme.labelSmall,
+                AppStrings.userOverviewUptime,
+                style: StylesManager.getSemiBoldStyle(
+                  color: ColorManager.greyNeutral3,
+                  fontSize: FontSize.sSubtitle5,
+                ),
               ),
             ],
           ),
@@ -264,8 +290,6 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   _getUserDetailsContent() {
     return Container(
       margin: const EdgeInsets.only(
-        right: AppMargin.m25,
-        left: AppMargin.m25,
         bottom: AppMargin.m50,
       ),
       child: Column(
@@ -280,10 +304,13 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           UserDetailsListTile(
             list: _viewModel.listOfUserInforms(userOverviewApiVar),
           ),
-          getCardTitle(
-            IconsAssets.userServiceInformation,
-            AppStrings.userOverviewServiceInformation,
-            context,
+          Container(
+            margin: const EdgeInsets.only(top: AppSize.s25),
+            child: getCardTitle(
+              IconsAssets.userServiceInformation,
+              AppStrings.userOverviewServiceInformation,
+              context,
+            ),
           ),
           UserDetailsListTile(
             list: _viewModel.listOfServiceInforms(userOverviewApiVar),
@@ -343,11 +370,15 @@ class _UserDetailsViewState extends State<UserDetailsView> {
                   dialogTitleIcon,
                   height: AppSize.s20,
                   width: AppSize.s20,
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral,
                 ),
               ),
               Text(
                 dialogTitle,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: ColorManager.greyNeutral,
+                    ),
               ),
             ],
           ),

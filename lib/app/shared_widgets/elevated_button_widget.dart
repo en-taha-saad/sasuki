@@ -46,6 +46,8 @@ class ElevatedButtonWidget extends StatelessWidget {
                     theme: const SvgTheme(
                       currentColor: ColorManager.whiteNeutral,
                     ),
+                      // ignore: deprecated_member_use
+                      color: ColorManager.whiteNeutral,
                   )
                 : Container(),
           ],

@@ -19,7 +19,14 @@ Widget getCardTitle(icon, title, context) {
       children: [
         Container(
           margin: const EdgeInsets.only(right: AppSize.s10),
-          child: SvgPicture.asset(icon),
+          child: SvgPicture.asset(
+            icon,
+            theme: const SvgTheme(
+              currentColor: ColorManager.whiteNeutral,
+            ),
+            // ignore: deprecated_member_use
+            color: ColorManager.whiteNeutral,
+          ),
         ),
         Text(
           title,

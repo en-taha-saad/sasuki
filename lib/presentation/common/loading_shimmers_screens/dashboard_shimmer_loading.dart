@@ -6,6 +6,7 @@ import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
+import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
@@ -31,9 +32,13 @@ class DashboardShimmerLoading extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AppSize.statusBarHeight(context),
-          const SizedBox(height: AppSize.s20),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+            margin: const EdgeInsets.only(
+              right: AppMargin.m25,
+              left: AppMargin.m25,
+              top: AppMargin.m20,
+              bottom: AppMargin.m35,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -84,17 +89,10 @@ class DashboardShimmerLoading extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: AppSize.s25),
           Container(
             width: MediaQuery.of(context).size.width,
+            color: ColorManager.secondary,
             child: _getDashboardContent(context),
-            decoration: const BoxDecoration(
-              color: ColorManager.secondary,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(AppSize.s35),
-                topRight: Radius.circular(AppSize.s35),
-              ),
-            ),
           ),
         ],
       ),
@@ -147,10 +145,13 @@ class DashboardShimmerLoading extends StatelessWidget {
               ),
             ],
           ),
-          _getCardTitle(
-            IconsAssets.dashboardSalesAndFinance,
-            AppStrings.dashboardSalesFinance,
-            context,
+          Container(
+            margin: const EdgeInsets.only(top: AppSize.s25),
+            child: _getCardTitle(
+              IconsAssets.dashboardSalesAndFinance,
+              AppStrings.dashboardSalesFinance,
+              context,
+            ),
           ),
           DashboardListTile(
             shimmerText: const ShimmerText(

@@ -13,8 +13,8 @@ String getStatusString(status) {
 
 Color getStatusColor(String statusString) {
   return statusString == AppStrings.activeUsers
-      ? ColorManager.greenAnnotations
+      ? ColorManager.greenAnnotations2
       : statusString == AppStrings.expiredUsers
-          ? ColorManager.orangeAnnotations
+          ? ColorManager.orangeAnnotations2
           : Colors.white;
 }

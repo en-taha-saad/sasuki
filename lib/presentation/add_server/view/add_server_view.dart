@@ -90,6 +90,8 @@ class _AddServerViewState extends State<AddServerView> {
                 theme: const SvgTheme(
                   currentColor: ColorManager.greyNeutral,
                 ),
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral,
               ),
               const SizedBox(width: AppSize.s10),
               Text(

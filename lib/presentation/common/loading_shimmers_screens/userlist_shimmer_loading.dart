@@ -116,6 +116,8 @@ class UserListShimmerLoading extends StatelessWidget {
                 theme: const SvgTheme(
                   currentColor: ColorManager.greyNeutral,
                 ),
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral,
               ),
               SvgPicture.asset(
                 height: AppSize.s18,
@@ -124,6 +126,8 @@ class UserListShimmerLoading extends StatelessWidget {
                 theme: const SvgTheme(
                   currentColor: ColorManager.greyNeutral,
                 ),
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral,
               ),
             ],
           ),

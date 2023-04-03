@@ -201,6 +201,8 @@ class _LoginViewState extends State<LoginView> {
               theme: const SvgTheme(
                 currentColor: ColorManager.greyNeutral,
               ),
+                // ignore: deprecated_member_use
+                color: ColorManager.greyNeutral,
             ),
             const SizedBox(width: AppSize.s10),
             Text(
@@ -322,6 +324,8 @@ class _LoginViewState extends State<LoginView> {
                                 theme: const SvgTheme(
                                   currentColor: ColorManager.whiteNeutral,
                                 ),
+                                  // ignore: deprecated_member_use
+                                  color: ColorManager.whiteNeutral,
                               ),
                               onTap: () {
                                 setState(() {

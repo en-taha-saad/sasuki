@@ -13,6 +13,7 @@ class ColorManager {
 
 
   static const Color orangeAnnotations = Color.fromRGBO(181, 100, 34, 1);
+  static const Color orangeAnnotations2 = Color.fromRGBO(231, 126, 35, 1);
   static const Color blackNeutral = Color.fromARGB(255, 0, 0, 0);
   static const Color whiteNeutral = Color.fromRGBO(255, 255, 255, 1);
   static const Color greyNeutral = Color.fromRGBO(146, 158, 174, 1);
