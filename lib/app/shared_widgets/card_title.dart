@@ -1,33 +1,31 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
-Widget getCardTitle(icon, title,context) {
-    return Column(
+Widget getCardTitle(icon, title, context) {
+  return Container(
+    color: ColorManager.whiteNeutral.withOpacity(0.2),
+    padding: const EdgeInsets.symmetric(
+      horizontal: AppSize.s15,
+      vertical: AppSize.s10,
+    ),
+    margin: const EdgeInsets.only(
+      bottom: AppSize.s20,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(height: AppSize.s35),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SvgPicture.asset(icon),
-            const SizedBox(width: AppSize.s15),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: ColorManager.greyNeutral,
-                  ),
-            ),
-          ],
+        Container(
+          margin: const EdgeInsets.only(right: AppSize.s10),
+          child: SvgPicture.asset(icon),
         ),
-        const SizedBox(height: AppSize.s10),
-        Divider(
-          color: ColorManager.greyNeutral.withOpacity(
-            AppSize.s0point25,
-          ),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
-        const SizedBox(height: AppSize.s15),
       ],
-    );
-  }
+    ),
+  );
+}

@@ -11,6 +11,7 @@ import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
+import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
@@ -108,9 +109,13 @@ class _DashboardViewState extends State<DashboardView> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AppSize.statusBarHeight(context),
-          const SizedBox(height: AppSize.s20),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+            margin: const EdgeInsets.only(
+              right: AppMargin.m25,
+              left: AppMargin.m25,
+              top: AppMargin.m20,
+              bottom: AppMargin.m35,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -190,17 +195,10 @@ class _DashboardViewState extends State<DashboardView> {
               ],
             ),
           ),
-          const SizedBox(height: AppSize.s25),
           Container(
             width: MediaQuery.of(context).size.width,
+            color: ColorManager.secondary,
             child: _getDashboardContent(),
-            decoration: const BoxDecoration(
-              color: ColorManager.secondary,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(AppSize.s35),
-                topRight: Radius.circular(AppSize.s35),
-              ),
-            ),
           ),
         ],
       ),
@@ -208,42 +206,41 @@ class _DashboardViewState extends State<DashboardView> {
   }
 
   _getDashboardContent() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          getCardTitle(
-            IconsAssets.dashboardUserStatistics,
-            AppStrings.dashboardUsersStatistics,
-            context,
-          ),
-          StreamBuilder<Dashboard>(
-            stream: _viewModel.outputDashboardData,
-            builder: (context, snapshot) {
-              return DashboardListTile(
-                list: _viewModel.listOfUserStatistics(snapshot.data),
-              );
-            },
-          ),
-          getCardTitle(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        getCardTitle(
+          IconsAssets.dashboardUserStatistics,
+          AppStrings.dashboardUsersStatistics,
+          context,
+        ),
+        StreamBuilder<Dashboard>(
+          stream: _viewModel.outputDashboardData,
+          builder: (context, snapshot) {
+            return DashboardListTile(
+              list: _viewModel.listOfUserStatistics(snapshot.data),
+            );
+          },
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: AppSize.s25),
+          child: getCardTitle(
             IconsAssets.dashboardSalesAndFinance,
             AppStrings.dashboardSalesFinance,
-                        context,
+            context,
           ),
-          StreamBuilder<Dashboard>(
-            stream: _viewModel.outputDashboardData,
-            builder: (context, snapshot) {
-              return DashboardListTile(
-                list: _viewModel.listOfSalesAndFinance(snapshot.data),
-              );
-            },
-          ),
-          const SizedBox(height: AppSize.s50),
-        ],
-      ),
+        ),
+        StreamBuilder<Dashboard>(
+          stream: _viewModel.outputDashboardData,
+          builder: (context, snapshot) {
+            return DashboardListTile(
+              list: _viewModel.listOfSalesAndFinance(snapshot.data),
+            );
+          },
+        ),
+        const SizedBox(height: AppSize.s50),
+      ],
     );
   }
-
 }
