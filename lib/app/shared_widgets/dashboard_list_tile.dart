@@ -45,6 +45,9 @@ class DashboardListTile extends StatelessWidget {
                                 Theme.of(context).textTheme.bodyLarge?.copyWith(
                                       color: ColorManager.greyNeutral,
                                     ),
+                            softWrap: Constants.trueBool,
+                            overflow: TextOverflow.fade,
+                            maxLines: 2,
                           ),
                         ],
                       ),

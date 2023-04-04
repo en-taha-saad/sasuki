@@ -8,6 +8,7 @@ import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
+import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
@@ -15,7 +16,10 @@ import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/get_status_vals.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
+import 'package:sasuki/app/shared_widgets/get_action_dialog_content.dart';
+import 'package:sasuki/app/shared_widgets/get_actions_text_field.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
+import 'package:sasuki/app/shared_widgets/showdialog.dart';
 import 'package:sasuki/app/shared_widgets/userdetails_list_tile.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
 import 'package:sasuki/domain/models/user_details/user_overview_api.dart';
@@ -301,7 +305,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             AppStrings.userOverviewUserInformation,
             context,
           ),
-          UserDetailsListTile(
+          SingleListTile(
             list: _viewModel.listOfUserInforms(userOverviewApiVar),
           ),
           Container(
@@ -312,129 +316,11 @@ class _UserDetailsViewState extends State<UserDetailsView> {
               context,
             ),
           ),
-          UserDetailsListTile(
+          SingleListTile(
             list: _viewModel.listOfServiceInforms(userOverviewApiVar),
           ),
         ],
       ),
-    );
-  }
-
-  _showDialog(BuildContext context, Widget? child) {
-    return showDialog(
-      context: context,
-      barrierColor: ColorManager.primaryshade1.withOpacity(AppSize.s0point4),
-      barrierDismissible: Constants.falseBool,
-      builder: (BuildContext context) {
-        return Dialog(
-          insetPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p15),
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p15,
-              vertical: AppPadding.p48,
-            ),
-            decoration: BoxDecoration(
-              color: ColorManager.secondary,
-              shape: BoxShape.rectangle,
-              borderRadius: RadiusSizes.radius35,
-            ),
-            child: child,
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _getDialogContent(
-    BuildContext context,
-    Widget child,
-    String buttonText,
-    String dialogTitle,
-    String dialogTitleIcon,
-    Function()? onPressed,
-  ) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(bottom: AppMargin.m25),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(right: AppMargin.m10),
-                child: SvgPicture.asset(
-                  dialogTitleIcon,
-                  height: AppSize.s20,
-                  width: AppSize.s20,
-                  // ignore: deprecated_member_use
-                  color: ColorManager.greyNeutral,
-                ),
-              ),
-              Text(
-                dialogTitle,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: ColorManager.greyNeutral,
-                    ),
-              ),
-            ],
-          ),
-        ),
-        child,
-        Container(
-          margin: const EdgeInsets.only(top: AppMargin.m40),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () => Nav.popRoute(context),
-                child: Text(
-                  AppStrings.cancelButton,
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-              ),
-              ElevatedButtonWidget(
-                name: buttonText,
-                onPressed: onPressed,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _getTextFieldInput(
-    controller,
-    Function(String)? onFieldSubmitted,
-    String textFieldLabel, [
-    bool? autoFocus,
-    TextInputType? keyboardType,
-  ]) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(bottom: AppMargin.m10),
-          child: Text(
-            textFieldLabel,
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-        ),
-        TextFormField(
-          controller: controller,
-          keyboardType: keyboardType ?? TextInputType.text,
-          autofocus: autoFocus ?? Constants.falseBool,
-          onEditingComplete: () => FocusScope.of(context).unfocus(),
-          onFieldSubmitted: onFieldSubmitted,
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-      ],
     );
   }
 
@@ -467,8 +353,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         // Nav.navTo(context, Routes.editUserRoute);
         break;
       case AppStrings.userActionExtend:
-        // TODO: implement extend user
-        // Nav.navTo(context, Routes.extendUserRoute);
+        Nav.navTo(context, Routes.extendUserRoute);
         break;
     }
   }
@@ -477,9 +362,9 @@ class _UserDetailsViewState extends State<UserDetailsView> {
     _newUsernameController = TextEditingController(
       text: userOverviewApiVar?.data?.username,
     );
-    _showDialog(
+    showActionDialog(
       context,
-      _getDialogContent(
+      getActionDialogContent(
         context,
         _getRenameUsernameDialogContent(),
         AppStrings.userActionRename,
@@ -497,7 +382,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   }
 
   Widget _getRenameUsernameDialogContent() {
-    return _getTextFieldInput(
+    return getActionTextFieldInput(
+      context,
       _newUsernameController,
       (val) {
         FocusScope.of(context).unfocus();
@@ -514,9 +400,9 @@ class _UserDetailsViewState extends State<UserDetailsView> {
 
   Future<void> _makeChangingProfileAction(context) async {
     selectedprofile = Constants.nullValue;
-    _showDialog(
+    showActionDialog(
       context,
-      _getDialogContent(
+      getActionDialogContent(
         context,
         _getChangeProfileDialogContent(),
         AppStrings.userActionChangeProfile,
@@ -558,9 +444,9 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   }
 
   void _makeDeleteAction(context) {
-    _showDialog(
+    showActionDialog(
       context,
-      _getDialogContent(
+      getActionDialogContent(
         context,
         _getDeleteDialogContent(),
         AppStrings.userActionDelete,
@@ -582,9 +468,9 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   }
 
   void _makeDepositAction(context) {
-    _showDialog(
+    showActionDialog(
       context,
-      _getDialogContent(
+      getActionDialogContent(
         context,
         _getDepositDialogContent(),
         AppStrings.userActionDeposit,
@@ -612,7 +498,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
-          child: _getTextFieldInput(
+          child: getActionTextFieldInput(
+            context,
             _amountController,
             (val) {},
             AppStrings.amountInputtitle,
@@ -620,7 +507,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             TextInputType.number,
           ),
         ),
-        _getTextFieldInput(
+        getActionTextFieldInput(
+          context,
           _commentController,
           (val) {},
           AppStrings.commentInputtitle,
@@ -631,9 +519,9 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   }
 
   void _makeWithdrawalAction(context) {
-    _showDialog(
+    showActionDialog(
       context,
-      _getDialogContent(
+      getActionDialogContent(
         context,
         _getWithdrawDialogContent(),
         AppStrings.userActionWithdrawal,
@@ -661,7 +549,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
-          child: _getTextFieldInput(
+          child: getActionTextFieldInput(
+            context,
             _amountController,
             (val) {},
             AppStrings.amountInputtitle,
@@ -669,7 +558,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             TextInputType.number,
           ),
         ),
-        _getTextFieldInput(
+        getActionTextFieldInput(
+          context,
           _commentController,
           (val) {},
           AppStrings.commentInputtitle,
@@ -680,9 +570,9 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   }
 
   void _makePayAction(context) {
-    _showDialog(
+    showActionDialog(
       context,
-      _getDialogContent(
+      getActionDialogContent(
         context,
         _getPayDebtDialogContent(),
         AppStrings.userActionPayDebt,
@@ -718,7 +608,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
-          child: _getTextFieldInput(
+          child: getActionTextFieldInput(
+            context,
             _amountController,
             (val) {},
             AppStrings.amountInputtitle,
@@ -728,7 +619,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         ),
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
-          child: _getTextFieldInput(
+          child: getActionTextFieldInput(
+            context,
             _commentController,
             (val) {},
             AppStrings.commentInputtitle,

@@ -9,9 +9,9 @@ import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/get_status_vals.dart';
 import 'package:sasuki/domain/models/dashboard_card_element.dart';
 
-class UserDetailsListTile extends StatelessWidget {
+class SingleListTile extends StatelessWidget {
   final List<CardElement>? list;
-  const UserDetailsListTile({
+  const SingleListTile({
     super.key,
     this.list,
   });

@@ -232,7 +232,7 @@ class AppStrings {
   static const addUserTitle = "Add User";
   static const editUserTitle = "Edit User";
   static const activateUserFloatingButtonTitle = "Activate";
-  static const extendUserFloatingButtonTitle = "Extend";
+  static const extendUserFloatingButtonTitle = "Extend User";
   static const userActivationCost = "Cost";
   static const userActivationManagerBalance = "Manager Balance";
   static const userActivationMUserBalance = "User Balance";

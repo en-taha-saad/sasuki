@@ -10,6 +10,7 @@ import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
+import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/dashboard_list_tile.dart';
 import 'package:sasuki/app/shared_widgets/text_shimmer.dart';
 import 'package:sasuki/domain/models/dashboard_card_element.dart';
@@ -100,125 +101,94 @@ class DashboardShimmerLoading extends StatelessWidget {
   }
 
   _getDashboardContent(context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          _getCardTitle(
-            IconsAssets.dashboardUserStatistics,
-            AppStrings.dashboardUsersStatistics,
-            context,
-          ),
-          DashboardListTile(
-            shimmerText: const ShimmerText(
-              baseColor: ColorManager.whiteNeutral,
-              highlightColor: ColorManager.backgroundCenter,
-              width: AppSize.s20,
-            ),
-            list: [
-              CardElement(
-                AppStrings.dashboardUsers,
-                AppStrings.dashboardTotalnumberofusers,
-                Constants.dash,
-              ),
-              CardElement(
-                AppStrings.dashboardOnlineUsers,
-                AppStrings.dashboardNumberofonlineusers,
-                Constants.dash,
-              ),
-              CardElement(
-                AppStrings.dashboardActiveUsers,
-                AppStrings.dashboardNumberofactiveusers,
-                Constants.dash,
-              ),
-              CardElement(
-                AppStrings.dashboardExpiredUsers,
-                AppStrings.dashboardNumberofexpiredusers,
-                Constants.dash,
-              ),
-              CardElement(
-                AppStrings.dashboardAboutToExpire,
-                AppStrings.dashboardUsersactivebutgoingtoexpiretoday,
-                Constants.dash,
-              ),
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: AppSize.s25),
-            child: _getCardTitle(
-              IconsAssets.dashboardSalesAndFinance,
-              AppStrings.dashboardSalesFinance,
-              context,
-            ),
-          ),
-          DashboardListTile(
-            shimmerText: const ShimmerText(
-              baseColor: ColorManager.whiteNeutral,
-              highlightColor: ColorManager.greyNeutral,
-              width: AppSize.s20,
-            ),
-            list: [
-              CardElement(
-                AppStrings.dashboardNewRegistrations,
-                AppStrings.dashboardUsersaddedthismonth,
-                Constants.dash,
-              ),
-              CardElement(
-                AppStrings.dashboardActivations,
-                AppStrings.dashboardUsersactivatedthismonth,
-                Constants.dash,
-              ),
-              CardElement(
-                AppStrings.dashboardSales,
-                AppStrings.dashboardTotalsalesforthismonth,
-                Constants.dash,
-              ),
-              CardElement(
-                AppStrings.dashboardProfits,
-                AppStrings.dashboardmonthlyprofits,
-                Constants.dash,
-              ),
-              CardElement(
-                AppStrings.dashboardRewardPoints,
-                AppStrings.dashboardrewardpointsbalance,
-                Constants.dash,
-              ),
-            ],
-          ),
-          const SizedBox(height: AppSize.s50),
-        ],
-      ),
-    );
-  }
-
-  Widget _getCardTitle(icon, title, context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const SizedBox(height: AppSize.s35),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SvgPicture.asset(icon),
-            const SizedBox(width: AppSize.s15),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: ColorManager.greyNeutral,
-                  ),
+        getCardTitle(
+          IconsAssets.dashboardUserStatistics,
+          AppStrings.dashboardUsersStatistics,
+          context,
+        ),
+        DashboardListTile(
+          shimmerText: const ShimmerText(
+            baseColor: ColorManager.whiteNeutral,
+            highlightColor: ColorManager.backgroundCenter,
+            width: AppSize.s20,
+          ),
+          list: [
+            CardElement(
+              AppStrings.dashboardUsers,
+              AppStrings.dashboardTotalnumberofusers,
+              Constants.dash,
+            ),
+            CardElement(
+              AppStrings.dashboardOnlineUsers,
+              AppStrings.dashboardNumberofonlineusers,
+              Constants.dash,
+            ),
+            CardElement(
+              AppStrings.dashboardActiveUsers,
+              AppStrings.dashboardNumberofactiveusers,
+              Constants.dash,
+            ),
+            CardElement(
+              AppStrings.dashboardExpiredUsers,
+              AppStrings.dashboardNumberofexpiredusers,
+              Constants.dash,
+            ),
+            CardElement(
+              AppStrings.dashboardAboutToExpire,
+              AppStrings.dashboardUsersactivebutgoingtoexpiretoday,
+              Constants.dash,
             ),
           ],
         ),
-        const SizedBox(height: AppSize.s10),
-        Divider(
-          color: ColorManager.greyNeutral.withOpacity(
-            AppSize.s0point25,
+        Container(
+          margin: const EdgeInsets.only(top: AppSize.s25),
+          child: getCardTitle(
+            IconsAssets.dashboardSalesAndFinance,
+            AppStrings.dashboardSalesFinance,
+            context,
           ),
         ),
-        const SizedBox(height: AppSize.s15),
+        DashboardListTile(
+          shimmerText: const ShimmerText(
+            baseColor: ColorManager.whiteNeutral,
+            highlightColor: ColorManager.greyNeutral,
+            width: AppSize.s20,
+          ),
+          list: [
+            CardElement(
+              AppStrings.dashboardNewRegistrations,
+              AppStrings.dashboardUsersaddedthismonth,
+              Constants.dash,
+            ),
+            CardElement(
+              AppStrings.dashboardActivations,
+              AppStrings.dashboardUsersactivatedthismonth,
+              Constants.dash,
+            ),
+            CardElement(
+              AppStrings.dashboardSales,
+              AppStrings.dashboardTotalsalesforthismonth,
+              Constants.dash,
+            ),
+            CardElement(
+              AppStrings.dashboardProfits,
+              AppStrings.dashboardmonthlyprofits,
+              Constants.dash,
+            ),
+            CardElement(
+              AppStrings.dashboardRewardPoints,
+              AppStrings.dashboardrewardpointsbalance,
+              Constants.dash,
+            ),
+          ],
+        ),
+        const SizedBox(height: AppSize.s50),
       ],
     );
   }
+
 }
