@@ -217,6 +217,7 @@ class AppStrings {
   static const comment = "Comment";
 
   static const activateInputDialogtitle = "Activate User";
+  static const activateInputDialogtitle0 = "Activate User Service";
   static const extendInputDialogtitle = "Extend User";
   static const activationNotesInputtitle = "Notes";
   static const activationPinInputtitle = "enter pin here";
@@ -228,7 +229,7 @@ class AppStrings {
   static const salePriceInput = "Sale Price";
 
   static const activateUserTitle = "Activate User";
-  static const extendUserTitle = "Extend User Service";
+  static const extendUserTitle = "Extend Service";
   static const addUserTitle = "Add User";
   static const editUserTitle = "Edit User";
   static const activateUserFloatingButtonTitle = "Activate";

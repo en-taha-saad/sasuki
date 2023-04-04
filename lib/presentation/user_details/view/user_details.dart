@@ -345,8 +345,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         _makePayAction(context);
         break;
       case AppStrings.userActionActivate:
-        // TODO: implement activate user
-        // Nav.navTo(context, Routes.userActivationInformsRoute);
+        Nav.navTo(context, Routes.userActivationInformsRoute);
         break;
       case AppStrings.userActionEdit:
         // TODO: implement edit user
