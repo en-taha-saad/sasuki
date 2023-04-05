@@ -15,12 +15,11 @@ import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/get_status_vals.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
-import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/get_action_dialog_content.dart';
 import 'package:sasuki/app/shared_widgets/get_actions_text_field.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
 import 'package:sasuki/app/shared_widgets/showdialog.dart';
-import 'package:sasuki/app/shared_widgets/userdetails_list_tile.dart';
+import 'package:sasuki/app/shared_widgets/single_list_tile.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
 import 'package:sasuki/domain/models/user_details/user_overview_api.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
@@ -160,8 +159,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           position: PopupMenuPosition.over,
           shape: RoundedRectangleBorder(
             borderRadius: RadiusSizes.radius12,
-            side: const BorderSide(
-              color: ColorManager.greyNeutral,
+            side:  BorderSide(
+              color: ColorManager.greyNeutral.withOpacity(0.25),
               width: AppSize.s1,
             ),
           ),

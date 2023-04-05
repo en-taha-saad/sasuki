@@ -14,7 +14,7 @@ import 'package:sasuki/app/shared_widgets/get_action_dialog_content.dart';
 import 'package:sasuki/app/shared_widgets/get_actions_text_field.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
 import 'package:sasuki/app/shared_widgets/showdialog.dart';
-import 'package:sasuki/app/shared_widgets/userdetails_list_tile.dart';
+import 'package:sasuki/app/shared_widgets/single_list_tile.dart';
 import 'package:sasuki/domain/models/activation_informs/activation_informs.dart';
 import 'package:sasuki/domain/models/activation_informs/activation_method.dart';
 import 'package:sasuki/domain/models/dashboard/dashboard.dart';
