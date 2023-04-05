@@ -168,7 +168,6 @@ class DrawerView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           AppSize.statusBarHeight(context),
-          const SizedBox(height: AppSize.s20),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
             child: Column(
@@ -192,9 +191,8 @@ class DrawerView extends StatelessWidget {
                 const SizedBox(height: AppSize.s20),
                 Text(
                   AppStrings.welcome,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color:
-                            ColorManager.whiteNeutral.withOpacity(AppSize.s0_5),
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: ColorManager.greyNeutral2,
                         height: AppSize.s1_5,
                       ),
                 ),
@@ -208,17 +206,13 @@ class DrawerView extends StatelessWidget {
                 Text(
                   "${_viewModel.dataCaptcha?.data?.siteCurrency ?? Constants.emptyStr} ${_viewModel.dashboardData?.data?.balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(_viewModel.dashboardData?.data?.balance) : Constants.emptyStr}",
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        color:
-                            ColorManager.whiteNeutral.withOpacity(AppSize.s0_5),
                         height: AppSize.s1_5,
                       ),
                 ),
                 Text(
                   AppStrings.availableBalance,
-                  style: StylesManager.getMediumStyle(
-                    color: ColorManager.whiteNeutral.withOpacity(
-                      AppSize.s0_5,
-                    ),
+                  style: StylesManager.getSemiBoldStyle(
+                    color: ColorManager.greyNeutral2,
                     height: AppSize.s1_5,
                     fontSize: FontSize.sSubtitle5,
                   ),
@@ -226,9 +220,10 @@ class DrawerView extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: AppSize.s35),
+          const SizedBox(height: AppSize.s25),
           Container(
             width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             child: _getDrawerContent(context),
             decoration: const BoxDecoration(color: ColorManager.secondary),
           ),
@@ -250,9 +245,13 @@ class DrawerView extends StatelessWidget {
                 child: Column(
                   children: [
                     if (element == listOfDrawerBars.first)
-                      const SizedBox(height: AppSize.s50),
+                      const SizedBox(height: AppSize.s25),
                     Container(
-                      margin: const EdgeInsets.only(bottom: AppSize.s20),
+                      margin: (listOfDrawerBars.indexOf(element) ==
+                                  AppSize.s3 ||
+                              listOfDrawerBars.indexOf(element) == AppSize.s5)
+                          ? null
+                          : const EdgeInsets.only(bottom: AppSize.s20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -263,7 +262,7 @@ class DrawerView extends StatelessWidget {
                             element.title,
                             style: StylesManager.getRegularStyle(
                               color: ColorManager.whiteNeutral,
-                              fontSize: FontSize.sButtonLink,
+                              fontSize: FontSize.sButton,
                             ),
                           ),
                         ],
@@ -271,12 +270,9 @@ class DrawerView extends StatelessWidget {
                     ),
                     if (listOfDrawerBars.indexOf(element) == AppSize.s3 ||
                         listOfDrawerBars.indexOf(element) == AppSize.s5)
-                      Container(
-                        margin: const EdgeInsets.only(bottom: AppSize.s20),
-                        child: Divider(
-                          color: ColorManager.greyNeutral.withOpacity(
-                            AppSize.s0point25,
-                          ),
+                      Divider(
+                        color: ColorManager.greyNeutral.withOpacity(
+                          AppSize.s0point25,
                         ),
                       ),
                   ],

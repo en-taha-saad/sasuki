@@ -91,13 +91,11 @@ class _UserDetailsViewState extends State<UserDetailsView> {
       child: Column(
         children: [
           AppSize.statusBarHeight(context),
-          const SizedBox(height: AppSize.s20),
           Container(
             margin: const EdgeInsets.only(
               right: AppMargin.m25,
               left: AppMargin.m25,
-              top: AppMargin.m20,
-              bottom: AppMargin.m15,
+              bottom: AppMargin.m25,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +104,6 @@ class _UserDetailsViewState extends State<UserDetailsView> {
                 _getUserActions(context),
                 const SizedBox(height: AppSize.s20),
                 _getStatisticsCard(context),
-                const SizedBox(height: AppSize.s15),
               ],
             ),
           ),
@@ -126,6 +123,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
       backgroundColor: Colors.transparent,
       centerTitle: Constants.trueBool,
       leadingWidth: AppSize.s10,
+      toolbarHeight: 40,
+      titleSpacing: 0,
       titleTextStyle: Theme.of(context).textTheme.headlineMedium,
       leading: InkWell(
         child: SvgPicture.asset(IconsAssets.back),
@@ -139,7 +138,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         PopupMenuButton<SingleUserAction>(
           onSelected: (SingleUserAction choice) =>
               _openActions(choice, context),
-          color: ColorManager.secondary,
+          color: ColorManager.whiteNeutral,
           elevation: Constants.zeroDouble,
           icon: Container(
             margin: const EdgeInsets.only(left: AppMargin.m20),
@@ -154,12 +153,15 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           ),
           enabled: Constants.trueBool,
           surfaceTintColor: ColorManager.primaryshade3,
-          padding: const EdgeInsets.all(AppPadding.p10),
+          padding: const EdgeInsets.symmetric(
+            vertical: AppPadding.p10,
+            horizontal: AppPadding.p20,
+          ),
           splashRadius: AppSize.s20,
           position: PopupMenuPosition.over,
           shape: RoundedRectangleBorder(
             borderRadius: RadiusSizes.radius12,
-            side:  BorderSide(
+            side: BorderSide(
               color: ColorManager.greyNeutral.withOpacity(0.25),
               width: AppSize.s1,
             ),
@@ -178,12 +180,16 @@ class _UserDetailsViewState extends State<UserDetailsView> {
                     children: [
                       Text(
                         choice.text!,
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: ColorManager.blackNeutral,
+                            ),
                       ),
                       SvgPicture.asset(
                         choice.icon!,
-                        height: AppSize.s20,
-                        width: AppSize.s20,
+                        height: AppSize.s18,
+                        width: AppSize.s18,
+                        // ignore: deprecated_member_use
+                        color: ColorManager.blackNeutral,
                       ),
                     ],
                   ),
@@ -436,6 +442,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             selectedprofile = val;
           },
           displayFn: (item) => (item as ProfileData).name,
+          dropdownColor:  ColorManager.greyNeutral.withOpacity(0.25),
         );
       },
     );

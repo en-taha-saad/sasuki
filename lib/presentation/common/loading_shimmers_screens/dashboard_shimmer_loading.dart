@@ -38,7 +38,7 @@ class DashboardShimmerLoading extends StatelessWidget {
               right: AppMargin.m25,
               left: AppMargin.m25,
               top: AppMargin.m20,
-              bottom: AppMargin.m35,
+              bottom: AppMargin.m25,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

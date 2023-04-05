@@ -155,8 +155,7 @@ class _UserActivationViewState extends State<UserActivationView> {
                 margin: const EdgeInsets.only(
                   right: AppMargin.m25,
                   left: AppMargin.m25,
-                  top: AppMargin.m20,
-                  bottom: AppMargin.m25,
+                  bottom: AppMargin.m5,
                 ),
                 child: AppBar(
                   elevation: AppSize.s0,
@@ -185,7 +184,7 @@ class _UserActivationViewState extends State<UserActivationView> {
         Container(
           margin: const EdgeInsets.symmetric(
             horizontal: AppMargin.m25,
-            vertical: AppMargin.m50,
+            vertical: AppMargin.m25,
           ),
           child: ElevatedButtonWidget(
             name: AppStrings.activateUserTitle,
@@ -199,7 +198,7 @@ class _UserActivationViewState extends State<UserActivationView> {
   _getActivateServiceContent() {
     return Container(
       margin: const EdgeInsets.only(
-        bottom: AppMargin.m138,
+        bottom: AppMargin.m115,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,6 +262,7 @@ class _UserActivationViewState extends State<UserActivationView> {
                     selectedActivationMethod = val;
                   },
                   displayFn: (item) => (item as ActivationMethod).method,
+                  dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
                 ),
               ),
               if (showPinInput)
@@ -297,7 +297,7 @@ class _UserActivationViewState extends State<UserActivationView> {
                       builder: (BuildContext context, StateSetter setState) {
                         return Switch(
                           value: isChecked,
-                          activeColor: ColorManager.whiteNeutral,
+                          activeColor: ColorManager.blackNeutral,
                           onChanged: (bool value) {
                             setState(() => isChecked = value);
                           },
@@ -307,7 +307,9 @@ class _UserActivationViewState extends State<UserActivationView> {
                     const SizedBox(width: AppSize.s8),
                     Text(
                       AppStrings.moneyCollectedSwitch,
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: ColorManager.blackNeutral,
+                          ),
                     ),
                   ],
                 ),

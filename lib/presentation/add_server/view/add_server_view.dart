@@ -60,16 +60,20 @@ class _AddServerViewState extends State<AddServerView> {
     return WillPopScope(
       onWillPop: () async => Constants.falseBool,
       child: Stack(
-        alignment: Alignment.bottomCenter,
         children: [
-          getScreenFooter(),
-          Column(
-            children: [
-              const SizedBox(height: AppSize.s100),
-              getScreenSmallLogo(),
-              const SizedBox(height: AppSize.s50),
-              getScreenContent(context),
-            ],
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: getScreenFooter(),
+          ),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: AppSize.s100),
+                getScreenSmallLogo(),
+                const SizedBox(height: AppSize.s50),
+                getScreenContent(context),
+              ],
+            ),
           ),
         ],
       ),
@@ -90,8 +94,8 @@ class _AddServerViewState extends State<AddServerView> {
                 theme: const SvgTheme(
                   currentColor: ColorManager.greyNeutral,
                 ),
-                  // ignore: deprecated_member_use
-                  color: ColorManager.greyNeutral,
+                // ignore: deprecated_member_use
+                color: ColorManager.greyNeutral,
               ),
               const SizedBox(width: AppSize.s10),
               Text(

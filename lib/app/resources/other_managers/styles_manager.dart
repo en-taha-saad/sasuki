@@ -27,11 +27,13 @@ class StylesManager {
     required double fontSize,
     required Color color,
     TextDecoration? decoration,
+    double? height,
   }) {
     return getTextStyle(
       fontSize: fontSize,
       fontWeight: FontWeightManager.regular,
       color: color,
+      height: height,
       decoration: decoration,
     );
   }
@@ -56,12 +58,14 @@ class StylesManager {
   static TextStyle getSemiBoldStyle({
     double? fontSize,
     Color? color,
+    double? height,
     TextDecoration? decoration,
   }) {
     return getTextStyle(
       fontSize: fontSize,
       fontWeight: FontWeightManager.semiBold,
       color: color,
+      height: height,
       decoration: decoration,
     );
   }

@@ -114,7 +114,7 @@ class _DashboardViewState extends State<DashboardView> {
               right: AppMargin.m25,
               left: AppMargin.m25,
               top: AppMargin.m20,
-              bottom: AppMargin.m35,
+              bottom: AppMargin.m25,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,22 +140,22 @@ class _DashboardViewState extends State<DashboardView> {
                 const SizedBox(height: AppSize.s20),
                 Text(
                   AppStrings.welcome,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color:
-                            ColorManager.whiteNeutral.withOpacity(AppSize.s0_5),
-                        height: AppSize.s1_5,
-                      ),
+                  style: StylesManager.getRegularStyle(
+                    color: ColorManager.greyNeutral2,
+                    fontSize: FontSize.sSubtitle2,
+                    height: AppSize.s1_5,
+                  ),
                 ),
                 StreamBuilder<Auth>(
                   stream: _viewModel.outputAuthData,
                   builder: (context, snapshot) {
                     return Text(
                       "${snapshot.data?.client?.firstname ?? Constants.dash} ${snapshot.data?.client?.lastname ?? Constants.dash}",
-                      style:
-                          Theme.of(context).textTheme.displayMedium?.copyWith(
-                                color: ColorManager.whiteNeutral,
-                                height: AppSize.s1_5,
-                              ),
+                      style: StylesManager.getMediumStyle(
+                        color: ColorManager.whiteNeutral,
+                        fontSize: FontSize.sHeading5,
+                        height: AppSize.s1_5,
+                      ),
                     );
                   },
                 ),
@@ -169,14 +169,11 @@ class _DashboardViewState extends State<DashboardView> {
                         final currency = snapshot.data?.data?.siteCurrency;
                         return Text(
                           "${currency ?? Constants.dash} ${balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(balance) : Constants.dash}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .displaySmall
-                              ?.copyWith(
-                                color: ColorManager.whiteNeutral
-                                    .withOpacity(AppSize.s0_5),
-                                height: AppSize.s1_5,
-                              ),
+                          style: StylesManager.getMediumStyle(
+                            color: ColorManager.whiteNeutral,
+                            fontSize: FontSize.sHeading5,
+                            height: AppSize.s1_5,
+                          ),
                         );
                       },
                     );
@@ -184,12 +181,10 @@ class _DashboardViewState extends State<DashboardView> {
                 ),
                 Text(
                   AppStrings.availableBalance,
-                  style: StylesManager.getMediumStyle(
-                    color: ColorManager.whiteNeutral.withOpacity(
-                      AppSize.s0_5,
-                    ),
+                   style: StylesManager.getRegularStyle(
+                    color: ColorManager.greyNeutral,
+                    fontSize: FontSize.sSubtitle2,
                     height: AppSize.s1_5,
-                    fontSize: FontSize.sSubtitle5,
                   ),
                 ),
               ],
@@ -224,7 +219,7 @@ class _DashboardViewState extends State<DashboardView> {
           },
         ),
         Container(
-          margin: const EdgeInsets.only(top: AppSize.s25),
+          margin: const EdgeInsets.only(top: AppSize.s20),
           child: getCardTitle(
             IconsAssets.dashboardSalesAndFinance,
             AppStrings.dashboardSalesFinance,

@@ -33,13 +33,13 @@ Widget getActionDialogContent(
                 height: AppSize.s20,
                 width: AppSize.s20,
                 // ignore: deprecated_member_use
-                color: ColorManager.greyNeutral,
+                color: ColorManager.greyNeutral5,
               ),
             ),
             Text(
               dialogTitle,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: ColorManager.greyNeutral,
+                    color: ColorManager.greyNeutral5,
                   ),
             ),
           ],
@@ -56,7 +56,9 @@ Widget getActionDialogContent(
               onTap: () => Nav.popRoute(context),
               child: Text(
                 AppStrings.cancelButton,
-                style: Theme.of(context).textTheme.labelLarge,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: ColorManager.blackNeutral,
+                    ),
               ),
             ),
             ElevatedButtonWidget(

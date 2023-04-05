@@ -101,7 +101,7 @@ class AppStrings {
   static const dashboardNumberofexpiredusers = "number of expired users";
   static const dashboardAboutToExpire = "About To Expire";
   static const dashboardUsersactivebutgoingtoexpiretoday =
-      "users active but going to expire today";
+      "users going to expire today";
   static const dashboardSalesFinance = "Sales & Finance";
   static const dashboardNewRegistrations = "New Registrations";
   static const dashboardUsersaddedthismonth = "users added this month";

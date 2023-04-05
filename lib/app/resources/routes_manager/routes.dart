@@ -8,6 +8,6 @@ class Routes {
   static const String usersListRoute = "/userslist";
   static const String userDetailsRoute = "/userDetails";
   static const String extendUserRoute = "/extendUserRoute";
-    static const String userActivationInformsRoute = "/userActivationInforms";
-
+  static const String userActivationInformsRoute = "/userActivationInforms";
+  static const String addUserRoute = "/addUserRoute";
 }

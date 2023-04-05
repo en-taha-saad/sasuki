@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_add_server_module.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_add_user_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_choose_server_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_dashboard_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_extend_user_module.dart';
@@ -13,6 +14,7 @@ import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/shared_funs/create_route.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
 import 'package:sasuki/presentation/add_server/view/add_server_view.dart';
+import 'package:sasuki/presentation/add_user/view/add_user_view.dart';
 import 'package:sasuki/presentation/choose_server/view/choose_server_view.dart';
 import 'package:sasuki/presentation/dashboard/view/dashboard_view.dart';
 import 'package:sasuki/presentation/drawer/drawer_view.dart';
@@ -113,7 +115,16 @@ class RouteGenerator {
           ),
           settings: settings,
         );
-
+      case Routes.addUserRoute:
+        initAddUserModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            resizeToAvoidBottomInset: Constants.trueBool,
+            isSecondAppBackground: Constants.falseBool,
+            child: AddUser(),
+          ),
+          settings: settings,
+        );
       default:
         return unDefinedRoute();
     }

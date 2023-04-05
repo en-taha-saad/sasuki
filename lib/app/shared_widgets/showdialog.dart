@@ -8,7 +8,7 @@ import 'package:sasuki/app/resources/values_manager/app_size.dart';
 showActionDialog(BuildContext context, Widget? child) {
   return showDialog(
     context: context,
-    barrierColor: ColorManager.primaryshade1.withOpacity(AppSize.s0point4),
+    barrierColor: ColorManager.backgroundCenter.withOpacity(AppSize.s0point4),
     barrierDismissible: Constants.falseBool,
     builder: (BuildContext context) {
       return Dialog(
@@ -16,12 +16,12 @@ showActionDialog(BuildContext context, Widget? child) {
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: AppPadding.p15,
-            vertical: AppPadding.p48,
+            vertical: AppPadding.p30,
           ),
           decoration: BoxDecoration(
-            color: ColorManager.secondary,
+            color: ColorManager.whiteNeutral,
             shape: BoxShape.rectangle,
-            borderRadius: RadiusSizes.radius35,
+            borderRadius: RadiusSizes.radius16,
           ),
           child: child,
         ),

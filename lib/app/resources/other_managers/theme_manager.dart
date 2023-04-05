@@ -149,19 +149,19 @@ ThemeData getApplicationTheme() {
       ),
 
       // heading 4
-      headlineMedium: StylesManager.getSemiBoldStyle(
+      headlineMedium: StylesManager.getMediumStyle(
         color: ColorManager.whiteNeutral,
         fontSize: FontSize.sHeading4,
       ),
 
       // heading 5
-      headlineSmall: StylesManager.getSemiBoldStyle(
+      headlineSmall: StylesManager.getMediumStyle(
         color: ColorManager.whiteNeutral,
         fontSize: FontSize.sHeading5,
       ),
 
       // heading 6
-      titleLarge: StylesManager.getSemiBoldStyle(
+      titleLarge: StylesManager.getMediumStyle(
         color: ColorManager.whiteNeutral,
         fontSize: FontSize.sHeading6,
       ),

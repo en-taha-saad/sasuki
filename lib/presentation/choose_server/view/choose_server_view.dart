@@ -54,14 +54,22 @@ class _ChooseServerViewState extends State<ChooseServerView> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => Constants.falseBool,
-      child: Column(
+      child: Stack(
         children: [
-          const SizedBox(height: AppSize.s100),
-          getScreenSmallLogo(),
-          const SizedBox(height: AppSize.s50),
-          getScreenContent(context),
-          Spacer(flex: AppSize.s2.toInt()),
-          getScreenFooter(),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: getScreenFooter(),
+          ),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: AppSize.s100),
+                getScreenSmallLogo(),
+                const SizedBox(height: AppSize.s50),
+                getScreenContent(context),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -81,8 +89,8 @@ class _ChooseServerViewState extends State<ChooseServerView> {
                 theme: const SvgTheme(
                   currentColor: ColorManager.greyNeutral,
                 ),
-                  // ignore: deprecated_member_use
-                  color: ColorManager.greyNeutral,
+                // ignore: deprecated_member_use
+                color: ColorManager.greyNeutral,
               ),
               const SizedBox(width: AppSize.s10),
               Text(

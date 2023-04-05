@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
+import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/domain/models/dashboard_card_element.dart';
@@ -24,7 +26,7 @@ class DashboardListTile extends StatelessWidget {
               (e) => Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,14 +39,19 @@ class DashboardListTile extends StatelessWidget {
                         children: [
                           Text(
                             e.title,
-                            style: Theme.of(context).textTheme.headlineSmall,
+                            style: StylesManager.getRegularStyle(
+                              color: ColorManager.whiteNeutral,
+                              fontSize: FontSize.sSubtitle2,
+                              // height: AppSize.s1,
+                            ),
                           ),
                           Text(
                             e.subtitle,
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      color: ColorManager.greyNeutral,
-                                    ),
+                            style: StylesManager.getRegularStyle(
+                              color: ColorManager.greyNeutral,
+                              fontSize: FontSize.sSubtitle5,
+                              // height: AppSize.s1,
+                            ),
                             softWrap: Constants.trueBool,
                             overflow: TextOverflow.fade,
                             maxLines: 2,
@@ -55,7 +62,11 @@ class DashboardListTile extends StatelessWidget {
                           ? shimmerText ?? Container()
                           : Text(
                               e.number,
-                              style: Theme.of(context).textTheme.headlineSmall,
+                              style: StylesManager.getRegularStyle(
+                                color: ColorManager.whiteNeutral,
+                                fontSize: FontSize.sSubtitle2,
+                                // height: AppSize.s1,
+                              ),
                             ),
                     ],
                   ),

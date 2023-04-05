@@ -37,12 +37,11 @@ class SingleListTile extends StatelessWidget {
                         children: [
                           Text(
                             e.title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  color: ColorManager.greyNeutral,
-                                ),
+                           style: StylesManager.getRegularStyle(
+                              color: ColorManager.greyNeutral,
+                              fontSize: FontSize.sSubtitle5,
+                              height: AppSize.s1,
+                            ),
                           ),
                           const SizedBox(height: AppSize.s5),
                           Text(
@@ -51,7 +50,7 @@ class SingleListTile extends StatelessWidget {
                               color: e.title == AppStrings.usersStatus
                                   ? getStatusColor(e.subtitle)
                                   : ColorManager.whiteNeutral,
-                              fontSize: FontSize.sInputLabel,
+                              fontSize: FontSize.sSubtitle3,
                             ),
                           ),
                         ],

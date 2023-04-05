@@ -138,7 +138,6 @@ class _ExtendUserViewState extends State<ExtendUserView> {
 
   Widget _getScreenView(context) {
     return Stack(
-      alignment: Alignment.bottomCenter,
       children: [
         SingleChildScrollView(
           child: Column(
@@ -148,8 +147,7 @@ class _ExtendUserViewState extends State<ExtendUserView> {
                 margin: const EdgeInsets.only(
                   right: AppMargin.m25,
                   left: AppMargin.m25,
-                  top: AppMargin.m20,
-                  bottom: AppMargin.m25,
+                  bottom: AppMargin.m5,
                 ),
                 child: AppBar(
                   elevation: AppSize.s0,
@@ -175,14 +173,17 @@ class _ExtendUserViewState extends State<ExtendUserView> {
             ],
           ),
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: AppMargin.m25,
-            vertical: AppMargin.m50,
-          ),
-          child: ElevatedButtonWidget(
-            name: AppStrings.extendUserFloatingButtonTitle,
-            onPressed: _extendUser,
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: AppMargin.m25,
+              vertical: AppMargin.m25,
+            ),
+            child: ElevatedButtonWidget(
+              name: AppStrings.extendUserFloatingButtonTitle,
+              onPressed: _extendUser,
+            ),
           ),
         ),
       ],
@@ -192,7 +193,7 @@ class _ExtendUserViewState extends State<ExtendUserView> {
   _getExtendServiceContent() {
     return Container(
       margin: const EdgeInsets.only(
-        bottom: AppMargin.m138,
+        bottom: AppMargin.m115,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -248,7 +249,8 @@ class _ExtendUserViewState extends State<ExtendUserView> {
                 doOtherThings: (val) {
                   selectedActivationMethod = val;
                 },
-                displayFn: (item) => (item as ActivationMethod).method,
+                displayFn: (item) => (item as ActivationMethod).method,          dropdownColor:  ColorManager.greyNeutral.withOpacity(0.25),
+
               ),
             ),
             DropDownComponent<Extension>(
@@ -259,7 +261,8 @@ class _ExtendUserViewState extends State<ExtendUserView> {
                 extensionValue = val;
               },
               displayFn: (item) =>
-                  (item as Extension).name ?? Constants.emptyStr,
+                  (item as Extension).name ?? Constants.emptyStr,          dropdownColor:  ColorManager.greyNeutral.withOpacity(0.25),
+
             )
           ],
         );

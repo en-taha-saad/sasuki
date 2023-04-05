@@ -22,12 +22,14 @@ class DropDownComponent<T> extends StatefulWidget {
   final void Function(dynamic) doOtherThings;
   final bool isThisServersDropdown;
   final ChooseServerViewModel? viewModel;
+  final Color? dropdownColor;
   const DropDownComponent({
     Key? key,
     required this.items,
     required this.displayFn,
     required this.doOtherThings,
     required this.isThisServersDropdown,
+    this.dropdownColor,
     this.hintStr,
     this.viewModel,
   }) : super(key: key);
@@ -205,6 +207,13 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
           ? AppStrings.dropDownHint
           : widget.hintStr ?? AppStrings.emptyString),
       alignment: Alignment.centerLeft,
+      decoration: InputDecoration(
+        fillColor: widget.dropdownColor,
+        
+        hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: ColorManager.blackNeutral,
+            ),
+      ),
       dropdownColor: ColorManager.backgroundCenter,
       style: Theme.of(context).textTheme.bodyLarge,
       elevation: Constants.zeroNum.toInt(),
@@ -212,10 +221,12 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
         return widget.items
             .map(
               (e) => SizedBox(
-                width: AppSize.s250,
+                width: AppSize.s150,
                 child: Text(
                   widget.displayFn(e),
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: ColorManager.blackNeutral,
+                      ),
                   overflow: TextOverflow.fade,
                   textAlign: TextAlign.left,
                 ),

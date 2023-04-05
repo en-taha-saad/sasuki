@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
+import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
 Widget getCardTitle(icon, title, context) {
@@ -11,7 +13,7 @@ Widget getCardTitle(icon, title, context) {
       vertical: AppSize.s10,
     ),
     margin: const EdgeInsets.only(
-      bottom: AppSize.s20,
+      bottom: AppSize.s15,
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -30,7 +32,10 @@ Widget getCardTitle(icon, title, context) {
         ),
         Text(
           title,
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: StylesManager.getMediumStyle(
+            color: ColorManager.whiteNeutral,
+            fontSize: FontSize.sSubtitle2,
+          ),
         ),
       ],
     ),

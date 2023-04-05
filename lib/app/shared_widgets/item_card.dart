@@ -67,8 +67,8 @@ class ItemCard extends StatelessWidget {
                   theme: const SvgTheme(
                     currentColor: ColorManager.whiteNeutral,
                   ),
-                    // ignore: deprecated_member_use
-                    color: ColorManager.whiteNeutral,
+                  // ignore: deprecated_member_use
+                  color: ColorManager.whiteNeutral,
                 ),
               ),
               const SizedBox(width: AppSize.s15),
@@ -87,7 +87,12 @@ class ItemCard extends StatelessWidget {
                           width: AppSize.s150,
                           child: Text(
                             fullName!,
-                            style: Theme.of(context).textTheme.titleLarge,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w400,
+                                ),
                             maxLines: Constants.oneNum.toInt(),
                             overflow: TextOverflow.ellipsis,
                             softWrap: Constants.trueBool,
@@ -104,7 +109,10 @@ class ItemCard extends StatelessWidget {
                           )
                         : Text(
                             username!,
-                            style: Theme.of(context).textTheme.bodySmall,
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                    ),
                             maxLines: Constants.oneNum.toInt(),
                             overflow: TextOverflow.ellipsis,
                             softWrap: Constants.trueBool,
@@ -123,22 +131,6 @@ class ItemCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: AppSize.s10),
-                  isShimmer != Constants.nullValue &&
-                          isShimmer != Constants.falseBool
-                      ? const ShimmerText(
-                          baseColor: ColorManager.whiteNeutral,
-                          highlightColor: ColorManager.backgroundCenter,
-                          width: AppSize.s35,
-                        )
-                      : Text(
-                          balance!,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: ColorManager.greyNeutral,
-                                  ),
-                        ),
-                  const SizedBox(height: AppSize.s10),
                   SizedBox(
                     width: AppSize.s210,
                     child: isShimmer != Constants.nullValue &&
@@ -152,7 +144,7 @@ class ItemCard extends StatelessWidget {
                             "Expires on $expireOn",
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w400,
                                       color: ColorManager.greyNeutral,
                                     ),
                             maxLines: Constants.oneNum.toInt(),
@@ -183,7 +175,12 @@ class ItemCard extends StatelessWidget {
                           )
                         : Text(
                             profileName!,
-                            style: Theme.of(context).textTheme.labelSmall,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w400,
+                                ),
                           ),
                   ),
                 ],
