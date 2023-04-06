@@ -196,8 +196,7 @@ class _UsersListViewState extends State<UsersListView> {
                   ),
                   InkWell(
                     onTap: () {
-                      // TODO : Add code for add user
-                      // Nav.navTo(context, Routes.addUserRoute);
+                      Nav.navTo(context, Routes.addUserRoute);
                     },
                     child: Container(
                       padding: const EdgeInsets.all(AppPadding.p7),
@@ -257,8 +256,8 @@ class _UsersListViewState extends State<UsersListView> {
                   theme: const SvgTheme(
                     currentColor: ColorManager.greyNeutral,
                   ),
-                    // ignore: deprecated_member_use
-                    color: ColorManager.greyNeutral,
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral,
                 ),
               ),
               InkWell(
@@ -270,8 +269,8 @@ class _UsersListViewState extends State<UsersListView> {
                   theme: const SvgTheme(
                     currentColor: ColorManager.greyNeutral,
                   ),
-                    // ignore: deprecated_member_use
-                    color: ColorManager.greyNeutral,
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral,
                 ),
               ),
             ],
@@ -373,7 +372,6 @@ class _UsersListViewState extends State<UsersListView> {
             (usersListData) {
               return InkWell(
                 onTap: () {
-                  // TODO: Add code for user details
                   Nav.navTo(context, Routes.userDetailsRoute);
                   instance<UserDetailsViewModel>()
                       .getUserApiOverview(usersListData.id);

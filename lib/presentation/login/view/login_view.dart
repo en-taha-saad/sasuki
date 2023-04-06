@@ -20,6 +20,7 @@ import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/get_data_from_base64string.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/footer.dart';
+import 'package:sasuki/app/shared_widgets/password_input.dart';
 import 'package:sasuki/app/shared_widgets/small_logo.dart';
 import 'package:sasuki/domain/usecase/login_usecase/login_usecase_input.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
@@ -201,8 +202,8 @@ class _LoginViewState extends State<LoginView> {
               theme: const SvgTheme(
                 currentColor: ColorManager.greyNeutral,
               ),
-                // ignore: deprecated_member_use
-                color: ColorManager.greyNeutral,
+              // ignore: deprecated_member_use
+              color: ColorManager.greyNeutral,
             ),
             const SizedBox(width: AppSize.s10),
             Text(
@@ -249,7 +250,7 @@ class _LoginViewState extends State<LoginView> {
             autofocus: Constants.trueBool,
           ),
           const SizedBox(height: AppSize.s25),
-          _getSingleTextField(
+          PasswordTextInput(
             stream: _viewModel.outputIsPasswordValid,
             controller: _userPasswordController,
             // controller: rememberMe == true ? null : _userPasswordController,
@@ -324,8 +325,8 @@ class _LoginViewState extends State<LoginView> {
                                 theme: const SvgTheme(
                                   currentColor: ColorManager.whiteNeutral,
                                 ),
-                                  // ignore: deprecated_member_use
-                                  color: ColorManager.whiteNeutral,
+                                // ignore: deprecated_member_use
+                                color: ColorManager.whiteNeutral,
                               ),
                               onTap: () {
                                 setState(() {

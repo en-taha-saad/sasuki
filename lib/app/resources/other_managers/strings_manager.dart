@@ -201,6 +201,7 @@ class AppStrings {
   static const managerRenamedSuccess = "username renamed successfully";
 
   static const addManagerTitle = "Manager Form";
+  static const addEditUserTitle = "User Form";
 
   static const usernameInputtitle = "New Username";
   static const amountInputtitle = "Amount";
@@ -244,10 +245,10 @@ class AppStrings {
   static const createNewUserTitle = "Create New User";
   static const createNewManagerTitle = "Create New Manager";
   static const editCurrentUserTitle = "Edit User";
-  static const userFirstNameHint = "first name";
-  static const userLastNameHint = "last name";
-  static const userPhoneHint = "phone";
-  static const userNotesHint = "notes";
+  static const userFirstNameHint = "First Name";
+  static const userLastNameHint = "Last Name";
+  static const userPhoneHint = "Phone";
+  static const userNotesHint = "Notes";
   static const userCompanyHint = "company";
   static const userAddressHint = "address";
   static const userEmailHint = "email";
