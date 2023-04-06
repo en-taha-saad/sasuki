@@ -355,8 +355,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         Nav.navTo(context, Routes.userActivationInformsRoute);
         break;
       case AppStrings.userActionEdit:
-        // TODO: implement edit user
-        // Nav.navTo(context, Routes.editUserRoute);
+        Nav.navTo(context, Routes.editUserRoute);
         break;
       case AppStrings.userActionExtend:
         Nav.navTo(context, Routes.extendUserRoute);

@@ -10,4 +10,5 @@ class Routes {
   static const String extendUserRoute = "/extendUserRoute";
   static const String userActivationInformsRoute = "/userActivationInforms";
   static const String addUserRoute = "/addUserRoute";
+  static const String editUserRoute = "/editUserRoute";
 }

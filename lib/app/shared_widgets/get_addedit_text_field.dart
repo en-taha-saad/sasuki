@@ -20,7 +20,7 @@ Widget getAddEditTextFieldInput(
         margin: const EdgeInsets.only(bottom: AppMargin.m10),
         child: Text(
           textFieldLabel,
-          style: Theme.of(context).textTheme.labelLarge,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
       TextFormField(
