@@ -87,33 +87,33 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   }
 
   Widget _getScreenView(context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          AppSize.statusBarHeight(context),
-          Container(
-            margin: const EdgeInsets.only(
-              right: AppMargin.m25,
-              left: AppMargin.m25,
-              bottom: AppMargin.m25,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _getUserActions(context),
-                const SizedBox(height: AppSize.s20),
-                _getStatisticsCard(context),
-              ],
-            ),
+    return Column(
+      children: [
+        AppSize.statusBarHeight(context),
+        Container(
+          margin: const EdgeInsets.only(
+            right: AppMargin.m25,
+            left: AppMargin.m25,
+            bottom: AppMargin.m25,
           ),
-          Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              _getUserActions(context),
+              const SizedBox(height: AppSize.s20),
+              _getStatisticsCard(context),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Container(
             width: MediaQuery.of(context).size.width,
             child: _getUserDetailsContent(),
             color: ColorManager.secondary,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -297,34 +297,36 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   }
 
   _getUserDetailsContent() {
-    return Container(
-      margin: const EdgeInsets.only(
-        bottom: AppMargin.m50,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          getCardTitle(
-            IconsAssets.information,
-            AppStrings.userOverviewUserInformation,
-            context,
-          ),
-          SingleListTile(
-            list: _viewModel.listOfUserInforms(userOverviewApiVar),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: AppSize.s25),
-            child: getCardTitle(
-              IconsAssets.userServiceInformation,
-              AppStrings.userOverviewServiceInformation,
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.only(
+          bottom: AppMargin.m50,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            getCardTitle(
+              IconsAssets.information,
+              AppStrings.userOverviewUserInformation,
               context,
             ),
-          ),
-          SingleListTile(
-            list: _viewModel.listOfServiceInforms(userOverviewApiVar),
-          ),
-        ],
+            SingleListTile(
+              list: _viewModel.listOfUserInforms(userOverviewApiVar),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: AppSize.s25),
+              child: getCardTitle(
+                IconsAssets.userServiceInformation,
+                AppStrings.userOverviewServiceInformation,
+                context,
+              ),
+            ),
+            SingleListTile(
+              list: _viewModel.listOfServiceInforms(userOverviewApiVar),
+            ),
+          ],
+        ),
       ),
     );
   }

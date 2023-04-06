@@ -140,6 +140,7 @@ ThemeData getApplicationTheme() {
       displayMedium: StylesManager.getSemiBoldStyle(
         color: ColorManager.whiteNeutral,
         fontSize: FontSize.sHeading2,
+        height: AppSize.s1_5,
       ),
 
       // heading 3

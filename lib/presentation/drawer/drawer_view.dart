@@ -162,124 +162,130 @@ class DrawerView extends StatelessWidget {
   }
 
   Widget _getContentWidget(context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          AppSize.statusBarHeight(context),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    child: SvgPicture.asset(IconsAssets.cancel),
-                    onTap: () => Nav.popRoute(context),
-                  ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        AppSize.statusBarHeight(context),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: InkWell(
+                  child: SvgPicture.asset(IconsAssets.cancel),
+                  onTap: () => Nav.popRoute(context),
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    _viewModel.selectedServer?.name ?? Constants.emptyStr,
-                    style: Theme.of(context).textTheme.displayLarge,
-                  ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  _viewModel.selectedServer?.name ?? Constants.emptyStr,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
-                const SizedBox(height: AppSize.s20),
-                Text(
-                  AppStrings.welcome,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: ColorManager.greyNeutral2,
-                        height: AppSize.s1_5,
-                      ),
+              ),
+              const SizedBox(height: AppSize.s20),
+              Text(
+                AppStrings.welcome,
+                style: StylesManager.getRegularStyle(
+                  color: ColorManager.greyNeutral,
+                  fontSize: FontSize.sSubtitle2,
+                  height: AppSize.s1_5,
                 ),
-                Text(
-                  "${_viewModel.auth?.client?.firstname ?? Constants.emptyStr} ${_viewModel.auth?.client?.lastname ?? Constants.emptyStr}",
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        color: ColorManager.whiteNeutral,
-                        height: AppSize.s1_5,
-                      ),
+              ),
+              Text(
+                "${_viewModel.auth?.client?.firstname ?? Constants.emptyStr} ${_viewModel.auth?.client?.lastname ?? Constants.emptyStr}",
+                style: StylesManager.getMediumStyle(
+                  color: ColorManager.whiteNeutral,
+                  fontSize: FontSize.sHeading5,
+                  height: AppSize.s1_5,
                 ),
-                Text(
-                  "${_viewModel.dataCaptcha?.data?.siteCurrency ?? Constants.emptyStr} ${_viewModel.dashboardData?.data?.balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(_viewModel.dashboardData?.data?.balance) : Constants.emptyStr}",
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        height: AppSize.s1_5,
-                      ),
+              ),
+              Text(
+                "${_viewModel.dataCaptcha?.data?.siteCurrency ?? Constants.emptyStr} ${_viewModel.dashboardData?.data?.balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(_viewModel.dashboardData?.data?.balance) : Constants.emptyStr}",
+                style: StylesManager.getMediumStyle(
+                  color: ColorManager.whiteNeutral,
+                  fontSize: FontSize.sHeading5,
+                  height: AppSize.s1_5,
                 ),
-                Text(
-                  AppStrings.availableBalance,
-                  style: StylesManager.getSemiBoldStyle(
-                    color: ColorManager.greyNeutral2,
-                    height: AppSize.s1_5,
-                    fontSize: FontSize.sSubtitle5,
-                  ),
+              ),
+              Text(
+                AppStrings.availableBalance,
+                style: StylesManager.getRegularStyle(
+                  color: ColorManager.greyNeutral,
+                  fontSize: FontSize.sSubtitle2,
+                  height: AppSize.s1_5,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const SizedBox(height: AppSize.s25),
-          Container(
+        ),
+        const SizedBox(height: AppSize.s25),
+        Expanded(
+          child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: _getDrawerContent(context),
             decoration: const BoxDecoration(color: ColorManager.secondary),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   _getDrawerContent(context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: listOfDrawerBars
-            .map(
-              (element) => InkWell(
-                onTap: onDrawerBarTapped(element, context),
-                child: Column(
-                  children: [
-                    if (element == listOfDrawerBars.first)
-                      const SizedBox(height: AppSize.s25),
-                    Container(
-                      margin: (listOfDrawerBars.indexOf(element) ==
-                                  AppSize.s3 ||
-                              listOfDrawerBars.indexOf(element) == AppSize.s5)
-                          ? null
-                          : const EdgeInsets.only(bottom: AppSize.s20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(element.icon!),
-                          const SizedBox(width: AppSize.s20),
-                          Text(
-                            element.title,
-                            style: StylesManager.getRegularStyle(
-                              color: ColorManager.whiteNeutral,
-                              fontSize: FontSize.sButton,
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: listOfDrawerBars
+              .map(
+                (element) => InkWell(
+                  onTap: onDrawerBarTapped(element, context),
+                  child: Column(
+                    children: [
+                      if (element == listOfDrawerBars.first)
+                        const SizedBox(height: AppSize.s25),
+                      Container(
+                        margin: (listOfDrawerBars.indexOf(element) ==
+                                    AppSize.s3 ||
+                                listOfDrawerBars.indexOf(element) == AppSize.s5)
+                            ? null
+                            : const EdgeInsets.only(bottom: AppSize.s20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(element.icon!),
+                            const SizedBox(width: AppSize.s20),
+                            Text(
+                              element.title,
+                              style: StylesManager.getRegularStyle(
+                                color: ColorManager.whiteNeutral,
+                                fontSize: FontSize.sButton,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (listOfDrawerBars.indexOf(element) == AppSize.s3 ||
-                        listOfDrawerBars.indexOf(element) == AppSize.s5)
-                      Divider(
-                        color: ColorManager.greyNeutral.withOpacity(
-                          AppSize.s0point25,
+                          ],
                         ),
                       ),
-                  ],
+                      if (listOfDrawerBars.indexOf(element) == AppSize.s3 ||
+                          listOfDrawerBars.indexOf(element) == AppSize.s5)
+                        Divider(
+                          color: ColorManager.greyNeutral.withOpacity(
+                            AppSize.s0point25,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            )
-            .toList(),
+              )
+              .toList(),
+        ),
       ),
     );
   }

@@ -139,39 +139,39 @@ class _ExtendUserViewState extends State<ExtendUserView> {
   Widget _getScreenView(context) {
     return Stack(
       children: [
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              AppSize.statusBarHeight(context),
-              Container(
-                margin: const EdgeInsets.only(
-                  right: AppMargin.m25,
-                  left: AppMargin.m25,
-                  bottom: AppMargin.m5,
+        Column(
+          children: [
+            AppSize.statusBarHeight(context),
+            Container(
+              margin: const EdgeInsets.only(
+                right: AppMargin.m25,
+                left: AppMargin.m25,
+                bottom: AppMargin.m5,
+              ),
+              child: AppBar(
+                elevation: AppSize.s0,
+                backgroundColor: Colors.transparent,
+                centerTitle: Constants.trueBool,
+                leadingWidth: AppSize.s10,
+                titleTextStyle: Theme.of(context).textTheme.headlineMedium,
+                leading: InkWell(
+                  child: SvgPicture.asset(IconsAssets.back),
+                  onTap: () => Nav.popRoute(context),
                 ),
-                child: AppBar(
-                  elevation: AppSize.s0,
-                  backgroundColor: Colors.transparent,
-                  centerTitle: Constants.trueBool,
-                  leadingWidth: AppSize.s10,
-                  titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-                  leading: InkWell(
-                    child: SvgPicture.asset(IconsAssets.back),
-                    onTap: () => Nav.popRoute(context),
-                  ),
-                  title: Text(
-                    AppStrings.extendUserTitle,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
+                title: Text(
+                  AppStrings.extendUserTitle,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
-              Container(
+            ),
+            Expanded(
+              child: Container(
                 width: MediaQuery.of(context).size.width,
                 color: ColorManager.secondary,
                 child: _getExtendServiceContent(),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -191,25 +191,27 @@ class _ExtendUserViewState extends State<ExtendUserView> {
   }
 
   _getExtendServiceContent() {
-    return Container(
-      margin: const EdgeInsets.only(
-        bottom: AppMargin.m115,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          getCardTitle(
-            IconsAssets.maximizecircleUserAction,
-            AppStrings.userActionExtend,
-            context,
-          ),
-          SingleListTile(
-            list: _extendUserViewModel.listOfExtendUserInforms(
-              extendUserInformsVar,
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.only(
+          bottom: AppMargin.m115,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            getCardTitle(
+              IconsAssets.maximizecircleUserAction,
+              AppStrings.userActionExtend,
+              context,
             ),
-          ),
-        ],
+            SingleListTile(
+              list: _extendUserViewModel.listOfExtendUserInforms(
+                extendUserInformsVar,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

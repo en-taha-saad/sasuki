@@ -147,39 +147,39 @@ class _UserActivationViewState extends State<UserActivationView> {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              AppSize.statusBarHeight(context),
-              Container(
-                margin: const EdgeInsets.only(
-                  right: AppMargin.m25,
-                  left: AppMargin.m25,
-                  bottom: AppMargin.m5,
+        Column(
+          children: [
+            AppSize.statusBarHeight(context),
+            Container(
+              margin: const EdgeInsets.only(
+                right: AppMargin.m25,
+                left: AppMargin.m25,
+                bottom: AppMargin.m5,
+              ),
+              child: AppBar(
+                elevation: AppSize.s0,
+                backgroundColor: Colors.transparent,
+                centerTitle: Constants.trueBool,
+                leadingWidth: AppSize.s10,
+                titleTextStyle: Theme.of(context).textTheme.headlineMedium,
+                leading: InkWell(
+                  child: SvgPicture.asset(IconsAssets.back),
+                  onTap: () => Nav.popRoute(context),
                 ),
-                child: AppBar(
-                  elevation: AppSize.s0,
-                  backgroundColor: Colors.transparent,
-                  centerTitle: Constants.trueBool,
-                  leadingWidth: AppSize.s10,
-                  titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-                  leading: InkWell(
-                    child: SvgPicture.asset(IconsAssets.back),
-                    onTap: () => Nav.popRoute(context),
-                  ),
-                  title: Text(
-                    AppStrings.activateUserTitle,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
+                title: Text(
+                  AppStrings.activateUserTitle,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
-              Container(
+            ),
+            Expanded(
+              child: Container(
                 width: MediaQuery.of(context).size.width,
                 color: ColorManager.secondary,
                 child: _getActivateServiceContent(),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         Container(
           margin: const EdgeInsets.symmetric(
@@ -196,26 +196,28 @@ class _UserActivationViewState extends State<UserActivationView> {
   }
 
   _getActivateServiceContent() {
-    return Container(
-      margin: const EdgeInsets.only(
-        bottom: AppMargin.m115,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          getCardTitle(
-            IconsAssets.tickcircleUserAction,
-            AppStrings.activateInputDialogtitle0,
-            context,
-          ),
-          SingleListTile(
-            list: _userActivationViewModel.listOfActivationInforms(
-              userOverviewApiVar,
-              activationInformsVar,
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.only(
+          bottom: AppMargin.m115,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            getCardTitle(
+              IconsAssets.tickcircleUserAction,
+              AppStrings.activateInputDialogtitle0,
+              context,
             ),
-          ),
-        ],
+            SingleListTile(
+              list: _userActivationViewModel.listOfActivationInforms(
+                userOverviewApiVar,
+                activationInformsVar,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
