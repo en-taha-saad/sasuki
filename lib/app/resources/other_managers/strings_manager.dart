@@ -288,7 +288,7 @@ class AppStrings {
   static const inputIsEmpty = "input is empty";
   static const dropdownIsRequired = "dropdown is required";
   static const retryAgain = "Retry again";
-  static const dialogTitle = "Are you sure you want to delete this server?";
+  static const dialogTitle = "Are you sure you want to delete this server";
 
   static const ispError = "ISP name is required";
   static const serverAddressError = "Invalid Server Address";

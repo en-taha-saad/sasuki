@@ -11,6 +11,8 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/app/shared_widgets/get_action_dialog_content.dart';
+import 'package:sasuki/app/shared_widgets/showdialog.dart';
 import 'package:sasuki/domain/models/choosing_server/server.dart';
 import 'package:sasuki/presentation/choose_server/viewmodel/choose_server_viewmodel.dart';
 
@@ -21,6 +23,7 @@ class DropDownComponent<T> extends StatefulWidget {
   final String? hintStr;
   final void Function(dynamic) doOtherThings;
   final bool isThisServersDropdown;
+  final bool? isThisActionDropdown;
   final ChooseServerViewModel? viewModel;
   final Color? dropdownColor;
   const DropDownComponent({
@@ -32,6 +35,7 @@ class DropDownComponent<T> extends StatefulWidget {
     this.dropdownColor,
     this.hintStr,
     this.viewModel,
+    this.isThisActionDropdown,
   }) : super(key: key);
 
   @override
@@ -42,67 +46,20 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
   T? _selectedItem;
 
   deleteServerDialog(Server? value, BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(borderRadius: RadiusSizes.radius10),
-          elevation: AppSize.s1_5,
-          backgroundColor: Colors.transparent,
-          child: Container(
-            decoration: BoxDecoration(
-              color: ColorManager.whiteNeutral,
-              shape: BoxShape.rectangle,
-              borderRadius: RadiusSizes.radius10,
-              boxShadow: const [BoxShadow(color: Colors.black26)],
-            ),
-            child: _getDialogContent(value, context),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _getDialogContent(Server? value, BuildContext context0) {
-    return Padding(
-      padding: const EdgeInsets.all(AppPadding.p16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            AppStrings.dialogTitle,
-            textAlign: TextAlign.center,
-            style: StylesManager.getMediumStyle(
-              color: ColorManager.backgroundCenter,
-              fontSize: AppSize.s16,
-            ),
-          ),
-          const SizedBox(height: AppSize.s16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TextButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: ColorManager.backgroundCenter,
-                ),
-                onPressed: () => Nav.popRoute(context),
-                child: const Text(AppStrings.cancelButton),
+    return showActionDialog(
+      context,
+      getActionDialogContent(
+        context,
+        Text(
+          "${AppStrings.dialogTitle} ${value?.name}?",
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: ColorManager.blackNeutral,
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorManager.backgroundCenter,
-                  foregroundColor: ColorManager.whiteNeutral,
-                  textStyle: Theme.of(context).textTheme.titleMedium,
-                ),
-                onPressed: () => _deleteServer(value),
-                child: const Text(AppStrings.deleteButton),
-              ),
-            ],
-          ),
-        ],
+        ),
+        AppStrings.userActionDelete,
+        AppStrings.userActionDeleteDialogTitle,
+        IconsAssets.trashUserAction,
+        () => _deleteServer(value),
       ),
     );
   }
@@ -137,6 +94,7 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
         });
         widget.doOtherThings(val);
       },
+      menuMaxHeight: MediaQuery.of(context).size.height * AppSize.s0_5,
       items: widget.items
           .map<DropdownMenuItem<T>>(
             (item) => DropdownMenuItem<T>(
@@ -161,18 +119,13 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                                   widget.displayFn(item),
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
-                                Opacity(
-                                  opacity: AppOpacity.op30,
-                                  child: IconButton(
-                                    icon: const Icon(
-                                      MdiIcons.delete,
-                                      color: ColorManager.whiteNeutral,
-                                    ),
-                                    onPressed: () {
-                                      deleteServerDialog(
-                                          item as Server, context);
-                                    },
+                                InkWell(
+                                  onTap: () => deleteServerDialog(
+                                    item as Server,
+                                    context,
                                   ),
+                                  child: SvgPicture.asset(
+                                      IconsAssets.trashUserAction),
                                 ),
                               ],
                             ),
@@ -205,13 +158,14 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
       },
       hint: Text(widget.isThisServersDropdown
           ? AppStrings.dropDownHint
-          : widget.hintStr ?? AppStrings.emptyString),
+          : widget.hintStr ?? Constants.emptyStr),
       alignment: Alignment.centerLeft,
       decoration: InputDecoration(
         fillColor: widget.dropdownColor,
-        
         hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: ColorManager.blackNeutral,
+              color: widget.isThisActionDropdown != Constants.nullValue
+                  ? ColorManager.blackNeutral
+                  : Constants.nullValue,
             ),
       ),
       dropdownColor: ColorManager.backgroundCenter,
@@ -225,7 +179,10 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                 child: Text(
                   widget.displayFn(e),
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: ColorManager.blackNeutral,
+                        color:
+                            widget.isThisActionDropdown != Constants.nullValue
+                                ? ColorManager.blackNeutral
+                                : Constants.nullValue,
                       ),
                   overflow: TextOverflow.fade,
                   textAlign: TextAlign.left,

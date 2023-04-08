@@ -24,8 +24,8 @@ class StylesManager {
 
 // regular style
   static TextStyle getRegularStyle({
-    required double fontSize,
-    required Color color,
+    double? fontSize,
+    Color? color,
     TextDecoration? decoration,
     double? height,
   }) {

@@ -191,6 +191,7 @@ class _AddServerViewState extends State<AddServerView> {
               controller: controller,
               decoration: InputDecoration(
                 hintText: inputHint,
+                
                 errorText: (snapshot.data ?? Constants.trueBool)
                     ? Constants.nullValue
                     : errorText,

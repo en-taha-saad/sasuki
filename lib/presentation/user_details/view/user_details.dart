@@ -437,13 +437,14 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         }
         return DropDownComponent<ProfileData>(
           isThisServersDropdown: Constants.falseBool,
+          isThisActionDropdown: Constants.trueBool,
           hintStr: AppStrings.changeProfileHint,
           items: profileList ?? [],
           doOtherThings: (val) {
             selectedprofile = val;
           },
           displayFn: (item) => (item as ProfileData).name,
-          dropdownColor:  ColorManager.greyNeutral.withOpacity(0.25),
+          dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
         );
       },
     );

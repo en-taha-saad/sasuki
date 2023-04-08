@@ -132,86 +132,72 @@ ThemeData getApplicationTheme() {
     textTheme: TextTheme(
       // heading 1
       displayLarge: StylesManager.getMediumStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sHeading1,
       ),
 
       // heading 2
       displayMedium: StylesManager.getSemiBoldStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sHeading2,
         height: AppSize.s1_5,
       ),
 
       // heading 3
       displaySmall: StylesManager.getBoldStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sHeading3,
       ),
 
       // heading 4
       headlineMedium: StylesManager.getMediumStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sHeading4,
       ),
 
       // heading 5
       headlineSmall: StylesManager.getMediumStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sHeading5,
       ),
 
       // heading 6
       titleLarge: StylesManager.getMediumStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sHeading6,
       ),
 
       // subtitle 1
       titleMedium: StylesManager.getMediumStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sSubtitle1,
       ),
 
       // subtitle 2,
       titleSmall: StylesManager.getMediumStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sSubtitle2,
       ),
 
       // button
       labelLarge: StylesManager.getSemiBoldStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sInputLabel,
       ),
 
       // badge 1
       labelMedium: StylesManager.getRegularStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sBadge1,
       ),
 
       // badge 2
       labelSmall: StylesManager.getSemiBoldStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sBadge1,
       ),
 
       // bodyText1 (input text), body2
       bodyLarge: StylesManager.getRegularStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sInputText,
       ),
 
       // bodyText2
       bodyMedium: StylesManager.getRegularStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sBadge1,
       ),
 
       // caption 1, 2
       bodySmall: StylesManager.getSemiBoldStyle(
-        color: ColorManager.whiteNeutral,
         fontSize: FontSize.sCaption1,
       ),
     ),
