@@ -142,6 +142,9 @@ extension FlowStateExtension on FlowState {
       (_) {
         showDialog(
           context: context,
+          barrierColor:
+              ColorManager.backgroundCenter.withOpacity(AppSize.s0point4),
+          barrierDismissible: Constants.trueBool,
           builder: (BuildContext context) {
             return StateRenderer(
               stateRendererType: stateRendererType,
@@ -179,15 +182,15 @@ extension FlowStateExtension on FlowState {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               shape: RoundedRectangleBorder(
-                borderRadius: RadiusSizes.radius12,
+                borderRadius: RadiusSizes.radius4,
               ),
               elevation: AppSize.s1_5,
-              backgroundColor: ColorManager.whiteNeutral,
+              backgroundColor: ColorManager.greyNeutral3,
               dismissDirection: DismissDirection.vertical,
               duration: const Duration(seconds: Constants.snackBarDelay),
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppPadding.p8,
-                vertical: AppPadding.p4,
+              padding: const EdgeInsets.only(
+                left: AppPadding.p16,
+                right: AppPadding.p8,
               ),
               behavior: SnackBarBehavior.floating,
               content: StateRenderer(

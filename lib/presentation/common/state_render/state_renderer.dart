@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
+import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/app/shared_widgets/showdialog.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/dashboard_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/userlist_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/state_render/states/mobile_module_screen.dart';
@@ -33,41 +36,67 @@ class StateRenderer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => _getStateWidget(context);
 
+  _showPopupWidget(
+    Widget child, {
+    double? height,
+    double? width,
+  }) {
+    return Dialog(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppPadding.p15,
+          vertical: AppPadding.p30,
+        ),
+        height: height ?? 245,
+        width: width ?? double.infinity - 50,
+        decoration: BoxDecoration(
+          color: ColorManager.secondary,
+          shape: BoxShape.rectangle,
+          borderRadius: RadiusSizes.radius16,
+        ),
+        child: child,
+      ),
+    );
+  }
+
   Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.popupLoadingState:
-        return _getPopUpDialog(
-          context,
-          [_getAnimatedImage(JsonAssets.loading)],
+        return _showPopupWidget(
+          Column(children: [_getAnimatedImage(JsonAssets.loading)]),
+          height: 160,
+          width: 150,
         );
       case StateRendererType.popupErrorState:
-        return _getPopUpDialog(
-          context,
-          [
-            _getAnimatedImage(JsonAssets.error),
-            _getMessage(message),
-            _getRetryButton(AppStrings.ok, context),
-          ],
+        return _showPopupWidget(
+          Column(
+            children: [
+              _getAnimatedImage(JsonAssets.error),
+              _getMessage(message),
+              _getRetryButton(AppStrings.ok, context),
+            ],
+          ),
         );
       case StateRendererType.popupSuccessState:
-        return _getPopUpDialog(
-          context,
-          [
-            _getAnimatedImage(JsonAssets.success),
-            _getMessage(title),
-            _getRetryButton(
-              AppStrings.ok,
-              context,
-              title: title,
-            ),
-          ],
+        return _showPopupWidget(
+          Column(
+            children: [
+              _getAnimatedImage(JsonAssets.success),
+              _getMessage(title),
+              _getRetryButton(
+                AppStrings.ok,
+                context,
+                title: title,
+              ),
+            ],
+          ),
         );
       case StateRendererType.fullScreenLoadingState:
         return _getFullScreenLoadingWidget(mobileModuleScreen);
       case StateRendererType.toastErrorState:
-        return _getSnackBarErrorWidget(
-          context,
-          [
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
             _getSnackBarMessage(message, context),
             _getRetryButton(AppStrings.retryAgain, context),
           ],
@@ -81,38 +110,8 @@ class StateRenderer extends StatelessWidget {
     }
   }
 
-  Widget _getPopUpDialog(BuildContext context, List<Widget> children) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: RadiusSizes.radius12,
-      ),
-      elevation: AppSize.s1_5,
-      backgroundColor: Colors.transparent,
-      child: Container(
-        decoration: BoxDecoration(
-          color: ColorManager.whiteNeutral,
-          shape: BoxShape.rectangle,
-          borderRadius: RadiusSizes.radius12,
-          boxShadow: const [BoxShadow(color: Colors.black26)],
-        ),
-        child: _getDialogContent(context, children),
-      ),
-    );
-  }
-
-  Widget _getDialogContent(BuildContext context, List<Widget> children) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: children,
-    );
-  }
-
   Widget _getEmptyServersList(BuildContext context, String message) {
-    return Center(
-      child: _getMessage(message, context),
-    );
+    return Center(child: _getMessage(message));
   }
 
   Widget _getAnimatedImage(String animationName) {
@@ -129,31 +128,27 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getSnackBarMessage(String message, BuildContext context) {
-    return SizedBox(
-      width: AppSize.s230,
-      child: Text(
-        message,
-        style: Theme.of(context).textTheme.bodySmall,
-        textAlign: TextAlign.left,
-        softWrap: true,
-        maxLines: 2,
+    return Text(
+      message,
+      style: StylesManager.getRegularStyle(
+        color: ColorManager.blackNeutral,
+        fontSize: FontSize.sSubtitle5,
       ),
+      softWrap: true,
+      maxLines: 2,
     );
   }
 
-  Widget _getMessage(String message, [BuildContext? context]) {
+  Widget _getMessage(String message) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.p8),
         child: Text(
           message,
           textAlign: TextAlign.center,
-          style: context != null
-              ? Theme.of(context).textTheme.titleLarge
-              : StylesManager.getRegularStyle(
-                  color: ColorManager.blackNeutral,
-                  fontSize: AppSize.s18,
-                ),
+          style: StylesManager.getRegularStyle(
+            fontSize: FontSize.sBody3,
+          ),
         ),
       ),
     );
@@ -166,73 +161,47 @@ class StateRenderer extends StatelessWidget {
   }) {
     return Center(
       child: TextButton(
-        style: TextButton.styleFrom(
-          side: BorderSide.none,
-          textStyle: StylesManager.getMediumStyle(
-            color: ColorManager.primaryshade1,
-            fontSize: AppSize.s12,
-          ),
-        ),
+        style: TextButton.styleFrom(side: BorderSide.none),
         onPressed: () {
           if (stateRendererType == StateRendererType.toastErrorState) {
             retryActionFunction.call();
           } else {
             Nav.popRoute(context);
             if (title == AppStrings.userDeletedSuccess ||
-                title == AppStrings.managerDeletedSuccess) {
+                title == AppStrings.managerDeletedSuccess ||
+                title == AppStrings.userActivatedSuccessfully ||
+                title == AppStrings.userExtendedSuccessfully) {
               Nav.popRoute(context);
             }
-            if (title == AppStrings.userRenamedSuccess) {
-              Nav.popRoute(context);
-              Nav.popRoute(context);
-            }
-            if (title == AppStrings.userAddedSuccess) {
-              Nav.popRoute(context);
-              Nav.popRoute(context);
-            }
-            if (title == AppStrings.managerAddedSuccess) {
-              Nav.popRoute(context);
-              Nav.popRoute(context);
-            }
-
-            if (title == AppStrings.userEditedSuccess) {
+            if (title == AppStrings.userRenamedSuccess ||
+                title == AppStrings.userAddedSuccess ||
+                title == AppStrings.managerAddedSuccess ||
+                title == AppStrings.userEditedSuccess ||
+                title == AppStrings.amountAddedSuccessfully ||
+                title == AppStrings.amountDeductedSuccessfully ||
+                title == AppStrings.changeAppliedSuccessfully ||
+                title == AppStrings.addRewardPointsSuccessfully) {
               Nav.popRoute(context);
               Nav.popRoute(context);
             }
 
             if (title == AppStrings.userProfileChangedSuccess) {}
-            if (title == AppStrings.userActivatedSuccessfully) {
-              Nav.popRoute(context);
-            }
-            if (title == AppStrings.userExtendedSuccessfully) {
-              Nav.popRoute(context);
-            }
-            if (title == AppStrings.amountAddedSuccessfully) {
-              Nav.popRoute(context);
-              Nav.popRoute(context);
-            }
-            if (title == AppStrings.amountDeductedSuccessfully) {
-              Nav.popRoute(context);
-              Nav.popRoute(context);
-            }
-            if (title == AppStrings.changeAppliedSuccessfully) {
-              Nav.popRoute(context);
-              Nav.popRoute(context);
-            }
-            if (title == AppStrings.addRewardPointsSuccessfully) {
-              Nav.popRoute(context);
-              Nav.popRoute(context);
-            }
           }
         },
         child: Text(
           butonTitle,
-          style: StylesManager.getMediumStyle(
-            color: ColorManager.primaryshade1,
-            fontSize: stateRendererType == StateRendererType.toastErrorState
-                ? AppSize.s16
-                : AppSize.s20,
-          ),
+          textAlign: stateRendererType == StateRendererType.toastErrorState
+              ? TextAlign.right
+              : TextAlign.center,
+          style: stateRendererType == StateRendererType.toastErrorState
+              ? StylesManager.getMediumStyle(
+                  color: ColorManager.secondary,
+                  fontSize: AppSize.s14,
+                )
+              : StylesManager.getSemiBoldStyle(
+                  color: ColorManager.whiteNeutral,
+                  fontSize: AppSize.s18,
+                ),
         ),
       ),
     );
@@ -258,16 +227,5 @@ class StateRenderer extends StatelessWidget {
       default:
         return Container();
     }
-  }
-
-  Widget _getSnackBarErrorWidget(BuildContext context, List<Widget> children) {
-    return SizedBox(
-      height: AppSize.s50,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: children,
-      ),
-    );
   }
 }

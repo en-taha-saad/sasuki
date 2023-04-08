@@ -396,7 +396,7 @@ class _LoginViewState extends State<LoginView> {
           backgroundColor: Colors.transparent,
           child: Container(
             decoration: BoxDecoration(
-              color: ColorManager.backgroundCorners,
+              color: ColorManager.secondary,
               shape: BoxShape.rectangle,
               borderRadius: RadiusSizes.radius12,
               boxShadow: const [BoxShadow(color: Colors.black26)],
@@ -471,7 +471,14 @@ class _LoginViewState extends State<LoginView> {
                             // _enteredCaptchaController.clear();
                           }
                         : Constants.nullValue,
-                    child: const Text(AppStrings.okButton),
+                    child: Text(
+                      AppStrings.userActionSubmitButton,
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: (snapshot.data ?? Constants.falseBool)
+                                ? ColorManager.whiteNeutral
+                                : ColorManager.greyNeutral,
+                          ),
+                    ),
                   );
                 },
               ),

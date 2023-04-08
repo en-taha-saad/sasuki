@@ -3,6 +3,7 @@ import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
 class RadiusSizes {
   static BorderRadius radius25 = BorderRadius.circular(AppSize.s25);
+  static BorderRadius radius4 = BorderRadius.circular(AppSize.s4);
   static BorderRadius radius6 = BorderRadius.circular(AppSize.s6);
   static BorderRadius radius10 = BorderRadius.circular(AppSize.s10);
   static BorderRadius radius12 = BorderRadius.circular(AppSize.s12);
