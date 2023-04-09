@@ -39,11 +39,7 @@ class DashboardListTile extends StatelessWidget {
                         children: [
                           Text(
                             e.title,
-                            style: StylesManager.getRegularStyle(
-                              color: ColorManager.whiteNeutral,
-                              fontSize: FontSize.sSubtitle2,
-                              // height: AppSize.s1,
-                            ),
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           Text(
                             e.subtitle,
@@ -62,11 +58,7 @@ class DashboardListTile extends StatelessWidget {
                           ? shimmerText ?? Container()
                           : Text(
                               e.number,
-                              style: StylesManager.getRegularStyle(
-                                color: ColorManager.whiteNeutral,
-                                fontSize: FontSize.sSubtitle2,
-                                // height: AppSize.s1,
-                              ),
+                              style: Theme.of(context).textTheme.headlineMedium,
                             ),
                     ],
                   ),

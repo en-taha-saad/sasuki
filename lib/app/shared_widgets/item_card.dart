@@ -62,8 +62,8 @@ class ItemCard extends StatelessWidget {
                 ),
                 child: SvgPicture.asset(
                   IconsAssets.person,
-                  height: AppSize.s24,
-                  width: AppSize.s24,
+                  height: AppSize.s20,
+                  width: AppSize.s20,
                   theme: const SvgTheme(
                     currentColor: ColorManager.whiteNeutral,
                   ),
@@ -87,12 +87,7 @@ class ItemCard extends StatelessWidget {
                           width: AppSize.s150,
                           child: Text(
                             fullName!,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w400,
-                                ),
+                            style: Theme.of(context).textTheme.titleLarge,
                             maxLines: Constants.oneNum.toInt(),
                             overflow: TextOverflow.ellipsis,
                             softWrap: Constants.trueBool,
@@ -125,7 +120,7 @@ class ItemCard extends StatelessWidget {
                       color: ColorManager.transparent,
                       borderRadius: RadiusSizes.radius15,
                       border: Border.all(
-                        color: ColorManager.primaryshade1,
+                        color: ColorManager.greyNeutral.withOpacity(0.25),
                         width: AppSize.s0point6,
                       ),
                     ),
@@ -162,7 +157,7 @@ class ItemCard extends StatelessWidget {
                       color: ColorManager.transparent,
                       borderRadius: RadiusSizes.radius15,
                       border: Border.all(
-                        color: ColorManager.primaryshade1,
+                        color: ColorManager.greyNeutral.withOpacity(0.25),
                         width: AppSize.s1,
                       ),
                     ),
@@ -210,7 +205,7 @@ class ItemCard extends StatelessWidget {
                       )
                     : Text(
                         status!,
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.labelSmall,
                       ),
               ),
               SizedBox(height: getScreenHeight(context) * 0.1),

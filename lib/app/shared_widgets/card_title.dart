@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
-import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
 Widget getCardTitle(icon, title, context) {
@@ -32,10 +30,7 @@ Widget getCardTitle(icon, title, context) {
         ),
         Text(
           title,
-          style: StylesManager.getMediumStyle(
-            color: ColorManager.whiteNeutral,
-            fontSize: FontSize.sSubtitle2,
-          ),
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
       ],
     ),

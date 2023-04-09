@@ -15,6 +15,7 @@ class AppMargin {
   static const double m22 = 22.0;
   static const double m24 = 24.0;
   static const double m28 = 28.0;
+  static const double m30 = 30.0;
   static const double m32 = 32.0;
   static const double m35 = 35.0;
   static const double m36 = 36.0;

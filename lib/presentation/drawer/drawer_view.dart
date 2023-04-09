@@ -166,64 +166,71 @@ class DrawerView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        AppSize.statusBarHeight(context),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+          color: ColorManager.primaryshade1,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: InkWell(
-                  child: SvgPicture.asset(IconsAssets.cancel),
-                  onTap: () => Nav.popRoute(context),
+              AppSize.statusBarHeight(context),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: InkWell(
+                        child: SvgPicture.asset(IconsAssets.cancel),
+                        onTap: () => Nav.popRoute(context),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        _viewModel.selectedServer?.name ?? Constants.emptyStr,
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                    ),
+                    const SizedBox(height: AppSize.s20),
+                    Text(
+                      AppStrings.welcome,
+                      style: StylesManager.getRegularStyle(
+                        color: ColorManager.greyNeutral3,
+                        fontSize: FontSize.sSubtitle5,
+                        height: AppSize.s1_5,
+                      ),
+                    ),
+                    Text(
+                      "${_viewModel.auth?.client?.firstname ?? Constants.emptyStr} ${_viewModel.auth?.client?.lastname ?? Constants.emptyStr}",
+                      style: StylesManager.getMediumStyle(
+                        color: ColorManager.whiteNeutral,
+                        fontSize: FontSize.sHeading4,
+                        height: AppSize.s1_5,
+                      ),
+                    ),
+                    Text(
+                      "${_viewModel.dataCaptcha?.data?.siteCurrency ?? Constants.emptyStr} ${_viewModel.dashboardData?.data?.balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(_viewModel.dashboardData?.data?.balance) : Constants.emptyStr}",
+                      style: StylesManager.getMediumStyle(
+                        color: ColorManager.whiteNeutral,
+                        fontSize: FontSize.sHeading4,
+                        height: AppSize.s1_5,
+                      ),
+                    ),
+                    Text(
+                      AppStrings.availableBalance,
+                      style: StylesManager.getRegularStyle(
+                        color: ColorManager.greyNeutral3,
+                        fontSize: FontSize.sSubtitle5,
+                        height: AppSize.s1_5,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  _viewModel.selectedServer?.name ?? Constants.emptyStr,
-                  style: Theme.of(context).textTheme.displayLarge,
-                ),
-              ),
-              const SizedBox(height: AppSize.s20),
-              Text(
-                AppStrings.welcome,
-                style: StylesManager.getRegularStyle(
-                  color: ColorManager.greyNeutral,
-                  fontSize: FontSize.sSubtitle2,
-                  height: AppSize.s1_5,
-                ),
-              ),
-              Text(
-                "${_viewModel.auth?.client?.firstname ?? Constants.emptyStr} ${_viewModel.auth?.client?.lastname ?? Constants.emptyStr}",
-                style: StylesManager.getMediumStyle(
-                  color: ColorManager.whiteNeutral,
-                  fontSize: FontSize.sHeading5,
-                  height: AppSize.s1_5,
-                ),
-              ),
-              Text(
-                "${_viewModel.dataCaptcha?.data?.siteCurrency ?? Constants.emptyStr} ${_viewModel.dashboardData?.data?.balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(_viewModel.dashboardData?.data?.balance) : Constants.emptyStr}",
-                style: StylesManager.getMediumStyle(
-                  color: ColorManager.whiteNeutral,
-                  fontSize: FontSize.sHeading5,
-                  height: AppSize.s1_5,
-                ),
-              ),
-              Text(
-                AppStrings.availableBalance,
-                style: StylesManager.getRegularStyle(
-                  color: ColorManager.greyNeutral,
-                  fontSize: FontSize.sSubtitle2,
-                  height: AppSize.s1_5,
-                ),
-              ),
+              const SizedBox(height: AppSize.s25),
             ],
           ),
         ),
-        const SizedBox(height: AppSize.s25),
         Expanded(
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -261,13 +268,17 @@ class DrawerView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SvgPicture.asset(element.icon!),
+                            SvgPicture.asset(
+                              element.icon!,
+                              height: 16,
+                              width: 16,
+                            ),
                             const SizedBox(width: AppSize.s20),
                             Text(
                               element.title,
                               style: StylesManager.getRegularStyle(
                                 color: ColorManager.whiteNeutral,
-                                fontSize: FontSize.sButton,
+                                fontSize: 14,
                               ),
                             ),
                           ],

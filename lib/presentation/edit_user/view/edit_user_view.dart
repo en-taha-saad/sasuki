@@ -183,7 +183,9 @@ class _EditUserState extends State<EditUser> {
             ),
             title: Text(
               AppStrings.addEditUserTitle,
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontSize: 18,
+                  ),
             ),
           ),
         ),
@@ -289,10 +291,10 @@ class _EditUserState extends State<EditUser> {
                     bottom: AppMargin.m25,
                     top: AppMargin.m25,
                   ),
-                  child: const Divider(
+                  child: Divider(
                     height: AppSize.s0_2,
                     thickness: AppSize.s0_5,
-                    color: ColorManager.primaryshade1,
+                    color: ColorManager.greyNeutral.withOpacity(0.25),
                   ),
                 ),
                 _getProfileDropdown(
@@ -344,7 +346,9 @@ class _EditUserState extends State<EditUser> {
       children: [
         Text(
           inputTitle,
-          style: Theme.of(context).textTheme.labelLarge,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                height: AppSize.s0_7,
+              ),
         ),
         Container(
           margin: const EdgeInsets.only(
@@ -383,7 +387,9 @@ class _EditUserState extends State<EditUser> {
       children: [
         Text(
           inputTitle,
-          style: Theme.of(context).textTheme.labelLarge,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                height: AppSize.s0_7,
+              ),
         ),
         Container(
           margin: const EdgeInsets.only(

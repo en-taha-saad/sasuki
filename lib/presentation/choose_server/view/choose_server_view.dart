@@ -120,47 +120,45 @@ class _ChooseServerViewState extends State<ChooseServerView> {
             stream: _viewModel.outputIsNotSelectedServer,
             builder: (context, snapshot) {
               // ignore: prefer_is_empty
-              return (snapshot.data ?? Constants.trueBool)
-                  ? const SizedBox(height: AppSize.s25)
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: AppSize.s10),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.39,
-                              child: Divider(
-                                color: ColorManager.greyNeutral.withOpacity(
-                                  AppSize.s0point25,
-                                ),
-                                thickness: AppSize.s1,
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: AppSize.s10,
-                              ),
-                              child: Text(
-                                AppStrings.or,
-                                style: Theme.of(context).textTheme.labelSmall,
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.39,
-                              child: Divider(
-                                color: ColorManager.greyNeutral.withOpacity(
-                                  AppSize.s0point25,
-                                ),
-                                thickness: AppSize.s1,
-                              ),
-                            ),
-                          ],
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: AppSize.s10),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.39,
+                        child: Divider(
+                          color: ColorManager.greyNeutral.withOpacity(
+                            AppSize.s0point25,
+                          ),
+                          thickness: AppSize.s1,
                         ),
-                        const SizedBox(height: AppSize.s10),
-                      ],
-                    );
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: AppSize.s10,
+                        ),
+                        child: Text(
+                          AppStrings.or,
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.39,
+                        child: Divider(
+                          color: ColorManager.greyNeutral.withOpacity(
+                            AppSize.s0point25,
+                          ),
+                          thickness: AppSize.s1,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSize.s10),
+                ],
+              );
             },
           ),
           TextButtonWidget(

@@ -107,83 +107,90 @@ class _DashboardViewState extends State<DashboardView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        AppSize.statusBarHeight(context),
         Container(
-          margin: const EdgeInsets.only(
-            right: AppMargin.m25,
-            left: AppMargin.m25,
-            top: AppMargin.m20,
-            bottom: AppMargin.m25,
-          ),
+          color: ColorManager.primaryshade1,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  InkWell(
-                    child: SvgPicture.asset(IconsAssets.menu),
-                    onTap: () {
-                      Nav.navTo(context, Routes.drawerRoute);
-                    },
-                  ),
-                  Text(
-                    _viewModel.selectedServer?.name ?? Constants.emptyStr,
-                    style: Theme.of(context).textTheme.displayLarge,
-                  ),
-                  Container(),
-                ],
-              ),
-              const SizedBox(height: AppSize.s20),
-              Text(
-                AppStrings.welcome,
-                style: StylesManager.getRegularStyle(
-                  color: ColorManager.greyNeutral2,
-                  fontSize: FontSize.sSubtitle2,
-                  height: AppSize.s1_5,
+              AppSize.statusBarHeight(context),
+              Container(
+                margin: const EdgeInsets.only(
+                  right: AppMargin.m25,
+                  left: AppMargin.m25,
+                  top: AppMargin.m20,
+                  bottom: AppMargin.m25,
                 ),
-              ),
-              StreamBuilder<Auth>(
-                stream: _viewModel.outputAuthData,
-                builder: (context, snapshot) {
-                  return Text(
-                    "${snapshot.data?.client?.firstname ?? Constants.dash} ${snapshot.data?.client?.lastname ?? Constants.dash}",
-                    style: StylesManager.getMediumStyle(
-                      color: ColorManager.whiteNeutral,
-                      fontSize: FontSize.sHeading5,
-                      height: AppSize.s1_5,
-                    ),
-                  );
-                },
-              ),
-              StreamBuilder<Dashboard>(
-                stream: _viewModel.outputDashboardData,
-                builder: (context, snapshot) {
-                  final balance = snapshot.data?.data?.balance;
-                  return StreamBuilder<Captcha>(
-                    stream: _viewModel.outputDataCaptcha,
-                    builder: (context, snapshot) {
-                      final currency = snapshot.data?.data?.siteCurrency;
-                      return Text(
-                        "${currency ?? Constants.dash} ${balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(balance) : Constants.dash}",
-                        style: StylesManager.getMediumStyle(
-                          color: ColorManager.whiteNeutral,
-                          fontSize: FontSize.sHeading5,
-                          height: AppSize.s1_5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          child: SvgPicture.asset(IconsAssets.menu),
+                          onTap: () {
+                            Nav.navTo(context, Routes.drawerRoute);
+                          },
                         ),
-                      );
-                    },
-                  );
-                },
-              ),
-              Text(
-                AppStrings.availableBalance,
-                 style: StylesManager.getRegularStyle(
-                  color: ColorManager.greyNeutral,
-                  fontSize: FontSize.sSubtitle2,
-                  height: AppSize.s1_5,
+                        Text(
+                          _viewModel.selectedServer?.name ?? Constants.emptyStr,
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                        Container(),
+                      ],
+                    ),
+                    const SizedBox(height: AppSize.s20),
+                    Text(
+                      AppStrings.welcome,
+                      style: StylesManager.getRegularStyle(
+                        color: ColorManager.greyNeutral2,
+                        fontSize: FontSize.sSubtitle2,
+                        height: AppSize.s1_5,
+                      ),
+                    ),
+                    StreamBuilder<Auth>(
+                      stream: _viewModel.outputAuthData,
+                      builder: (context, snapshot) {
+                        return Text(
+                          "${snapshot.data?.client?.firstname ?? Constants.dash} ${snapshot.data?.client?.lastname ?? Constants.dash}",
+                          style: StylesManager.getMediumStyle(
+                            color: ColorManager.whiteNeutral,
+                            fontSize: FontSize.sHeading5,
+                            height: AppSize.s1_5,
+                          ),
+                        );
+                      },
+                    ),
+                    StreamBuilder<Dashboard>(
+                      stream: _viewModel.outputDashboardData,
+                      builder: (context, snapshot) {
+                        final balance = snapshot.data?.data?.balance;
+                        return StreamBuilder<Captcha>(
+                          stream: _viewModel.outputDataCaptcha,
+                          builder: (context, snapshot) {
+                            final currency = snapshot.data?.data?.siteCurrency;
+                            return Text(
+                              "${currency ?? Constants.dash} ${balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(balance) : Constants.dash}",
+                              style: StylesManager.getMediumStyle(
+                                color: ColorManager.whiteNeutral,
+                                fontSize: FontSize.sHeading5,
+                                height: AppSize.s1_5,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    Text(
+                      AppStrings.availableBalance,
+                      style: StylesManager.getRegularStyle(
+                        color: ColorManager.greyNeutral,
+                        fontSize: FontSize.sSubtitle2,
+                        height: AppSize.s1_5,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

@@ -59,24 +59,27 @@ class _AddServerViewState extends State<AddServerView> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => Constants.falseBool,
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: getScreenFooter(),
+      child: _getContentWidget(),
+    );
+  }
+
+  Widget _getContentWidget() {
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        getScreenFooter(),
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: AppSize.s100),
+              getScreenSmallLogo(),
+              const SizedBox(height: AppSize.s25),
+              getScreenContent(context),
+              const SizedBox(height: AppSize.s100),
+            ],
           ),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: AppSize.s100),
-                getScreenSmallLogo(),
-                const SizedBox(height: AppSize.s50),
-                getScreenContent(context),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -125,11 +128,9 @@ class _AddServerViewState extends State<AddServerView> {
             onTap: () => Nav.replaceTo(context, Routes.chooseServerRoute),
             child: Text(
               AppStrings.cancelButton,
-              style: StylesManager.getSemiBoldStyle(
-                fontSize: FontSize.sButton,
-              ),
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
-          ),
+          )
         ],
       ),
     );
@@ -191,7 +192,6 @@ class _AddServerViewState extends State<AddServerView> {
               controller: controller,
               decoration: InputDecoration(
                 hintText: inputHint,
-                
                 errorText: (snapshot.data ?? Constants.trueBool)
                     ? Constants.nullValue
                     : errorText,

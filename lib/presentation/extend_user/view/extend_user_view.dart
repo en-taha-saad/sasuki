@@ -160,8 +160,9 @@ class _ExtendUserViewState extends State<ExtendUserView> {
                 ),
                 title: Text(
                   AppStrings.extendUserTitle,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
+ style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+          fontSize: 18,
+        ),                ),
               ),
             ),
             Expanded(

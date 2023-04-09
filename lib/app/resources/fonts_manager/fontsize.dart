@@ -4,7 +4,7 @@ class FontSize {
   static const double sHeading2 = 24;
   static const double sHeading3 = 22;
   static const double sHeading4 = 20;
-  static const double sHeading5 = 18;
+  static const double sHeading5 = 16;
   static const double sHeading6 = 16;
 
   ///
@@ -25,12 +25,12 @@ class FontSize {
   static const double sCaption2 = 12;
 
   ///
-  static const double sInputLabel = 18;
-  static const double sInputText = 16;
+  static const double sInputLabel = 16;
+  static const double sInputText = 14;
 
   ///
   static const double sButtonLink = 20;
-  static const double sButton = 18;
+  static const double sButton = 16;
   static const double sButtonPill = 14;
   static const double sButtonUnderline = 18;
 

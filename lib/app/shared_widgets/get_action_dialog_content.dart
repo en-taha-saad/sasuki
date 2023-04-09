@@ -21,7 +21,7 @@ Widget getActionDialogContent(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Container(
-        margin: const EdgeInsets.only(bottom: AppMargin.m25),
+        margin: const EdgeInsets.only(bottom: AppMargin.m30),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,13 +33,13 @@ Widget getActionDialogContent(
                 height: AppSize.s20,
                 width: AppSize.s20,
                 // ignore: deprecated_member_use
-                color: ColorManager.greyNeutral5,
+                color: ColorManager.blackNeutral,
               ),
             ),
             Text(
               dialogTitle,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: ColorManager.greyNeutral5,
+                    color: ColorManager.blackNeutral,
                   ),
             ),
           ],
@@ -47,7 +47,7 @@ Widget getActionDialogContent(
       ),
       child,
       Container(
-        margin: const EdgeInsets.only(top: AppMargin.m40),
+        margin: const EdgeInsets.only(top: AppMargin.m30),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,7 +56,7 @@ Widget getActionDialogContent(
               onTap: () => Nav.popRoute(context),
               child: Text(
                 AppStrings.cancelButton,
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: ColorManager.blackNeutral,
                     ),
               ),

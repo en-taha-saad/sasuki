@@ -132,91 +132,106 @@ class _UsersListViewState extends State<UsersListView> {
   Widget _getContentWidget() {
     return Column(
       children: [
-        AppSize.statusBarHeight(context),
-        const SizedBox(height: AppSize.s20),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+          color: ColorManager.primaryshade1,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  InkWell(
-                    child: SvgPicture.asset(IconsAssets.menu),
-                    onTap: () {
-                      Nav.navTo(context, Routes.drawerRoute);
-                    },
-                  ),
-                  Text(
-                    AppStrings.usersUsersList,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  Container(),
-                ],
-              ),
+              AppSize.statusBarHeight(context),
               const SizedBox(height: AppSize.s20),
-              StreamBuilder<UsersList>(
-                stream: _usersListViewModel.outputUsersListData,
-                builder: (context, outputUsersListData) {
-                  return StreamBuilder<Dashboard>(
-                      stream: _dashboardViewModel.outputDashboardData,
-                      builder: (context, outputDashboardData) {
-                        return SingleCardStatistics(
-                          isShimmer: Constants.falseBool,
-                          totalUsers:
-                              "${outputUsersListData.data?.total ?? Constants.dash}",
-                          activeUsers:
-                              "${outputDashboardData.data?.data?.activeUsersCount ?? Constants.dash}",
-                          expiredUsers:
-                              "${outputDashboardData.data?.data?.expiredUsersCount ?? Constants.dash}",
-                          onlineUsers:
-                              "${outputDashboardData.data?.data?.usersOnlineCount ?? Constants.dash}",
-                        );
-                      });
-                },
-              ),
-              const SizedBox(height: AppSize.s15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: getScreenWidth(context) * 0.6,
-                    child: _getSearchTextField(),
-                  ),
-                  InkWell(
-                    onTap: _showFilterDialog,
-                    child: SvgPicture.asset(
-                      IconsAssets.filter,
-                      width: AppSize.s18,
-                      height: AppSize.s18,
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          child: SvgPicture.asset(IconsAssets.menu),
+                          onTap: () {
+                            Nav.navTo(context, Routes.drawerRoute);
+                          },
+                        ),
+                        Text(
+                          AppStrings.usersUsersList,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                fontSize: 18,
+                              ),
+                        ),
+                        Container(),
+                      ],
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Nav.navTo(context, Routes.addUserRoute);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(AppPadding.p7),
-                      decoration: const BoxDecoration(
-                        color: ColorManager.primaryshade1,
-                        shape: BoxShape.circle,
-                      ),
-                      child: SvgPicture.asset(
-                        IconsAssets.add,
-                        width: AppSize.s24,
-                        height: AppSize.s24,
-                      ),
+                    const SizedBox(height: AppSize.s20),
+                    StreamBuilder<UsersList>(
+                      stream: _usersListViewModel.outputUsersListData,
+                      builder: (context, outputUsersListData) {
+                        return StreamBuilder<Dashboard>(
+                            stream: _dashboardViewModel.outputDashboardData,
+                            builder: (context, outputDashboardData) {
+                              return SingleCardStatistics(
+                                isShimmer: Constants.falseBool,
+                                totalUsers:
+                                    "${outputUsersListData.data?.total ?? Constants.dash}",
+                                activeUsers:
+                                    "${outputDashboardData.data?.data?.activeUsersCount ?? Constants.dash}",
+                                expiredUsers:
+                                    "${outputDashboardData.data?.data?.expiredUsersCount ?? Constants.dash}",
+                                onlineUsers:
+                                    "${outputDashboardData.data?.data?.usersOnlineCount ?? Constants.dash}",
+                              );
+                            });
+                      },
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              const SizedBox(height: AppSize.s15),
             ],
           ),
         ),
+        const SizedBox(height: AppSize.s15),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: getScreenWidth(context) * 0.6,
+                child: _getSearchTextField(),
+              ),
+              InkWell(
+                onTap: _showFilterDialog,
+                child: SvgPicture.asset(
+                  IconsAssets.filter,
+                  width: AppSize.s18,
+                  height: AppSize.s18,
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Nav.navTo(context, Routes.addUserRoute);
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(AppPadding.p7),
+                  decoration: const BoxDecoration(
+                    color: ColorManager.primaryshade1,
+                    shape: BoxShape.circle,
+                  ),
+                  child: SvgPicture.asset(
+                    IconsAssets.add,
+                    width: AppSize.s24,
+                    height: AppSize.s24,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppSize.s15),
         Expanded(
           child: _getUsersList(),
         ),
@@ -478,14 +493,13 @@ class _UsersListViewState extends State<UsersListView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell(
-                  onTap: _resetFilters,
+                TextButton(
+                  onPressed: _resetFilters,
                   child: Text(
                     AppStrings.usersReset,
-                    style: StylesManager.getSemiBoldStyle(
-                      fontSize: FontSize.sButton,
-                      decoration: TextDecoration.underline,
-                    ),
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          decoration: TextDecoration.underline,
+                        ),
                   ),
                 ),
                 ElevatedButtonWidget(
@@ -539,9 +553,7 @@ class _UsersListViewState extends State<UsersListView> {
         const SizedBox(height: AppSize.s20),
         Text(
           inputTitle,
-          style: StylesManager.getSemiBoldStyle(
-            fontSize: FontSize.sButton,
-          ),
+          style: Theme.of(context).textTheme.labelLarge,
         ),
         StreamBuilder<List<SingleParentData>?>(
           stream: _usersListViewModel.outputParentList,
@@ -578,9 +590,7 @@ class _UsersListViewState extends State<UsersListView> {
         const SizedBox(height: AppSize.s20),
         Text(
           inputTitle,
-          style: StylesManager.getSemiBoldStyle(
-            fontSize: FontSize.sButton,
-          ),
+          style: Theme.of(context).textTheme.labelLarge,
         ),
         StreamBuilder<List<StatusFilterList>?>(
           stream: _usersListViewModel.outputStatusList,
@@ -616,9 +626,7 @@ class _UsersListViewState extends State<UsersListView> {
         const SizedBox(height: AppSize.s20),
         Text(
           inputTitle,
-          style: StylesManager.getSemiBoldStyle(
-            fontSize: FontSize.sButton,
-          ),
+          style: Theme.of(context).textTheme.labelLarge,
         ),
         StreamBuilder<List<ConnectionFilterList>?>(
           stream: _usersListViewModel.outputConnectionList,
@@ -654,9 +662,7 @@ class _UsersListViewState extends State<UsersListView> {
         const SizedBox(height: AppSize.s20),
         Text(
           inputTitle,
-          style: StylesManager.getSemiBoldStyle(
-            fontSize: FontSize.sButton,
-          ),
+          style: Theme.of(context).textTheme.labelLarge,
         ),
         StreamBuilder<List<ProfileData>>(
           stream: _usersListViewModel.outputProfileList,

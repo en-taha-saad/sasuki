@@ -7,11 +7,9 @@ import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
-import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
-import 'package:sasuki/app/shared_widgets/showdialog.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/dashboard_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/userlist_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/state_render/states/mobile_module_screen.dart';
@@ -50,7 +48,7 @@ class StateRenderer extends StatelessWidget {
         height: height ?? 245,
         width: width ?? double.infinity - 50,
         decoration: BoxDecoration(
-          color: ColorManager.secondary,
+          color: ColorManager.whiteNeutral,
           shape: BoxShape.rectangle,
           borderRadius: RadiusSizes.radius16,
         ),
@@ -148,6 +146,7 @@ class StateRenderer extends StatelessWidget {
           textAlign: TextAlign.center,
           style: StylesManager.getRegularStyle(
             fontSize: FontSize.sBody3,
+            color: ColorManager.blackNeutral,
           ),
         ),
       ),
@@ -193,15 +192,11 @@ class StateRenderer extends StatelessWidget {
           textAlign: stateRendererType == StateRendererType.toastErrorState
               ? TextAlign.right
               : TextAlign.center,
-          style: stateRendererType == StateRendererType.toastErrorState
-              ? StylesManager.getMediumStyle(
+          style:  StylesManager.getMediumStyle(
                   color: ColorManager.secondary,
                   fontSize: AppSize.s14,
                 )
-              : StylesManager.getSemiBoldStyle(
-                  color: ColorManager.whiteNeutral,
-                  fontSize: AppSize.s18,
-                ),
+              ,
         ),
       ),
     );

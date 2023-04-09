@@ -24,9 +24,7 @@ class ElevatedButtonWidget extends StatelessWidget {
       height: AppSize.s48,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          disabledBackgroundColor: ColorManager.greyNeutral.withOpacity(
-            AppSize.s0point25,
-          ),
+          disabledBackgroundColor: const Color(0xff566E8F),
         ),
         onPressed: onPressed,
         child: Row(

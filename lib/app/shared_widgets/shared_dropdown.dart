@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
-import 'package:sasuki/app/resources/other_managers/opacity_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
-import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
-import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/get_action_dialog_content.dart';
@@ -117,7 +113,12 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                               children: [
                                 Text(
                                   widget.displayFn(item),
-                                  style: Theme.of(context).textTheme.bodyLarge,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        color: ColorManager.blackNeutral,
+                                      ),
                                 ),
                                 InkWell(
                                   onTap: () => deleteServerDialog(
@@ -125,7 +126,10 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                                     context,
                                   ),
                                   child: SvgPicture.asset(
-                                      IconsAssets.trashUserAction),
+                                    IconsAssets.trashUserAction,
+                                    // ignore: deprecated_member_use
+                                    color: ColorManager.blackNeutral,
+                                  ),
                                 ),
                               ],
                             ),
@@ -140,7 +144,12 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                         ],
                       ),
                     )
-                  : Text(widget.displayFn(item)),
+                  : Text(
+                      widget.displayFn(item),
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: ColorManager.blackNeutral,
+                          ),
+                    ),
             ),
           )
           .toList(),
@@ -158,7 +167,7 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
       },
       hint: Text(widget.isThisServersDropdown
           ? AppStrings.dropDownHint
-          : widget.hintStr ?? Constants.emptyStr),
+          : Constants.emptyStr),
       alignment: Alignment.centerLeft,
       decoration: InputDecoration(
         fillColor: widget.dropdownColor,
@@ -168,8 +177,10 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                   : Constants.nullValue,
             ),
       ),
-      dropdownColor: ColorManager.backgroundCenter,
-      style: Theme.of(context).textTheme.bodyLarge,
+      dropdownColor: ColorManager.whiteNeutral,
+      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            color: ColorManager.blackNeutral,
+          ),
       elevation: Constants.zeroNum.toInt(),
       selectedItemBuilder: (context) {
         return widget.items
@@ -178,7 +189,7 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                 width: AppSize.s150,
                 child: Text(
                   widget.displayFn(e),
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color:
                             widget.isThisActionDropdown != Constants.nullValue
                                 ? ColorManager.blackNeutral

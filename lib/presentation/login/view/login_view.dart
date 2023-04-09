@@ -178,9 +178,7 @@ class _LoginViewState extends State<LoginView> {
             onTap: () => Nav.replaceTo(context, Routes.chooseServerRoute),
             child: Text(
               AppStrings.servChangeServer,
-              style: StylesManager.getSemiBoldStyle(
-                fontSize: FontSize.sButton,
-              ),
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
         ],
@@ -266,6 +264,91 @@ class _LoginViewState extends State<LoginView> {
       ),
     );
   }
+
+  Widget _getCaptchaTextField({
+    Stream<bool>? stream,
+    TextEditingController? controller,
+    String? inputLabel,
+    String? inputHint,
+    String? errorText,
+    bool? autofocus,
+    bool showPassword = Constants.falseBool,
+  }) {
+    return StreamBuilder<bool>(
+      stream: stream,
+      builder: (context, snapshot) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            inputLabel != Constants.nullValue
+                ? Text(
+                    inputLabel!,
+                    style: Theme.of(context).textTheme.labelLarge,
+                  )
+                : Container(),
+            inputLabel != Constants.nullValue
+                ? const SizedBox(height: AppSize.s10)
+                : Container(),
+            Stack(
+              children: [
+                TextFormField(
+                  controller: controller,
+                  cursorColor: ColorManager.blackNeutral,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: ColorManager.blackNeutral,
+                      ),
+                  decoration: InputDecoration(
+                    hintText: inputHint,
+                    fillColor: ColorManager.greyNeutral.withOpacity(0.25),
+                    errorText: (snapshot.data ?? Constants.trueBool)
+                        ? Constants.nullValue
+                        : errorText,
+                  ),
+                  obscureText:
+                      showPassword ? showHidePassword : Constants.falseBool,
+                  autofocus: autofocus!,
+                ),
+                showPassword
+                    ? Container(
+                        margin: const EdgeInsets.only(
+                          top: AppMargin.m12,
+                          right: AppMargin.m12,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(),
+                            InkWell(
+                              child: SvgPicture.asset(
+                                showHidePassword
+                                    ? IconsAssets.eyeslash
+                                    : IconsAssets.eye,
+                                theme: const SvgTheme(
+                                  currentColor: ColorManager.whiteNeutral,
+                                ),
+                                // ignore: deprecated_member_use
+                                color: ColorManager.whiteNeutral,
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  showHidePassword = !showHidePassword;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container(),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   Widget _getSingleTextField({
     Stream<bool>? stream,
@@ -368,7 +451,7 @@ class _LoginViewState extends State<LoginView> {
             _viewModel.setUnsetRememberMe(rememberMe ?? Constants.falseBool);
           },
         ),
-        const SizedBox(width: AppSize.s15),
+        const SizedBox(width: AppSize.s5),
         Text(
           AppStrings.servRememberMe,
           style: Theme.of(context).textTheme.bodyLarge,
@@ -396,7 +479,7 @@ class _LoginViewState extends State<LoginView> {
           backgroundColor: Colors.transparent,
           child: Container(
             decoration: BoxDecoration(
-              color: ColorManager.secondary,
+              color: ColorManager.whiteNeutral,
               shape: BoxShape.rectangle,
               borderRadius: RadiusSizes.radius12,
               boxShadow: const [BoxShadow(color: Colors.black26)],
@@ -445,7 +528,7 @@ class _LoginViewState extends State<LoginView> {
             ),
           ),
           const SizedBox(height: AppSize.s16),
-          _getSingleTextField(
+          _getCaptchaTextField(
             stream: _viewModel.outputIsCaptchaValid,
             controller: _enteredCaptchaController,
             inputHint: AppStrings.captchaInputHint,
@@ -475,7 +558,7 @@ class _LoginViewState extends State<LoginView> {
                       AppStrings.userActionSubmitButton,
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                             color: (snapshot.data ?? Constants.falseBool)
-                                ? ColorManager.whiteNeutral
+                                ? ColorManager.blackNeutral
                                 : ColorManager.greyNeutral,
                           ),
                     ),

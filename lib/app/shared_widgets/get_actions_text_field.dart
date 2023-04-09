@@ -13,6 +13,7 @@ Widget getActionTextFieldInput(
   TextInputType? keyboardType,
   bool? isRequiredValidation,
 ]) {
+  
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +23,7 @@ Widget getActionTextFieldInput(
         child: Text(
           textFieldLabel,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: ColorManager.blackNeutral,
+                    color: ColorManager.greyNeutral5,
               ),
         ),
       ),

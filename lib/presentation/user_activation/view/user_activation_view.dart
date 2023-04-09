@@ -168,8 +168,9 @@ class _UserActivationViewState extends State<UserActivationView> {
                 ),
                 title: Text(
                   AppStrings.activateUserTitle,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
+ style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+          fontSize: 18,
+        ),                ),
               ),
             ),
             Expanded(

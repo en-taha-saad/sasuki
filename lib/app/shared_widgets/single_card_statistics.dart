@@ -27,40 +27,38 @@ class SingleCardStatistics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(AppSize.s15),
-      decoration: BoxDecoration(
-        color: ColorManager.primaryshade1,
-        borderRadius: BorderRadius.circular(AppSize.s12),
-      ),
+      alignment: Alignment.center,
+      padding: const EdgeInsets.only(bottom: AppSize.s25),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
+          Container(
+            margin: const EdgeInsets.only(
+              right: AppSize.s15,
+              top: AppSize.s13,
+              bottom: AppSize.s13,
+            ),
+            child: SvgPicture.asset(
+              IconsAssets.statusup,
+              height: AppSize.s20,
+              width: AppSize.s20,
+            ),
+          ),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                margin: const EdgeInsets.only(
-                  right: AppSize.s15,
-                  top: AppSize.s13,
-                  bottom: AppSize.s13,
-                ),
-                child: SvgPicture.asset(
-                  IconsAssets.statusup,
-                  height: AppSize.s20,
-                  width: AppSize.s20,
-                ),
-              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     AppStrings.totalUsers,
-                    style: StylesManager.getMediumStyle(
+                    style: StylesManager.getRegularStyle(
                       color: ColorManager.greyNeutral3,
-                      fontSize: FontSize.sCaption1,
+                      fontSize: FontSize.sBody3,
                     ),
                   ),
                   Container(
@@ -74,27 +72,42 @@ class SingleCardStatistics extends StatelessWidget {
                           )
                         : Text(
                             totalUsers!,
-                            style: Theme.of(context).textTheme.headlineMedium,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  fontSize: FontSize.sHeading2,
+                                ),
                           ),
                   ),
+                ],
+              ),
+              Row(
+                children: [
                   singleCardStatisticsInform(
                     context,
                     activeUsers,
                     AppStrings.activeUsers,
                   ),
+                  Container(
+                    margin: const EdgeInsets.only(left: AppSize.s55),
+                    child: singleCardStatisticsInform(
+                      context,
+                      expiredUsers,
+                      AppStrings.expiredUsers,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: AppSize.s55),
+                    child: singleCardStatisticsInform(
+                      context,
+                      onlineUsers,
+                      AppStrings.onlineUsers,
+                    ),
+                  ),
                 ],
               ),
             ],
-          ),
-          singleCardStatisticsInform(
-            context,
-            expiredUsers,
-            AppStrings.expiredUsers,
-          ),
-          singleCardStatisticsInform(
-            context,
-            onlineUsers,
-            AppStrings.onlineUsers,
           ),
         ],
       ),
@@ -117,13 +130,15 @@ class SingleCardStatistics extends StatelessWidget {
               )
             : Text(
                 value!,
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: FontSize.sHeading4,
+                    ),
               ),
         Text(
           label!,
-          style: StylesManager.getMediumStyle(
+          style: StylesManager.getRegularStyle(
             color: ColorManager.greyNeutral3,
-            fontSize: FontSize.sCaption1,
+            fontSize: FontSize.sBody3,
           ),
         ),
       ],

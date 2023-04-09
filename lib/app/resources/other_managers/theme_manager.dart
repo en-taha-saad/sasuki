@@ -51,9 +51,10 @@ ThemeData getApplicationTheme() {
           horizontal: AppPadding.p25,
           vertical: AppPadding.p10Point5,
         ),
+        disabledBackgroundColor: ColorManager.whiteNeutral.withOpacity(0.30),
         foregroundColor: ColorManager.whiteNeutral,
         backgroundColor: ColorManager.primaryshade1,
-        textStyle: StylesManager.getSemiBoldStyle(
+        textStyle: StylesManager.getMediumStyle(
           fontSize: FontSize.sButton,
         ),
         shape: RoundedRectangleBorder(
@@ -66,7 +67,7 @@ ThemeData getApplicationTheme() {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: AppPadding.p10Point5),
-        textStyle: StylesManager.getSemiBoldStyle(
+        textStyle: StylesManager.getMediumStyle(
           fontSize: FontSize.sButton,
         ),
         shape: RoundedRectangleBorder(
@@ -79,8 +80,8 @@ ThemeData getApplicationTheme() {
 
     // text field cursor theme
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: ColorManager.whiteNeutral,
-      selectionColor: ColorManager.whiteNeutral,
+      cursorColor: ColorManager.blackNeutral,
+      selectionColor: ColorManager.greyNeutral,
       selectionHandleColor: ColorManager.transparent,
     ),
 
@@ -130,10 +131,10 @@ ThemeData getApplicationTheme() {
 
     // text theme
     textTheme: TextTheme(
-      // heading 1
-      displayLarge: StylesManager.getMediumStyle(
-        fontSize: FontSize.sHeading1,
-      ),
+      // // heading 1
+      // displayLarge: StylesManager.getMediumStyle(
+      //   fontSize: FontSize.sHeading1,
+      // ),
 
       // heading 2
       displayMedium: StylesManager.getSemiBoldStyle(
@@ -141,25 +142,43 @@ ThemeData getApplicationTheme() {
         height: AppSize.s1_5,
       ),
 
-      // heading 3
-      displaySmall: StylesManager.getBoldStyle(
-        fontSize: FontSize.sHeading3,
-      ),
+      // // heading 3
+      // displaySmall: StylesManager.getBoldStyle(
+      //   fontSize: FontSize.sHeading3,
+      // ),
 
-      // heading 4
+      ////////////// heading 5
       headlineMedium: StylesManager.getMediumStyle(
-        fontSize: FontSize.sHeading4,
-      ),
-
-      // heading 5
-      headlineSmall: StylesManager.getMediumStyle(
         fontSize: FontSize.sHeading5,
       ),
 
-      // heading 6
+      ////////////// input label
+      labelLarge: StylesManager.getMediumStyle(
+        fontSize: FontSize.sInputLabel,
+      ),
+
+      ///////////// button
+      headlineSmall: StylesManager.getMediumStyle(
+        fontSize: FontSize.sButton,
+      ),
+
+      ////////////// badge 2
+      labelSmall: StylesManager.getMediumStyle(
+        fontSize: FontSize.sBadge1,
+      ),
+
+      ///////////// heading 6
       titleLarge: StylesManager.getMediumStyle(
         fontSize: FontSize.sHeading6,
       ),
+
+      ////////// caption 1, 2
+      bodySmall: StylesManager.getSemiBoldStyle(
+        fontSize: FontSize.sCaption1,
+      ),
+
+
+
 
       // subtitle 1
       titleMedium: StylesManager.getMediumStyle(
@@ -171,20 +190,11 @@ ThemeData getApplicationTheme() {
         fontSize: FontSize.sSubtitle2,
       ),
 
-      // button
-      labelLarge: StylesManager.getSemiBoldStyle(
-        fontSize: FontSize.sInputLabel,
-      ),
-
       // badge 1
       labelMedium: StylesManager.getRegularStyle(
         fontSize: FontSize.sBadge1,
       ),
 
-      // badge 2
-      labelSmall: StylesManager.getSemiBoldStyle(
-        fontSize: FontSize.sBadge1,
-      ),
 
       // bodyText1 (input text), body2
       bodyLarge: StylesManager.getRegularStyle(
@@ -196,15 +206,11 @@ ThemeData getApplicationTheme() {
         fontSize: FontSize.sBadge1,
       ),
 
-      // caption 1, 2
-      bodySmall: StylesManager.getSemiBoldStyle(
-        fontSize: FontSize.sCaption1,
-      ),
     ),
 
     // divider theme
-    dividerTheme: const DividerThemeData(
-      color: ColorManager.greyNeutral,
+    dividerTheme:  DividerThemeData(
+      color: ColorManager.greyNeutral.withOpacity(0.25),
       thickness: AppSize.s1,
       space: AppSize.s25,
     ),

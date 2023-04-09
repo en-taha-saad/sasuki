@@ -148,8 +148,9 @@ class _AddUserState extends State<AddUser> {
             ),
             title: Text(
               AppStrings.addEditUserTitle,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+ style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+          fontSize: 18,
+        ),            ),
           ),
         ),
         Expanded(
@@ -254,10 +255,10 @@ class _AddUserState extends State<AddUser> {
                     bottom: AppMargin.m25,
                     top: AppMargin.m25,
                   ),
-                  child: const Divider(
+                  child:  Divider(
                     height: AppSize.s0_2,
                     thickness: AppSize.s0_5,
-                    color: ColorManager.primaryshade1,
+                    color: ColorManager.greyNeutral.withOpacity(0.25),
                   ),
                 ),
                 _getProfileDropdown(
@@ -309,7 +310,9 @@ class _AddUserState extends State<AddUser> {
       children: [
         Text(
           inputTitle,
-          style: Theme.of(context).textTheme.labelLarge,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                height: AppSize.s0_7,
+              ),
         ),
         Container(
           margin: const EdgeInsets.only(
@@ -348,7 +351,9 @@ class _AddUserState extends State<AddUser> {
       children: [
         Text(
           inputTitle,
-          style: Theme.of(context).textTheme.labelLarge,
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                height: AppSize.s0_7,
+              ),
         ),
         Container(
           margin: const EdgeInsets.only(

@@ -89,20 +89,27 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   Widget _getScreenView(context) {
     return Column(
       children: [
-        AppSize.statusBarHeight(context),
         Container(
-          margin: const EdgeInsets.only(
-            right: AppMargin.m25,
-            left: AppMargin.m25,
-            bottom: AppMargin.m25,
-          ),
+          color: ColorManager.primaryshade1,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _getUserActions(context),
-              const SizedBox(height: AppSize.s20),
-              _getStatisticsCard(context),
+              AppSize.statusBarHeight(context),
+              Container(
+                margin: const EdgeInsets.only(
+                  right: AppMargin.m25,
+                  left: AppMargin.m25,
+                  bottom: AppMargin.m25,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _getUserActions(context),
+                    const SizedBox(height: AppSize.s20),
+                    _getStatisticsCard(context),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -132,7 +139,9 @@ class _UserDetailsViewState extends State<UserDetailsView> {
       ),
       title: Text(
         AppStrings.userOverviewTitle,
-        style: Theme.of(context).textTheme.headlineMedium,
+        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+          fontSize: 18,
+        ),
       ),
       actions: [
         PopupMenuButton<SingleUserAction>(
@@ -202,26 +211,20 @@ class _UserDetailsViewState extends State<UserDetailsView> {
     );
   }
 
-  Container _getStatisticsCard(context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: AppSize.s15,
-        horizontal: AppSize.s20,
-      ),
-      height: AppSize.s80,
-      decoration: BoxDecoration(
-        color: ColorManager.primaryshade1,
-        borderRadius: BorderRadius.circular(AppSize.s12),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
+  Widget _getStatisticsCard(context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(right: AppSize.s35),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 AppStrings.userOverviewStatus,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: FontSize.sHeading4,
+                    ),
               ),
               Row(
                 children: [
@@ -240,59 +243,67 @@ class _UserDetailsViewState extends State<UserDetailsView> {
                   ),
                   Text(
                     getStatusString(userOverviewApiVar?.data?.status),
-                    style: StylesManager.getSemiBoldStyle(
+                    style: StylesManager.getRegularStyle(
                       color: ColorManager.greyNeutral3,
-                      fontSize: FontSize.sSubtitle5,
+                      fontSize: FontSize.sBody3,
                     ),
                   ),
                 ],
               ),
             ],
           ),
-          Container(
-            height: AppSize.s30,
-            width: AppSize.s1,
-            decoration: BoxDecoration(
-              color: ColorManager.greyNeutral.withOpacity(0.25),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(AppSize.s15),
-              ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(right: AppSize.s35),
+          height: AppSize.s30,
+          width: AppSize.s1,
+          decoration: BoxDecoration(
+            color: ColorManager.greyNeutral.withOpacity(0.25),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(AppSize.s15),
             ),
           ),
-          Column(
+        ),
+        Container(
+          margin: const EdgeInsets.only(right: AppSize.s35),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "${userOverviewApiVar?.data?.remainingRxtx ?? Constants.dash}",
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: FontSize.sHeading4,
+                    ),
               ),
               Text(
                 AppStrings.userOverviewDailyTaffic,
-                style: StylesManager.getSemiBoldStyle(
+                style: StylesManager.getRegularStyle(
                   color: ColorManager.greyNeutral3,
-                  fontSize: FontSize.sSubtitle5,
+                  fontSize: FontSize.sBody3,
                 ),
               ),
             ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${userOverviewApiVar?.data?.remainingUptime ?? Constants.dash}",
-                style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${userOverviewApiVar?.data?.remainingUptime ?? Constants.dash}",
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontSize: FontSize.sHeading4,
+                  ),
+            ),
+            Text(
+              AppStrings.userOverviewUptime,
+              style: StylesManager.getRegularStyle(
+                color: ColorManager.greyNeutral3,
+                fontSize: FontSize.sBody3,
               ),
-              Text(
-                AppStrings.userOverviewUptime,
-                style: StylesManager.getSemiBoldStyle(
-                  color: ColorManager.greyNeutral3,
-                  fontSize: FontSize.sSubtitle5,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
