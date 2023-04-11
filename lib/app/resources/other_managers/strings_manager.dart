@@ -186,6 +186,7 @@ class AppStrings {
   static const userActionExtend = "Extend";
   static const userActionSubmitButton = "Submit";
   static const userActionChangeProfile = "Change Profile";
+  static const userActionChange = "Change";
   static const userActionDeposit = "Deposit";
   static const userActionWithdrawal = "Withdrawal";
   static const userActionPayDebt = "Pay";
@@ -201,7 +202,8 @@ class AppStrings {
   static const managerRenamedSuccess = "username renamed successfully";
 
   static const addManagerTitle = "Manager Form";
-  static const addEditUserTitle = "User Form";
+  static const addUserTitle = "Add User";
+  static const editUserTitle = "Edit User";
 
   static const usernameInputtitle = "New Username";
   static const amountInputtitle = "Amount";
@@ -231,11 +233,9 @@ class AppStrings {
 
   static const activateUserTitle = "Activate User";
   static const extendUserTitle = "Extend Service";
-  static const addUserTitle = "Add User";
-  static const editUserTitle = "Edit User";
   static const activateUserFloatingButtonTitle = "Activate";
   static const extendUserFloatingButtonTitle = "Extend User";
-  static const userActivationCost = "Cost";
+  static const userActivationCost = "Price";
   static const userActivationManagerBalance = "Manager Balance";
   static const userActivationMUserBalance = "User Balance";
   static const userExtendRewardPoints = "Reward Points";
@@ -267,7 +267,10 @@ class AppStrings {
 
   static const usersAdvancedFilter = "Filter";
   static const usersParent = "Parent";
-  static const usersParentHint = "All";
+  static const usersParentHint = "Select Parent";
+  static const usersProfileHint = "Select Profile";
+  static const usersExtendHint = "Select Activation Method";
+
   static const changeProfileHint = "Select Option";
   static const usersStatus = "Status";
   static const usersStatusAny = "Any";

@@ -175,14 +175,18 @@ class _EditUserState extends State<EditUser> {
             elevation: AppSize.s0,
             backgroundColor: Colors.transparent,
             centerTitle: Constants.trueBool,
-            leadingWidth: AppSize.s10,
             titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-            leading: InkWell(
-              child: SvgPicture.asset(IconsAssets.back),
-              onTap: () => Nav.popRoute(context),
+            leading: Container(
+              margin: const EdgeInsets.only(
+                right: AppMargin.m20,
+              ),
+              child: IconButton(
+                icon: SvgPicture.asset(IconsAssets.back),
+                onPressed: () => Nav.popRoute(context),
+              ),
             ),
             title: Text(
-              AppStrings.addEditUserTitle,
+              AppStrings.editUserTitle,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontSize: 18,
                   ),
@@ -236,10 +240,42 @@ class _EditUserState extends State<EditUser> {
                         Constants.trueBool,
                         TextInputType.text,
                         snapshot.data,
+                        Constants.trueBool,
                       );
                     },
                   ),
                 ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    bottom: AppMargin.m25,
+                  ),
+                  child: PasswordTextInput(
+                    stream: _editUserViewModel.outputIsPasswordValid,
+                    controller: _passwordController,
+                    // controller: rememberMe == true ? null : _userPasswordController,
+                    inputLabel: AppStrings.servPassword,
+                    inputHint: Constants.emptyStr,
+                    errorText: AppStrings.servInvalidPassword,
+                    autofocus: Constants.falseBool,
+                    showPassword: Constants.trueBool,
+                    isRequired: Constants.trueBool,
+                  ),
+                ),
+
+                _getProfileDropdown(context),
+                _getParentDropdown(context),
+                Container(
+                  margin: const EdgeInsets.only(
+                    bottom: AppMargin.m25,
+                  ),
+                  child: Divider(
+                    height: AppSize.s0_2,
+                    thickness: AppSize.s0_5,
+                    color: ColorManager.greyNeutral.withOpacity(0.25),
+                  ),
+                ),
+
+                ///
                 Container(
                   margin: const EdgeInsets.only(bottom: AppMargin.m25),
                   child: getAddEditTextFieldInput(
@@ -276,35 +312,8 @@ class _EditUserState extends State<EditUser> {
                     Constants.falseBool,
                   ),
                 ),
-                PasswordTextInput(
-                  stream: _editUserViewModel.outputIsPasswordValid,
-                  controller: _passwordController,
-                  // controller: rememberMe == true ? null : _userPasswordController,
-                  inputLabel: AppStrings.servPassword,
-                  inputHint: Constants.emptyStr,
-                  errorText: AppStrings.servInvalidPassword,
-                  autofocus: Constants.falseBool,
-                  showPassword: Constants.trueBool,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    bottom: AppMargin.m25,
-                    top: AppMargin.m25,
-                  ),
-                  child: Divider(
-                    height: AppSize.s0_2,
-                    thickness: AppSize.s0_5,
-                    color: ColorManager.greyNeutral.withOpacity(0.25),
-                  ),
-                ),
-                _getProfileDropdown(
-                  AppStrings.usersProfile,
-                  context,
-                ),
-                _getParentDropdown(
-                  AppStrings.usersParent,
-                  context,
-                ),
+
+                ///
                 Container(
                   margin: const EdgeInsets.only(
                     top: AppMargin.m40,
@@ -314,7 +323,7 @@ class _EditUserState extends State<EditUser> {
                     stream: _editUserViewModel.outputAreAllInputsValid,
                     builder: (context, snapshot) {
                       return ElevatedButtonWidget(
-                        name: AppStrings.addUserTitle,
+                        name: AppStrings.userActionSubmitButton,
                         assetName: IconsAssets.forward,
                         onPressed: () {
                           FocusScope.of(context).unfocus();
@@ -339,16 +348,27 @@ class _EditUserState extends State<EditUser> {
     );
   }
 
-  _getParentDropdown(String inputTitle, context) {
+  _getParentDropdown(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          inputTitle,
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                height: AppSize.s0_7,
-              ),
+        Row(
+          children: [
+            Text(
+              "*",
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: ColorManager.orangeAnnotations2,
+                  ),
+            ),
+            const SizedBox(width: AppSize.s5),
+            Text(
+              AppStrings.usersParent,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    height: AppSize.s0_7,
+                  ),
+            ),
+          ],
         ),
         Container(
           margin: const EdgeInsets.only(
@@ -366,12 +386,13 @@ class _EditUserState extends State<EditUser> {
               // ignore: prefer_is_empty
               return DropDownComponent<SingleParentData?>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.usersParentHint,
+                hintStr: userOverviewApiVar?.data?.parentUsername,
                 items: parentList ?? [],
                 doOtherThings: (val) {
                   selectedparent = val;
                 },
                 displayFn: (item) => (item as SingleParentData).username,
+                textAndHintColor: ColorManager.whiteNeutral,
               );
             },
           ),
@@ -380,16 +401,27 @@ class _EditUserState extends State<EditUser> {
     );
   }
 
-  _getProfileDropdown(String inputTitle, context) {
+  _getProfileDropdown(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          inputTitle,
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                height: AppSize.s0_7,
-              ),
+        Row(
+          children: [
+            Text(
+              "*",
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: ColorManager.orangeAnnotations2,
+                  ),
+            ),
+            const SizedBox(width: AppSize.s5),
+            Text(
+              AppStrings.usersProfile,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    height: AppSize.s0_7,
+                  ),
+            ),
+          ],
         ),
         Container(
           margin: const EdgeInsets.only(
@@ -407,12 +439,13 @@ class _EditUserState extends State<EditUser> {
               // ignore: prefer_is_empty
               return DropDownComponent<ProfileData?>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.usersParentHint,
+                hintStr: userOverviewApiVar?.data?.profileName,
                 items: profileList ?? [],
                 doOtherThings: (val) {
                   selectedprofile = val;
                 },
                 displayFn: (item) => (item as ProfileData).name,
+                textAndHintColor: ColorManager.whiteNeutral,
               );
             },
           ),

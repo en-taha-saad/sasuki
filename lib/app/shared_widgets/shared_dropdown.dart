@@ -20,6 +20,7 @@ class DropDownComponent<T> extends StatefulWidget {
   final void Function(dynamic) doOtherThings;
   final bool isThisServersDropdown;
   final bool? isThisActionDropdown;
+  final Color? textAndHintColor;
   final ChooseServerViewModel? viewModel;
   final Color? dropdownColor;
   const DropDownComponent({
@@ -32,6 +33,7 @@ class DropDownComponent<T> extends StatefulWidget {
     this.hintStr,
     this.viewModel,
     this.isThisActionDropdown,
+    this.textAndHintColor,
   }) : super(key: key);
 
   @override
@@ -165,21 +167,19 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
         }
         return Constants.nullValue;
       },
-      hint: Text(widget.isThisServersDropdown
-          ? AppStrings.dropDownHint
-          : Constants.emptyStr),
       alignment: Alignment.centerLeft,
       decoration: InputDecoration(
         fillColor: widget.dropdownColor,
+        hintText: widget.isThisServersDropdown
+            ? AppStrings.dropDownHint
+            : widget.hintStr!,
         hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: widget.isThisActionDropdown != Constants.nullValue
-                  ? ColorManager.blackNeutral
-                  : Constants.nullValue,
+              color: widget.textAndHintColor,
             ),
       ),
       dropdownColor: ColorManager.whiteNeutral,
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: ColorManager.blackNeutral,
+            color: widget.textAndHintColor,
           ),
       elevation: Constants.zeroNum.toInt(),
       selectedItemBuilder: (context) {
@@ -190,10 +190,7 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
                 child: Text(
                   widget.displayFn(e),
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color:
-                            widget.isThisActionDropdown != Constants.nullValue
-                                ? ColorManager.blackNeutral
-                                : Constants.nullValue,
+                        color: widget.textAndHintColor,
                       ),
                   overflow: TextOverflow.fade,
                   textAlign: TextAlign.left,

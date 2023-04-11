@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
+import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
 Widget getAddEditTextFieldInput(
   context,
@@ -11,6 +13,7 @@ Widget getAddEditTextFieldInput(
   bool? autoFocus,
   TextInputType? keyboardType,
   bool? isRequiredValidation,
+  bool isRequired = Constants.falseBool,
 ]) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
@@ -18,10 +21,26 @@ Widget getAddEditTextFieldInput(
     children: [
       Container(
         margin: const EdgeInsets.only(bottom: AppMargin.m10),
-        child: Text(
-          textFieldLabel,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        child: isRequired
+            ? Row(
+                children: [
+                  Text(
+                    "*",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: ColorManager.orangeAnnotations2,
+                        ),
+                  ),
+                  const SizedBox(width: AppSize.s5),
+                  Text(
+                    textFieldLabel,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ],
+              )
+            : Text(
+                textFieldLabel,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
       ),
       TextFormField(
         controller: controller,

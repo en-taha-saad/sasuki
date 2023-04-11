@@ -311,7 +311,7 @@ class UsersListViewModel extends BaseViewModel
           SingleParentData(
             Constants.minusOne,
             parentList0[Constants.zeroNum.toInt()].parentId,
-            AppStrings.usersParentHint,
+            "Any",
           ),
         );
         tempParentList.addAll(parentList0);
@@ -367,7 +367,7 @@ class UsersListViewModel extends BaseViewModel
         // right -> success (data)
         List<ProfileData> profileList = [];
         profileList.add(
-          ProfileData(Constants.minusOne, AppStrings.usersParentHint),
+          ProfileData(Constants.minusOne, "Any"),
         );
         debugPrint("getProfileList = ${profileList0.data.length}");
         profileList.addAll(profileList0.data);

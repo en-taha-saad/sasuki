@@ -7,7 +7,6 @@ import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
-import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
@@ -66,6 +65,28 @@ class _ExtendUserViewState extends State<ExtendUserView> {
     _extendUserViewModel.getExtendUserInforms(
       _userDetailsViewModel.commingUserId!,
     );
+    _userDetailsViewModel.outputUserOverviewApi.listen(
+      (event) {
+        if (mounted) {
+          // check whether the state object is in tree
+          setState(() {
+            userOverviewApiVar = event;
+            _extendUserViewModel.getExtensionsInforms(
+              (userOverviewApiVar?.data?.profileId)!,
+            );
+          });
+        }
+      },
+    );
+    _dashboardViewModel.outputDashboardData.listen(
+      (event) {
+        if (mounted) {
+          // check whether the state object is in tree
+          setState(() => dashboardVar = event);
+        }
+      },
+    );
+
     _extendUserViewModel.outputExtendUserInforms.listen(
       (event) {
         if (mounted) {
@@ -79,24 +100,9 @@ class _ExtendUserViewState extends State<ExtendUserView> {
       (event) {
         if (mounted) {
           debugPrint("${event.status}");
+          debugPrint("listOfExtensionValue ${listOfExtensionValue?.length}");
           // check whether the state object is in tree
           setState(() => listOfExtensionValue = event.data);
-        }
-      },
-    );
-    _userDetailsViewModel.outputUserOverviewApi.listen(
-      (event) {
-        if (mounted) {
-          // check whether the state object is in tree
-          setState(() => userOverviewApiVar = event);
-        }
-      },
-    );
-    _dashboardViewModel.outputDashboardData.listen(
-      (event) {
-        if (mounted) {
-          // check whether the state object is in tree
-          setState(() => dashboardVar = event);
         }
       },
     );
@@ -152,17 +158,22 @@ class _ExtendUserViewState extends State<ExtendUserView> {
                 elevation: AppSize.s0,
                 backgroundColor: Colors.transparent,
                 centerTitle: Constants.trueBool,
-                leadingWidth: AppSize.s10,
                 titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-                leading: InkWell(
-                  child: SvgPicture.asset(IconsAssets.back),
-                  onTap: () => Nav.popRoute(context),
+                leading: Container(
+                  margin: const EdgeInsets.only(
+                    right: AppMargin.m20,
+                  ),
+                  child: IconButton(
+                    icon: SvgPicture.asset(IconsAssets.back),
+                    onPressed: () => Nav.popRoute(context),
+                  ),
                 ),
                 title: Text(
                   AppStrings.extendUserTitle,
- style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-          fontSize: 18,
-        ),                ),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontSize: 18,
+                      ),
+                ),
               ),
             ),
             Expanded(
@@ -218,12 +229,6 @@ class _ExtendUserViewState extends State<ExtendUserView> {
   }
 
   _extendUser() {
-    if (listOfExtensionValue == Constants.nullValue ||
-        listOfExtensionValue?.length == Constants.zeroNum) {
-      _extendUserViewModel.getExtensionsInforms(
-        (userOverviewApiVar?.data?.profileId)!,
-      );
-    }
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     showActionDialog(
       context,
@@ -242,20 +247,40 @@ class _ExtendUserViewState extends State<ExtendUserView> {
     return StatefulBuilder(
       builder: (context, setState) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: AppMargin.m10),
+                child: Text(
+                  "Activation Method",
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: ColorManager.greyNeutral5,
+                      ),
+                ),
+              ),
             Container(
               margin: const EdgeInsets.only(bottom: AppMargin.m25),
               child: DropDownComponent<ActivationMethod>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.changeProfileHint,
+                hintStr: AppStrings.usersExtendHint,
                 items: activationMethods,
                 doOtherThings: (val) {
                   selectedActivationMethod = val;
                 },
-                displayFn: (item) => (item as ActivationMethod).method,          dropdownColor:  ColorManager.greyNeutral.withOpacity(0.25),
-
+                displayFn: (item) => (item as ActivationMethod).method,
+                dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
+                textAndHintColor: ColorManager.blackNeutral,
               ),
             ),
+              Container(
+                margin: const EdgeInsets.only(bottom: AppMargin.m10),
+                child: Text(
+                  "Extension",
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: ColorManager.greyNeutral5,
+                      ),
+                ),
+              ),
             DropDownComponent<Extension>(
               isThisServersDropdown: Constants.falseBool,
               hintStr: AppStrings.changeProfileHint,
@@ -264,8 +289,9 @@ class _ExtendUserViewState extends State<ExtendUserView> {
                 extensionValue = val;
               },
               displayFn: (item) =>
-                  (item as Extension).name ?? Constants.emptyStr,          dropdownColor:  ColorManager.greyNeutral.withOpacity(0.25),
-
+                  (item as Extension).name ?? Constants.emptyStr,
+              dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
+              textAndHintColor: ColorManager.blackNeutral,
             )
           ],
         );

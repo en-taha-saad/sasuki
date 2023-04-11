@@ -204,6 +204,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
                     isThisServersDropdown: Constants.trueBool,
                     items: serversList?.servers ?? [],
                     viewModel: _viewModel,
+                    
                     doOtherThings: (val) {
                       selectedServer = val;
                       _viewModel.inputIsNotSelectedServer
@@ -213,6 +214,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
                       _viewModel.saveSelectedServer(selectedServer);
                     },
                     displayFn: (item) => (item as Server).name,
+                    textAndHintColor: ColorManager.whiteNeutral,
                   );
                 },
               )

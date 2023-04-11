@@ -64,7 +64,7 @@ class _UserActivationViewState extends State<UserActivationView> {
   ];
   ActivationMethod? selectedActivationMethod;
   final TextEditingController _pinController = TextEditingController();
-  final TextEditingController _userPriceController = TextEditingController();
+  TextEditingController _userPriceController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   _bind() {
     _dashboardViewModel.getDataStreamingly();
@@ -77,10 +77,21 @@ class _UserActivationViewState extends State<UserActivationView> {
         if (mounted) {
           debugPrint("${event.status}");
           // check whether the state object is in tree
-          setState(() => activationInformsVar = event);
+          setState(() {
+            activationInformsVar = event;
+            var price =
+                activationInformsVar?.data?.unitPrice?.split(" ")[1].split(",");
+            debugPrint("_userPriceController = ${_userPriceController.text}");
+            debugPrint(
+                "activationInformsVar?.data?.unitPrice = ${activationInformsVar?.data?.unitPrice}");
+            _userPriceController = TextEditingController(
+              text: "${price?[0]}${price?[1]}",
+            );
+          });
         }
       },
     );
+
     _userDetailsViewModel.outputUserOverviewApi.listen(
       (event) {
         if (mounted) {
@@ -97,6 +108,13 @@ class _UserActivationViewState extends State<UserActivationView> {
         }
       },
     );
+
+    _userPriceController.addListener(
+      () {
+        _userActivationViewModel.setSalePrice(_userPriceController.text);
+      },
+    );
+
     _pinController.addListener(
       () {
         _userActivationViewModel.setPin(_pinController.text);
@@ -160,17 +178,22 @@ class _UserActivationViewState extends State<UserActivationView> {
                 elevation: AppSize.s0,
                 backgroundColor: Colors.transparent,
                 centerTitle: Constants.trueBool,
-                leadingWidth: AppSize.s10,
                 titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-                leading: InkWell(
-                  child: SvgPicture.asset(IconsAssets.back),
-                  onTap: () => Nav.popRoute(context),
+                leading: Container(
+                  margin: const EdgeInsets.only(
+                    right: AppMargin.m20,
+                  ),
+                  child: IconButton(
+                    icon: SvgPicture.asset(IconsAssets.back),
+                    onPressed: () => Nav.popRoute(context),
+                  ),
                 ),
                 title: Text(
                   AppStrings.activateUserTitle,
- style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-          fontSize: 18,
-        ),                ),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontSize: 18,
+                      ),
+                ),
               ),
             ),
             Expanded(
@@ -254,7 +277,17 @@ class _UserActivationViewState extends State<UserActivationView> {
       child: StatefulBuilder(
         builder: (context, setState) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: AppMargin.m10),
+                child: Text(
+                  "Activation Method",
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: ColorManager.greyNeutral5,
+                      ),
+                ),
+              ),
               Container(
                 margin: const EdgeInsets.only(bottom: AppMargin.m25),
                 child: DropDownComponent<ActivationMethod>(
@@ -266,6 +299,7 @@ class _UserActivationViewState extends State<UserActivationView> {
                   },
                   displayFn: (item) => (item as ActivationMethod).method,
                   dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
+                  textAndHintColor: ColorManager.blackNeutral,
                 ),
               ),
               if (showPinInput)

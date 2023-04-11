@@ -419,7 +419,7 @@ class UserDetailsViewModel extends BaseViewModel
         // right -> success (data)
         List<ProfileData> profileList = [];
         profileList.add(
-          ProfileData(Constants.minusOne, AppStrings.usersParentHint),
+          ProfileData(Constants.minusOne, "Any"),
         );
         debugPrint("getProfileList = ${profileList0.data.length}");
         profileList.addAll(profileList0.data);

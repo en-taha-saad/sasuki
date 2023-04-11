@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
-import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
-import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
@@ -574,6 +572,7 @@ class _UsersListViewState extends State<UsersListView> {
                   selectedparent = val;
                 },
                 displayFn: (item) => (item as SingleParentData).username,
+                textAndHintColor: ColorManager.whiteNeutral,
               ),
             );
           },
@@ -610,6 +609,7 @@ class _UsersListViewState extends State<UsersListView> {
                   selectedstatusFilter = val;
                 },
                 displayFn: (item) => (item as StatusFilterList).name,
+                textAndHintColor: ColorManager.whiteNeutral,
               ),
             );
           },
@@ -646,6 +646,7 @@ class _UsersListViewState extends State<UsersListView> {
                   selectedconnectionFilter = val;
                 },
                 displayFn: (item) => (item as ConnectionFilterList).name,
+                textAndHintColor: ColorManager.whiteNeutral,
               ),
             );
           },
@@ -683,6 +684,7 @@ class _UsersListViewState extends State<UsersListView> {
                   selectedprofile = val;
                 },
                 displayFn: (item) => (item as ProfileData).name,
+                textAndHintColor: ColorManager.whiteNeutral,
               ),
             );
           },

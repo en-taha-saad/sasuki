@@ -12,7 +12,6 @@ import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
-import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/dashboard_list_tile.dart';

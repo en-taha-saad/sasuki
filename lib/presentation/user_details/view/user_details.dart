@@ -129,19 +129,23 @@ class _UserDetailsViewState extends State<UserDetailsView> {
       elevation: AppSize.s0,
       backgroundColor: Colors.transparent,
       centerTitle: Constants.trueBool,
-      leadingWidth: AppSize.s10,
       toolbarHeight: 40,
       titleSpacing: 0,
       titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-      leading: InkWell(
-        child: SvgPicture.asset(IconsAssets.back),
-        onTap: () => Nav.popRoute(context),
+      leading: Container(
+        margin: const EdgeInsets.only(
+          right: AppMargin.m20,
+        ),
+        child: IconButton(
+          icon: SvgPicture.asset(IconsAssets.back),
+          onPressed: () => Nav.popRoute(context),
+        ),
       ),
       title: Text(
         AppStrings.userOverviewTitle,
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-          fontSize: 18,
-        ),
+              fontSize: 18,
+            ),
       ),
       actions: [
         PopupMenuButton<SingleUserAction>(
@@ -421,7 +425,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
       getActionDialogContent(
         context,
         _getChangeProfileDialogContent(),
-        AppStrings.userActionChangeProfile,
+        AppStrings.userActionChange,
         AppStrings.userActionProfileDialogTitle,
         IconsAssets.profileUserAction,
         () {
@@ -439,25 +443,40 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   }
 
   Widget _getChangeProfileDialogContent() {
-    return StreamBuilder<List<ProfileData>>(
-      stream: _viewModel.outputProfileList,
-      builder: (context, snapshot0) {
-        if (profileList == Constants.nullValue ||
-            profileList?.length == Constants.zeroNum) {
-          profileList = snapshot0.data;
-        }
-        return DropDownComponent<ProfileData>(
-          isThisServersDropdown: Constants.falseBool,
-          isThisActionDropdown: Constants.trueBool,
-          hintStr: AppStrings.changeProfileHint,
-          items: profileList ?? [],
-          doOtherThings: (val) {
-            selectedprofile = val;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m10),
+          child: Text(
+            "Profile",
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: ColorManager.greyNeutral5,
+                ),
+          ),
+        ),
+        StreamBuilder<List<ProfileData>>(
+          stream: _viewModel.outputProfileList,
+          builder: (context, snapshot0) {
+            if (profileList == Constants.nullValue ||
+                profileList?.length == Constants.zeroNum) {
+              profileList = snapshot0.data;
+            }
+            return DropDownComponent<ProfileData>(
+              isThisServersDropdown: Constants.falseBool,
+              isThisActionDropdown: Constants.trueBool,
+              hintStr: AppStrings.changeProfileHint,
+              items: profileList ?? [],
+              doOtherThings: (val) {
+                selectedprofile = val;
+              },
+              displayFn: (item) => (item as ProfileData).name,
+              dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
+              textAndHintColor: ColorManager.blackNeutral,
+            );
           },
-          displayFn: (item) => (item as ProfileData).name,
-          dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
-        );
-      },
+        ),
+      ],
     );
   }
 

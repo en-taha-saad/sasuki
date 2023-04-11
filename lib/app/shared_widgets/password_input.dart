@@ -17,6 +17,7 @@ class PasswordTextInput extends StatefulWidget {
     this.errorText,
     this.autofocus,
     this.showPassword = Constants.falseBool,
+    this.isRequired = Constants.falseBool,
   });
   final Stream<bool>? stream;
   final TextEditingController? controller;
@@ -25,6 +26,7 @@ class PasswordTextInput extends StatefulWidget {
   final String? errorText;
   final bool? autofocus;
   final bool showPassword;
+  final bool? isRequired;
 
   @override
   State<PasswordTextInput> createState() => _PasswordTextInputState();
@@ -43,10 +45,30 @@ class _PasswordTextInputState extends State<PasswordTextInput> {
           mainAxisSize: MainAxisSize.min,
           children: [
             widget.inputLabel != Constants.nullValue
-                ? Text(
-                    widget.inputLabel!,
-                    style: Theme.of(context).textTheme.labelLarge,
-                  )
+                ? widget.isRequired != Constants.nullValue &&
+                        widget.isRequired != Constants.falseBool
+                    ? Row(
+                        children: [
+                          Text(
+                            "*",
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  color: ColorManager.orangeAnnotations2,
+                                ),
+                          ),
+                          const SizedBox(width: AppSize.s5),
+                          Text(
+                            widget.inputLabel!,
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                        ],
+                      )
+                    : Text(
+                        widget.inputLabel!,
+                        style: Theme.of(context).textTheme.labelLarge,
+                      )
                 : Container(),
             widget.inputLabel != Constants.nullValue
                 ? const SizedBox(height: AppSize.s10)

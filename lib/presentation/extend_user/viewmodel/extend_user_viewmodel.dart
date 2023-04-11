@@ -84,7 +84,8 @@ class ExtendUserViewModel extends BaseViewModel
     Constants.emptyStr,
   );
   @override
-  void start() {}
+  void start() {
+  }
 
   @override
   void dispose() {}
@@ -209,7 +210,7 @@ class ExtendUserViewModel extends BaseViewModel
             extensionsList,
           ),
         );
-        debugPrint("allowedExtersionMethods = $allowedExtersionMethods");
+        debugPrint("allowedExtersionMethods = ${allowedExtersionMethods.data?.length}");
       },
     );
   }

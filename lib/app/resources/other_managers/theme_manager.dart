@@ -25,13 +25,6 @@ ThemeData getApplicationTheme() {
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
 
-    // TODO : add all the theme data
-    // snackBarTheme: const SnackBarThemeData(),
-    // scrollbarTheme: const ScrollbarThemeData(),
-    // menuTheme: const MenuThemeData(),
-    // menuBarTheme: const MenuBarThemeData(),
-    // iconTheme: const IconThemeData(),
-    // iconButtonTheme: const IconButtonThemeData(),
 
     // card button theme
     cardTheme: CardTheme(

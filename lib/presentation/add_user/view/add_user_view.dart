@@ -2,21 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
-import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
-import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
-import 'package:sasuki/app/shared_widgets/get_actions_text_field.dart';
 import 'package:sasuki/app/shared_widgets/get_addedit_text_field.dart';
 import 'package:sasuki/app/shared_widgets/password_input.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
+import 'package:sasuki/domain/models/dashboard/auth.dart';
 import 'package:sasuki/domain/models/dashboard/dashboard.dart';
 import 'package:sasuki/domain/models/filter_lists/parent_list.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
-import 'package:sasuki/domain/models/user_details/user_overview_api.dart';
 import 'package:sasuki/presentation/add_user/viewmodel/add_user_viewmodel.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/presentation/dashboard/viewmodel/dashboard_viewmodel.dart';
@@ -43,7 +40,7 @@ class _AddUserState extends State<AddUser> {
 
   final AddUserViewModel _addUserViewModel = instance<AddUserViewModel>();
   final DashboardViewModel _dashboardViewModel = instance<DashboardViewModel>();
-  UserOverviewApi? userOverviewApiVar;
+  Auth? userAuth;
   Dashboard? dashboardVar;
   List<ProfileData>? profileList;
   ProfileData? selectedprofile;
@@ -54,6 +51,15 @@ class _AddUserState extends State<AddUser> {
   _bind() {
     _addUserViewModel.start();
     _dashboardViewModel.getDataStreamingly();
+    _dashboardViewModel.outputAuthData.listen(
+      (event) {
+        if (mounted) {
+          // check whether the state object is in tree
+          setState(() => userAuth = event);
+        }
+      },
+    );
+
     _dashboardViewModel.outputDashboardData.listen(
       (event) {
         if (mounted) {
@@ -140,17 +146,22 @@ class _AddUserState extends State<AddUser> {
             elevation: AppSize.s0,
             backgroundColor: Colors.transparent,
             centerTitle: Constants.trueBool,
-            leadingWidth: AppSize.s10,
             titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-            leading: InkWell(
-              child: SvgPicture.asset(IconsAssets.back),
-              onTap: () => Nav.popRoute(context),
+            leading: Container(
+              margin: const EdgeInsets.only(
+                right: AppMargin.m20,
+              ),
+              child: IconButton(
+                icon: SvgPicture.asset(IconsAssets.back),
+                onPressed: () => Nav.popRoute(context),
+              ),
             ),
             title: Text(
-              AppStrings.addEditUserTitle,
- style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-          fontSize: 18,
-        ),            ),
+              AppStrings.addUserTitle,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontSize: 18,
+                  ),
+            ),
           ),
         ),
         Expanded(
@@ -162,6 +173,11 @@ class _AddUserState extends State<AddUser> {
         ),
       ],
     );
+  }
+
+  SingleParentData? _getParentUsername(parentUsername) {
+    return parentList
+        ?.firstWhere((element) => element.username == parentUsername);
   }
 
   _getAddUserContent() {
@@ -200,10 +216,41 @@ class _AddUserState extends State<AddUser> {
                         Constants.trueBool,
                         TextInputType.text,
                         snapshot.data,
+                        Constants.trueBool,
                       );
                     },
                   ),
                 ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    bottom: AppMargin.m25,
+                  ),
+                  child: PasswordTextInput(
+                    stream: _addUserViewModel.outputIsPasswordValid,
+                    controller: _passwordController,
+                    // controller: rememberMe == true ? null : _userPasswordController,
+                    inputLabel: AppStrings.servPassword,
+                    inputHint: Constants.emptyStr,
+                    errorText: AppStrings.servInvalidPassword,
+                    autofocus: Constants.falseBool,
+                    showPassword: Constants.trueBool,
+                    isRequired: Constants.trueBool,
+                  ),
+                ),
+                _getProfileDropdown(AppStrings.usersProfile, context),
+                _getParentDropdown(AppStrings.usersParent, context),
+                Container(
+                  margin: const EdgeInsets.only(
+                    bottom: AppMargin.m25,
+                  ),
+                  child: Divider(
+                    height: AppSize.s0_2,
+                    thickness: AppSize.s0_5,
+                    color: ColorManager.greyNeutral.withOpacity(0.25),
+                  ),
+                ),
+
+                ///
                 Container(
                   margin: const EdgeInsets.only(bottom: AppMargin.m25),
                   child: getAddEditTextFieldInput(
@@ -240,35 +287,8 @@ class _AddUserState extends State<AddUser> {
                     Constants.falseBool,
                   ),
                 ),
-                PasswordTextInput(
-                  stream: _addUserViewModel.outputIsPasswordValid,
-                  controller: _passwordController,
-                  // controller: rememberMe == true ? null : _userPasswordController,
-                  inputLabel: AppStrings.servPassword,
-                  inputHint: Constants.emptyStr,
-                  errorText: AppStrings.servInvalidPassword,
-                  autofocus: Constants.falseBool,
-                  showPassword: Constants.trueBool,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    bottom: AppMargin.m25,
-                    top: AppMargin.m25,
-                  ),
-                  child:  Divider(
-                    height: AppSize.s0_2,
-                    thickness: AppSize.s0_5,
-                    color: ColorManager.greyNeutral.withOpacity(0.25),
-                  ),
-                ),
-                _getProfileDropdown(
-                  AppStrings.usersProfile,
-                  context,
-                ),
-                _getParentDropdown(
-                  AppStrings.usersParent,
-                  context,
-                ),
+
+                ///
                 Container(
                   margin: const EdgeInsets.only(
                     top: AppMargin.m40,
@@ -278,7 +298,7 @@ class _AddUserState extends State<AddUser> {
                     stream: _addUserViewModel.outputAreAllInputsValid,
                     builder: (context, snapshot) {
                       return ElevatedButtonWidget(
-                        name: AppStrings.addUserTitle,
+                        name: AppStrings.userActionSubmitButton,
                         assetName: IconsAssets.forward,
                         onPressed: () {
                           FocusScope.of(context).unfocus();
@@ -287,7 +307,10 @@ class _AddUserState extends State<AddUser> {
                           setState(() {});
                           _addUserViewModel.saveFloatingButton(
                             isTextInputsValid,
-                            selectedparent,
+                            selectedparent ??
+                                _getParentUsername(
+                                  userAuth?.client?.username,
+                                ),
                             selectedprofile,
                           );
                         },
@@ -308,11 +331,22 @@ class _AddUserState extends State<AddUser> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          inputTitle,
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                height: AppSize.s0_7,
-              ),
+        Row(
+          children: [
+            Text(
+              "*",
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: ColorManager.orangeAnnotations2,
+                  ),
+            ),
+            const SizedBox(width: AppSize.s5),
+            Text(
+              inputTitle,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    height: AppSize.s0_7,
+                  ),
+            ),
+          ],
         ),
         Container(
           margin: const EdgeInsets.only(
@@ -330,12 +364,14 @@ class _AddUserState extends State<AddUser> {
               // ignore: prefer_is_empty
               return DropDownComponent<SingleParentData?>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.usersParentHint,
+                hintStr:
+                    userAuth?.client?.username ?? AppStrings.usersParentHint,
                 items: parentList ?? [],
                 doOtherThings: (val) {
                   selectedparent = val;
                 },
                 displayFn: (item) => (item as SingleParentData).username,
+                textAndHintColor: ColorManager.whiteNeutral,
               );
             },
           ),
@@ -349,11 +385,22 @@ class _AddUserState extends State<AddUser> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          inputTitle,
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                height: AppSize.s0_7,
-              ),
+        Row(
+          children: [
+            Text(
+              "*",
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: ColorManager.orangeAnnotations2,
+                  ),
+            ),
+            const SizedBox(width: AppSize.s5),
+            Text(
+              inputTitle,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    height: AppSize.s0_7,
+                  ),
+            ),
+          ],
         ),
         Container(
           margin: const EdgeInsets.only(
@@ -371,12 +418,13 @@ class _AddUserState extends State<AddUser> {
               // ignore: prefer_is_empty
               return DropDownComponent<ProfileData?>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.usersParentHint,
+                hintStr: AppStrings.usersProfileHint,
                 items: profileList ?? [],
                 doOtherThings: (val) {
                   selectedprofile = val;
                 },
                 displayFn: (item) => (item as ProfileData).name,
+                textAndHintColor: ColorManager.whiteNeutral,
               );
             },
           ),

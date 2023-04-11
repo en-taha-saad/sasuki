@@ -7,7 +7,6 @@ import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
-import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';

@@ -206,6 +206,12 @@ class UserActivationViewModel extends BaseViewModel
     activationRequestObject = activationRequestObject.copyWith(pin: pin);
   }
 
+  setSalePrice(String salePrice) {
+    activationRequestObject = activationRequestObject.copyWith(
+      userPrice: int.parse(salePrice),
+    );
+  }
+
   @override
   setComment(String comment) {
     activationRequestObject = activationRequestObject.copyWith(
