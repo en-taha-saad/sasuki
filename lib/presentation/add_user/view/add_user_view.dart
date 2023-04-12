@@ -275,23 +275,20 @@ class _AddUserState extends State<AddUser> {
                     Constants.falseBool,
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: getAddEditTextFieldInput(
-                    context,
-                    _phoneController,
-                    (val) {
-                      FocusScope.of(context).unfocus();
-                    },
-                    AppStrings.userPhoneHint,
-                    Constants.falseBool,
-                  ),
+                getAddEditTextFieldInput(
+                  context,
+                  _phoneController,
+                  (val) {
+                    FocusScope.of(context).unfocus();
+                  },
+                  AppStrings.userPhoneHint,
+                  Constants.falseBool,
                 ),
 
                 ///
                 Container(
                   margin: const EdgeInsets.only(
-                    top: AppMargin.m40,
+                    top: AppMargin.m35,
                     bottom: AppMargin.m50,
                   ),
                   child: StreamBuilder<bool>(

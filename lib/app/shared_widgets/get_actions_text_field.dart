@@ -13,7 +13,6 @@ Widget getActionTextFieldInput(
   TextInputType? keyboardType,
   bool? isRequiredValidation,
 ]) {
-  
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,7 +22,7 @@ Widget getActionTextFieldInput(
         child: Text(
           textFieldLabel,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: ColorManager.greyNeutral5,
+                color: ColorManager.blackNeutral,
               ),
         ),
       ),
@@ -38,6 +37,7 @@ Widget getActionTextFieldInput(
               ? AppStrings.inputIsEmpty
               : Constants.nullValue,
         ),
+        // TODO: ADD PLACEHOLDERS TO ALL TEXT FIELDS
         cursorColor: ColorManager.blackNeutral,
         onEditingComplete: () => FocusScope.of(context).unfocus(),
         onFieldSubmitted: onFieldSubmitted,

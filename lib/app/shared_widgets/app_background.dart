@@ -24,30 +24,43 @@ class AppBackground extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: isSecondAppBackground == Constants.falseBool
-              ? const RadialGradient(
-                  focal: Alignment(-AppSize.s0_5, AppSize.s0_9),
-                  center: Alignment(-AppSize.s0_5, AppSize.s0_1),
-                  focalRadius: AppSize.s0_5,
-                  radius: AppSize.s1_7,
-                  stops: [
-                    AppSize.s0_2,
-                    AppSize.s0_7,
-                  ],
-                  colors: [
-                    ColorManager.backgroundCenter,
-                    ColorManager.backgroundCorners,
-                  ],
-                )
-              : const LinearGradient(
-                  begin: Alignment(-AppSize.s0point95, AppSize.s1),
-                  end: Alignment(AppSize.s0point95, AppSize.s1),
-                  colors: [
-                    ColorManager.backgroundCenter,
-                    ColorManager.backgroundCorners,
-                  ],
-                ),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            stops: [0.0, 1.0],
+            colors: [
+              Color(0xFF0C3F6A),
+              Color(0xFF0F1644),
+            ],
+            transform: GradientRotation(0.03),
+          ),
+          // gradient: isSecondAppBackground == Constants.falseBool
+          //     ? const RadialGradient(
+          //         focal: Alignment(-AppSize.s0_5, AppSize.s0_9),
+          //         center: Alignment(-AppSize.s0_5, AppSize.s0_1),
+          //         focalRadius: AppSize.s0_5,
+          //         radius: AppSize.s1_7,
+          //         stops: [
+          //           AppSize.s0_2,
+          //           AppSize.s0_7,
+          //         ],
+          //         colors: [
+          //           ColorManager.backgroundCenter,
+          //           ColorManager.primaryshade1,
+          //           // Color(0xff0C3F6A),
+          //         ],
+          //       )
+          //     : const LinearGradient(
+          //         begin: Alignment(-5.7, 1),
+          //         end: Alignment(AppSize.s0point95, 2.5),
+          //         colors: [
+          //           ColorManager.backgroundCenter,
+          //           ColorManager.primaryshade1,
+
+          //           // Color(0xff0C3F6A),
+          //         ],
+          //       ),
         ),
         child: child,
       ),

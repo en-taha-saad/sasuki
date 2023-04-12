@@ -23,7 +23,7 @@ class AppStrings {
   static const userAddedSuccess = "User added successfully";
   static const managerAddedSuccess = "Manager added successfully";
   static const userEditedSuccess = "User edited successfully";
-  static const userRenamedSuccess = "username renamed successfully";
+  static const userRenamedSuccess = "Username renamed successfully";
   static const userProfileChangedSuccess = "User profile changed successfully";
   static const userActivatedSuccessfully = "User activated successfully";
   static const userExtendedSuccessfully = "User extended successfully";
@@ -34,7 +34,7 @@ class AppStrings {
   static const managerDeletedSuccess = "Manager deleted successfully";
 
   static const loading = "Loading ...";
-  static const ok = "ok";
+  static const ok = "Ok";
   static const success = "Success";
   static const emptyString = "Not Found";
   static const admin = "admin";
@@ -50,7 +50,7 @@ class AppStrings {
 
   static const serv2AuthDescription =
       "Find the code in your authneticator mobile app";
-  static const serv2AuthError = "please fill up all the cells properly";
+  static const serv2AuthError = "Please fill up all the cells properly";
 
   static const servChooseServerHint = "Choose Your Server";
   static const servLoginToServer = "Login To Server";
@@ -68,9 +68,9 @@ class AppStrings {
   static const servISPName = "ISP Name";
   static const servServerAddress = "Server Address";
   static const servUsername = "Username";
-  static const servUsernameHint = "add username";
+  static const servUsernameHint = "Add username";
   static const servPassword = "Password";
-  static const servPasswordHint = "add password";
+  static const servPasswordHint = "Add password";
   static const captchaInputHint = "Enter captcha text here";
   static const captchaError = "Captcha is required";
 
@@ -92,27 +92,27 @@ class AppStrings {
   // dashboard
   static const dashboardUsersStatistics = "Users Statistics";
   static const dashboardUsers = "Users";
-  static const dashboardTotalnumberofusers = "total number of users";
+  static const dashboardTotalnumberofusers = "Total number of users";
   static const dashboardOnlineUsers = "Online Users";
-  static const dashboardNumberofonlineusers = "number of online users";
+  static const dashboardNumberofonlineusers = "Number of online users";
   static const dashboardActiveUsers = "Active Users";
-  static const dashboardNumberofactiveusers = "number of active users";
+  static const dashboardNumberofactiveusers = "Number of active users";
   static const dashboardExpiredUsers = "Expired Users";
-  static const dashboardNumberofexpiredusers = "number of expired users";
+  static const dashboardNumberofexpiredusers = "Number of expired users";
   static const dashboardAboutToExpire = "About To Expire";
   static const dashboardUsersactivebutgoingtoexpiretoday =
-      "users going to expire today";
+      "Users going to expire today";
   static const dashboardSalesFinance = "Sales & Finance";
   static const dashboardNewRegistrations = "New Registrations";
-  static const dashboardUsersaddedthismonth = "users added this month";
+  static const dashboardUsersaddedthismonth = "Users added this month";
   static const dashboardActivations = "Activations";
-  static const dashboardUsersactivatedthismonth = "users activated this month";
+  static const dashboardUsersactivatedthismonth = "Users activated this month";
   static const dashboardSales = "Sales";
-  static const dashboardTotalsalesforthismonth = "total sales for this month";
+  static const dashboardTotalsalesforthismonth = "Total sales for this month";
   static const dashboardProfits = "Profits";
   static const dashboardmonthlyprofits = "monthly profits";
   static const dashboardRewardPoints = "Reward Points";
-  static const dashboardrewardpointsbalance = "reward points balance";
+  static const dashboardrewardpointsbalance = "Reward points balance";
 
   // dashboard
   static const usersUsersList = "Users List";
@@ -123,8 +123,8 @@ class AppStrings {
   static const usersOnline = "Online";
   static const searchError = "Search is required";
   static const usersSearchusers = "Search users";
-  static const usersSearchmanagers = "search managers";
-  static const noUsersFound = "no records found";
+  static const usersSearchmanagers = "Search managers";
+  static const noUsersFound = "No records found";
 
   // user overview
   static const userOverviewStatus = "Status";
@@ -135,15 +135,15 @@ class AppStrings {
   static const userOverviewServiceInformation = "Service Information";
   static const userOverviewDailyTaffic = "Daily Taffic";
   static const userOverviewUptime = "Uptime";
-  static const userOverviewusername = "username";
+  static const userOverviewusername = "Username";
   static const userOverviewFullName = "Full Name";
   static const userOverviewProfile = "Profile";
   static const managerPermissionGroup = "Permission Group";
 
   static const userOverviewPassword = "Password";
-  static const managerOverviewOwner = "owner";
+  static const managerOverviewOwner = "Owner";
   static const managerOverviewBalance = "Balance";
-  static const userOverviewowner = "owner";
+  static const userOverviewowner = "Owner";
   static const userOverviewExpirationDate = "Expiration Date";
   static const userOverviewEmail = "Email";
   static const userOverviewRemainingTraffic = "Remaining Traffic";
@@ -199,11 +199,12 @@ class AppStrings {
 
   static const actionDeleteManagerdialogTitle =
       "Are you sure you want to delete this manager";
-  static const managerRenamedSuccess = "username renamed successfully";
+  static const managerRenamedSuccess = "Username renamed successfully";
 
   static const addManagerTitle = "Manager Form";
   static const addUserTitle = "Add User";
   static const editUserTitle = "Edit User";
+  static const updateUserTitle = "Update User";
 
   static const usernameInputtitle = "New Username";
   static const amountInputtitle = "Amount";
@@ -223,10 +224,10 @@ class AppStrings {
   static const activateInputDialogtitle0 = "Activate User Service";
   static const extendInputDialogtitle = "Extend User";
   static const activationNotesInputtitle = "Notes";
-  static const activationPinInputtitle = "enter pin here";
+  static const activationPinInputtitle = "Enter pin here";
   static const activationSalePriceInputtitle = "Sale Price";
   static const profileInputDialogtitle = "Change Profile";
-  static const changeProfileDefaultValue = "immediate";
+  static const changeProfileDefaultValue = "Immediate";
   static const moneyCollectedSwitch = "Money Collected";
   static const loanSwitch = "Loan";
   static const salePriceInput = "Sale Price";
@@ -249,10 +250,10 @@ class AppStrings {
   static const userLastNameHint = "Last Name";
   static const userPhoneHint = "Phone";
   static const userNotesHint = "Notes";
-  static const userCompanyHint = "company";
-  static const userAddressHint = "address";
-  static const userEmailHint = "email";
-  static const userCityHint = "city";
+  static const userCompanyHint = "Company";
+  static const userAddressHint = "Address";
+  static const userEmailHint = "Email";
+  static const userCityHint = "City";
 
   static const userSavefloatingButton = "Save";
 
@@ -288,7 +289,7 @@ class AppStrings {
   static const usersProfile = "Profile";
   static const usersApply = "Apply";
   static const usersReset = "Reset";
-  static const inputIsEmpty = "input is empty";
+  static const inputIsEmpty = "Input is empty";
   static const dropdownIsRequired = "dropdown is required";
   static const retryAgain = "Retry again";
   static const dialogTitle = "Are you sure you want to delete this server";
@@ -300,7 +301,7 @@ class AppStrings {
 
   static const or = "Or";
 
-    static const servISPNameHint = "add isp name";
-    static const servServerAddressHint = "add server address";
+    static const servISPNameHint = "Add isp name";
+    static const servServerAddressHint = "Add server address";
 
 }

@@ -19,7 +19,7 @@ showActionDialog(BuildContext context, Widget? child) {
             vertical: AppPadding.p30,
           ),
           decoration: BoxDecoration(
-            color: ColorManager.whiteNeutral,
+            color: const Color(0xffF5F5F5),
             shape: BoxShape.rectangle,
             borderRadius: RadiusSizes.radius16,
           ),

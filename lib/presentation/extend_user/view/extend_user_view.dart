@@ -254,7 +254,7 @@ class _ExtendUserViewState extends State<ExtendUserView> {
                 child: Text(
                   "Activation Method",
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: ColorManager.greyNeutral5,
+                        color: ColorManager.blackNeutral,
                       ),
                 ),
               ),
@@ -277,7 +277,7 @@ class _ExtendUserViewState extends State<ExtendUserView> {
                 child: Text(
                   "Extension",
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: ColorManager.greyNeutral5,
+                        color: ColorManager.blackNeutral,
                       ),
                 ),
               ),

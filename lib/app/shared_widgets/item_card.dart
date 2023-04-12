@@ -208,30 +208,33 @@ class ItemCard extends StatelessWidget {
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
               ),
-              SizedBox(height: getScreenHeight(context) * 0.1),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    width: AppSize.s8,
-                    height: AppSize.s8,
-                    margin: const EdgeInsets.only(right: AppSize.s5),
-                    decoration: BoxDecoration(
-                      color: isOnline != Constants.nullValue &&
-                              isOnline != Constants.falseBool
-                          ? ColorManager.greenAnnotations2
-                          : ColorManager.greyNeutral,
-                      shape: BoxShape.circle,
+              SizedBox(height: getScreenHeight(context) * 0.07),
+              Container(
+                margin: const EdgeInsets.only(right: AppMargin.m8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: AppSize.s8,
+                      height: AppSize.s8,
+                      margin: const EdgeInsets.only(right: AppSize.s5),
+                      decoration: BoxDecoration(
+                        color: isOnline != Constants.nullValue &&
+                                isOnline != Constants.falseBool
+                            ? ColorManager.greenAnnotations2
+                            : ColorManager.greyNeutral,
+                        shape: BoxShape.circle,
+                      ),
                     ),
-                  ),
-                  Text(
-                    isOnline != Constants.nullValue &&
-                            isOnline != Constants.falseBool
-                        ? AppStrings.usersConnectionOnline
-                        : AppStrings.usersConnectionOffline,
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                ],
+                    Text(
+                      isOnline != Constants.nullValue &&
+                              isOnline != Constants.falseBool
+                          ? AppStrings.usersConnectionOnline
+                          : AppStrings.usersConnectionOffline,
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

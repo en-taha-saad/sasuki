@@ -200,20 +200,26 @@ class _ChooseServerViewState extends State<ChooseServerView> {
             ? StreamBuilder<Server?>(
                 stream: _viewModel.outputSelectedServer,
                 builder: (context, snapshot) {
-                  return DropDownComponent<Server?>(
-                    isThisServersDropdown: Constants.trueBool,
-                    items: serversList?.servers ?? [],
-                    viewModel: _viewModel,
-                    doOtherThings: (val) {
-                      selectedServer = val;
-                      _viewModel.inputIsNotSelectedServer
-                          .add(Constants.falseBool);
-                      _viewModel.inputIsSelectedServer.add(Constants.trueBool);
-                      _viewModel.inputSelectedServer.add(selectedServer);
-                      _viewModel.saveSelectedServer(selectedServer);
-                    },
-                    displayFn: (item) => (item as Server).name,
-                    textAndHintColor: ColorManager.whiteNeutral,
+                  return ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width,
+                    ),
+                    child: DropDownComponent<Server?>(
+                      isThisServersDropdown: Constants.trueBool,
+                      items: serversList?.servers ?? [],
+                      viewModel: _viewModel,
+                      doOtherThings: (val) {
+                        selectedServer = val;
+                        _viewModel.inputIsNotSelectedServer
+                            .add(Constants.falseBool);
+                        _viewModel.inputIsSelectedServer
+                            .add(Constants.trueBool);
+                        _viewModel.inputSelectedServer.add(selectedServer);
+                        _viewModel.saveSelectedServer(selectedServer);
+                      },
+                      displayFn: (item) => (item as Server).name,
+                      textAndHintColor: ColorManager.whiteNeutral,
+                    ),
                   );
                 },
               )

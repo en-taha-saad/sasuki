@@ -508,7 +508,9 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   Widget _getDeleteDialogContent() {
     return Text(
       "${AppStrings.actionDeleteUserdialogTitle} ${userOverviewApiVar?.data?.username}?",
-      style: Theme.of(context).textTheme.titleMedium,
+      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: ColorManager.blackNeutral,
+          ),
     );
   }
 

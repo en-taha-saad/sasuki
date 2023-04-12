@@ -143,7 +143,7 @@ class _DashboardViewState extends State<DashboardView> {
                     Text(
                       AppStrings.welcome,
                       style: StylesManager.getRegularStyle(
-                        color: ColorManager.greyNeutral2,
+                        color: ColorManager.greyNeutral3,
                         fontSize: FontSize.sSubtitle2,
                         height: AppSize.s1_5,
                       ),
@@ -184,7 +184,7 @@ class _DashboardViewState extends State<DashboardView> {
                     Text(
                       AppStrings.availableBalance,
                       style: StylesManager.getRegularStyle(
-                        color: ColorManager.greyNeutral,
+                        color: ColorManager.greyNeutral3,
                         fontSize: FontSize.sSubtitle2,
                         height: AppSize.s1_5,
                       ),

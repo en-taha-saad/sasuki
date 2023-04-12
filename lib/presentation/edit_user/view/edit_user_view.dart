@@ -197,7 +197,7 @@ class _EditUserState extends State<EditUser> {
               ),
             ),
             title: Text(
-              AppStrings.editUserTitle,
+              AppStrings.updateUserTitle,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontSize: 18,
                   ),
@@ -307,23 +307,20 @@ class _EditUserState extends State<EditUser> {
                     Constants.falseBool,
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: getAddEditTextFieldInput(
-                    context,
-                    _phoneController,
-                    (val) {
-                      FocusScope.of(context).unfocus();
-                    },
-                    AppStrings.userPhoneHint,
-                    Constants.falseBool,
-                  ),
+                getAddEditTextFieldInput(
+                  context,
+                  _phoneController,
+                  (val) {
+                    FocusScope.of(context).unfocus();
+                  },
+                  AppStrings.userPhoneHint,
+                  Constants.falseBool,
                 ),
 
                 ///
                 Container(
                   margin: const EdgeInsets.only(
-                    top: AppMargin.m40,
+                    top: AppMargin.m35,
                     bottom: AppMargin.m50,
                   ),
                   child: StreamBuilder<bool>(

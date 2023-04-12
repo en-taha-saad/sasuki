@@ -25,7 +25,6 @@ ThemeData getApplicationTheme() {
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
 
-
     // card button theme
     cardTheme: CardTheme(
       color: ColorManager.primaryshade3,
@@ -44,7 +43,7 @@ ThemeData getApplicationTheme() {
           horizontal: AppPadding.p25,
           vertical: AppPadding.p10Point5,
         ),
-        disabledBackgroundColor: ColorManager.whiteNeutral.withOpacity(0.30),
+        disabledBackgroundColor: const Color(0xff2F4268),
         foregroundColor: ColorManager.whiteNeutral,
         backgroundColor: ColorManager.primaryshade1,
         textStyle: StylesManager.getMediumStyle(
@@ -170,9 +169,6 @@ ThemeData getApplicationTheme() {
         fontSize: FontSize.sCaption1,
       ),
 
-
-
-
       // subtitle 1
       titleMedium: StylesManager.getMediumStyle(
         fontSize: FontSize.sSubtitle1,
@@ -188,7 +184,6 @@ ThemeData getApplicationTheme() {
         fontSize: FontSize.sBadge1,
       ),
 
-
       // bodyText1 (input text), body2
       bodyLarge: StylesManager.getRegularStyle(
         fontSize: FontSize.sInputText,
@@ -198,11 +193,10 @@ ThemeData getApplicationTheme() {
       bodyMedium: StylesManager.getRegularStyle(
         fontSize: FontSize.sBadge1,
       ),
-
     ),
 
     // divider theme
-    dividerTheme:  DividerThemeData(
+    dividerTheme: DividerThemeData(
       color: ColorManager.greyNeutral.withOpacity(0.25),
       thickness: AppSize.s1,
       space: AppSize.s25,

@@ -120,7 +120,12 @@ class _UsersListViewState extends State<UsersListView> {
       child: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
-          setState(() => showFilterWidget = Constants.falseBool);
+          setState(
+            () {
+              showFilterWidget = Constants.falseBool;
+              showClearIcon = Constants.falseBool;
+            },
+          );
         },
         child: _getContentWidget(),
       ),
@@ -237,59 +242,89 @@ class _UsersListViewState extends State<UsersListView> {
     );
   }
 
+  bool showClearIcon = Constants.falseBool;
   _getSearchTextField() {
     return Stack(
       children: [
         TextFormField(
           controller: _searchInputController,
           onEditingComplete: _searchUsers,
-          onFieldSubmitted: (value) => _searchUsers(),
-          decoration: const InputDecoration(
+          onTap: () {
+            showClearIcon = Constants.trueBool;
+          },
+          onFieldSubmitted: (value) {
+            _searchUsers();
+            showClearIcon = Constants.falseBool;
+          },
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: ColorManager.greyNeutral,
+              ),
+          decoration: InputDecoration(
             hintText: AppStrings.usersSearchusers,
+            hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ColorManager.greyNeutral3,
+                ),
             fillColor: ColorManager.greyshade1,
+            prefixIcon: Transform.scale(
+              scale: 0.35,
+              child: SvgPicture.asset(
+                IconsAssets.search,
+                fit: BoxFit.cover,
+                theme: const SvgTheme(
+                  currentColor: ColorManager.greyNeutral3,
+                ),
+                // ignore: deprecated_member_use
+                color: ColorManager.greyNeutral3,
+              ),
+            ),
           ),
         ),
         Container(
           margin: const EdgeInsets.only(
-            top: AppMargin.m10,
-            right: AppMargin.m12,
+            right: AppMargin.m16,
+            top: AppMargin.m14,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () {
-                  FocusScope.of(context).unfocus();
-                  _searchInputController.clear();
-                  _searchUsers();
-                },
-                child: SvgPicture.asset(
-                  IconsAssets.clearInput,
-                  theme: const SvgTheme(
-                    currentColor: ColorManager.greyNeutral,
+          alignment: Alignment.centerRight,
+          child: showClearIcon
+              ? InkWell(
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                    _searchInputController.clear();
+                    _searchUsers();
+                  },
+                  child: const Icon(
+                    Icons.clear,
+                    size: 21,
+                    color: ColorManager.greyNeutral3,
                   ),
-                  // ignore: deprecated_member_use
-                  color: ColorManager.greyNeutral,
-                ),
-              ),
-              InkWell(
-                onTap: _searchUsers,
-                child: SvgPicture.asset(
-                  height: AppSize.s18,
-                  width: AppSize.s18,
-                  IconsAssets.search,
-                  theme: const SvgTheme(
-                    currentColor: ColorManager.greyNeutral,
-                  ),
-                  // ignore: deprecated_member_use
-                  color: ColorManager.greyNeutral,
-                ),
-              ),
-            ],
-          ),
+                )
+              : Container(),
         ),
       ],
+    );
+    return Container(
+      margin: const EdgeInsets.only(
+        top: AppMargin.m18,
+        left: AppMargin.m16,
+      ),
+      child: Row(
+        children: [
+          InkWell(
+            onTap: () {},
+            child: SvgPicture.asset(
+              height: AppSize.s18,
+              width: AppSize.s18,
+              IconsAssets.search,
+              theme: const SvgTheme(
+                currentColor: ColorManager.greyNeutral,
+              ),
+              // ignore: deprecated_member_use
+              color: ColorManager.greyNeutral,
+            ),
+          ),
+          Container(),
+        ],
+      ),
     );
   }
 

@@ -92,7 +92,8 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
         });
         widget.doOtherThings(val);
       },
-      menuMaxHeight: MediaQuery.of(context).size.height * AppSize.s0_5,
+      
+      onTap: () {},
       items: widget.items
           .map<DropdownMenuItem<T>>(
             (item) => DropdownMenuItem<T>(
@@ -177,7 +178,7 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
               color: widget.textAndHintColor,
             ),
       ),
-      dropdownColor: ColorManager.whiteNeutral,
+      dropdownColor: const Color(0xffDCDFE3),
       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             color: widget.textAndHintColor,
           ),

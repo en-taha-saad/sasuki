@@ -21,7 +21,7 @@ Widget getActionDialogContent(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Container(
-        margin: const EdgeInsets.only(bottom: AppMargin.m30),
+        margin: const EdgeInsets.only(bottom: AppMargin.m15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,21 +33,30 @@ Widget getActionDialogContent(
                 height: AppSize.s20,
                 width: AppSize.s20,
                 // ignore: deprecated_member_use
-                color: ColorManager.blackNeutral,
+                color: ColorManager.greyNeutral5,
               ),
             ),
             Text(
               dialogTitle,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: ColorManager.blackNeutral,
+                    color: ColorManager.greyNeutral5,
                   ),
             ),
           ],
         ),
       ),
+      Container(
+          margin: const EdgeInsets.only(
+            bottom: AppMargin.m20,
+          ),
+          child: const Divider(
+            color: ColorManager.greyNeutral,
+            height: AppSize.s1,
+            thickness: AppSize.s1,
+          )),
       child,
       Container(
-        margin: const EdgeInsets.only(top: AppMargin.m30),
+        margin: const EdgeInsets.only(top: AppMargin.m15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,

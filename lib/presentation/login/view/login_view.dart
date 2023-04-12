@@ -347,7 +347,6 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-
   Widget _getSingleTextField({
     Stream<bool>? stream,
     TextEditingController? controller,
@@ -432,24 +431,27 @@ class _LoginViewState extends State<LoginView> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Checkbox(
-          value: rememberMe ?? Constants.falseBool,
-          onChanged: (value) {
-            setState(() => rememberMe = value);
-            _appPrefs.setLoginObject(
-              LoginUseCaseInput(
-                _userNameController.text,
-                _userPasswordController.text,
-                Constants.en,
-                Constants.emptyStr,
-                Constants.emptyStr,
-                Constants.emptyStr,
-              ),
-            );
-            _viewModel.setUnsetRememberMe(rememberMe ?? Constants.falseBool);
-          },
+        SizedBox(
+          width: AppSize.s20,
+          child: Checkbox(
+            value: rememberMe ?? Constants.falseBool,
+            onChanged: (value) {
+              setState(() => rememberMe = value);
+              _appPrefs.setLoginObject(
+                LoginUseCaseInput(
+                  _userNameController.text,
+                  _userPasswordController.text,
+                  Constants.en,
+                  Constants.emptyStr,
+                  Constants.emptyStr,
+                  Constants.emptyStr,
+                ),
+              );
+              _viewModel.setUnsetRememberMe(rememberMe ?? Constants.falseBool);
+            },
+          ),
         ),
-        const SizedBox(width: AppSize.s5),
+        const SizedBox(width: AppSize.s15),
         Text(
           AppStrings.servRememberMe,
           style: Theme.of(context).textTheme.bodyLarge,

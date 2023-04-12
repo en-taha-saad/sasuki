@@ -285,7 +285,7 @@ class _UserActivationViewState extends State<UserActivationView> {
                 child: Text(
                   "Activation Method",
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: ColorManager.greyNeutral5,
+                        color: ColorManager.blackNeutral,
                       ),
                 ),
               ),
@@ -327,37 +327,43 @@ class _UserActivationViewState extends State<UserActivationView> {
               ),
               Container(
                 margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    StatefulBuilder(
-                      builder: (BuildContext context, StateSetter setState) {
-                        return Switch(
+                child: getActionTextFieldInput(
+                  context,
+                  _commentController,
+                  (val) {},
+                  AppStrings.activationNotesInputtitle,
+                  Constants.falseBool,
+                ),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    AppStrings.moneyCollectedSwitch,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: ColorManager.blackNeutral,
+                        ),
+                  ),
+                  const SizedBox(width: AppSize.s25),
+                  StatefulBuilder(
+                    builder: (BuildContext context, StateSetter setState) {
+                      return Transform.scale(
+                        scale: 0.7,
+                        child: Switch(
                           value: isChecked,
-                          activeColor: ColorManager.blackNeutral,
+                          activeColor: ColorManager.primaryshade1,
+                          activeTrackColor: const Color(0xffDCDFE3),
+                          inactiveThumbColor: ColorManager.primaryshade1,
+                          inactiveTrackColor: const Color(0xffDCDFE3),
                           onChanged: (bool value) {
                             setState(() => isChecked = value);
                           },
-                        );
-                      },
-                    ),
-                    const SizedBox(width: AppSize.s8),
-                    Text(
-                      AppStrings.moneyCollectedSwitch,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: ColorManager.blackNeutral,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              getActionTextFieldInput(
-                context,
-                _commentController,
-                (val) {},
-                AppStrings.activationNotesInputtitle,
-                Constants.falseBool,
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           );
