@@ -79,14 +79,15 @@ class _UserActivationViewState extends State<UserActivationView> {
           // check whether the state object is in tree
           setState(() {
             activationInformsVar = event;
-            var price =
-                activationInformsVar?.data?.unitPrice?.split(" ")[1].split(",");
-            debugPrint("_userPriceController = ${_userPriceController.text}");
-            debugPrint(
-                "activationInformsVar?.data?.unitPrice = ${activationInformsVar?.data?.unitPrice}");
-            _userPriceController = TextEditingController(
-              text: "${price?[0]}${price?[1]}",
-            );
+            if (activationInformsVar?.data?.unitPrice != Constants.nullValue) {
+              var price = activationInformsVar?.data?.unitPrice?.split(" ")[1];
+              if ((activationInformsVar?.data?.unitPrice?.contains(","))!) {
+                price = price?.replaceAll(",", "");
+              }
+              _userPriceController = TextEditingController(text: price);
+            } else {
+              _userPriceController = TextEditingController(text: "");
+            }
           });
         }
       },

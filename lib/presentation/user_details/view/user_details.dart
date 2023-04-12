@@ -274,7 +274,11 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "${userOverviewApiVar?.data?.remainingRxtx ?? Constants.dash}",
+                userOverviewApiVar?.data?.remainingRxtx == Constants.nullValue
+                    ? Constants.dash
+                    : (userOverviewApiVar?.data?.remainingRxtx)! < 0
+                        ? "0"
+                        : "${userOverviewApiVar?.data?.remainingRxtx}",
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontSize: FontSize.sHeading4,
                     ),
@@ -293,7 +297,11 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "${userOverviewApiVar?.data?.remainingUptime ?? Constants.dash}",
+              userOverviewApiVar?.data?.remainingUptime == Constants.nullValue
+                  ? Constants.dash
+                  : (userOverviewApiVar?.data?.remainingUptime)! < 0
+                      ? "0"
+                      : "${userOverviewApiVar?.data?.remainingUptime}",
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontSize: FontSize.sHeading4,
                   ),

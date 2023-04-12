@@ -14,6 +14,7 @@ Widget getAddEditTextFieldInput(
   TextInputType? keyboardType,
   bool? isRequiredValidation,
   bool isRequired = Constants.falseBool,
+  bool isEnabled = Constants.trueBool,
 ]) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
@@ -44,6 +45,7 @@ Widget getAddEditTextFieldInput(
       ),
       TextFormField(
         controller: controller,
+        enabled: isEnabled,
         keyboardType: keyboardType ?? TextInputType.text,
         autofocus: autoFocus ?? Constants.falseBool,
         decoration: InputDecoration(

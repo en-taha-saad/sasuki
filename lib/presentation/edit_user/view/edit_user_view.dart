@@ -13,6 +13,7 @@ import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/get_addedit_text_field.dart';
 import 'package:sasuki/app/shared_widgets/password_input.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
+import 'package:sasuki/domain/models/dashboard/auth.dart';
 import 'package:sasuki/domain/models/dashboard/dashboard.dart';
 import 'package:sasuki/domain/models/filter_lists/parent_list.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
@@ -49,6 +50,7 @@ class _EditUserState extends State<EditUser> {
   Dashboard? dashboardVar;
   List<ProfileData>? profileList;
   List<SingleParentData>? parentList;
+  Auth? userAuth;
 
   ProfileData? selectedprofile;
   SingleParentData? selectedparent;
@@ -66,6 +68,15 @@ class _EditUserState extends State<EditUser> {
         }
       },
     );
+    _dashboardViewModel.outputAuthData.listen(
+      (event) {
+        if (mounted) {
+          // check whether the state object is in tree
+          setState(() => userAuth = event);
+        }
+      },
+    );
+
     _usernameController.addListener(
       () {
         _editUserViewModel.setUsername(_usernameController.text);
@@ -227,22 +238,18 @@ class _EditUserState extends State<EditUser> {
                     bottom: AppMargin.m25,
                     top: AppMargin.m25,
                   ),
-                  child: StreamBuilder<bool>(
-                    stream: _editUserViewModel.outputIsUsernameValid,
-                    builder: (context, snapshot) {
-                      return getAddEditTextFieldInput(
-                        context,
-                        _usernameController,
-                        (val) {
-                          FocusScope.of(context).unfocus();
-                        },
-                        AppStrings.servUsername,
-                        Constants.trueBool,
-                        TextInputType.text,
-                        snapshot.data,
-                        Constants.trueBool,
-                      );
+                  child: getAddEditTextFieldInput(
+                    context,
+                    _usernameController,
+                    (val) {
+                      FocusScope.of(context).unfocus();
                     },
+                    AppStrings.servUsername,
+                    Constants.falseBool,
+                    TextInputType.text,
+                    Constants.trueBool,
+                    Constants.trueBool,
+                    Constants.falseBool,
                   ),
                 ),
                 Container(
@@ -326,12 +333,31 @@ class _EditUserState extends State<EditUser> {
                         name: AppStrings.userActionSubmitButton,
                         assetName: IconsAssets.forward,
                         onPressed: () {
+                          debugPrint("snapshot.data = ${snapshot.data}");
+
                           FocusScope.of(context).unfocus();
-                          bool isTextInputsValid =
-                              snapshot.data ?? Constants.falseBool;
+                          
+                          debugPrint(
+                              "selectedparent = ${selectedparent?.username}");
+                          debugPrint(
+                              "selectedprofile = ${selectedprofile?.name}");
                           setState(() {});
+                          if (selectedparent == Constants.nullValue) {
+                            selectedparent = _getParentUsername(
+                              userAuth?.client?.username,
+                            );
+                          }
+                          if (selectedprofile == Constants.nullValue) {
+                            selectedprofile = _getProfileUsername(
+                              userOverviewApiVar?.data?.profileName,
+                            );
+                          }
+                          debugPrint(
+                              "selectedparent = ${selectedparent?.username}");
+                          debugPrint(
+                              "selectedprofile = ${selectedprofile?.name}");
+
                           _editUserViewModel.saveFloatingButton(
-                            isTextInputsValid,
                             selectedparent,
                             selectedprofile,
                           );
@@ -346,6 +372,16 @@ class _EditUserState extends State<EditUser> {
         ],
       ),
     );
+  }
+
+  SingleParentData? _getParentUsername(parentUsername) {
+    return parentList
+        ?.firstWhere((element) => element.username == parentUsername);
+  }
+
+  ProfileData? _getProfileUsername(profileUsername) {
+    return profileList
+        ?.firstWhere((element) => element.name == profileUsername);
   }
 
   _getParentDropdown(context) {
@@ -386,7 +422,8 @@ class _EditUserState extends State<EditUser> {
               // ignore: prefer_is_empty
               return DropDownComponent<SingleParentData?>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: userOverviewApiVar?.data?.parentUsername,
+                hintStr: userOverviewApiVar?.data?.parentUsername ??
+                    AppStrings.usersParentHint,
                 items: parentList ?? [],
                 doOtherThings: (val) {
                   selectedparent = val;
@@ -439,7 +476,8 @@ class _EditUserState extends State<EditUser> {
               // ignore: prefer_is_empty
               return DropDownComponent<ProfileData?>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: userOverviewApiVar?.data?.profileName,
+                hintStr: userOverviewApiVar?.data?.profileName ??
+                    AppStrings.usersProfileHint,
                 items: profileList ?? [],
                 doOtherThings: (val) {
                   selectedprofile = val;

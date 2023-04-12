@@ -73,7 +73,7 @@ ThemeData getApplicationTheme() {
 
     // text field cursor theme
     textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: ColorManager.blackNeutral,
+      cursorColor: ColorManager.greyNeutral,
       selectionColor: ColorManager.greyNeutral,
       selectionHandleColor: ColorManager.transparent,
     ),

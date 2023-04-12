@@ -146,7 +146,9 @@ class StateRenderer extends StatelessWidget {
           textAlign: TextAlign.center,
           style: StylesManager.getRegularStyle(
             fontSize: FontSize.sBody3,
-            color: ColorManager.blackNeutral,
+            color: message == AppStrings.servNoServersFound
+                ? ColorManager.whiteNeutral
+                : ColorManager.blackNeutral,
           ),
         ),
       ),
@@ -192,11 +194,10 @@ class StateRenderer extends StatelessWidget {
           textAlign: stateRendererType == StateRendererType.toastErrorState
               ? TextAlign.right
               : TextAlign.center,
-          style:  StylesManager.getMediumStyle(
-                  color: ColorManager.secondary,
-                  fontSize: AppSize.s14,
-                )
-              ,
+          style: StylesManager.getMediumStyle(
+            color: ColorManager.secondary,
+            fontSize: AppSize.s14,
+          ),
         ),
       ),
     );

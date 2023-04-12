@@ -118,24 +118,15 @@ class EditUserViewModel extends BaseViewModel
   }
 
   saveFloatingButton(
-    bool? enteredInputs,
     SingleParentData? selectedparent,
     ProfileData? selectedprofile,
   ) {
-    if (enteredInputs == Constants.trueBool &&
-        selectedparent != Constants.nullValue &&
-        selectedprofile != Constants.nullValue) {
-      addUserRequestObject = addUserRequestObject.copyWith(
-        parentId: selectedparent!.id,
-        profileId: selectedprofile!.id,
-      );
-      editUser();
-    } else {
-      if (!enteredInputs!) {
-        inputUsername.add(Constants.emptyStr);
-        inputPassword.add(Constants.emptyStr);
-      }
-    }
+    addUserRequestObject = addUserRequestObject.copyWith(
+      parentId: selectedparent?.id,
+      profileId: selectedprofile?.id,
+    );
+    inputUsername.add(Constants.emptyStr);
+    editUser();
   }
 
   @override
