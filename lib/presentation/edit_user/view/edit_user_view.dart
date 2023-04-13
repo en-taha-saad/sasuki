@@ -221,10 +221,31 @@ class _EditUserState extends State<EditUser> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          getCardTitle(
-            IconsAssets.edit,
-            AppStrings.editCurrentUserTitle,
-            context,
+          Container(
+            margin: const EdgeInsets.all(AppSize.s25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(right: AppSize.s10),
+                  child: SvgPicture.asset(
+                    IconsAssets.edit,
+                    theme: const SvgTheme(
+                      currentColor: ColorManager.greyNeutral2,
+                    ),
+                    // ignore: deprecated_member_use
+                    color: ColorManager.greyNeutral2,
+                  ),
+                ),
+                Text(
+                  AppStrings.editCurrentUserTitle,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: ColorManager.greyNeutral2,
+                      ),
+                ),
+              ],
+            ),
           ),
           Container(
             margin: const EdgeInsets.only(
@@ -234,10 +255,7 @@ class _EditUserState extends State<EditUser> {
             child: Column(
               children: [
                 Container(
-                  margin: const EdgeInsets.only(
-                    bottom: AppMargin.m25,
-                    top: AppMargin.m25,
-                  ),
+                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
                   child: getAddEditTextFieldInput(
                     context,
                     _usernameController,
@@ -333,7 +351,7 @@ class _EditUserState extends State<EditUser> {
                           debugPrint("snapshot.data = ${snapshot.data}");
 
                           FocusScope.of(context).unfocus();
-                          
+
                           debugPrint(
                               "selectedparent = ${selectedparent?.username}");
                           debugPrint(

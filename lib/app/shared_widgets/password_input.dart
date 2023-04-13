@@ -18,7 +18,11 @@ class PasswordTextInput extends StatefulWidget {
     this.autofocus,
     this.showPassword = Constants.falseBool,
     this.isRequired = Constants.falseBool,
+    this.onTap,
+    this.onFieldSubmitted,
   });
+  final Function()? onTap;
+  final Function(String)? onFieldSubmitted;
   final Stream<bool>? stream;
   final TextEditingController? controller;
   final String? inputLabel;
@@ -77,6 +81,8 @@ class _PasswordTextInputState extends State<PasswordTextInput> {
               children: [
                 TextFormField(
                   controller: widget.controller,
+                  onTap: widget.onTap,
+                  onFieldSubmitted: widget.onFieldSubmitted,
                   decoration: InputDecoration(
                     hintText: widget.inputHint,
                     errorText: (snapshot.data ?? Constants.trueBool)

@@ -113,12 +113,11 @@ class UserDetailsViewModel extends BaseViewModel
           userOverviewApi?.data?.parentUsername ?? Constants.none,
           Constants.emptyStr,
         ),
-        // TOOD: add balance to user overview
-        // CardElement(
-        //   AppStrings.userActivationMUserBalance,
-        //   userOverviewApi?.data?. ?? Constants.none,
-        //   Constants.emptyStr,
-        // ),
+        CardElement(
+          AppStrings.userActivationMUserBalance,
+          userOverviewApi?.data?.balance.toString() ?? Constants.none,
+          Constants.emptyStr,
+        ),
         CardElement(
           AppStrings.userOverviewExpirationDate,
           userOverviewApi?.data?.expiration ?? Constants.none,

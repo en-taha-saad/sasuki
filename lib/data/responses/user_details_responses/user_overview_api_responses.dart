@@ -34,8 +34,8 @@ class UserOverviewDataResponse {
   // String? createdAt;
   // @JsonKey(name: "created_by")
   // String? createdBy;
-  // @JsonKey(name: "balance")
-  // int? balance;
+  @JsonKey(name: "balance")
+  int? balance;
   @JsonKey(name: "password")
   String? password;
   @JsonKey(name: "firstname")

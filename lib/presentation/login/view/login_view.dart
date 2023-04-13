@@ -134,22 +134,30 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _getContentWidget() {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        getScreenFooter(),
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: AppSize.s100),
-              getScreenSmallLogo(),
-              const SizedBox(height: AppSize.s25),
-              getScreenContent(context),
-              const SizedBox(height: AppSize.s100),
-            ],
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        setState(() {
+          isFooterHided = Constants.trueBool;
+        });
+      },
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          isFooterHided ? Container() : getScreenFooter(),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: AppSize.s100),
+                getScreenSmallLogo(),
+                const SizedBox(height: AppSize.s25),
+                getScreenContent(context),
+                const SizedBox(height: AppSize.s100),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -228,6 +236,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
+  var isFooterHided = Constants.trueBool;
   Widget _getLoginContentWidget() {
     return Form(
       key: _formKey,
@@ -244,6 +253,16 @@ class _LoginViewState extends State<LoginView> {
             inputHint: AppStrings.servUsernameHint,
             errorText: AppStrings.servInvalidUsername,
             autofocus: Constants.trueBool,
+            onTap: () {
+              setState(() {
+                isFooterHided = Constants.trueBool;
+              });
+            },
+            onFieldSubmitted: (value) {
+              setState(() {
+                isFooterHided = Constants.falseBool;
+              });
+            },
           ),
           const SizedBox(height: AppSize.s25),
           PasswordTextInput(
@@ -255,6 +274,16 @@ class _LoginViewState extends State<LoginView> {
             errorText: AppStrings.servInvalidPassword,
             autofocus: Constants.falseBool,
             showPassword: Constants.trueBool,
+            onTap: () {
+              setState(() {
+                isFooterHided = Constants.trueBool;
+              });
+            },
+            onFieldSubmitted: (value) {
+              setState(() {
+                isFooterHided = Constants.falseBool;
+              });
+            },
           ),
           const SizedBox(height: AppSize.s25),
           _rememberMeCheckBoxWidget(),
@@ -355,6 +384,8 @@ class _LoginViewState extends State<LoginView> {
     String? errorText,
     bool? autofocus,
     bool showPassword = Constants.falseBool,
+    Function()? onTap,
+    Function(String)? onFieldSubmitted,
   }) {
     return StreamBuilder<bool>(
       stream: stream,
@@ -377,6 +408,8 @@ class _LoginViewState extends State<LoginView> {
               children: [
                 TextFormField(
                   controller: controller,
+                  onTap: onTap,
+                  onFieldSubmitted: onFieldSubmitted,
                   decoration: InputDecoration(
                     hintText: inputHint,
                     errorText: (snapshot.data ?? Constants.trueBool)

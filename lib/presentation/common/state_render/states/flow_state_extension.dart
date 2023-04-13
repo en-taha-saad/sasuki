@@ -30,6 +30,8 @@ extension FlowStateExtension on FlowState {
     switch (runtimeType) {
       case LoadingState:
         if (getStateRendererType() == StateRendererType.popupLoadingState) {
+          dismissDialog(context);
+
           // show popup loading
           showPopup(
             context,
@@ -102,6 +104,7 @@ extension FlowStateExtension on FlowState {
               getMessage(),
               retryActionFunction,
             );
+            dismissDialog(context);
             // show content screen
             return contentScreenWidget;
           }

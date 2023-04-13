@@ -186,10 +186,31 @@ class _AddUserState extends State<AddUser> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          getCardTitle(
-            IconsAssets.add,
-            AppStrings.createNewUserTitle,
-            context,
+          Container(
+            margin: const EdgeInsets.all(AppSize.s25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(right: AppSize.s10),
+                  child: SvgPicture.asset(
+                    IconsAssets.add,
+                    theme: const SvgTheme(
+                      currentColor: ColorManager.greyNeutral2,
+                    ),
+                    // ignore: deprecated_member_use
+                    color: ColorManager.greyNeutral2,
+                  ),
+                ),
+                Text(
+                  AppStrings.createNewUserTitle,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: ColorManager.greyNeutral2,
+                      ),
+                ),
+              ],
+            ),
           ),
           Container(
             margin: const EdgeInsets.only(
@@ -201,7 +222,6 @@ class _AddUserState extends State<AddUser> {
                 Container(
                   margin: const EdgeInsets.only(
                     bottom: AppMargin.m25,
-                    top: AppMargin.m25,
                   ),
                   child: StreamBuilder<bool>(
                     stream: _addUserViewModel.outputIsUsernameValid,

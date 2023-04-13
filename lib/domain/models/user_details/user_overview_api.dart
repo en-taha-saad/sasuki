@@ -14,7 +14,7 @@ class UserOverviewData {
   bool? status;
   // String? createdAt;
   // String? createdBy;
-  // int? balance;
+  int? balance;
   String? password;
   String? firstname;
   String? lastname;
@@ -40,7 +40,7 @@ class UserOverviewData {
     this.status,
     // this.createdAt,
     // this.createdBy,
-    // this.balance,
+    this.balance,
     this.password,
     this.firstname,
     this.lastname,

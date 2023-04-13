@@ -16,7 +16,10 @@ ThemeData getApplicationTheme() {
       primary: ColorManager.primaryshade1,
       secondary: ColorManager.secondary,
     ),
-
+    primarySwatch: Colors.blue,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.green,
+    ),
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.all<Color>(ColorManager.whiteNeutral),
       shape: RoundedRectangleBorder(borderRadius: RadiusSizes.radius6),

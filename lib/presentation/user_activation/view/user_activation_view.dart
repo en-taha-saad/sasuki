@@ -268,7 +268,7 @@ class _UserActivationViewState extends State<UserActivationView> {
       selectedActivationMethod ?? activationMethods.first,
       isChecked,
       _userPriceController.text.isNotEmpty
-          ? int.parse(_userPriceController.text)
+          ? double.parse(_userPriceController.text).toInt()
           : activationInformsVar?.data?.userPrice?.toInt(),
     );
   }
@@ -297,6 +297,16 @@ class _UserActivationViewState extends State<UserActivationView> {
                   items: activationMethods,
                   doOtherThings: (val) {
                     selectedActivationMethod = val;
+                    setState(() {
+                      if (selectedActivationMethod?.method ==
+                          AppStrings.activationMethod2) {
+                        showPinInput = Constants.trueBool;
+                      } else {
+                        showPinInput = Constants.falseBool;
+                      }
+                    });
+                    // Nav.popRoute(context);
+                    // _activateUser(context);
                   },
                   displayFn: (item) => (item as ActivationMethod).method,
                   dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),

@@ -9,6 +9,9 @@ applyScreenSettings() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: ColorManager.transparent,
+      systemNavigationBarColor: ColorManager.secondary,
+      systemNavigationBarDividerColor: ColorManager.secondary,
+      systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
 }

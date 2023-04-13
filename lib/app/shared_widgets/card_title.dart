@@ -3,9 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
-Widget getCardTitle(icon, title, context) {
+Widget getCardTitle(
+  icon,
+  title,
+  context, {
+  color = ColorManager.whiteNeutral,
+}) {
   return Container(
-    color: ColorManager.whiteNeutral.withOpacity(0.2),
+    color: color != ColorManager.whiteNeutral
+        ? ColorManager.transparent
+        : ColorManager.whiteNeutral.withOpacity(0.2),
     padding: const EdgeInsets.symmetric(
       horizontal: AppSize.s15,
       vertical: AppSize.s10,
@@ -21,16 +28,18 @@ Widget getCardTitle(icon, title, context) {
           margin: const EdgeInsets.only(right: AppSize.s10),
           child: SvgPicture.asset(
             icon,
-            theme: const SvgTheme(
-              currentColor: ColorManager.whiteNeutral,
+            theme: SvgTheme(
+              currentColor: color,
             ),
             // ignore: deprecated_member_use
-            color: ColorManager.whiteNeutral,
+            color: color,
           ),
         ),
         Text(
           title,
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: color,
+              ),
         ),
       ],
     ),

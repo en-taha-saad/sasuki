@@ -25,7 +25,7 @@ extension UserOverviewDataResponseMapper on UserOverviewDataResponse? {
       this?.status.orFalse(),
       // this?.createdAt.orEmpty(),
       // this?.createdBy.orEmpty(),
-      // this?.balance.orZero(),
+      this?.balance.orZero(),
       this?.password.orEmpty(),
       this?.firstname.orEmpty(),
       this?.lastname.orEmpty(),

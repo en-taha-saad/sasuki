@@ -61,8 +61,14 @@ Widget getActionDialogContent(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            InkWell(
-              onTap: () => Nav.popRoute(context),
+            TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                elevation: 0,
+              ),
+              onPressed: () => Nav.popRoute(context),
               child: Text(
                 AppStrings.cancelButton,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(

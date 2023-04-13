@@ -65,7 +65,7 @@ class _AddServerViewState extends State<AddServerView> {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        getScreenFooter(),
+        isFooterHided ? Container() : getScreenFooter(),
         SingleChildScrollView(
           child: Column(
             children: [
@@ -134,6 +134,8 @@ class _AddServerViewState extends State<AddServerView> {
     );
   }
 
+  var isFooterHided = Constants.trueBool;
+
   Widget _getDataContentWidget() {
     return Form(
       key: _formKey,
@@ -149,6 +151,16 @@ class _AddServerViewState extends State<AddServerView> {
             inputHint: AppStrings.servISPNameHint,
             errorText: AppStrings.ispError,
             autofocus: Constants.trueBool,
+            onTap: () {
+              setState(() {
+                isFooterHided = Constants.trueBool;
+              });
+            },
+            onFieldSubmitted: (value) {
+              setState(() {
+                isFooterHided = Constants.falseBool;
+              });
+            },
           ),
           const SizedBox(height: AppSize.s25),
           _getSingleTextField(
@@ -158,6 +170,16 @@ class _AddServerViewState extends State<AddServerView> {
             inputHint: AppStrings.servServerAddressHint,
             errorText: AppStrings.serverAddressError,
             autofocus: Constants.falseBool,
+            onTap: () {
+              setState(() {
+                isFooterHided = Constants.trueBool;
+              });
+            },
+            onFieldSubmitted: (value) {
+              setState(() {
+                isFooterHided = Constants.falseBool;
+              });
+            },
           ),
           const SizedBox(height: AppSize.s25),
         ],
@@ -172,6 +194,8 @@ class _AddServerViewState extends State<AddServerView> {
     String? inputHint,
     String? errorText,
     bool? autofocus,
+    Function()? onTap,
+    Function(String)? onFieldSubmitted,
   }) {
     return StreamBuilder<bool>(
       stream: stream,
@@ -188,6 +212,8 @@ class _AddServerViewState extends State<AddServerView> {
             const SizedBox(height: AppSize.s10),
             TextFormField(
               controller: controller,
+              onTap: onTap,
+              onFieldSubmitted: onFieldSubmitted,
               decoration: InputDecoration(
                 hintText: inputHint,
                 errorText: (snapshot.data ?? Constants.trueBool)

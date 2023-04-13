@@ -680,11 +680,15 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           children: [
             Text(
               AppStrings.totaldebtDialogText,
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: ColorManager.blackNeutral,
+                  ),
             ),
             Text(
               "${_viewModel.paydebtInforms?.data?.total}",
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: ColorManager.blackNeutral,
+                  ),
             ),
           ],
         ),

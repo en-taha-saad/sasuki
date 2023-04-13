@@ -92,7 +92,6 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
         });
         widget.doOtherThings(val);
       },
-      
       onTap: () {},
       items: widget.items
           .map<DropdownMenuItem<T>>(
@@ -175,7 +174,9 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
             ? AppStrings.dropDownHint
             : widget.hintStr!,
         hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: widget.textAndHintColor,
+              color: widget.textAndHintColor == ColorManager.whiteNeutral
+                  ? ColorManager.greyNeutral3
+                  : widget.textAndHintColor,
             ),
       ),
       dropdownColor: const Color(0xffDCDFE3),

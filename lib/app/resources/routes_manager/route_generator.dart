@@ -53,7 +53,6 @@ class RouteGenerator {
         initAddServerModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: Constants.falseBool,
             child: AddServerView(),
           ),
         );
@@ -61,8 +60,6 @@ class RouteGenerator {
         initDashboardModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: Constants.trueBool,
-            isSecondAppBackground: Constants.falseBool,
             child: DashboardView(),
           ),
           settings: settings,
@@ -72,7 +69,6 @@ class RouteGenerator {
         initLoginModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: Constants.trueBool,
             child: LoginView(),
           ),
         );
@@ -80,8 +76,6 @@ class RouteGenerator {
         initUsersListModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: Constants.trueBool,
-            isSecondAppBackground: Constants.falseBool,
             child: UsersListView(),
           ),
           settings: settings,
@@ -90,8 +84,6 @@ class RouteGenerator {
         initUserDetailsModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: Constants.trueBool,
-            isSecondAppBackground: Constants.falseBool,
             child: UserDetailsView(),
           ),
           settings: settings,
@@ -100,8 +92,6 @@ class RouteGenerator {
         initExtendUserModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: Constants.trueBool,
-            isSecondAppBackground: Constants.falseBool,
             child: ExtendUserView(),
           ),
           settings: settings,
@@ -111,8 +101,6 @@ class RouteGenerator {
 
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: Constants.trueBool,
-            isSecondAppBackground: Constants.falseBool,
             child: UserActivationView(),
           ),
           settings: settings,
@@ -121,18 +109,14 @@ class RouteGenerator {
         initAddUserModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: Constants.trueBool,
-            isSecondAppBackground: Constants.falseBool,
             child: AddUser(),
           ),
           settings: settings,
         );
-        case Routes.editUserRoute:
+      case Routes.editUserRoute:
         initEditUserModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: Constants.trueBool,
-            isSecondAppBackground: Constants.falseBool,
             child: EditUser(),
           ),
           settings: settings,

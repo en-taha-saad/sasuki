@@ -302,30 +302,6 @@ class _UsersListViewState extends State<UsersListView> {
         ),
       ],
     );
-    return Container(
-      margin: const EdgeInsets.only(
-        top: AppMargin.m18,
-        left: AppMargin.m16,
-      ),
-      child: Row(
-        children: [
-          InkWell(
-            onTap: () {},
-            child: SvgPicture.asset(
-              height: AppSize.s18,
-              width: AppSize.s18,
-              IconsAssets.search,
-              theme: const SvgTheme(
-                currentColor: ColorManager.greyNeutral,
-              ),
-              // ignore: deprecated_member_use
-              color: ColorManager.greyNeutral,
-            ),
-          ),
-          Container(),
-        ],
-      ),
-    );
   }
 
   _searchUsers() {
