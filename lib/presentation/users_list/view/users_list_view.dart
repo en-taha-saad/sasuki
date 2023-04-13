@@ -250,11 +250,15 @@ class _UsersListViewState extends State<UsersListView> {
           controller: _searchInputController,
           onEditingComplete: _searchUsers,
           onTap: () {
-            showClearIcon = Constants.trueBool;
+            setState(() {
+              showClearIcon = Constants.trueBool;
+            });
           },
           onFieldSubmitted: (value) {
             _searchUsers();
-            showClearIcon = Constants.falseBool;
+            setState(() {
+              showClearIcon = Constants.falseBool;
+            });
           },
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: ColorManager.greyNeutral,
@@ -288,6 +292,11 @@ class _UsersListViewState extends State<UsersListView> {
           child: showClearIcon
               ? InkWell(
                   onTap: () {
+                    setState(
+                      () {
+                        showClearIcon = Constants.falseBool;
+                      },
+                    );
                     FocusScope.of(context).unfocus();
                     _searchInputController.clear();
                     _searchUsers();

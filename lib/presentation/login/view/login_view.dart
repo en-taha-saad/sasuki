@@ -179,7 +179,7 @@ class _LoginViewState extends State<LoginView> {
                   : _showLogin();
             },
           ),
-          const SizedBox(height: AppSize.s10),
+          const SizedBox(height: AppSize.s15),
           InkWell(
             onTap: () => Nav.replaceTo(context, Routes.chooseServerRoute),
             child: Text(
