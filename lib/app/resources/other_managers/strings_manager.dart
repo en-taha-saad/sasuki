@@ -13,6 +13,9 @@ class AppStrings {
   static const onlineUsers = "Online";
   static const shimmer = "shimmer";
 
+  static const disabledManager = "Disabled";
+  static const enabledManager = "Enabled";
+
   ///
   static const serInvalidUsernameError = "rsp_invalid_username_or_password";
   static const showLoginError = "Invalid username or password";
@@ -125,6 +128,9 @@ class AppStrings {
   static const usersSearchusers = "Search users";
   static const usersSearchmanagers = "Search managers";
   static const noUsersFound = "No records found";
+
+  // managers list
+  static const managersListScreen = "Managers List";
 
   // user overview
   static const userOverviewStatus = "Status";
