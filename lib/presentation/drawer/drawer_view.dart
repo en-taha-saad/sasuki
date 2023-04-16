@@ -40,10 +40,6 @@ class DrawerView extends StatelessWidget {
       IconsAssets.usersList,
     ),
     DrawerSingleBar(
-      AppStrings.drawerOnlineUsers,
-      IconsAssets.reports,
-    ),
-    DrawerSingleBar(
       AppStrings.drawerManagers,
       IconsAssets.managers,
     ),
@@ -103,10 +99,9 @@ class DrawerView extends StatelessWidget {
         case AppStrings.drawerUsersList:
           _manageDrawerNavigations(Routes.usersListRoute, context);
           break;
-        // TODO add screen
-        // case AppStrings.drawerManagers:
-        //   _manageDrawerNavigations(Routes.managersListRoute, context);
-        //   break;
+        case AppStrings.drawerManagers:
+          _manageDrawerNavigations(Routes.managersListRoute, context);
+          break;
         // case AppStrings.drawerReports:
         //   _manageDrawerNavigations(AppStrings.drawerReports, context);
         //   break;
