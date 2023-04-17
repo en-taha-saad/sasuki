@@ -12,7 +12,8 @@ import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
-import 'package:sasuki/app/shared_widgets/item_card.dart';
+import 'package:sasuki/app/shared_widgets/single_manager_card.dart';
+import 'package:sasuki/app/shared_widgets/single_manager_card_statistics.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
@@ -152,28 +153,17 @@ class _ManagersListViewState extends State<ManagersListView> {
                       ],
                     ),
                     const SizedBox(height: AppSize.s20),
-
                     /// TODO: add header widget
-                    // StreamBuilder<UsersList>(
-                    //   stream: _managersListViewModel.outputUsersListData,
-                    //   builder: (context, outputUsersListData) {
-                    //     return StreamBuilder<Dashboard>(
-                    //         stream: _dashboardViewModel.outputDashboardData,
-                    //         builder: (context, outputDashboardData) {
-                    //           return SingleCardStatistics(
-                    //             isShimmer: Constants.falseBool,
-                    //             totalUsers:
-                    //                 "${outputUsersListData.data?.total ?? Constants.dash}",
-                    //             activeUsers:
-                    //                 "${outputDashboardData.data?.data?.activeUsersCount ?? Constants.dash}",
-                    //             expiredUsers:
-                    //                 "${outputDashboardData.data?.data?.expiredUsersCount ?? Constants.dash}",
-                    //             onlineUsers:
-                    //                 "${outputDashboardData.data?.data?.usersOnlineCount ?? Constants.dash}",
-                    //           );
-                    //         });
-                    //   },
-                    // ),
+                    StreamBuilder<List<SingleManagerDetails>?>(
+                      stream: _managersListViewModel.outputManagersList,
+                      builder: (context, snapshot) {
+                        return SingleManagerCardStatistics(
+                          isShimmer: Constants.falseBool,
+                          totalManagers:
+                              "${snapshot.data?.length ?? Constants.dash}",
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -384,9 +374,7 @@ class _ManagersListViewState extends State<ManagersListView> {
   }
 
   Widget _singleManager(
-    List<SingleManagerDetails>? listOfManagers,
-    BuildContext context,
-  ) {
+      List<SingleManagerDetails>? listOfManagers, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -400,10 +388,15 @@ class _ManagersListViewState extends State<ManagersListView> {
                   // instance<UserDetailsViewModel>()
                   //     .getManagerApiOverview(managersListData.id!);
                 },
-                child: ItemCard(
+                child: SingleManagerCard(
                   fullName: managersListData.firstname != Constants.nullValue ||
                           managersListData.lastname != ""
                       ? "${managersListData.firstname} ${managersListData.lastname}"
+                      : Constants.dash,
+                  permissionGroup: managersListData.aclGroupDetails?.name !=
+                              Constants.nullValue ||
+                          managersListData.aclGroupDetails?.name != ""
+                      ? "${managersListData.aclGroupDetails?.name}"
                       : Constants.dash,
                   balance: managersListData.balance != Constants.nullValue ||
                           // ignore: unrelated_type_equality_checks
@@ -412,6 +405,9 @@ class _ManagersListViewState extends State<ManagersListView> {
                       : Constants.dash,
                   status: _getUserStatusString(managersListData),
                   statusColor: _getUserStatusColor(managersListData),
+                  usersCount: managersListData.usersCount != Constants.nullValue
+                      ? "${managersListData.usersCount}"
+                      : Constants.dash,
                   username: managersListData.username,
                 ),
               );
@@ -596,7 +592,7 @@ class _ManagersListViewState extends State<ManagersListView> {
 
   _getUserStatusColor(SingleManagerDetails singleManagerDetails) {
     return singleManagerDetails.enabled == Constants.zeroNum
-        ? ColorManager.redAnnotations
+        ? ColorManager.orangeAnnotations
         : ColorManager.greenAnnotations;
   }
 }

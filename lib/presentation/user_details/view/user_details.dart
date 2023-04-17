@@ -173,7 +173,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           splashRadius: AppSize.s20,
           position: PopupMenuPosition.over,
           shape: RoundedRectangleBorder(
-            borderRadius: RadiusSizes.radius12,
+            borderRadius: RadiusSizes.radius4,
             side: BorderSide(
               color: ColorManager.greyNeutral.withOpacity(0.25),
               width: AppSize.s1,
@@ -189,20 +189,23 @@ class _UserDetailsViewState extends State<UserDetailsView> {
                     horizontal: AppPadding.p10,
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      Container(
+                        margin: const EdgeInsets.only(right: AppMargin.m10),
+                        child: SvgPicture.asset(
+                          choice.icon!,
+                          height: AppSize.s18,
+                          width: AppSize.s18,
+                          // ignore: deprecated_member_use
+                          color: ColorManager.blackNeutral,
+                        ),
+                      ),
                       Text(
                         choice.text!,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: ColorManager.blackNeutral,
                             ),
-                      ),
-                      SvgPicture.asset(
-                        choice.icon!,
-                        height: AppSize.s18,
-                        width: AppSize.s18,
-                        // ignore: deprecated_member_use
-                        color: ColorManager.blackNeutral,
                       ),
                     ],
                   ),

@@ -9,8 +9,8 @@ import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/text_shimmer.dart';
 
-class SingleCardStatistics extends StatelessWidget {
-  const SingleCardStatistics({
+class SingleUserCardStatistics extends StatelessWidget {
+  const SingleUserCardStatistics({
     this.totalUsers,
     this.activeUsers,
     this.expiredUsers,
@@ -84,14 +84,14 @@ class SingleCardStatistics extends StatelessWidget {
               ),
               Row(
                 children: [
-                  singleCardStatisticsInform(
+                  SingleUserCardStatisticsInform(
                     context,
                     activeUsers,
                     AppStrings.activeUsers,
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: AppSize.s55),
-                    child: singleCardStatisticsInform(
+                    child: SingleUserCardStatisticsInform(
                       context,
                       expiredUsers,
                       AppStrings.expiredUsers,
@@ -99,7 +99,7 @@ class SingleCardStatistics extends StatelessWidget {
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: AppSize.s55),
-                    child: singleCardStatisticsInform(
+                    child: SingleUserCardStatisticsInform(
                       context,
                       onlineUsers,
                       AppStrings.onlineUsers,
@@ -114,7 +114,7 @@ class SingleCardStatistics extends StatelessWidget {
     );
   }
 
-  Widget singleCardStatisticsInform(
+  Widget SingleUserCardStatisticsInform(
     context,
     String? value,
     String? label,

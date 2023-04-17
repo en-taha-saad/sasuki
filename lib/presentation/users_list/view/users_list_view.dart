@@ -12,9 +12,9 @@ import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
-import 'package:sasuki/app/shared_widgets/item_card.dart';
+import 'package:sasuki/app/shared_widgets/single_user_card.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
-import 'package:sasuki/app/shared_widgets/single_card_statistics.dart';
+import 'package:sasuki/app/shared_widgets/single_user_card_statistics.dart';
 import 'package:sasuki/domain/models/dashboard/dashboard.dart';
 import 'package:sasuki/domain/models/filter_lists/connection_list.dart';
 import 'package:sasuki/domain/models/filter_lists/parent_list.dart';
@@ -176,7 +176,7 @@ class _UsersListViewState extends State<UsersListView> {
                         return StreamBuilder<Dashboard>(
                             stream: _dashboardViewModel.outputDashboardData,
                             builder: (context, outputDashboardData) {
-                              return SingleCardStatistics(
+                              return SingleUserCardStatistics(
                                 isShimmer: Constants.falseBool,
                                 totalUsers:
                                     "${outputUsersListData.data?.total ?? Constants.dash}",
@@ -409,7 +409,7 @@ class _UsersListViewState extends State<UsersListView> {
                   instance<UserDetailsViewModel>()
                       .getUserApiOverview(usersListData.id);
                 },
-                child: ItemCard(
+                child: SingleUserCard(
                   fullName: usersListData.firstname.isNotEmpty
                       ? "${usersListData.firstname} ${usersListData.lastname}"
                       : Constants.dash,

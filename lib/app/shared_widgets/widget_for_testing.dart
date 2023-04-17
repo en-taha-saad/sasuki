@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SingleCardStatistics extends StatelessWidget {
-  const SingleCardStatistics({
+class SingleUserCardStatistics extends StatelessWidget {
+  const SingleUserCardStatistics({
     super.key,
   });
 

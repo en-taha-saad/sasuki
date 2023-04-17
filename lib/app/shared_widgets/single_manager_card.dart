@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
-import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
+import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
@@ -12,24 +13,23 @@ import 'package:sasuki/app/shared_funs/screen_hieght.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/text_shimmer.dart';
 
-class ItemCard extends StatelessWidget {
+class SingleManagerCard extends StatelessWidget {
   final String? status;
-  final String? profileName;
+  final String? permissionGroup;
   final String? fullName;
-  final String? expireOn;
   final String? username;
   final String? balance;
+  final String? usersCount;
+
   final Color? statusColor;
   final bool? isShimmer;
-  final bool? isOnline;
-  const ItemCard({
+  const SingleManagerCard({
     this.status = "active",
-    this.profileName = "group",
+    this.permissionGroup = "group",
     this.username = "taha_saad",
     this.fullName = "Taha Saad",
     this.balance = "IQD 25,000",
-    this.expireOn = "2021-09-09",
-    this.isOnline,
+    this.usersCount = "10",
     this.statusColor = ColorManager.greenAnnotations,
     this.isShimmer,
     super.key,
@@ -136,11 +136,11 @@ class ItemCard extends StatelessWidget {
                             width: AppSize.s50,
                           )
                         : Text(
-                            "Expires on $expireOn",
+                            balance!,
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      color: ColorManager.greyNeutral,
+                                      fontWeight: FontWeight.w500,
+                                      color: ColorManager.greyNeutral3,
                                     ),
                             maxLines: Constants.oneNum.toInt(),
                             overflow: TextOverflow.ellipsis,
@@ -169,7 +169,7 @@ class ItemCard extends StatelessWidget {
                             width: AppSize.s20,
                           )
                         : Text(
-                            profileName!,
+                            permissionGroup!,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall
@@ -205,7 +205,9 @@ class ItemCard extends StatelessWidget {
                       )
                     : Text(
                         status!,
-                        style: Theme.of(context).textTheme.labelSmall,
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                              color: ColorManager.blackNeutral,
+                            ),
                       ),
               ),
               SizedBox(height: getScreenHeight(context) * 0.07),
@@ -214,24 +216,19 @@ class ItemCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Container(
-                      width: AppSize.s8,
-                      height: AppSize.s8,
-                      margin: const EdgeInsets.only(right: AppSize.s5),
-                      decoration: BoxDecoration(
-                        color: isOnline != Constants.nullValue &&
-                                isOnline != Constants.falseBool
-                            ? ColorManager.greenAnnotations2
-                            : ColorManager.greyNeutral,
-                        shape: BoxShape.circle,
-                      ),
+                    Text(
+                      usersCount!,
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            fontSize: AppSize.s14,
+                            color: ColorManager.greyNeutral3,
+                          ),
                     ),
                     Text(
-                      isOnline != Constants.nullValue &&
-                              isOnline != Constants.falseBool
-                          ? AppStrings.usersConnectionOnline
-                          : AppStrings.usersConnectionOffline,
-                      style: Theme.of(context).textTheme.labelSmall,
+                      " Users",
+                      style: StylesManager.getMediumStyle(
+                        fontSize: FontSize.sBadge1,
+                        color: ColorManager.greyNeutral3,
+                      ),
                     ),
                   ],
                 ),

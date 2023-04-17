@@ -7,10 +7,10 @@ import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
-import 'package:sasuki/app/shared_widgets/item_card.dart';
+import 'package:sasuki/app/shared_widgets/single_user_card.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
-import 'package:sasuki/app/shared_widgets/single_card_statistics.dart';
+import 'package:sasuki/app/shared_widgets/single_user_card_statistics.dart';
 
 class UserListShimmerLoading extends StatelessWidget {
   const UserListShimmerLoading({super.key});
@@ -47,7 +47,7 @@ class UserListShimmerLoading extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: AppSize.s20),
-              const SingleCardStatistics(
+              const SingleUserCardStatistics(
                 isShimmer: Constants.trueBool,
                 totalUsers: Constants.dash,
                 activeUsers: Constants.dash,
@@ -156,7 +156,7 @@ class UserListShimmerLoading extends StatelessWidget {
   }
 
   Widget _singleUser() {
-    return const ItemCard(
+    return const SingleUserCard(
       isShimmer: Constants.trueBool,
       fullName: Constants.dash,
       profileName: Constants.dash,

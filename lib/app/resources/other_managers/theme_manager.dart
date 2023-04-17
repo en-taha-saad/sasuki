@@ -159,7 +159,7 @@ ThemeData getApplicationTheme() {
 
       ////////////// badge 2
       labelSmall: StylesManager.getMediumStyle(
-        fontSize: FontSize.sBadge1,
+        fontSize: FontSize.sBadge2,
       ),
 
       ///////////// heading 6

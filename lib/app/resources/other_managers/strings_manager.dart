@@ -7,6 +7,8 @@ class AppStrings {
 
   ///
   static const totalUsers = "Total Users";
+  static const totalManagers = "Total Managers";
+  
   static const activeUsers = "Active";
   static const expiredUsers = "Expired";
   static const disabledUser = "Disabled";
