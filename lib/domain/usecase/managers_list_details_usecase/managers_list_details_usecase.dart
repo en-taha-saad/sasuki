@@ -6,13 +6,13 @@ import 'package:sasuki/domain/usecase/base_usecase.dart';
 import 'package:sasuki/presentation/common/freezed_data_classes.dart';
 
 class ManagersListDetailsUsecase
-    implements BaseUseCase<ManagersListRequestObject, ManagerListDetails> {
+    implements BaseUseCase<ManagerRequestObject, ManagerListDetails> {
   final Repository _repository;
   ManagersListDetailsUsecase(this._repository);
   @override
   // ignore: non_constant_identifier_names, avoid_types_as_parameter_names
   Future<Either<Failure, ManagerListDetails>> execute(
-      ManagersListRequestObject managersListRequestObject) async {
+      ManagerRequestObject managersListRequestObject) async {
     return await _repository.getManagersListDetails(managersListRequestObject);
   }
 }

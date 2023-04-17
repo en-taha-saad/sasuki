@@ -30,12 +30,13 @@ SingleManagerDetailsResponses _$SingleManagerDetailsResponsesFromJson(
       json['username'] as String?,
       json['firstname'] as String?,
       json['lastname'] as String?,
+      (json['balance'] as num?)?.toDouble(),
+      json['enabled'] as int?,
+      json['users_count'] as int?,
       json['acl_group_details'] == null
           ? null
           : AclGroupDetailsResponses.fromJson(
               json['acl_group_details'] as Map<String, dynamic>),
-      (json['balance'] as num?)?.toDouble(),
-      json['enabled'] as int?,
     );
 
 Map<String, dynamic> _$SingleManagerDetailsResponsesToJson(
@@ -45,9 +46,10 @@ Map<String, dynamic> _$SingleManagerDetailsResponsesToJson(
       'username': instance.username,
       'firstname': instance.firstname,
       'lastname': instance.lastname,
-      'acl_group_details': instance.aclGroupDetails,
       'balance': instance.balance,
       'enabled': instance.enabled,
+      'users_count': instance.userCount,
+      'acl_group_details': instance.aclGroupDetails,
     };
 
 AclGroupDetailsResponses _$AclGroupDetailsResponsesFromJson(

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
-import 'package:sasuki/app/resources/other_managers/color_manager.dart';
-import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
 class AppBackground extends StatelessWidget {
   final Widget? child;

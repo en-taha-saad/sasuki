@@ -1115,7 +1115,7 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, ManagerListDetails>> getManagersListDetails(
-    ManagersListRequestObject managersListRequestObject,
+    ManagerRequestObject managersListRequestObject,
   ) async {
     if (await _networkInfo.isConnected) {
       // its connected to internet so we can call the api

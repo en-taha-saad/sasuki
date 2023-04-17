@@ -2358,357 +2358,6 @@ abstract class _PayDebtRequestObject implements PayDebtRequestObject {
 }
 
 /// @nodoc
-mixin _$ManagersListRequestObject {
-  int? get page => throw _privateConstructorUsedError;
-  int? get count => throw _privateConstructorUsedError;
-  String? get sortBy => throw _privateConstructorUsedError;
-  String? get direction => throw _privateConstructorUsedError;
-  String? get search => throw _privateConstructorUsedError;
-  List<String>? get columns => throw _privateConstructorUsedError;
-  int? get parentId => throw _privateConstructorUsedError;
-  int? get subManagers => throw _privateConstructorUsedError;
-  int? get siteId => throw _privateConstructorUsedError;
-  int? get aclGroupId => throw _privateConstructorUsedError;
-  int? get groupId => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ManagersListRequestObjectCopyWith<ManagersListRequestObject> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ManagersListRequestObjectCopyWith<$Res> {
-  factory $ManagersListRequestObjectCopyWith(ManagersListRequestObject value,
-          $Res Function(ManagersListRequestObject) then) =
-      _$ManagersListRequestObjectCopyWithImpl<$Res, ManagersListRequestObject>;
-  @useResult
-  $Res call(
-      {int? page,
-      int? count,
-      String? sortBy,
-      String? direction,
-      String? search,
-      List<String>? columns,
-      int? parentId,
-      int? subManagers,
-      int? siteId,
-      int? aclGroupId,
-      int? groupId});
-}
-
-/// @nodoc
-class _$ManagersListRequestObjectCopyWithImpl<$Res,
-        $Val extends ManagersListRequestObject>
-    implements $ManagersListRequestObjectCopyWith<$Res> {
-  _$ManagersListRequestObjectCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = freezed,
-    Object? count = freezed,
-    Object? sortBy = freezed,
-    Object? direction = freezed,
-    Object? search = freezed,
-    Object? columns = freezed,
-    Object? parentId = freezed,
-    Object? subManagers = freezed,
-    Object? siteId = freezed,
-    Object? aclGroupId = freezed,
-    Object? groupId = freezed,
-  }) {
-    return _then(_value.copyWith(
-      page: freezed == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int?,
-      count: freezed == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int?,
-      sortBy: freezed == sortBy
-          ? _value.sortBy
-          : sortBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      direction: freezed == direction
-          ? _value.direction
-          : direction // ignore: cast_nullable_to_non_nullable
-              as String?,
-      search: freezed == search
-          ? _value.search
-          : search // ignore: cast_nullable_to_non_nullable
-              as String?,
-      columns: freezed == columns
-          ? _value.columns
-          : columns // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      parentId: freezed == parentId
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      subManagers: freezed == subManagers
-          ? _value.subManagers
-          : subManagers // ignore: cast_nullable_to_non_nullable
-              as int?,
-      siteId: freezed == siteId
-          ? _value.siteId
-          : siteId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      aclGroupId: freezed == aclGroupId
-          ? _value.aclGroupId
-          : aclGroupId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      groupId: freezed == groupId
-          ? _value.groupId
-          : groupId // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_ManagersListRequestObjectCopyWith<$Res>
-    implements $ManagersListRequestObjectCopyWith<$Res> {
-  factory _$$_ManagersListRequestObjectCopyWith(
-          _$_ManagersListRequestObject value,
-          $Res Function(_$_ManagersListRequestObject) then) =
-      __$$_ManagersListRequestObjectCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {int? page,
-      int? count,
-      String? sortBy,
-      String? direction,
-      String? search,
-      List<String>? columns,
-      int? parentId,
-      int? subManagers,
-      int? siteId,
-      int? aclGroupId,
-      int? groupId});
-}
-
-/// @nodoc
-class __$$_ManagersListRequestObjectCopyWithImpl<$Res>
-    extends _$ManagersListRequestObjectCopyWithImpl<$Res,
-        _$_ManagersListRequestObject>
-    implements _$$_ManagersListRequestObjectCopyWith<$Res> {
-  __$$_ManagersListRequestObjectCopyWithImpl(
-      _$_ManagersListRequestObject _value,
-      $Res Function(_$_ManagersListRequestObject) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = freezed,
-    Object? count = freezed,
-    Object? sortBy = freezed,
-    Object? direction = freezed,
-    Object? search = freezed,
-    Object? columns = freezed,
-    Object? parentId = freezed,
-    Object? subManagers = freezed,
-    Object? siteId = freezed,
-    Object? aclGroupId = freezed,
-    Object? groupId = freezed,
-  }) {
-    return _then(_$_ManagersListRequestObject(
-      freezed == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int?,
-      freezed == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int?,
-      freezed == sortBy
-          ? _value.sortBy
-          : sortBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      freezed == direction
-          ? _value.direction
-          : direction // ignore: cast_nullable_to_non_nullable
-              as String?,
-      freezed == search
-          ? _value.search
-          : search // ignore: cast_nullable_to_non_nullable
-              as String?,
-      freezed == columns
-          ? _value._columns
-          : columns // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      freezed == parentId
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      freezed == subManagers
-          ? _value.subManagers
-          : subManagers // ignore: cast_nullable_to_non_nullable
-              as int?,
-      freezed == siteId
-          ? _value.siteId
-          : siteId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      freezed == aclGroupId
-          ? _value.aclGroupId
-          : aclGroupId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      freezed == groupId
-          ? _value.groupId
-          : groupId // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_ManagersListRequestObject implements _ManagersListRequestObject {
-  _$_ManagersListRequestObject(
-      this.page,
-      this.count,
-      this.sortBy,
-      this.direction,
-      this.search,
-      final List<String>? columns,
-      this.parentId,
-      this.subManagers,
-      this.siteId,
-      this.aclGroupId,
-      this.groupId)
-      : _columns = columns;
-
-  @override
-  final int? page;
-  @override
-  final int? count;
-  @override
-  final String? sortBy;
-  @override
-  final String? direction;
-  @override
-  final String? search;
-  final List<String>? _columns;
-  @override
-  List<String>? get columns {
-    final value = _columns;
-    if (value == null) return null;
-    if (_columns is EqualUnmodifiableListView) return _columns;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  @override
-  final int? parentId;
-  @override
-  final int? subManagers;
-  @override
-  final int? siteId;
-  @override
-  final int? aclGroupId;
-  @override
-  final int? groupId;
-
-  @override
-  String toString() {
-    return 'ManagersListRequestObject(page: $page, count: $count, sortBy: $sortBy, direction: $direction, search: $search, columns: $columns, parentId: $parentId, subManagers: $subManagers, siteId: $siteId, aclGroupId: $aclGroupId, groupId: $groupId)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ManagersListRequestObject &&
-            (identical(other.page, page) || other.page == page) &&
-            (identical(other.count, count) || other.count == count) &&
-            (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
-            (identical(other.direction, direction) ||
-                other.direction == direction) &&
-            (identical(other.search, search) || other.search == search) &&
-            const DeepCollectionEquality().equals(other._columns, _columns) &&
-            (identical(other.parentId, parentId) ||
-                other.parentId == parentId) &&
-            (identical(other.subManagers, subManagers) ||
-                other.subManagers == subManagers) &&
-            (identical(other.siteId, siteId) || other.siteId == siteId) &&
-            (identical(other.aclGroupId, aclGroupId) ||
-                other.aclGroupId == aclGroupId) &&
-            (identical(other.groupId, groupId) || other.groupId == groupId));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      page,
-      count,
-      sortBy,
-      direction,
-      search,
-      const DeepCollectionEquality().hash(_columns),
-      parentId,
-      subManagers,
-      siteId,
-      aclGroupId,
-      groupId);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ManagersListRequestObjectCopyWith<_$_ManagersListRequestObject>
-      get copyWith => __$$_ManagersListRequestObjectCopyWithImpl<
-          _$_ManagersListRequestObject>(this, _$identity);
-}
-
-abstract class _ManagersListRequestObject implements ManagersListRequestObject {
-  factory _ManagersListRequestObject(
-      final int? page,
-      final int? count,
-      final String? sortBy,
-      final String? direction,
-      final String? search,
-      final List<String>? columns,
-      final int? parentId,
-      final int? subManagers,
-      final int? siteId,
-      final int? aclGroupId,
-      final int? groupId) = _$_ManagersListRequestObject;
-
-  @override
-  int? get page;
-  @override
-  int? get count;
-  @override
-  String? get sortBy;
-  @override
-  String? get direction;
-  @override
-  String? get search;
-  @override
-  List<String>? get columns;
-  @override
-  int? get parentId;
-  @override
-  int? get subManagers;
-  @override
-  int? get siteId;
-  @override
-  int? get aclGroupId;
-  @override
-  int? get groupId;
-  @override
-  @JsonKey(ignore: true)
-  _$$_ManagersListRequestObjectCopyWith<_$_ManagersListRequestObject>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$DepositWithdrawPayDebtManagerRequestObject {
   int? get managerId => throw _privateConstructorUsedError;
   String? get managerUsername => throw _privateConstructorUsedError;
@@ -3356,4 +3005,350 @@ abstract class _AddEditManagerRequestObject
   @JsonKey(ignore: true)
   _$$_AddEditManagerRequestObjectCopyWith<_$_AddEditManagerRequestObject>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ManagerRequestObject {
+  int get page => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
+  String get sortBy => throw _privateConstructorUsedError;
+  String get direction => throw _privateConstructorUsedError;
+  String get search => throw _privateConstructorUsedError;
+  List<String> get columns => throw _privateConstructorUsedError;
+  int get parentId => throw _privateConstructorUsedError;
+  int get subManagers => throw _privateConstructorUsedError;
+  int get siteId => throw _privateConstructorUsedError;
+  int get aclGroupId => throw _privateConstructorUsedError;
+  int get groupId => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ManagerRequestObjectCopyWith<ManagerRequestObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ManagerRequestObjectCopyWith<$Res> {
+  factory $ManagerRequestObjectCopyWith(ManagerRequestObject value,
+          $Res Function(ManagerRequestObject) then) =
+      _$ManagerRequestObjectCopyWithImpl<$Res, ManagerRequestObject>;
+  @useResult
+  $Res call(
+      {int page,
+      int count,
+      String sortBy,
+      String direction,
+      String search,
+      List<String> columns,
+      int parentId,
+      int subManagers,
+      int siteId,
+      int aclGroupId,
+      int groupId});
+}
+
+/// @nodoc
+class _$ManagerRequestObjectCopyWithImpl<$Res,
+        $Val extends ManagerRequestObject>
+    implements $ManagerRequestObjectCopyWith<$Res> {
+  _$ManagerRequestObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+    Object? parentId = null,
+    Object? subManagers = null,
+    Object? siteId = null,
+    Object? aclGroupId = null,
+    Object? groupId = null,
+  }) {
+    return _then(_value.copyWith(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      sortBy: null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String,
+      search: null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+      columns: null == columns
+          ? _value.columns
+          : columns // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      parentId: null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      subManagers: null == subManagers
+          ? _value.subManagers
+          : subManagers // ignore: cast_nullable_to_non_nullable
+              as int,
+      siteId: null == siteId
+          ? _value.siteId
+          : siteId // ignore: cast_nullable_to_non_nullable
+              as int,
+      aclGroupId: null == aclGroupId
+          ? _value.aclGroupId
+          : aclGroupId // ignore: cast_nullable_to_non_nullable
+              as int,
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ManagerRequestObjectCopyWith<$Res>
+    implements $ManagerRequestObjectCopyWith<$Res> {
+  factory _$$_ManagerRequestObjectCopyWith(_$_ManagerRequestObject value,
+          $Res Function(_$_ManagerRequestObject) then) =
+      __$$_ManagerRequestObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int page,
+      int count,
+      String sortBy,
+      String direction,
+      String search,
+      List<String> columns,
+      int parentId,
+      int subManagers,
+      int siteId,
+      int aclGroupId,
+      int groupId});
+}
+
+/// @nodoc
+class __$$_ManagerRequestObjectCopyWithImpl<$Res>
+    extends _$ManagerRequestObjectCopyWithImpl<$Res, _$_ManagerRequestObject>
+    implements _$$_ManagerRequestObjectCopyWith<$Res> {
+  __$$_ManagerRequestObjectCopyWithImpl(_$_ManagerRequestObject _value,
+      $Res Function(_$_ManagerRequestObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+    Object? parentId = null,
+    Object? subManagers = null,
+    Object? siteId = null,
+    Object? aclGroupId = null,
+    Object? groupId = null,
+  }) {
+    return _then(_$_ManagerRequestObject(
+      null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == columns
+          ? _value._columns
+          : columns // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      null == parentId
+          ? _value.parentId
+          : parentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == subManagers
+          ? _value.subManagers
+          : subManagers // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == siteId
+          ? _value.siteId
+          : siteId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == aclGroupId
+          ? _value.aclGroupId
+          : aclGroupId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ManagerRequestObject implements _ManagerRequestObject {
+  _$_ManagerRequestObject(
+      this.page,
+      this.count,
+      this.sortBy,
+      this.direction,
+      this.search,
+      final List<String> columns,
+      this.parentId,
+      this.subManagers,
+      this.siteId,
+      this.aclGroupId,
+      this.groupId)
+      : _columns = columns;
+
+  @override
+  final int page;
+  @override
+  final int count;
+  @override
+  final String sortBy;
+  @override
+  final String direction;
+  @override
+  final String search;
+  final List<String> _columns;
+  @override
+  List<String> get columns {
+    if (_columns is EqualUnmodifiableListView) return _columns;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_columns);
+  }
+
+  @override
+  final int parentId;
+  @override
+  final int subManagers;
+  @override
+  final int siteId;
+  @override
+  final int aclGroupId;
+  @override
+  final int groupId;
+
+  @override
+  String toString() {
+    return 'ManagerRequestObject(page: $page, count: $count, sortBy: $sortBy, direction: $direction, search: $search, columns: $columns, parentId: $parentId, subManagers: $subManagers, siteId: $siteId, aclGroupId: $aclGroupId, groupId: $groupId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ManagerRequestObject &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
+            (identical(other.search, search) || other.search == search) &&
+            const DeepCollectionEquality().equals(other._columns, _columns) &&
+            (identical(other.parentId, parentId) ||
+                other.parentId == parentId) &&
+            (identical(other.subManagers, subManagers) ||
+                other.subManagers == subManagers) &&
+            (identical(other.siteId, siteId) || other.siteId == siteId) &&
+            (identical(other.aclGroupId, aclGroupId) ||
+                other.aclGroupId == aclGroupId) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      page,
+      count,
+      sortBy,
+      direction,
+      search,
+      const DeepCollectionEquality().hash(_columns),
+      parentId,
+      subManagers,
+      siteId,
+      aclGroupId,
+      groupId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ManagerRequestObjectCopyWith<_$_ManagerRequestObject> get copyWith =>
+      __$$_ManagerRequestObjectCopyWithImpl<_$_ManagerRequestObject>(
+          this, _$identity);
+}
+
+abstract class _ManagerRequestObject implements ManagerRequestObject {
+  factory _ManagerRequestObject(
+      final int page,
+      final int count,
+      final String sortBy,
+      final String direction,
+      final String search,
+      final List<String> columns,
+      final int parentId,
+      final int subManagers,
+      final int siteId,
+      final int aclGroupId,
+      final int groupId) = _$_ManagerRequestObject;
+
+  @override
+  int get page;
+  @override
+  int get count;
+  @override
+  String get sortBy;
+  @override
+  String get direction;
+  @override
+  String get search;
+  @override
+  List<String> get columns;
+  @override
+  int get parentId;
+  @override
+  int get subManagers;
+  @override
+  int get siteId;
+  @override
+  int get aclGroupId;
+  @override
+  int get groupId;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ManagerRequestObjectCopyWith<_$_ManagerRequestObject> get copyWith =>
+      throw _privateConstructorUsedError;
 }

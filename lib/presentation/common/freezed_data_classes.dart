@@ -120,22 +120,7 @@ class PayDebtRequestObject with _$PayDebtRequestObject {
   ) = _PayDebtRequestObject;
 }
 
-@freezed
-class ManagersListRequestObject with _$ManagersListRequestObject {
-  factory ManagersListRequestObject(
-    int? page,
-    int? count,
-    String? sortBy,
-    String? direction,
-    String? search,
-    List<String>? columns,
-    int? parentId,
-    int? subManagers,
-    int? siteId,
-    int? aclGroupId,
-    int? groupId,
-  ) = _ManagersListRequestObject;
-}
+
 
 @freezed
 class DepositWithdrawPayDebtManagerRequestObject
@@ -168,4 +153,21 @@ class AddEditManagerRequestObject with _$AddEditManagerRequestObject {
     String? address,
     String? notes,
   ) = _AddEditManagerRequestObject;
+}
+
+@freezed
+class ManagerRequestObject with _$ManagerRequestObject {
+  factory ManagerRequestObject(
+    int page,
+    int count,
+    String sortBy,
+    String direction,
+    String search,
+    List<String> columns,
+    int parentId,
+    int subManagers,
+    int siteId,
+    int aclGroupId,
+    int groupId,
+  ) = _ManagerRequestObject;
 }

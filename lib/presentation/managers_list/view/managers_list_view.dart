@@ -13,18 +13,11 @@ import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/item_card.dart';
-import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
-import 'package:sasuki/app/shared_widgets/single_card_statistics.dart';
-import 'package:sasuki/domain/models/dashboard/dashboard.dart';
-import 'package:sasuki/domain/models/filter_lists/parent_list.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
-import 'package:sasuki/domain/models/users_list/users_list.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
-import 'package:sasuki/presentation/dashboard/viewmodel/dashboard_viewmodel.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
 import 'package:sasuki/presentation/managers_list/viewmodel/managers_list_viewmodel.dart';
-import 'package:sasuki/presentation/user_details/viewmodel/user_details_viewmodel.dart';
 
 class ManagersListView extends StatefulWidget {
   const ManagersListView({Key? key}) : super(key: key);
@@ -314,12 +307,12 @@ class _ManagersListViewState extends State<ManagersListView> {
   }
 
   Widget _getManagersList() {
-    return StreamBuilder<ManagerListDetails>(
+    return StreamBuilder<List<SingleManagerDetails>?>(
       stream: _managersListViewModel.outputManagersList,
       builder: (context, snapshot) {
         // ignore: prefer_is_empty
-        if (snapshot.data?.data?.length == Constants.oneNum ||
-            snapshot.data?.data?.length == Constants.zeroNum) {
+        if (snapshot.data?.length == Constants.oneNum ||
+            snapshot.data?.length == Constants.zeroNum) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Future.delayed(
               Duration(seconds: Constants.oneNum.toInt()),
@@ -329,14 +322,14 @@ class _ManagersListViewState extends State<ManagersListView> {
         }
         return !loadFilteredManagers
             // ignore: prefer_is_empty
-            ? snapshot.data?.data?.length != Constants.zeroNum
+            ? snapshot.data?.length != Constants.zeroNum
                 ? SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     controller: _scrollController,
                     child: loadingMoreManagers
                         ? Column(
                             children: [
-                              _singleManager(snapshot.data?.data, context),
+                              _singleManager(snapshot.data, context),
                               const SizedBox(height: AppSize.s20),
                               const Center(
                                 child: CircularProgressIndicator(
@@ -347,7 +340,7 @@ class _ManagersListViewState extends State<ManagersListView> {
                               ),
                             ],
                           )
-                        : _singleManager(snapshot.data?.data, context),
+                        : _singleManager(snapshot.data, context),
                   )
                 : Container(
                     margin: const EdgeInsets.only(top: AppMargin.m38),
@@ -437,13 +430,16 @@ class _ManagersListViewState extends State<ManagersListView> {
       useSafeArea: Constants.trueBool,
       builder: (context) => _filterDialog(context),
     );
-    if (parentList == Constants.nullValue ||
-        parentList?.length == Constants.zeroDouble) {
-      await _managersListViewModel.getParentList();
-      if (profileList == Constants.nullValue ||
-          profileList?.length == Constants.zeroDouble) {
-        await _managersListViewModel.getProfileList();
-      }
+    if (parentManagerList == Constants.nullValue ||
+        parentManagerList?.length == Constants.zeroDouble) {
+      // TODO: uncomment this when parrent list is ready
+      // await _managersListViewModel.getParentList();
+      ///
+      // TODO: uncomment this when profile list is ready
+      // if (profileList == Constants.nullValue ||
+      //     profileList?.length == Constants.zeroDouble) {
+      //   await _managersListViewModel.getProfileList();
+      // }
     }
     showFilterWidget = !showFilterWidget;
     setState(() {});
@@ -500,10 +496,8 @@ class _ManagersListViewState extends State<ManagersListView> {
                 ),
               ],
             ),
-            _getParentDropdown(AppStrings.usersParent, context),
-            _getStatusDropdown(AppStrings.usersStatus, context),
-            _getConnectionDropdown(AppStrings.usersConnection, context),
-            _getProfileDropdown(AppStrings.usersProfile, context),
+            // TOOD: uncomment this when parrent list is ready
+            _getParentManagerDropdown(AppStrings.usersParent, context),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -531,188 +525,68 @@ class _ManagersListViewState extends State<ManagersListView> {
 
   void _resetFilters() {
     setState(() {
-      selectedparent = Constants.nullValue;
-      selectedprofile = Constants.nullValue;
-      selectedconnectionFilter = Constants.nullValue;
-      selectedstatusFilter = Constants.nullValue;
+      selectedparentManager = Constants.nullValue;
       showFilterWidget = !showFilterWidget;
-      loadFilteredUsers = Constants.trueBool;
+      loadFilteredManagers = Constants.trueBool;
     });
     _searchInputController.clear();
     _managersListViewModel.setSearchInput(Constants.emptyStr);
-    _managersListViewModel.getUserFromSearch();
+    _managersListViewModel.getManagerFromSearch();
     Nav.popRoute(context);
   }
 
   void _applyFilters() {
     setState(() {
       showFilterWidget = !showFilterWidget;
-      loadFilteredUsers = Constants.trueBool;
+      loadFilteredManagers = Constants.trueBool;
     });
     _searchInputController.clear();
     _managersListViewModel.setSearchInput(Constants.emptyStr);
-    _managersListViewModel.getUserFromSearch(
-      parentId: selectedparent?.id,
-      profileId: selectedprofile?.id,
-      connectionId: selectedconnectionFilter?.id,
-      statusId: selectedstatusFilter?.id,
+    _managersListViewModel.getManagerFromSearch(
+      parentId: selectedparentManager?.id,
+      // TODO uncomment this when profile list is ready
+      // profileId: selectedprofile?.id,
     );
     Nav.popRoute(context);
   }
 
-  _getParentDropdown(String inputTitle, context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const SizedBox(height: AppSize.s20),
-        Text(
-          inputTitle,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        StreamBuilder<List<SingleParentData>?>(
-          stream: _managersListViewModel.outputParentList,
-          builder: (_, snapshot0) {
-            if (parentList == Constants.nullValue ||
-                parentList?.length == Constants.zeroNum) {
-              parentList = snapshot0.data;
-            }
-            debugPrint("parentList: $parentList");
-            // ignore: prefer_is_empty
-            return Container(
-              margin: const EdgeInsets.only(top: AppMargin.m15),
-              child: DropDownComponent<SingleParentData?>(
-                isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.usersParentHint,
-                items: parentList ?? [],
-                doOtherThings: (val) {
-                  selectedparent = val;
-                },
-                displayFn: (item) => (item as SingleParentData).username,
-                textAndHintColor: ColorManager.whiteNeutral,
-              ),
-            );
-          },
-        ),
-      ],
-    );
+  _getParentManagerDropdown(String inputTitle, context) {
+    // return Column(
+    //   crossAxisAlignment: CrossAxisAlignment.start,
+    //   mainAxisAlignment: MainAxisAlignment.start,
+    //   children: [
+    //     const SizedBox(height: AppSize.s20),
+    //     Text(
+    //       inputTitle,
+    //       style: Theme.of(context).textTheme.labelLarge,
+    //     ),
+    //     StreamBuilder<List<SingleManagerData>?>(
+    //       stream: _managersListViewModel.outputParentList,
+    //       builder: (_, snapshot0) {
+    //         if (parentManagerList == Constants.nullValue ||
+    //             parentManagerList?.length == Constants.zeroNum) {
+    //           parentManagerList = snapshot0.data;
+    //         }
+    //         debugPrint("parentManagerList: $parentManagerList");
+    //         // ignore: prefer_is_empty
+    //         return Container(
+    //           margin: const EdgeInsets.only(top: AppMargin.m15),
+    //           child: DropDownComponent<SingleManagerData?>(
+    //             isThisServersDropdown: Constants.falseBool,
+    //             hintStr: AppStrings.usersParentHint,
+    //             items: parentManagerList ?? [],
+    //             doOtherThings: (val) {
+    //               selectedparentManager = val;
+    //             },
+    //             displayFn: (item) => (item as SingleManagerData).username ?? "",
+    //             textAndHintColor: ColorManager.whiteNeutral,
+    //           ),
+    //         );
+    //       },
+    //     ),
+    //   ],
+    // );
   }
-
-  _getStatusDropdown(String inputTitle, context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const SizedBox(height: AppSize.s20),
-        Text(
-          inputTitle,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        StreamBuilder<List<StatusFilterList>?>(
-          stream: _managersListViewModel.outputStatusList,
-          builder: (_, snapshot0) {
-            if (statusFilterList == Constants.nullValue ||
-                statusFilterList?.length == Constants.zeroNum) {
-              statusFilterList = snapshot0.data;
-            }
-            // ignore: prefer_is_empty
-            return Container(
-              margin: const EdgeInsets.only(top: AppMargin.m15),
-              child: DropDownComponent<StatusFilterList?>(
-                isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.usersStatusAny,
-                items: statusFilterList ?? [],
-                doOtherThings: (val) {
-                  selectedstatusFilter = val;
-                },
-                displayFn: (item) => (item as StatusFilterList).name,
-                textAndHintColor: ColorManager.whiteNeutral,
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  _getConnectionDropdown(String inputTitle, context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const SizedBox(height: AppSize.s20),
-        Text(
-          inputTitle,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        StreamBuilder<List<ConnectionFilterList>?>(
-          stream: _managersListViewModel.outputConnectionList,
-          builder: (_, snapshot0) {
-            if (connectionFilterList == Constants.nullValue ||
-                connectionFilterList?.length == Constants.zeroNum) {
-              connectionFilterList = snapshot0.data;
-            }
-            // ignore: prefer_is_empty
-            return Container(
-              margin: const EdgeInsets.only(top: AppMargin.m15),
-              child: DropDownComponent<ConnectionFilterList?>(
-                isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.usersStatusAny,
-                items: connectionFilterList ?? [],
-                doOtherThings: (val) {
-                  selectedconnectionFilter = val;
-                },
-                displayFn: (item) => (item as ConnectionFilterList).name,
-                textAndHintColor: ColorManager.whiteNeutral,
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  _getProfileDropdown(String inputTitle, context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const SizedBox(height: AppSize.s20),
-        Text(
-          inputTitle,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        StreamBuilder<List<ProfileData>>(
-          stream: _managersListViewModel.outputProfileList,
-          builder: (_, snapshot0) {
-            if (profileList == Constants.nullValue ||
-                profileList?.length == Constants.zeroNum) {
-              profileList = snapshot0.data;
-            }
-            debugPrint("profileList: $profileList");
-            // ignore: prefer_is_empty
-            return Container(
-              margin: const EdgeInsets.only(top: AppMargin.m15),
-              child: DropDownComponent<ProfileData?>(
-                isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.usersParentHint,
-                items: profileList ?? [],
-                doOtherThings: (val) {
-                  selectedprofile = val;
-                },
-                displayFn: (item) => (item as ProfileData).name,
-                textAndHintColor: ColorManager.whiteNeutral,
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-
-
-
 
   _getUserStatusString(SingleManagerDetails singleManagerDetails) {
     return singleManagerDetails.enabled == Constants.zeroNum

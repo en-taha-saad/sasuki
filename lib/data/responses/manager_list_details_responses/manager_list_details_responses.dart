@@ -25,21 +25,25 @@ class SingleManagerDetailsResponses {
   String? firstname;
   @JsonKey(name: 'lastname')
   String? lastname;
-  @JsonKey(name: 'acl_group_details')
-  AclGroupDetailsResponses? aclGroupDetails;
   @JsonKey(name: 'balance')
   double? balance;
   @JsonKey(name: 'enabled')
   int? enabled;
+  @JsonKey(name: 'users_count')
+  int? userCount;
+  @JsonKey(name: 'acl_group_details')
+  AclGroupDetailsResponses? aclGroupDetails;
+
 
   SingleManagerDetailsResponses(
     this.id,
     this.username,
     this.firstname,
     this.lastname,
-    this.aclGroupDetails,
     this.balance,
     this.enabled,
+    this.userCount,
+    this.aclGroupDetails,
   );
   factory SingleManagerDetailsResponses.fromJson(Map<String, dynamic> json) =>
       _$SingleManagerDetailsResponsesFromJson(json);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_add_server_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_add_user_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_choose_server_module.dart';
@@ -7,6 +6,7 @@ import 'package:sasuki/app/init_screens_dependencies/init_dashboard_module.dart'
 import 'package:sasuki/app/init_screens_dependencies/init_edit_user_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_extend_user_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_login_module.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_managers_list_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_user_activation_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_user_details_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_users_list_module.dart';
@@ -22,6 +22,7 @@ import 'package:sasuki/presentation/drawer/drawer_view.dart';
 import 'package:sasuki/presentation/edit_user/view/edit_user_view.dart';
 import 'package:sasuki/presentation/extend_user/view/extend_user_view.dart';
 import 'package:sasuki/presentation/login/view/login_view.dart';
+import 'package:sasuki/presentation/managers_list/view/managers_list_view.dart';
 import 'package:sasuki/presentation/splash/splash_view.dart';
 import 'package:sasuki/presentation/user_activation/view/user_activation_view.dart';
 import 'package:sasuki/presentation/user_details/view/user_details.dart';
@@ -118,6 +119,14 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
             child: EditUser(),
+          ),
+          settings: settings,
+        );
+      case Routes.managersListRoute:
+        initManagersListModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: ManagersListView(),
           ),
           settings: settings,
         );

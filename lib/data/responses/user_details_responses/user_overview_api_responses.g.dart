@@ -42,7 +42,7 @@ UserOverviewDataResponse _$UserOverviewDataResponseFromJson(
       json['remaining_rxtx'] as int?,
       json['remaining_uptime'] as int?,
       json['last_online'] as String?,
-    );
+    )..balance = json['balance'] as int?;
 
 Map<String, dynamic> _$UserOverviewDataResponseToJson(
         UserOverviewDataResponse instance) =>
@@ -53,6 +53,7 @@ Map<String, dynamic> _$UserOverviewDataResponseToJson(
       'profile_id': instance.profileId,
       'expiration': instance.expiration,
       'status': instance.status,
+      'balance': instance.balance,
       'password': instance.password,
       'firstname': instance.firstname,
       'lastname': instance.lastname,

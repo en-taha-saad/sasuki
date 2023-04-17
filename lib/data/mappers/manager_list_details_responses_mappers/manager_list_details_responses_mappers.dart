@@ -21,9 +21,10 @@ extension SingleManagerDetailsResponsesMapper
       this?.username.orEmpty(),
       this?.firstname.orEmpty(),
       this?.lastname.orEmpty(),
-      this?.aclGroupDetails?.toDomain(),
-      this?.balance.orZeroDouble() ?? 0,
+      this?.balance.orZeroDouble().toInt(),
       this?.enabled.orZero(),
+      this?.userCount.orZero(),
+      this?.aclGroupDetails?.toDomain(),
     );
   }
 }

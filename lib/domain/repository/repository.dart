@@ -85,7 +85,7 @@ abstract class Repository {
 
   Future<Either<Failure, ManagersList>> getManagersList();
   Future<Either<Failure, ManagerListDetails>> getManagersListDetails(
-    ManagersListRequestObject managersListRequestObject,
+    ManagerRequestObject managersListRequestObject,
   );
   Future<Either<Failure, ManagerOverviewApi>> getManagerOverviewApi(
     int managerId,

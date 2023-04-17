@@ -1,17 +1,10 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
-import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
-import 'package:sasuki/domain/models/filter_lists/connection_list.dart';
-import 'package:sasuki/domain/models/filter_lists/parent_list.dart';
-import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
-import 'package:sasuki/domain/models/filter_lists/status_list.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
-import 'package:sasuki/domain/models/users_list/users_list.dart';
-import 'package:sasuki/domain/usecase/filter_lists_usecase/parent_list.usecase.dart';
-import 'package:sasuki/domain/usecase/filter_lists_usecase/profile_list.usecase.dart';
-import 'package:sasuki/domain/usecase/managers_list_usecase/managers_list_usecase.dart';
+import 'package:sasuki/domain/models/managers_list/managers_list.dart'
+    as managers_list;
+import 'package:sasuki/domain/usecase/managers_list_details_usecase/managers_list_details_usecase.dart';
 import 'package:sasuki/presentation/common/freezed_data_classes.dart';
 import 'package:sasuki/presentation/common/state_render/states/content_state.dart';
 import 'package:sasuki/presentation/common/state_render/states/error_state.dart';
@@ -20,13 +13,13 @@ import 'package:sasuki/presentation/common/state_render/states/mobile_module_scr
 import 'package:sasuki/presentation/common/state_render/states/state_renderer_type.dart';
 import 'package:sasuki/presentation/base/base_viewmodel.dart';
 import 'package:sasuki/presentation/managers_list/viewmodel/managers_list_viewmodel_inputs.dart';
-import 'package:sasuki/presentation/managers_list/viewmodel/managers_list_viewmodel_outputs.dart';
 import 'package:sasuki/presentation/managers_list/viewmodel/managers_viewmodel_outputs.dart';
 
 class ManagersListViewModel extends BaseViewModel
     with ManagersListViewModelInputs, ManagersListViewModelOutputs {
-  final ManagersListUsecase _managersListUsecase;
-  UserRequestObject userRequest = UserRequestObject(
+  final ManagersListDetailsUsecase _managersListDetailsUsecase;
+
+  ManagerRequestObject managerRequest = ManagerRequestObject(
     Constants.oneNum.toInt(),
     Constants.twintyNum,
     "username",
@@ -34,18 +27,15 @@ class ManagersListViewModel extends BaseViewModel
     Constants.emptyStr,
     Constants.emptyList,
     Constants.minusOne,
+    Constants.oneNum.toInt(),
     Constants.minusOne,
     Constants.minusOne,
     Constants.minusOne,
-    Constants.minusOne,
-    Constants.minusOne,
-    Constants.zeroNum.toInt(),
-    Constants.emptyStr,
   );
-  UsersList? usersList;
-  List<UsersListData>? listOfUsers;
+  ManagerListDetails? managersList;
+  List<SingleManagerDetails>? listOfManagers;
 
-  ManagersListViewModel(this._managersListUsecase);
+  ManagersListViewModel(this._managersListDetailsUsecase);
   int page = Constants.oneNum.toInt();
   @override
   Future start() async {
@@ -55,41 +45,38 @@ class ManagersListViewModel extends BaseViewModel
   @override
   void dispose() {}
 
-  ///
-  final StreamController _usersListController =
-      StreamController<UsersList>.broadcast();
+  /// get list of users
+  final StreamController _listOfManagersController =
+      StreamController<List<SingleManagerDetails>?>.broadcast();
   @override
-  Sink get inputUsersListData => _usersListController.sink;
+  Sink get inputManagersList => _listOfManagersController.sink;
 
   @override
-  Stream<UsersList> get outputUsersListData => _usersListController.stream.map(
-        (usersList) => usersList,
-      );
+  Stream<List<SingleManagerDetails>?> get outputManagersList =>
+      _listOfManagersController.stream.map((listOfManagers) => listOfManagers);
 
   @override
   getManagersListData() async {
-    userRequest = userRequest.copyWith(
+    managerRequest = managerRequest.copyWith(
       page: Constants.oneNum.toInt(),
       columns: Constants.emptyList,
-      status: Constants.minusOne,
-      connection: Constants.minusOne,
       search: Constants.emptyStr,
       count: Constants.twintyNum,
       groupId: Constants.minusOne,
       parentId: Constants.minusOne,
-      profileId: Constants.minusOne,
     );
     inputState.add(
       LoadingState(
-        mobileModuleScreen: MobileModuleScreen.usersList,
+        // TODO: change to your screen
+        mobileModuleScreen: MobileModuleScreen.managersList,
         stateRendererType: StateRendererType.fullScreenLoadingState,
       ),
     );
     // ignore: void_checks
-    return (await _managersListUsecase.execute(userRequest)).fold(
+    return (await _managersListDetailsUsecase.execute(managerRequest)).fold(
       (failure) {
         // left -> failure
-        debugPrint("failure getUsersListData failure = ${failure.message}");
+        debugPrint("failure getManagersListData failure = ${failure.message}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -97,27 +84,27 @@ class ManagersListViewModel extends BaseViewModel
           ),
         );
       },
-      (usersList0) async {
-        debugPrint("getUsersListData failure = ${usersList0.total}");
+      (managersList0) async {
+        debugPrint("getManagersListData failure = ${managersList0.total}");
 
         // right -> success (data)
-        usersList = usersList0;
+        managersList = managersList0;
         inputState.add(ContentState());
-        inputUsersListData.add(usersList);
-        inputUsersList.add(usersList?.data);
-        getUsersListForPull();
+        inputManagersListData.add(managersList);
+        inputManagersList.add(managersList?.data);
+        getManagersListForPull();
       },
     );
   }
 
   @override
-  getManagersListForPull([void Function()? dashboardRequestsStart]) async {
-    userRequest = userRequest.copyWith(page: Constants.oneNum.toInt());
+  getManagersListForPull() async {
+    managerRequest = managerRequest.copyWith(page: Constants.oneNum.toInt());
     // ignore: void_checks
-    return (await _managersListUsecase.execute(userRequest)).fold(
+    return (await _managersListDetailsUsecase.execute(managerRequest)).fold(
       (failure) {
         // left -> failure
-        debugPrint("getUsersListForPull failure = ${failure.message}");
+        debugPrint("getManagersListForPull failure = ${failure.message}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -125,15 +112,12 @@ class ManagersListViewModel extends BaseViewModel
           ),
         );
       },
-      (usersList0) async {
+      (managersList0) async {
         // right -> success (data)
-        usersList = usersList0;
-        listOfUsers = usersList?.data;
-        inputUsersListData.add(usersList);
-        inputUsersList.add(listOfUsers);
-        if (dashboardRequestsStart != null) {
-          dashboardRequestsStart();
-        }
+        managersList = managersList0;
+        listOfManagers = managersList?.data;
+        inputManagersListData.add(managersList);
+        inputManagersList.add(listOfManagers);
         inputState.add(ContentState());
       },
     );
@@ -141,12 +125,12 @@ class ManagersListViewModel extends BaseViewModel
 
   @override
   refreshManagersList() async {
-    userRequest = userRequest.copyWith(page: Constants.oneNum.toInt());
+    managerRequest = managerRequest.copyWith(page: Constants.oneNum.toInt());
     // ignore: void_checks
-    return (await _managersListUsecase.execute(userRequest)).fold(
+    return (await _managersListDetailsUsecase.execute(managerRequest)).fold(
       (failure) {
         // left -> failure
-        debugPrint("getUsersListForPull failure = ${failure.message}");
+        debugPrint("refreshManagersList failure = ${failure.message}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -154,12 +138,12 @@ class ManagersListViewModel extends BaseViewModel
           ),
         );
       },
-      (usersList0) async {
+      (managersList0) async {
         // right -> success (data)
-        usersList = usersList0;
-        listOfUsers = usersList?.data;
-        inputUsersListData.add(usersList);
-        inputUsersList.add(listOfUsers);
+        managersList = managersList0;
+        listOfManagers = managersList?.data;
+        inputManagersListData.add(managersList);
+        inputManagersList.add(listOfManagers);
         inputState.add(ContentState());
       },
     );
@@ -167,12 +151,12 @@ class ManagersListViewModel extends BaseViewModel
 
   @override
   Future getNextManagersList() async {
-    userRequest = userRequest.copyWith(page: page++);
+    managerRequest = managerRequest.copyWith(page: page++);
     // ignore: void_checks
-    return (await _managersListUsecase.execute(userRequest)).fold(
+    return (await _managersListDetailsUsecase.execute(managerRequest)).fold(
       (failure) {
         // left -> failure
-        debugPrint("getNextUsersList failure = ${failure.message}");
+        debugPrint("getNextManagersList failure = ${failure.message}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -180,20 +164,20 @@ class ManagersListViewModel extends BaseViewModel
           ),
         );
       },
-      (usersList0) async {
+      (managersList0) async {
         // right -> success (data)
-        usersList = usersList0;
-        listOfUsers?.addAll((usersList?.data)!);
-        inputUsersListData.add(usersList);
-        inputUsersList.add(listOfUsers);
-        debugPrint("users@ listOfUsers = ${listOfUsers?.length}");
+        managersList = managersList0;
+        listOfManagers?.addAll((managersList?.data)!);
+        inputManagersListData.add(managersList);
+        inputManagersList.add(listOfManagers);
+        debugPrint("users@ listOfUsers = ${listOfManagers?.length}");
         debugPrint("users@ page = $page");
         inputState.add(ContentState());
       },
     );
   }
 
-  List<UsersListData>? emptyListOfUsers = [];
+  List<SingleManagerDetails>? emptyListOfManagers = [];
 
   @override
   Future getManagerFromSearch({
@@ -202,19 +186,16 @@ class ManagersListViewModel extends BaseViewModel
     int? statusId,
     int? connectionId,
   }) async {
-    inputUsersList.add(emptyListOfUsers);
-    userRequest = userRequest.copyWith(
+    inputManagersList.add(emptyListOfManagers);
+    managerRequest = managerRequest.copyWith(
       page: Constants.oneNum.toInt(),
-      profileId: profileId ?? Constants.minusOne,
       parentId: parentId ?? Constants.minusOne,
-      status: statusId ?? Constants.minusOne,
-      connection: connectionId ?? Constants.minusOne,
     );
     // ignore: void_checks
-    return (await _managersListUsecase.execute(userRequest)).fold(
+    return (await _managersListDetailsUsecase.execute(managerRequest)).fold(
       (failure) {
         // left -> failure
-        debugPrint("getUserFromSearch failure = ${failure.code}");
+        debugPrint("getManagerFromSearch failure = ${failure.code}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -222,29 +203,19 @@ class ManagersListViewModel extends BaseViewModel
           ),
         );
       },
-      (usersList0) async {
+      (managersList0) async {
         // right -> success (data)
-        usersList = usersList0;
-        listOfUsers = usersList0.data;
-        inputUsersList.add(listOfUsers);
-        debugPrint("users@ listOfUsers = ${listOfUsers?.length}");
-        debugPrint("users@ page = $page");
+        managersList = managersList0;
+        listOfManagers = managersList0.data;
+        inputManagersList.add(listOfManagers);
+        debugPrint("Managers@ listOfManagers = ${listOfManagers?.length}");
+        debugPrint("Managers@ page = $page");
         inputState.add(ContentState());
       },
     );
   }
 
-  /// get list of users
-  final StreamController _listOfUsersController =
-      StreamController<List<UsersListData>?>.broadcast();
-  @override
-  Sink get inputManagersList => _listOfUsersController.sink;
-
-  @override
-  Stream<ManagerListDetails> get outputManagersList =>
-      _listOfUsersController.stream.map((listOfUsers) => listOfUsers);
-
-  /// search user
+  /// search manager
   final StreamController _searchInputController =
       StreamController<String>.broadcast();
   @override
@@ -260,100 +231,58 @@ class ManagersListViewModel extends BaseViewModel
   @override
   setSearchInput(String searchInput) {
     inputSearch.add(searchInput);
-    userRequest = userRequest.copyWith(search: searchInput);
+    managerRequest = managerRequest.copyWith(search: searchInput);
   }
 
   ///
-  final StreamController _getParentListController =
-      StreamController<List<SingleParentData>>.broadcast();
+  final StreamController _getparentManagerListController =
+      StreamController<List<managers_list.SingleManagerData>>.broadcast();
   @override
-  Sink get inputParentList => _getParentListController.sink;
+  Sink get inputParentManagerList => _getparentManagerListController.sink;
   @override
-  Stream<List<SingleParentData>> get outputParentList =>
-      _getParentListController.stream.map((parentList) => parentList);
+  Stream<List<managers_list.SingleManagerData>> get outputParentManagerList =>
+      _getparentManagerListController.stream
+          .map((parentManagerList) => parentManagerList);
+
   @override
-  Future getParentList() async {
+  Future getParentManagerList() async {
     // ignore: void_checks
-    return (await _parentListUseCase.execute(Void)).fold(
-      (failure) {
-        // left -> failure
-        debugPrint("getUsersListData failure = ${failure.message}");
-        inputState.add(
-          ErrorState(
-            StateRendererType.toastErrorState,
-            failure.message,
-          ),
-        );
-      },
-      (parentList0) async {
-        // right -> success (data)
-        List<SingleParentData> tempParentList = [];
-        tempParentList.add(
-          SingleParentData(
-            Constants.minusOne,
-            parentList0[Constants.zeroNum.toInt()].parentId,
-            "Any",
-          ),
-        );
-        tempParentList.addAll(parentList0);
-        inputParentList.add(tempParentList);
-        inputStatusList.add(listOfStatus);
-        inputConnectionList.add(listOfConnection);
-      },
-    );
+    // return (await _parentListUseCase.execute(Void)).fold(
+    //   (failure) {
+    //     // left -> failure
+    //     debugPrint("getUsersListData failure = ${failure.message}");
+    //     inputState.add(
+    //       ErrorState(
+    //         StateRendererType.toastErrorState,
+    //         failure.message,
+    //       ),
+    //     );
+    //   },
+    //   (parentList0) async {
+    //     // right -> success (data)
+    //     List<SingleParentData> tempParentList = [];
+    //     tempParentList.add(
+    //       SingleParentData(
+    //         Constants.minusOne,
+    //         parentList0[Constants.zeroNum.toInt()].parentId,
+    //         "Any",
+    //       ),
+    //     );
+    //     tempParentList.addAll(parentList0);
+    //     inputParentManagerList.add(tempParentList);
+    //   },
+    // );
   }
 
   ///
-  final StreamController _getStatusListController =
-      StreamController<List<StatusFilterList>>.broadcast();
+  final StreamController _managersListController =
+      StreamController<ManagerListDetails>.broadcast();
   @override
-  Sink get inputStatusList => _getStatusListController.sink;
-  @override
-  Stream<List<StatusFilterList>> get outputStatusList =>
-      _getStatusListController.stream.map((statusList) => statusList);
+  Sink get inputManagersListData => _managersListController.sink;
 
-  ///
-  final StreamController _getConnectionListController =
-      StreamController<List<ConnectionFilterList>>.broadcast();
   @override
-  Sink get inputConnectionList => _getConnectionListController.sink;
-  @override
-  Stream<List<ConnectionFilterList>> get outputConnectionList =>
-      _getConnectionListController.stream
-          .map((connectionList) => connectionList);
-
-  ///
-  final StreamController _getProfileListController =
-      StreamController<List<ProfileData>>.broadcast();
-  @override
-  Sink get inputProfileList => _getProfileListController.sink;
-  @override
-  Stream<List<ProfileData>> get outputProfileList =>
-      _getProfileListController.stream.map((profileList) => profileList);
-  @override
-  Future getProfileList() async {
-    // ignore: void_checks
-    return (await _profileListUseCase.execute(Void)).fold(
-      (failure) {
-        // left -> failure
-        debugPrint("getProfileList failure = ${failure.message}");
-        inputState.add(
-          ErrorState(
-            StateRendererType.toastErrorState,
-            failure.message,
-          ),
-        );
-      },
-      (profileList0) async {
-        // right -> success (data)
-        List<ProfileData> profileList = [];
-        profileList.add(
-          ProfileData(Constants.minusOne, "Any"),
-        );
-        debugPrint("getProfileList = ${profileList0.data.length}");
-        profileList.addAll(profileList0.data);
-        inputProfileList.add(profileList);
-      },
-    );
-  }
+  Stream<ManagerListDetails> get outputManagersListData =>
+      _managersListController.stream.map(
+        (managersList) => managersList,
+      );
 }

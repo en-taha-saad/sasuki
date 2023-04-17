@@ -5,14 +5,10 @@ abstract class ManagersListViewModelInputs {
   Future getNextManagersList();
   Future getManagerFromSearch();
   Future refreshManagersList();
-  Future getParentList();
-  Future getProfileList();
+  Future getParentManagerList();
   setSearchInput(String searchInput);
   Sink get inputManagersListData;
   Sink get inputSearch;
   Sink get inputManagersList;
-  Sink get inputParentList;
-  Sink get inputStatusList;
-  Sink get inputConnectionList;
-  Sink get inputProfileList;
+  Sink get inputParentManagerList;
 }
