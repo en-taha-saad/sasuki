@@ -171,3 +171,5 @@ class ManagerRequestObject with _$ManagerRequestObject {
     int groupId,
   ) = _ManagerRequestObject;
 }
+
+

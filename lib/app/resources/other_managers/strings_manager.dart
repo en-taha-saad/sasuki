@@ -160,6 +160,12 @@ class AppStrings {
   static const userOverviewRemainingUptime = "Remaining Uptime";
   static const userOverviewLastLogin = "Last Login";
 
+  // manager overview
+    static const managerOverviewCreationDate = "Created At";
+  static const managerBalance = "Balance";
+
+
+  static const userPermissionCreate = "prm_users_create";
   static const userPermissionEdit = "prm_users_update";
   static const userPermissionRename = "prm_users_rename";
   static const userPermissionActivate = "prm_users_activate";
@@ -170,13 +176,14 @@ class AppStrings {
   static const userPermissionPay = "prm_any";
   static const userPermissionDelete = "prm_users_delete";
 
+  static const managerPermissionCreate = "prm_managers_create";
   static const managerPermissionEdit = "prm_managers_update";
-  static const managerPermissionRename = "prm_managers_rename";
   static const managerPermissionDeposit = "prm_managers_deposit";
   static const managerPermissionWithdrawal = "prm_managers_withdrawal";
+  static const managerPermissionRename = "prm_managers_rename";
+  static const managerPermissionDelete = "prm_managers_delete";
   static const managerPermissionAddRewardPoints =
       "prm_manager_add_reward_points";
-  static const managerPermissionDelete = "prm_managers_delete";
 
   static const managerActionEdit = "Edit";
   static const managerActionRename = "Rename";
@@ -189,6 +196,7 @@ class AppStrings {
   static const userActionEdit = "Edit";
   static const userActionRename = "Rename";
   static const userActionRenameDialogTitle = "Rename Username";
+  static const managerActionRenameDialogTitle = "Rename Manager";
   static const userActionProfileDialogTitle = "Change Profile";
   static const userActionActivate = "Activate";
   static const userActionExtend = "Extend";
@@ -200,6 +208,7 @@ class AppStrings {
   static const userActionPayDebt = "Pay";
   static const userActionPay = "Pay Debt";
   static const userActionDeleteDialogTitle = "Delete Username";
+  static const managerActionDeleteDialogTitle = "Delete Manager";
   static const userActionDelete = "Delete";
 
   static const actionDeleteUserdialogTitle =

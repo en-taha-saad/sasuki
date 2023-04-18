@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/domain/repository/repository.dart';
+import 'package:sasuki/domain/usecase/dashboard_usecase/auth_usecase.dart';
 import 'package:sasuki/domain/usecase/filter_lists_usecase/parent_list.usecase.dart';
 import 'package:sasuki/domain/usecase/filter_lists_usecase/profile_list.usecase.dart';
 import 'package:sasuki/domain/usecase/users_list_usecase/users_list.usecase.dart';
@@ -30,12 +31,20 @@ initUsersListModule() async {
     );
   }
 
+
+ if (!GetIt.I.isRegistered<AuthUseCase>()) {
+    instance.registerFactory<AuthUseCase>(
+      () => AuthUseCase(instance<Repository>()),
+    );
+  }
+
   if (!GetIt.I.isRegistered<UsersListViewModel>()) {
     // users list view model instance
     instance.registerLazySingleton<UsersListViewModel>(() => UsersListViewModel(
           instance<UsersListUseCase>(),
           instance<ParentListUseCase>(),
           instance<ProfileListUseCase>(),
+          instance<AuthUseCase>(),
         ));
   }
 }

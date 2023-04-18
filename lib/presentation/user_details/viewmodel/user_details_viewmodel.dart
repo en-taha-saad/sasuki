@@ -49,6 +49,7 @@ class UserDetailsViewModel extends BaseViewModel
   final WithdrawUsecase _withdrawUsecase;
   final PaydebtUseCase _payDebtUsecase;
   final PayDebtInformsUsecase _payDebtInformsUsecase;
+  bool isThereAddUserCreationPermission = Constants.falseBool;
   final UsersListViewModel _usersListViewModel = instance<UsersListViewModel>();
   DepositWithdrawUserRequestObject depositWithdrawUserRequestObject =
       DepositWithdrawUserRequestObject(
@@ -219,6 +220,7 @@ class UserDetailsViewModel extends BaseViewModel
       (auth0) {
         // right -> success (data)
         userActions = [];
+       
         _getPermissionsList(auth0.permissions);
       },
     );
@@ -290,6 +292,15 @@ class UserDetailsViewModel extends BaseViewModel
         ),
       );
     }
+    if (permissions.contains(AppStrings.userPermissionDelete)) {
+      userActions.add(
+        SingleUserAction(
+          AppStrings.userActionDelete,
+          IconsAssets.trashUserAction,
+        ),
+      );
+    }
+
     if (permissions.contains(AppStrings.userPermissionDelete)) {
       userActions.add(
         SingleUserAction(

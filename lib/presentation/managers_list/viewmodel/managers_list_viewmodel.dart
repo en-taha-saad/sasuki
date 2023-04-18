@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart'
     as managers_list;
 import 'package:sasuki/domain/usecase/acl_permission_group_list_usecase/acl_permission_group_list_usecase.dart';
+import 'package:sasuki/domain/usecase/dashboard_usecase/auth_usecase.dart';
 import 'package:sasuki/domain/usecase/managers_list_details_usecase/managers_list_details_usecase.dart';
 import 'package:sasuki/domain/usecase/managers_list_usecase/managers_list_usecase.dart';
 import 'package:sasuki/presentation/common/freezed_data_classes.dart';
@@ -24,6 +26,7 @@ class ManagersListViewModel extends BaseViewModel
   final ManagersListDetailsUsecase _managersListDetailsUsecase;
   final ManagersListUsecase _managersListUsecase;
   final AclPermissionGroupListUsecase _aclPermissionGroupListUsecase;
+  final AuthUseCase _authUseCase;
 
   ManagerRequestObject managerRequest = ManagerRequestObject(
     Constants.oneNum.toInt(),
@@ -45,6 +48,7 @@ class ManagersListViewModel extends BaseViewModel
     this._managersListDetailsUsecase,
     this._managersListUsecase,
     this._aclPermissionGroupListUsecase,
+    this._authUseCase,
   );
   int page = Constants.oneNum.toInt();
   @override
@@ -77,7 +81,7 @@ class ManagersListViewModel extends BaseViewModel
     );
     inputState.add(
       LoadingState(
-        // TODO: change to your screen
+        // TODO: add shimmer
         mobileModuleScreen: MobileModuleScreen.managersList,
         stateRendererType: StateRendererType.fullScreenLoadingState,
       ),
@@ -96,6 +100,7 @@ class ManagersListViewModel extends BaseViewModel
       },
       (managersList0) async {
         debugPrint("getManagersListData failure = ${managersList0.total}");
+        _getAuth();
 
         // right -> success (data)
         managersList = managersList0;
@@ -191,15 +196,14 @@ class ManagersListViewModel extends BaseViewModel
 
   @override
   Future getManagerFromSearch({
-    int? profileId,
+    int? aclPermissionGroup,
     int? parentId,
-    int? statusId,
-    int? connectionId,
   }) async {
     inputManagersList.add(emptyListOfManagers);
     managerRequest = managerRequest.copyWith(
       page: Constants.oneNum.toInt(),
       parentId: parentId ?? Constants.minusOne,
+      aclGroupId: aclPermissionGroup ?? Constants.minusOne,
     );
     // ignore: void_checks
     return (await _managersListDetailsUsecase.execute(managerRequest)).fold(
@@ -335,4 +339,29 @@ class ManagersListViewModel extends BaseViewModel
       _managersListController.stream.map(
         (managersList) => managersList,
       );
+
+  bool isThereAddManagerCreationPermission = Constants.falseBool;
+  _getAuth() async {
+    // ignore: void_checks
+    return (await _authUseCase.execute(Void)).fold(
+      (failure) {
+        // left -> failure
+        debugPrint("getAuth failure = ${failure.message}");
+        inputState.add(
+          ErrorState(
+            StateRendererType.toastErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (auth0) {
+        // right -> success (data)
+        if (auth0.permissions.contains(AppStrings.managerPermissionCreate)) {
+          isThereAddManagerCreationPermission = Constants.trueBool;
+        } else {
+          isThereAddManagerCreationPermission = Constants.falseBool;
+        }
+      },
+    );
+  }
 }

@@ -7,6 +7,7 @@ class Routes {
   static const String addServerRoute = "/addServer";
   static const String usersListRoute = "/userslist";
   static const String managersListRoute = "/managersList";
+  static const String managerDetailsRoute = "/managerDetails";
   
   static const String userDetailsRoute = "/userDetails";
   static const String extendUserRoute = "/extendUserRoute";

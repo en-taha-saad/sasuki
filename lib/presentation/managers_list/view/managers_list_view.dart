@@ -20,6 +20,7 @@ import 'package:sasuki/domain/models/manager_list_details/manager_list_details.d
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
+import 'package:sasuki/presentation/manager_details/viewmodel/manager_details_viewmodel.dart';
 import 'package:sasuki/presentation/managers_list/viewmodel/managers_list_viewmodel.dart';
 
 class ManagersListView extends StatefulWidget {
@@ -157,8 +158,6 @@ class _ManagersListViewState extends State<ManagersListView> {
                       ],
                     ),
                     const SizedBox(height: AppSize.s20),
-
-                    /// TODO: add header widget
                     StreamBuilder<List<SingleManagerDetails>?>(
                       stream: _managersListViewModel.outputManagersList,
                       builder: (context, snapshot) {
@@ -195,8 +194,10 @@ class _ManagersListViewState extends State<ManagersListView> {
               ),
               InkWell(
                 onTap: () {
-                  /// TODO: add manager
-                  // Nav.navTo(context, Routes.addUserRoute);
+                  // TODO: add manager
+                  // _managersListViewModel.isThereAddManagerCreationPermission
+                  //     ? Nav.navTo(context, Routes.addManager)
+                  //     : null;
                 },
                 child: Container(
                   padding: const EdgeInsets.all(AppPadding.p7),
@@ -388,10 +389,9 @@ class _ManagersListViewState extends State<ManagersListView> {
             (managersListData) {
               return InkWell(
                 onTap: () {
-                  /// TODO: Navigate to manager details
-                  // Nav.navTo(context, Routes.userDetailsRoute);
-                  // instance<UserDetailsViewModel>()
-                  //     .getManagerApiOverview(managersListData.id!);
+                  Nav.navTo(context, Routes.managerDetailsRoute);
+                  instance<ManagerDetailsViewModel>()
+                      .getManagerApiOverview(managersListData.id!);
                 },
                 child: SingleManagerCard(
                   fullName: managersListData.firstname != Constants.nullValue ||
@@ -546,8 +546,7 @@ class _ManagersListViewState extends State<ManagersListView> {
     _managersListViewModel.setSearchInput(Constants.emptyStr);
     _managersListViewModel.getManagerFromSearch(
       parentId: selectedparentManager?.id,
-      // TODO uncomment this when profile list is ready
-      // profileId: selectedprofile?.id,
+      aclPermissionGroup: selectedAclPermissionGroup?.id,
     );
     Nav.popRoute(context);
   }

@@ -65,6 +65,16 @@ class DrawerView extends StatelessWidget {
     ),
   ];
 
+  // TODO: add permissions
+  /*
+  {
+  "permissions": [
+    "prm_managers_index",
+    "prm_users_index",
+    "prm_users_index_all",
+      ]
+}
+  */
   List<DrawerSingleBar> listOfDrawer() {
     for (String permission in (_viewModel.auth?.permissions)!) {
       if (permission == AppStrings.admin) {

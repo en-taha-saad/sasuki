@@ -8,6 +8,7 @@ import 'package:sasuki/domain/models/filter_lists/parent_list.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
 import 'package:sasuki/domain/models/filter_lists/status_list.dart';
 import 'package:sasuki/domain/models/users_list/users_list.dart';
+import 'package:sasuki/domain/usecase/dashboard_usecase/auth_usecase.dart';
 import 'package:sasuki/domain/usecase/filter_lists_usecase/parent_list.usecase.dart';
 import 'package:sasuki/domain/usecase/filter_lists_usecase/profile_list.usecase.dart';
 import 'package:sasuki/domain/usecase/users_list_usecase/users_list.usecase.dart';
@@ -26,6 +27,8 @@ class UsersListViewModel extends BaseViewModel
   final UsersListUseCase _usersListUseCase;
   final ParentListUseCase _parentListUseCase;
   final ProfileListUseCase _profileListUseCase;
+  final AuthUseCase _authUseCase;
+
   UserRequestObject userRequest = UserRequestObject(
     Constants.oneNum.toInt(),
     Constants.twintyNum,
@@ -64,6 +67,7 @@ class UsersListViewModel extends BaseViewModel
     this._usersListUseCase,
     this._parentListUseCase,
     this._profileListUseCase,
+    this._authUseCase,
   );
   int page = Constants.oneNum.toInt();
   @override
@@ -118,6 +122,7 @@ class UsersListViewModel extends BaseViewModel
       },
       (usersList0) async {
         debugPrint("getUsersListData failure = ${usersList0.total}");
+        _getAuth();
 
         // right -> success (data)
         usersList = usersList0;
@@ -372,6 +377,31 @@ class UsersListViewModel extends BaseViewModel
         debugPrint("getProfileList = ${profileList0.data.length}");
         profileList.addAll(profileList0.data);
         inputProfileList.add(profileList);
+      },
+    );
+  }
+
+  bool isThereAddUserCreationPermission = Constants.falseBool;
+  _getAuth() async {
+    // ignore: void_checks
+    return (await _authUseCase.execute(Void)).fold(
+      (failure) {
+        // left -> failure
+        debugPrint("getAuth failure = ${failure.message}");
+        inputState.add(
+          ErrorState(
+            StateRendererType.toastErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (auth0) {
+        // right -> success (data)
+        if (auth0.permissions.contains(AppStrings.userPermissionCreate)) {
+          isThereAddUserCreationPermission = Constants.trueBool;
+        } else {
+          isThereAddUserCreationPermission = Constants.falseBool;
+        }
       },
     );
   }

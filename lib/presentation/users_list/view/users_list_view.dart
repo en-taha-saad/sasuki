@@ -215,9 +215,9 @@ class _UsersListViewState extends State<UsersListView> {
                 ),
               ),
               InkWell(
-                onTap: () {
-                  Nav.navTo(context, Routes.addUserRoute);
-                },
+                onTap: _usersListViewModel.isThereAddUserCreationPermission
+                    ? () => Nav.navTo(context, Routes.addUserRoute)
+                    : null,
                 child: Container(
                   padding: const EdgeInsets.all(AppPadding.p7),
                   decoration: const BoxDecoration(
