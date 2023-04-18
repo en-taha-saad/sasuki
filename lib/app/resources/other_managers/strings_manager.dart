@@ -276,7 +276,9 @@ class AppStrings {
 
   static const usersAdvancedFilter = "Filter";
   static const usersParent = "Parent";
+  static const managerPermission = "Permission";
   static const usersParentHint = "Select Parent";
+  static const managersAclPermissionHint = "Select Permission";
   static const usersProfileHint = "Select Profile";
   static const usersExtendHint = "Select Activation Method";
 

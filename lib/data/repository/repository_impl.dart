@@ -5,6 +5,7 @@ import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/shared_funs/get_payload.dart';
 import 'package:sasuki/data/data_sources/local/local_data_source.dart';
 import 'package:sasuki/data/data_sources/remote/remote_data_source.dart';
+import 'package:sasuki/data/mappers/acl_permission_group_list_responses_mappers/acl_permission_group_list_responses_mappers.dart';
 import 'package:sasuki/data/mappers/activate_method_responses_mappers/activate_method_responses_mappers.dart';
 import 'package:sasuki/data/mappers/activation_informs_responses_mappers/activation_informs_responses_mappers.dart';
 import 'package:sasuki/data/mappers/captcha_mappers/captcha_response_mapper.dart';
@@ -36,6 +37,7 @@ import 'package:sasuki/data/network/models/change_profile_request.dart';
 import 'package:sasuki/data/network/models/failure.dart';
 import 'package:sasuki/data/network/models/loginrequest.dart';
 import 'package:sasuki/data/responses/servers_responses/servers_responses.dart';
+import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/models/activate_method/activate_method.dart';
 import 'package:sasuki/domain/models/activation_informs/activation_informs.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
@@ -1094,6 +1096,33 @@ class RepositoryImpl implements Repository {
       try {
         final response = await _remoteDataSource.getManagersList();
         if (response.i0 == ApiInternalStatus.success) {
+          // success reutrn either right
+          return Right(response.toDomain());
+        } else {
+          // failure return either left business error
+          return Left(
+            Failure(ApiInternalStatus.twoAuthStatus, "$response"),
+          );
+        }
+      } catch (error) {
+        debugPrint("error = $error");
+
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // its not connected to internet so return a failure
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, AclPermissionGroupList>>
+      getAclPermissionGroupList() async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet so we can call the api
+      try {
+        final response = await _remoteDataSource.getAclPermissionGroupList();
+        if (response.status == ApiInternalStatus.success) {
           // success reutrn either right
           return Right(response.toDomain());
         } else {

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:sasuki/data/network/models/change_profile_request.dart';
 import 'package:sasuki/data/network/models/failure.dart';
 import 'package:sasuki/data/network/models/loginrequest.dart';
+import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/models/activate_method/activate_method.dart';
 import 'package:sasuki/domain/models/activation_informs/activation_informs.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
@@ -84,6 +85,8 @@ abstract class Repository {
   Future<Either<Failure, PaydebtInforms>> getPayDebtInforms(int userId);
 
   Future<Either<Failure, ManagersList>> getManagersList();
+  Future<Either<Failure, AclPermissionGroupList>> getAclPermissionGroupList();
+
   Future<Either<Failure, ManagerListDetails>> getManagersListDetails(
     ManagerRequestObject managersListRequestObject,
   );

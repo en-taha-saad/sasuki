@@ -5,6 +5,7 @@ import 'package:sasuki/app/shared_funs/get_selectedserver_fromlocal.dart';
 import 'package:sasuki/data/data_sources/remote/remote_data_source.dart';
 import 'package:sasuki/data/network/app_api.dart';
 import 'package:sasuki/data/network/dio_instance/dio_factory.dart';
+import 'package:sasuki/data/responses/acl_permission_group_list_responses/acl_permission_group_list_responses.dart';
 import 'package:sasuki/data/responses/activate_method_responses/activate_method_responses.dart';
 import 'package:sasuki/data/responses/activation_informs_responses/activation_informs_responses.dart';
 import 'package:sasuki/data/responses/captcha_responses/captcha_responses.dart';
@@ -231,5 +232,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<UserActionResponse> editManager(String payload, int managerId) async {
     return await _appServiceClient.editManager(managerId, payload);
+  }
+
+  @override
+  Future<AclPermissionGroupListResponses> getAclPermissionGroupList() async {
+    return await _appServiceClient.getAclPermissionGroupList();
   }
 }

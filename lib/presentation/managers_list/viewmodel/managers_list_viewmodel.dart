@@ -1,10 +1,14 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart'
     as managers_list;
+import 'package:sasuki/domain/usecase/acl_permission_group_list_usecase/acl_permission_group_list_usecase.dart';
 import 'package:sasuki/domain/usecase/managers_list_details_usecase/managers_list_details_usecase.dart';
+import 'package:sasuki/domain/usecase/managers_list_usecase/managers_list_usecase.dart';
 import 'package:sasuki/presentation/common/freezed_data_classes.dart';
 import 'package:sasuki/presentation/common/state_render/states/content_state.dart';
 import 'package:sasuki/presentation/common/state_render/states/error_state.dart';
@@ -18,6 +22,8 @@ import 'package:sasuki/presentation/managers_list/viewmodel/managers_viewmodel_o
 class ManagersListViewModel extends BaseViewModel
     with ManagersListViewModelInputs, ManagersListViewModelOutputs {
   final ManagersListDetailsUsecase _managersListDetailsUsecase;
+  final ManagersListUsecase _managersListUsecase;
+  final AclPermissionGroupListUsecase _aclPermissionGroupListUsecase;
 
   ManagerRequestObject managerRequest = ManagerRequestObject(
     Constants.oneNum.toInt(),
@@ -35,7 +41,11 @@ class ManagersListViewModel extends BaseViewModel
   ManagerListDetails? managersList;
   List<SingleManagerDetails>? listOfManagers;
 
-  ManagersListViewModel(this._managersListDetailsUsecase);
+  ManagersListViewModel(
+    this._managersListDetailsUsecase,
+    this._managersListUsecase,
+    this._aclPermissionGroupListUsecase,
+  );
   int page = Constants.oneNum.toInt();
   @override
   Future start() async {
@@ -247,31 +257,71 @@ class ManagersListViewModel extends BaseViewModel
   @override
   Future getParentManagerList() async {
     // ignore: void_checks
-    // return (await _parentListUseCase.execute(Void)).fold(
-    //   (failure) {
-    //     // left -> failure
-    //     debugPrint("getUsersListData failure = ${failure.message}");
-    //     inputState.add(
-    //       ErrorState(
-    //         StateRendererType.toastErrorState,
-    //         failure.message,
-    //       ),
-    //     );
-    //   },
-    //   (parentList0) async {
-    //     // right -> success (data)
-    //     List<SingleParentData> tempParentList = [];
-    //     tempParentList.add(
-    //       SingleParentData(
-    //         Constants.minusOne,
-    //         parentList0[Constants.zeroNum.toInt()].parentId,
-    //         "Any",
-    //       ),
-    //     );
-    //     tempParentList.addAll(parentList0);
-    //     inputParentManagerList.add(tempParentList);
-    //   },
-    // );
+    return (await _managersListUsecase.execute(Void)).fold(
+      (failure) {
+        // left -> failure
+        debugPrint("getUsersListData failure = ${failure.message}");
+        inputState.add(
+          ErrorState(
+            StateRendererType.toastErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (parentManagerList0) async {
+        // right -> success (data)
+        List<managers_list.SingleManagerData> tempParentManagerList = [];
+        tempParentManagerList.add(
+          managers_list.SingleManagerData(
+            Constants.minusOne,
+            "Any",
+          ),
+        );
+        tempParentManagerList.addAll((parentManagerList0.data)!);
+        inputParentManagerList.add(tempParentManagerList);
+      },
+    );
+  }
+
+  ///
+  final StreamController _getAclPermissionGroupListController =
+      StreamController<List<SingleAclPermissionGroup>>.broadcast();
+  @override
+  Sink get inputAclPermissionGroupList =>
+      _getAclPermissionGroupListController.sink;
+  @override
+  Stream<List<SingleAclPermissionGroup>> get outputAclPermissionGroupList =>
+      _getAclPermissionGroupListController.stream
+          .map((aclPermissionGroupList) => aclPermissionGroupList);
+
+  @override
+  Future getAclPermissionGroupList() async {
+    // ignore: void_checks
+    return (await _aclPermissionGroupListUsecase.execute(Void)).fold(
+      (failure) {
+        // left -> failure
+        debugPrint("getAclPermissionGroupList failure = ${failure.message}");
+        inputState.add(
+          ErrorState(
+            StateRendererType.toastErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (aclPermissionGroupList0) async {
+        // right -> success (data)
+        List<SingleAclPermissionGroup> tempAclPermissionGroupList0 = [];
+        tempAclPermissionGroupList0.add(
+          SingleAclPermissionGroup(
+            Constants.minusOne,
+            "Any",
+            Constants.minusOne,
+          ),
+        );
+        tempAclPermissionGroupList0.addAll((aclPermissionGroupList0.data)!);
+        inputAclPermissionGroupList.add(tempAclPermissionGroupList0);
+      },
+    );
   }
 
   ///

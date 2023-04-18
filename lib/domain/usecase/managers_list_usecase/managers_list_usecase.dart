@@ -6,7 +6,7 @@ import 'package:sasuki/domain/models/managers_list/managers_list.dart';
 import 'package:sasuki/domain/repository/repository.dart';
 import 'package:sasuki/domain/usecase/base_usecase.dart';
 
-class ManagersListUsecase implements BaseUseCase<Void, ManagersList> {
+class ManagersListUsecase implements BaseUseCase<void, ManagersList> {
   final Repository _repository;
   ManagersListUsecase(this._repository);
   @override

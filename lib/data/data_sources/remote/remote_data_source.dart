@@ -1,3 +1,4 @@
+import 'package:sasuki/data/responses/acl_permission_group_list_responses/acl_permission_group_list_responses.dart';
 import 'package:sasuki/data/responses/activate_method_responses/activate_method_responses.dart';
 import 'package:sasuki/data/responses/activation_informs_responses/activation_informs_responses.dart';
 import 'package:sasuki/data/responses/captcha_responses/captcha_responses.dart';
@@ -45,6 +46,7 @@ abstract class RemoteDataSource {
   Future<PaydebtInformsResponses> getPayDebtInforms(int userId);
   Future<UserActionResponse> payDebt(String payload);
   Future<ManagersListResponses> getManagersList();
+  Future<AclPermissionGroupListResponses> getAclPermissionGroupList();
   Future<ManagerListDetailsResponses> getManagersListDetails(String payload);
   Future<ManagerOverviewApiResponses> getManagerOverviewApi(int managerId);
   Future<ManagerActionResponse> deleteManager(int managerId);

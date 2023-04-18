@@ -12,8 +12,10 @@ import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
+import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
 import 'package:sasuki/app/shared_widgets/single_manager_card.dart';
 import 'package:sasuki/app/shared_widgets/single_manager_card_statistics.dart';
+import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
@@ -38,6 +40,8 @@ class _ManagersListViewState extends State<ManagersListView> {
   bool showFilterWidget = Constants.falseBool;
   List<SingleManagerData>? parentManagerList;
   SingleManagerData? selectedparentManager;
+  List<SingleAclPermissionGroup>? aclPermissionGroupList;
+  SingleAclPermissionGroup? selectedAclPermissionGroup;
 
   _bind() async {
     await _managersListViewModel.start();
@@ -153,6 +157,7 @@ class _ManagersListViewState extends State<ManagersListView> {
                       ],
                     ),
                     const SizedBox(height: AppSize.s20),
+
                     /// TODO: add header widget
                     StreamBuilder<List<SingleManagerDetails>?>(
                       stream: _managersListViewModel.outputManagersList,
@@ -428,14 +433,13 @@ class _ManagersListViewState extends State<ManagersListView> {
     );
     if (parentManagerList == Constants.nullValue ||
         parentManagerList?.length == Constants.zeroDouble) {
-      // TODO: uncomment this when parrent list is ready
-      // await _managersListViewModel.getParentList();
+      await _managersListViewModel.getParentManagerList();
+
       ///
-      // TODO: uncomment this when profile list is ready
-      // if (profileList == Constants.nullValue ||
-      //     profileList?.length == Constants.zeroDouble) {
-      //   await _managersListViewModel.getProfileList();
-      // }
+      if (aclPermissionGroupList == Constants.nullValue ||
+          aclPermissionGroupList?.length == Constants.zeroDouble) {
+        await _managersListViewModel.getAclPermissionGroupList();
+      }
     }
     showFilterWidget = !showFilterWidget;
     setState(() {});
@@ -494,6 +498,8 @@ class _ManagersListViewState extends State<ManagersListView> {
             ),
             // TOOD: uncomment this when parrent list is ready
             _getParentManagerDropdown(AppStrings.usersParent, context),
+            _getAclPermissionGroupDropdown(
+                AppStrings.managerPermission, context),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -547,41 +553,80 @@ class _ManagersListViewState extends State<ManagersListView> {
   }
 
   _getParentManagerDropdown(String inputTitle, context) {
-    // return Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   mainAxisAlignment: MainAxisAlignment.start,
-    //   children: [
-    //     const SizedBox(height: AppSize.s20),
-    //     Text(
-    //       inputTitle,
-    //       style: Theme.of(context).textTheme.labelLarge,
-    //     ),
-    //     StreamBuilder<List<SingleManagerData>?>(
-    //       stream: _managersListViewModel.outputParentList,
-    //       builder: (_, snapshot0) {
-    //         if (parentManagerList == Constants.nullValue ||
-    //             parentManagerList?.length == Constants.zeroNum) {
-    //           parentManagerList = snapshot0.data;
-    //         }
-    //         debugPrint("parentManagerList: $parentManagerList");
-    //         // ignore: prefer_is_empty
-    //         return Container(
-    //           margin: const EdgeInsets.only(top: AppMargin.m15),
-    //           child: DropDownComponent<SingleManagerData?>(
-    //             isThisServersDropdown: Constants.falseBool,
-    //             hintStr: AppStrings.usersParentHint,
-    //             items: parentManagerList ?? [],
-    //             doOtherThings: (val) {
-    //               selectedparentManager = val;
-    //             },
-    //             displayFn: (item) => (item as SingleManagerData).username ?? "",
-    //             textAndHintColor: ColorManager.whiteNeutral,
-    //           ),
-    //         );
-    //       },
-    //     ),
-    //   ],
-    // );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const SizedBox(height: AppSize.s20),
+        Text(
+          inputTitle,
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        StreamBuilder<List<SingleManagerData>?>(
+          stream: _managersListViewModel.outputParentManagerList,
+          builder: (_, snapshot0) {
+            if (parentManagerList == Constants.nullValue ||
+                parentManagerList?.length == Constants.zeroNum) {
+              parentManagerList = snapshot0.data;
+            }
+            debugPrint("parentManagerList: $parentManagerList");
+            // ignore: prefer_is_empty
+            return Container(
+              margin: const EdgeInsets.only(top: AppMargin.m15),
+              child: DropDownComponent<SingleManagerData?>(
+                isThisServersDropdown: Constants.falseBool,
+                hintStr: AppStrings.usersParentHint,
+                items: parentManagerList ?? [],
+                doOtherThings: (val) {
+                  selectedparentManager = val;
+                },
+                displayFn: (item) => (item as SingleManagerData).username ?? "",
+                textAndHintColor: ColorManager.whiteNeutral,
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  _getAclPermissionGroupDropdown(String inputTitle, context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const SizedBox(height: AppSize.s15),
+        Text(
+          inputTitle,
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        StreamBuilder<List<SingleAclPermissionGroup>?>(
+          stream: _managersListViewModel.outputAclPermissionGroupList,
+          builder: (_, snapshot0) {
+            if (aclPermissionGroupList == Constants.nullValue ||
+                aclPermissionGroupList?.length == Constants.zeroNum) {
+              aclPermissionGroupList = snapshot0.data;
+            }
+            debugPrint("aclPermissionGroupList: $aclPermissionGroupList");
+            // ignore: prefer_is_empty
+            return Container(
+              margin: const EdgeInsets.only(top: AppMargin.m15),
+              child: DropDownComponent<SingleAclPermissionGroup?>(
+                isThisServersDropdown: Constants.falseBool,
+                hintStr: AppStrings.managersAclPermissionHint,
+                items: aclPermissionGroupList ?? [],
+                doOtherThings: (val) {
+                  selectedAclPermissionGroup = val;
+                },
+                displayFn: (item) =>
+                    (item as SingleAclPermissionGroup).name ?? "",
+                textAndHintColor: ColorManager.whiteNeutral,
+              ),
+            );
+          },
+        ),
+      ],
+    );
   }
 
   _getUserStatusString(SingleManagerDetails singleManagerDetails) {
