@@ -6,6 +6,7 @@ import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
+import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
@@ -243,7 +244,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
         break;
       case AppStrings.managerActionEdit:
         // TODO: Handle this case.
-        // Nav.navTo(context, Routes.editUserRoute);
+        Nav.navTo(context, Routes.editUserRoute);
         break;
     }
   }

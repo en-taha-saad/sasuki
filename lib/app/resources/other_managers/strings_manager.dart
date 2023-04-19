@@ -28,6 +28,7 @@ class AppStrings {
   static const userAddedSuccess = "User added successfully";
   static const managerAddedSuccess = "Manager added successfully";
   static const userEditedSuccess = "User edited successfully";
+  static const managerEditedSuccess = "Manager edited successfully";
   static const userRenamedSuccess = "Username renamed successfully";
   static const userProfileChangedSuccess = "User profile changed successfully";
   static const userActivatedSuccessfully = "User activated successfully";
