@@ -8,7 +8,7 @@ class AppStrings {
   ///
   static const totalUsers = "Total Users";
   static const totalManagers = "Total Managers";
-  
+
   static const activeUsers = "Active";
   static const expiredUsers = "Expired";
   static const disabledUser = "Disabled";
@@ -161,9 +161,8 @@ class AppStrings {
   static const userOverviewLastLogin = "Last Login";
 
   // manager overview
-    static const managerOverviewCreationDate = "Created At";
+  static const managerOverviewCreationDate = "Created At";
   static const managerBalance = "Balance";
-
 
   static const userPermissionCreate = "prm_users_create";
   static const userPermissionEdit = "prm_users_update";
@@ -247,6 +246,7 @@ class AppStrings {
   static const changeProfileDefaultValue = "Immediate";
   static const moneyCollectedSwitch = "Money Collected";
   static const loanSwitch = "Loan";
+  static String managerDepositBalanceUsernameString(userName) => "Balance ($userName)";
   static const salePriceInput = "Sale Price";
 
   static const activateUserTitle = "Activate User";
@@ -320,7 +320,6 @@ class AppStrings {
 
   static const or = "Or";
 
-    static const servISPNameHint = "Add isp name";
-    static const servServerAddressHint = "Add server address";
-
+  static const servISPNameHint = "Add isp name";
+  static const servServerAddressHint = "Add server address";
 }

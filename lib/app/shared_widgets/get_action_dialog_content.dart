@@ -15,74 +15,76 @@ Widget getActionDialogContent(
   String dialogTitleIcon,
   Function()? onPressed,
 ) {
-  return Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Container(
-        margin: const EdgeInsets.only(bottom: AppMargin.m15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(right: AppMargin.m10),
-              child: SvgPicture.asset(
-                dialogTitleIcon,
-                height: AppSize.s20,
-                width: AppSize.s20,
-                // ignore: deprecated_member_use
-                color: ColorManager.greyNeutral5,
+  return SingleChildScrollView(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(right: AppMargin.m10),
+                child: SvgPicture.asset(
+                  dialogTitleIcon,
+                  height: AppSize.s20,
+                  width: AppSize.s20,
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral5,
+                ),
               ),
-            ),
-            Text(
-              dialogTitle,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: ColorManager.greyNeutral5,
-                  ),
-            ),
-          ],
-        ),
-      ),
-      Container(
-          margin: const EdgeInsets.only(
-            bottom: AppMargin.m20,
-          ),
-          child: const Divider(
-            color: ColorManager.greyNeutral,
-            height: AppSize.s1,
-            thickness: AppSize.s1,
-          )),
-      child,
-      Container(
-        margin: const EdgeInsets.only(top: AppMargin.m15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.transparent,
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                elevation: 0,
-              ),
-              onPressed: () => Nav.popRoute(context),
-              child: Text(
-                AppStrings.cancelButton,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: ColorManager.blackNeutral,
+              Text(
+                dialogTitle,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: ColorManager.greyNeutral5,
                     ),
               ),
-            ),
-            ElevatedButtonWidget(
-              name: buttonText,
-              onPressed: onPressed,
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    ],
+        Container(
+            margin: const EdgeInsets.only(
+              bottom: AppMargin.m20,
+            ),
+            child: const Divider(
+              color: ColorManager.greyNeutral,
+              height: AppSize.s1,
+              thickness: AppSize.s1,
+            )),
+        child,
+        Container(
+          margin: const EdgeInsets.only(top: AppMargin.m15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.transparent,
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  elevation: 0,
+                ),
+                onPressed: () => Nav.popRoute(context),
+                child: Text(
+                  AppStrings.cancelButton,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: ColorManager.blackNeutral,
+                      ),
+                ),
+              ),
+              ElevatedButtonWidget(
+                name: buttonText,
+                onPressed: onPressed,
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
   );
 }

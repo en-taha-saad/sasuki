@@ -61,6 +61,8 @@ class ManagerDetailsViewModel extends BaseViewModel
 
   // UserApi? userApiVar;
   String? newUsername;
+  double? upperBalance = Constants.zeroNum;
+  String? upperUsername = Constants.emptyStr;
   ManagerOverviewApi? managerOverviewApiVar;
   int? commingManagerId;
 
@@ -187,6 +189,8 @@ class ManagerDetailsViewModel extends BaseViewModel
       (auth0) {
         // right -> success (data)
         managerActions = [];
+        upperUsername = auth0.client?.username;
+        upperBalance = auth0.client?.balance;
         _getPermissionsList(auth0.permissions);
       },
     );

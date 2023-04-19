@@ -327,9 +327,10 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
           if (_amountController.text.isNotEmpty) {
             FocusScope.of(context).unfocus();
             Nav.popRoute(context);
-            _viewModel.withdrawAction(
+            _viewModel.depositAction(
               _amountController.text,
               _commentController.text,
+              isChecked,
             );
             _amountController.clear();
             _commentController.clear();
@@ -339,10 +340,17 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
     );
   }
 
+  bool isChecked = Constants.falseBool;
   Widget _getDepositDialogContent() {
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
       children: [
+        _balanceLabel(
+          (managerOverviewApiVar?.data?.username)!,
+          (managerOverviewApiVar?.data?.balance?.toDouble())!,
+        ),
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
           child: getActionTextFieldInput(
@@ -354,14 +362,77 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
             TextInputType.number,
           ),
         ),
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m25),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                AppStrings.loanSwitch,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: ColorManager.blackNeutral,
+                    ),
+              ),
+              StatefulBuilder(
+                builder: (BuildContext context, StateSetter setState) {
+                  return Transform.scale(
+                    scale: 0.7,
+                    child: Switch(
+                      value: isChecked,
+                      activeColor: ColorManager.primaryshade1,
+                      activeTrackColor: const Color(0xffDCDFE3),
+                      inactiveThumbColor: ColorManager.primaryshade1,
+                      inactiveTrackColor: const Color(0xffDCDFE3),
+                      onChanged: (bool value) {
+                        setState(() => isChecked = value);
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        _balanceLabel(
+          (_viewModel.upperUsername)!,
+          (_viewModel.upperBalance)!,
+        ),
         getActionTextFieldInput(
           context,
           _commentController,
           (val) {},
           AppStrings.commentInputtitle,
           Constants.falseBool,
-        )
+        ),
       ],
+    );
+  }
+
+  Widget _balanceLabel(String username, double balance) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: AppMargin.m25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(bottom: AppMargin.m5),
+            child: Text(
+              AppStrings.managerDepositBalanceUsernameString(username),
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: ColorManager.blackNeutral,
+                  ),
+            ),
+          ),
+          Text(
+            balance.toString(),
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: ColorManager.greyNeutral5,
+                ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -392,8 +463,14 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
 
   Widget _getWithdrawDialogContent() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        _balanceLabel(
+          (managerOverviewApiVar?.data?.username)!,
+          (managerOverviewApiVar?.data?.balance?.toDouble())!,
+        ),
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
           child: getActionTextFieldInput(
