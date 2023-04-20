@@ -243,8 +243,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
         _makeWithdrawalAction(context);
         break;
       case AppStrings.managerActionEdit:
-        // TODO: Handle this case.
-        Nav.navTo(context, Routes.editUserRoute);
+        Nav.navTo(context, Routes.editManagerRoute);
         break;
     }
   }

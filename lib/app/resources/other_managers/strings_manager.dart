@@ -218,10 +218,12 @@ class AppStrings {
       "Are you sure you want to delete this manager";
   static const managerRenamedSuccess = "Username renamed successfully";
 
-  static const addManagerTitle = "Manager Form";
   static const addUserTitle = "Add User";
   static const editUserTitle = "Edit User";
+  static const editManagerTitle = "Edit Manager";
   static const updateUserTitle = "Update User";
+  static const updateManagerTitle = "Update Manager";
+  static const addManagerTitle = "Add Manager";
 
   static const usernameInputtitle = "New Username";
   static const amountInputtitle = "Amount";
@@ -247,7 +249,9 @@ class AppStrings {
   static const changeProfileDefaultValue = "Immediate";
   static const moneyCollectedSwitch = "Money Collected";
   static const loanSwitch = "Loan";
-  static String managerDepositBalanceUsernameString(userName) => "Balance ($userName)";
+  static const enableManagerSwitch = "Enable Manager";
+  static String managerDepositBalanceUsernameString(userName) =>
+      "Balance ($userName)";
   static const salePriceInput = "Sale Price";
 
   static const activateUserTitle = "Activate User";
@@ -307,6 +311,7 @@ class AppStrings {
 
   static const usersConnection = "Connection";
   static const usersProfile = "Profile";
+  static const managerSecurityGroup = "Security Group";
   static const usersApply = "Apply";
   static const usersReset = "Reset";
   static const inputIsEmpty = "Input is empty";

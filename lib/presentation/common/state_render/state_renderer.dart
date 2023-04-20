@@ -177,7 +177,9 @@ class StateRenderer extends StatelessWidget {
             if (title == AppStrings.userRenamedSuccess ||
                 title == AppStrings.userAddedSuccess ||
                 title == AppStrings.managerAddedSuccess ||
+                title == AppStrings.managerAddedSuccess ||
                 title == AppStrings.userEditedSuccess ||
+                title == AppStrings.managerEditedSuccess ||
                 title == AppStrings.amountAddedSuccessfully ||
                 title == AppStrings.amountDeductedSuccessfully ||
                 title == AppStrings.changeAppliedSuccessfully ||
