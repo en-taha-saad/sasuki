@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
+import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
+import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
@@ -61,6 +63,7 @@ class _EditManagerState extends State<EditManager> {
   SingleAclPermissionGroup? selectedAclGroupPermission;
   managers_list.SingleManagerData? selectedParentManager;
   bool isChecked = Constants.falseBool;
+  bool isStepOne = Constants.trueBool;
 
   _bind() {
     _editManagerViewModel.start();
@@ -222,243 +225,364 @@ class _EditManagerState extends State<EditManager> {
 
   _getEditManagerContent() {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ///
-          Container(
-            margin: const EdgeInsets.all(AppSize.s25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(right: AppSize.s10),
-                  child: SvgPicture.asset(
-                    IconsAssets.edit,
-                    theme: const SvgTheme(
-                      currentColor: ColorManager.greyNeutral2,
+      child: Container(
+        margin: const EdgeInsets.only(
+          right: AppMargin.m25,
+          left: AppMargin.m25,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ///
+            Container(
+              margin: const EdgeInsets.only(
+                top: AppSize.s25,
+                bottom: AppSize.s25,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(right: AppSize.s10),
+                    child: SvgPicture.asset(
+                      IconsAssets.edit,
+                      theme: const SvgTheme(
+                        currentColor: ColorManager.whiteNeutral,
+                      ),
+                      // ignore: deprecated_member_use
+                      color: ColorManager.whiteNeutral,
                     ),
-                    // ignore: deprecated_member_use
-                    color: ColorManager.greyNeutral2,
                   ),
-                ),
-                Text(
-                  AppStrings.editManagerTitle,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        color: ColorManager.greyNeutral2,
-                      ),
-                ),
-              ],
+                  Text(
+                    AppStrings.editManagerTitle,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: ColorManager.whiteNeutral,
+                        ),
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          /// TODO: add stepper
-
-          ///
-          Container(
-            margin: const EdgeInsets.only(
-              right: AppMargin.m25,
-              left: AppMargin.m25,
+            ///
+            Container(
+              margin: const EdgeInsets.only(
+                bottom: AppSize.s25,
+              ),
+              child: isStepOne
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(bottom: AppSize.s25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: AppSize.s5,
+                                width: MediaQuery.of(context).size.width * 0.5 -
+                                    25 -
+                                    5,
+                                decoration: BoxDecoration(
+                                  color: ColorManager.primaryshade1,
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s12),
+                                ),
+                              ),
+                              const SizedBox(width: AppSize.s10),
+                              Container(
+                                height: AppSize.s5,
+                                width: MediaQuery.of(context).size.width * 0.5 -
+                                    25 -
+                                    5,
+                                decoration: BoxDecoration(
+                                  color: ColorManager.whiteNeutral,
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s12),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          AppStrings.addEditManagerStepOneTitle,
+                          style: StylesManager.getMediumStyle(
+                            fontSize: FontSize.sInputText,
+                            color: ColorManager.greyNeutral,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(bottom: AppSize.s25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: AppSize.s5,
+                                width: MediaQuery.of(context).size.width * 0.5 -
+                                    25 -
+                                    5,
+                                decoration: BoxDecoration(
+                                  color: ColorManager.primaryshade1,
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s12),
+                                ),
+                              ),
+                              const SizedBox(width: AppSize.s10),
+                              Container(
+                                height: AppSize.s5,
+                                width: MediaQuery.of(context).size.width * 0.5 -
+                                    25 -
+                                    5,
+                                decoration: BoxDecoration(
+                                  color: ColorManager.primaryshade1,
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s12),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          AppStrings.addEditManagerStepTwoTitle,
+                          style: StylesManager.getMediumStyle(
+                            fontSize: FontSize.sInputText,
+                            color: ColorManager.greyNeutral,
+                          ),
+                        ),
+                      ],
+                    ),
             ),
-            child: Column(
+
+            ///
+            Column(
               children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: getAddEditTextFieldInput(
-                    context,
-                    _usernameController,
-                    (val) {
-                      FocusScope.of(context).unfocus();
-                    },
-                    AppStrings.servUsername,
-                    Constants.falseBool,
-                    TextInputType.text,
-                    Constants.trueBool,
-                    Constants.trueBool,
-                    Constants.falseBool,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    bottom: AppMargin.m25,
-                  ),
-                  child: PasswordTextInput(
-                    stream: _editManagerViewModel.outputIsPasswordValid,
-                    controller: _passwordController,
-                    // controller: rememberMe == true ? null : _managerPasswordController,
-                    inputLabel: AppStrings.servPassword,
-                    inputHint: Constants.emptyStr,
-                    errorText: AppStrings.servInvalidPassword,
-                    autofocus: Constants.falseBool,
-                    showPassword: Constants.trueBool,
-                    isRequired: Constants.trueBool,
-                  ),
-                ),
-
-                ///
-                Container(
-                  margin: const EdgeInsets.only(
-                    bottom: AppMargin.m25,
-                  ),
-                  child: Divider(
-                    height: AppSize.s0_2,
-                    thickness: AppSize.s0_5,
-                    color: ColorManager.greyNeutral.withOpacity(0.25),
-                  ),
-                ),
-
-                ///
-                _getParentManagerDropdown(context),
-                _getAclGroupPermissionDropdown(context),
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppStrings.enableManagerSwitch,
-                        style: Theme.of(context).textTheme.labelLarge,
-                      ),
-                      StatefulBuilder(
-                        builder: (BuildContext context, StateSetter setState) {
-                          return Transform.scale(
-                            scale: 0.7,
-                            child: Switch(
-                              value: isChecked,
-                              activeColor: ColorManager.primaryshade1,
-                              activeTrackColor: const Color(0xffDCDFE3),
-                              inactiveThumbColor: ColorManager.primaryshade1,
-                              inactiveTrackColor: const Color(0xffDCDFE3),
-                              onChanged: (bool value) {
-                                setState(() => isChecked = value);
+                isStepOne
+                    ? Column(
+                        children: [
+                          Container(
+                            margin:
+                                const EdgeInsets.only(bottom: AppMargin.m25),
+                            child: getAddEditTextFieldInput(
+                              context,
+                              _usernameController,
+                              (val) {
+                                FocusScope.of(context).unfocus();
                               },
+                              AppStrings.servUsername,
+                              Constants.falseBool,
+                              TextInputType.text,
+                              Constants.trueBool,
+                              Constants.trueBool,
+                              Constants.falseBool,
                             ),
-                          );
-                        },
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              bottom: AppMargin.m25,
+                            ),
+                            child: PasswordTextInput(
+                              stream:
+                                  _editManagerViewModel.outputIsPasswordValid,
+                              controller: _passwordController,
+                              // controller: rememberMe == true ? null : _managerPasswordController,
+                              inputLabel: AppStrings.servPassword,
+                              inputHint: Constants.emptyStr,
+                              errorText: AppStrings.servInvalidPassword,
+                              autofocus: Constants.falseBool,
+                              showPassword: Constants.trueBool,
+                              isRequired: Constants.trueBool,
+                            ),
+                          ),
+
+                          ///
+                          Container(
+                            margin: const EdgeInsets.only(
+                              bottom: AppMargin.m25,
+                            ),
+                            child: Divider(
+                              height: AppSize.s0_2,
+                              thickness: AppSize.s0_5,
+                              color: ColorManager.greyNeutral.withOpacity(0.25),
+                            ),
+                          ),
+
+                          ///
+                          _getParentManagerDropdown(context),
+                          _getAclGroupPermissionDropdown(context),
+                          Container(
+                            margin:
+                                const EdgeInsets.only(bottom: AppMargin.m25),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  AppStrings.enableManagerSwitch,
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                StatefulBuilder(
+                                  builder: (BuildContext context,
+                                      StateSetter setState) {
+                                    return Transform.scale(
+                                      scale: 0.7,
+                                      child: Switch(
+                                        value: isChecked,
+                                        activeColor: ColorManager.primaryshade1,
+                                        activeTrackColor:
+                                            const Color(0xffDCDFE3),
+                                        inactiveThumbColor:
+                                            ColorManager.primaryshade1,
+                                        inactiveTrackColor:
+                                            const Color(0xffDCDFE3),
+                                        onChanged: (bool value) {
+                                          setState(() => isChecked = value);
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          ///
+                          Container(
+                            margin:
+                                const EdgeInsets.only(bottom: AppMargin.m25),
+                            child: getAddEditTextFieldInput(
+                              context,
+                              _firstNameController,
+                              (val) {
+                                FocusScope.of(context).unfocus();
+                              },
+                              AppStrings.userFirstNameHint,
+                              Constants.falseBool,
+                              TextInputType.text,
+                              Constants.trueBool,
+                              Constants.trueBool,
+                              Constants.trueBool,
+                            ),
+                          ),
+                          Container(
+                            margin:
+                                const EdgeInsets.only(bottom: AppMargin.m25),
+                            child: getAddEditTextFieldInput(
+                              context,
+                              _lastNameController,
+                              (val) {
+                                FocusScope.of(context).unfocus();
+                              },
+                              AppStrings.userLastNameHint,
+                              Constants.falseBool,
+                              TextInputType.text,
+                              Constants.trueBool,
+                              Constants.trueBool,
+                              Constants.trueBool,
+                            ),
+                          ),
+                          Container(
+                            margin:
+                                const EdgeInsets.only(bottom: AppMargin.m25),
+                            child: getAddEditTextFieldInput(
+                              context,
+                              _emailController,
+                              (val) {
+                                FocusScope.of(context).unfocus();
+                              },
+                              AppStrings.userOverviewEmail,
+                              Constants.falseBool,
+                            ),
+                          ),
+                          Container(
+                            margin:
+                                const EdgeInsets.only(bottom: AppMargin.m25),
+                            child: getAddEditTextFieldInput(
+                              context,
+                              _phoneController,
+                              (val) {
+                                FocusScope.of(context).unfocus();
+                              },
+                              AppStrings.userPhoneHint,
+                              Constants.falseBool,
+                            ),
+                          ),
+
+                          ///
+                          Container(
+                            margin: const EdgeInsets.only(
+                              bottom: AppMargin.m25,
+                            ),
+                            child: Divider(
+                              height: AppSize.s0_2,
+                              thickness: AppSize.s0_5,
+                              color: ColorManager.greyNeutral.withOpacity(0.25),
+                            ),
+                          ),
+
+                          ///
+                          Container(
+                            margin:
+                                const EdgeInsets.only(bottom: AppMargin.m25),
+                            child: getAddEditTextFieldInput(
+                              context,
+                              _companyController,
+                              (val) {
+                                FocusScope.of(context).unfocus();
+                              },
+                              AppStrings.userCompanyHint,
+                              Constants.falseBool,
+                            ),
+                          ),
+                          Container(
+                            margin:
+                                const EdgeInsets.only(bottom: AppMargin.m25),
+                            child: getAddEditTextFieldInput(
+                              context,
+                              _cityController,
+                              (val) {
+                                FocusScope.of(context).unfocus();
+                              },
+                              AppStrings.userCityHint,
+                              Constants.falseBool,
+                            ),
+                          ),
+                          Container(
+                            margin:
+                                const EdgeInsets.only(bottom: AppMargin.m25),
+                            child: getAddEditTextFieldInput(
+                              context,
+                              _addressController,
+                              (val) {
+                                FocusScope.of(context).unfocus();
+                              },
+                              AppStrings.userAddressHint,
+                              Constants.falseBool,
+                            ),
+                          ),
+                          getAddEditTextFieldInput(
+                            context,
+                            _notesController,
+                            (val) {
+                              FocusScope.of(context).unfocus();
+                            },
+                            AppStrings.userNotesHint,
+                            Constants.falseBool,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-
-                ///
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: getAddEditTextFieldInput(
-                    context,
-                    _firstNameController,
-                    (val) {
-                      FocusScope.of(context).unfocus();
-                    },
-                    AppStrings.userFirstNameHint,
-                    Constants.falseBool,
-                    TextInputType.text,
-                    Constants.trueBool,
-                    Constants.trueBool,
-                    Constants.trueBool,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: getAddEditTextFieldInput(
-                    context,
-                    _lastNameController,
-                    (val) {
-                      FocusScope.of(context).unfocus();
-                    },
-                    AppStrings.userLastNameHint,
-                    Constants.falseBool,
-                    TextInputType.text,
-                    Constants.trueBool,
-                    Constants.trueBool,
-                    Constants.trueBool,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: getAddEditTextFieldInput(
-                    context,
-                    _emailController,
-                    (val) {
-                      FocusScope.of(context).unfocus();
-                    },
-                    AppStrings.userOverviewEmail,
-                    Constants.falseBool,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: getAddEditTextFieldInput(
-                    context,
-                    _phoneController,
-                    (val) {
-                      FocusScope.of(context).unfocus();
-                    },
-                    AppStrings.userPhoneHint,
-                    Constants.falseBool,
-                  ),
-                ),
-
-                ///
-                Container(
-                  margin: const EdgeInsets.only(
-                    bottom: AppMargin.m25,
-                  ),
-                  child: Divider(
-                    height: AppSize.s0_2,
-                    thickness: AppSize.s0_5,
-                    color: ColorManager.greyNeutral.withOpacity(0.25),
-                  ),
-                ),
-
-                ///
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: getAddEditTextFieldInput(
-                    context,
-                    _companyController,
-                    (val) {
-                      FocusScope.of(context).unfocus();
-                    },
-                    AppStrings.userCompanyHint,
-                    Constants.falseBool,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: getAddEditTextFieldInput(
-                    context,
-                    _cityController,
-                    (val) {
-                      FocusScope.of(context).unfocus();
-                    },
-                    AppStrings.userCityHint,
-                    Constants.falseBool,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: AppMargin.m25),
-                  child: getAddEditTextFieldInput(
-                    context,
-                    _addressController,
-                    (val) {
-                      FocusScope.of(context).unfocus();
-                    },
-                    AppStrings.userAddressHint,
-                    Constants.falseBool,
-                  ),
-                ),
-                getAddEditTextFieldInput(
-                  context,
-                  _notesController,
-                  (val) {
-                    FocusScope.of(context).unfocus();
-                  },
-                  AppStrings.userNotesHint,
-                  Constants.falseBool,
-                ),
 
                 ///
                 Container(
@@ -469,50 +593,95 @@ class _EditManagerState extends State<EditManager> {
                   child: StreamBuilder<bool>(
                     stream: _editManagerViewModel.outputAreAllInputsValid,
                     builder: (context, snapshot) {
-                      return ElevatedButtonWidget(
-                        name: AppStrings.userActionSubmitButton,
-                        assetName: IconsAssets.forward,
-                        onPressed: () {
-                          debugPrint("snapshot.data = ${snapshot.data}");
+                      return isStepOne
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(),
+                                ElevatedButtonWidget(
+                                  name: AppStrings.nextButton,
+                                  onPressed: () {
+                                    debugPrint(
+                                        "snapshot.data = ${snapshot.data}");
+                                    FocusScope.of(context).unfocus();
+                                    setState(() {
+                                      isStepOne = Constants.falseBool;
+                                    });
+                                  },
+                                ),
+                              ],
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: ColorManager.whiteNeutral,
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                    elevation: 0,
+                                  ),
+                                  onPressed: () {
+                                    FocusScope.of(context).unfocus();
 
-                          FocusScope.of(context).unfocus();
+                                    setState(() {
+                                      isStepOne = Constants.trueBool;
+                                    });
+                                  },
+                                  child: const Text(AppStrings.previousButton),
+                                ),
+                                ElevatedButtonWidget(
+                                  name: AppStrings.userActionSubmitButton,
+                                  assetName: IconsAssets.forward,
+                                  onPressed: () {
+                                    debugPrint(
+                                        "snapshot.data = ${snapshot.data}");
 
-                          debugPrint(
-                              "selectedParentManager = ${selectedParentManager?.username}");
-                          debugPrint(
-                              "selectedAclGroupPermission = ${selectedAclGroupPermission?.name}");
-                          setState(() {});
-                          if (selectedParentManager == Constants.nullValue) {
-                            selectedParentManager = _getParentManagerUsername(
-                              managerAuth?.client?.username,
+                                    FocusScope.of(context).unfocus();
+
+                                    debugPrint(
+                                        "selectedParentManager = ${selectedParentManager?.username}");
+                                    debugPrint(
+                                        "selectedAclGroupPermission = ${selectedAclGroupPermission?.name}");
+
+                                    if (selectedParentManager ==
+                                        Constants.nullValue) {
+                                      selectedParentManager =
+                                          _getParentManagerUsername(
+                                        managerAuth?.client?.username,
+                                      );
+                                    }
+                                    if (selectedAclGroupPermission ==
+                                        Constants.nullValue) {
+                                      selectedAclGroupPermission =
+                                          _getAclGroupPermissionUsername(
+                                        managerOverviewApiVar
+                                            ?.data?.aclGroupName,
+                                      );
+                                    }
+                                    debugPrint(
+                                        "selectedParentManager = ${selectedParentManager?.username}");
+                                    debugPrint(
+                                        "selectedAclGroupPermission = ${selectedAclGroupPermission?.name}");
+
+                                    _editManagerViewModel.saveFloatingButton(
+                                      selectedParentManager,
+                                      selectedAclGroupPermission,
+                                      isChecked,
+                                    );
+                                  },
+                                ),
+                              ],
                             );
-                          }
-                          if (selectedAclGroupPermission ==
-                              Constants.nullValue) {
-                            selectedAclGroupPermission =
-                                _getAclGroupPermissionUsername(
-                              managerOverviewApiVar?.data?.aclGroupName,
-                            );
-                          }
-                          debugPrint(
-                              "selectedParentManager = ${selectedParentManager?.username}");
-                          debugPrint(
-                              "selectedAclGroupPermission = ${selectedAclGroupPermission?.name}");
-
-                          _editManagerViewModel.saveFloatingButton(
-                            selectedParentManager,
-                            selectedAclGroupPermission,
-                            isChecked,
-                          );
-                        },
-                      );
                     },
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

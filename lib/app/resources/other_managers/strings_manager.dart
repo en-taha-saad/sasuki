@@ -82,6 +82,7 @@ class AppStrings {
 
   static const servAddButton = "Add";
   static const cancelButton = "Cancel";
+  static const previousButton = "Previous";
   static const okButton = "Ok";
   static const deleteButton = "Delete";
 
@@ -201,6 +202,7 @@ class AppStrings {
   static const userActionActivate = "Activate";
   static const userActionExtend = "Extend";
   static const userActionSubmitButton = "Submit";
+  static const nextButton = "Next";
   static const userActionChangeProfile = "Change Profile";
   static const userActionChange = "Change";
   static const userActionDeposit = "Deposit";
@@ -328,4 +330,6 @@ class AppStrings {
 
   static const servISPNameHint = "Add isp name";
   static const servServerAddressHint = "Add server address";
+  static const addEditManagerStepOneTitle = "Step 1: Basic Information";
+  static const addEditManagerStepTwoTitle = "Step 2: Personal Information";
 }
