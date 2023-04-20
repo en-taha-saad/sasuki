@@ -158,13 +158,13 @@ class _ManagersListViewState extends State<ManagersListView> {
                       ],
                     ),
                     const SizedBox(height: AppSize.s20),
-                    StreamBuilder<List<SingleManagerDetails>?>(
+                    StreamBuilder<ManagerListDetails?>(
                       stream: _managersListViewModel.outputManagersList,
                       builder: (context, snapshot) {
                         return SingleManagerCardStatistics(
                           isShimmer: Constants.falseBool,
                           totalManagers:
-                              "${snapshot.data?.length ?? Constants.dash}",
+                              "${snapshot.data?.total ?? Constants.dash}",
                         );
                       },
                     ),
@@ -194,10 +194,9 @@ class _ManagersListViewState extends State<ManagersListView> {
               ),
               InkWell(
                 onTap: () {
-                  // TODO: add manager
-                  // _managersListViewModel.isThereAddManagerCreationPermission
-                  //     ? Nav.navTo(context, Routes.addManager)
-                  //     : null;
+                  _managersListViewModel.isThereAddManagerCreationPermission
+                      ? Nav.navTo(context, Routes.addManagerRoute)
+                      : null;
                 },
                 child: Container(
                   padding: const EdgeInsets.all(AppPadding.p7),
@@ -303,12 +302,12 @@ class _ManagersListViewState extends State<ManagersListView> {
   }
 
   Widget _getManagersList() {
-    return StreamBuilder<List<SingleManagerDetails>?>(
+    return StreamBuilder<ManagerListDetails?>(
       stream: _managersListViewModel.outputManagersList,
       builder: (context, snapshot) {
         // ignore: prefer_is_empty
-        if (snapshot.data?.length == Constants.oneNum ||
-            snapshot.data?.length == Constants.zeroNum) {
+        if (snapshot.data?.data?.length == Constants.oneNum ||
+            snapshot.data?.data?.length == Constants.zeroNum) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Future.delayed(
               Duration(seconds: Constants.oneNum.toInt()),
@@ -318,14 +317,14 @@ class _ManagersListViewState extends State<ManagersListView> {
         }
         return !loadFilteredManagers
             // ignore: prefer_is_empty
-            ? snapshot.data?.length != Constants.zeroNum
+            ? snapshot.data?.data?.length != Constants.zeroNum
                 ? SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     controller: _scrollController,
                     child: loadingMoreManagers
                         ? Column(
                             children: [
-                              _singleManager(snapshot.data, context),
+                              _singleManager(snapshot.data?.data, context),
                               const SizedBox(height: AppSize.s20),
                               const Center(
                                 child: CircularProgressIndicator(
@@ -336,7 +335,7 @@ class _ManagersListViewState extends State<ManagersListView> {
                               ),
                             ],
                           )
-                        : _singleManager(snapshot.data, context),
+                        : _singleManager(snapshot.data?.data, context),
                   )
                 : Container(
                     margin: const EdgeInsets.only(top: AppMargin.m38),

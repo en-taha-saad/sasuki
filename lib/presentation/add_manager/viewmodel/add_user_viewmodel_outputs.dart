@@ -1,12 +1,13 @@
 import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart'
     as managers_list;
-import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 
-abstract class ManagersListViewModelOutputs {
-  Stream<ManagerListDetails> get outputManagersListData;
-  Stream<ManagerListDetails?> get outputManagersList;
+abstract class AddManagerViewModelOutputs {
+  Stream<bool> get outputIsUsernameValid;
+  Stream<bool> get outputIsPasswordValid;
+  Stream<bool> get outputIsFirstNameValid;
+  Stream<bool> get outputIsLastNameValid;
+  Stream<bool> get outputAreAllInputsValid;
   Stream<List<managers_list.SingleManagerData>> get outputParentManagerList;
-  Stream<bool> get outputIsSearchInputValid;
   Stream<List<SingleAclPermissionGroup>> get outputAclPermissionGroupList;
 }

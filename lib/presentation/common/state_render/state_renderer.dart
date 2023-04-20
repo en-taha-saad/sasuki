@@ -170,16 +170,15 @@ class StateRenderer extends StatelessWidget {
             Nav.popRoute(context);
             if (title == AppStrings.userDeletedSuccess ||
                 title == AppStrings.managerDeletedSuccess ||
+                title == AppStrings.managerAddedSuccess ||
+                title == AppStrings.managerEditedSuccess ||
                 title == AppStrings.userActivatedSuccessfully ||
                 title == AppStrings.userExtendedSuccessfully) {
               Nav.popRoute(context);
             }
             if (title == AppStrings.userRenamedSuccess ||
                 title == AppStrings.userAddedSuccess ||
-                title == AppStrings.managerAddedSuccess ||
-                title == AppStrings.managerAddedSuccess ||
                 title == AppStrings.userEditedSuccess ||
-                title == AppStrings.managerEditedSuccess ||
                 title == AppStrings.amountAddedSuccessfully ||
                 title == AppStrings.amountDeductedSuccessfully ||
                 title == AppStrings.changeAppliedSuccessfully ||

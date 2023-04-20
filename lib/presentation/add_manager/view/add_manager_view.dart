@@ -18,24 +18,22 @@ import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_gr
 import 'package:sasuki/domain/models/dashboard/auth.dart';
 import 'package:sasuki/domain/models/manager_details/manager_overview_api.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
+import 'package:sasuki/presentation/add_manager/viewmodel/add_manager_viewmodel.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/presentation/dashboard/viewmodel/dashboard_viewmodel.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
-import 'package:sasuki/presentation/edit_manager/viewmodel/edit_manager_viewmodel.dart';
-import 'package:sasuki/presentation/manager_details/viewmodel/manager_details_viewmodel.dart';
-import 'package:sasuki/presentation/managers_list/viewmodel/managers_list_viewmodel.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart'
     as managers_list;
 
-class EditManager extends StatefulWidget {
-  const EditManager({Key? key}) : super(key: key);
+class AddManager extends StatefulWidget {
+  const AddManager({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
-  _EditManagerState createState() => _EditManagerState();
+  _AddManagerState createState() => _AddManagerState();
 }
 
-class _EditManagerState extends State<EditManager> {
+class _AddManagerState extends State<AddManager> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
@@ -46,12 +44,9 @@ class _EditManagerState extends State<EditManager> {
   final TextEditingController _companyController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  final ManagerDetailsViewModel _managerDetailsViewModel =
-      instance<ManagerDetailsViewModel>();
-  final ManagersListViewModel _managersListViewModel =
-      instance<ManagersListViewModel>();
-  final EditManagerViewModel _editManagerViewModel =
-      instance<EditManagerViewModel>();
+
+  final AddManagerViewModel _addManagerViewModel =
+      instance<AddManagerViewModel>();
   final DashboardViewModel _dashboardViewModel = instance<DashboardViewModel>();
   ManagerOverviewApi? managerOverviewApiVar;
   List<SingleAclPermissionGroup>? aclPermissionGroupList;
@@ -60,14 +55,12 @@ class _EditManagerState extends State<EditManager> {
 
   SingleAclPermissionGroup? selectedAclGroupPermission;
   managers_list.SingleManagerData? selectedParentManager;
-  bool isChecked = Constants.falseBool;
+  bool isChecked = Constants.trueBool;
   bool isStepOne = Constants.trueBool;
 
   _bind() {
-    _editManagerViewModel.start();
+    _addManagerViewModel.start();
     _dashboardViewModel.getDataStreamingly();
-    _managerDetailsViewModel.getManagerDataStreamingly();
-    _managersListViewModel.getManagersListForPull();
     _dashboardViewModel.outputAuthData.listen(
       (event) {
         if (mounted) {
@@ -78,71 +71,52 @@ class _EditManagerState extends State<EditManager> {
     );
     _usernameController.addListener(
       () {
-        _editManagerViewModel.setUsername(_usernameController.text);
+        _addManagerViewModel.setUsername(_usernameController.text);
       },
     );
     _passwordController.addListener(
       () {
-        _editManagerViewModel.setPassword(_passwordController.text);
+        _addManagerViewModel.setPassword(_passwordController.text);
       },
     );
     _firstNameController.addListener(
       () {
-        _editManagerViewModel.setFirstName(_firstNameController.text);
+        _addManagerViewModel.setFirstName(_firstNameController.text);
       },
     );
     _lastNameController.addListener(
       () {
-        _editManagerViewModel.setLastName(_lastNameController.text);
+        _addManagerViewModel.setLastName(_lastNameController.text);
       },
     );
     _phoneController.addListener(
       () {
-        _editManagerViewModel.setPhone(_phoneController.text);
+        _addManagerViewModel.setPhone(_phoneController.text);
       },
     );
     _notesController.addListener(
       () {
-        _editManagerViewModel.setNotes(_notesController.text);
+        _addManagerViewModel.setNotes(_notesController.text);
       },
     );
     _emailController.addListener(
       () {
-        _editManagerViewModel.setEmail(_notesController.text);
+        _addManagerViewModel.setEmail(_notesController.text);
       },
     );
     _companyController.addListener(
       () {
-        _editManagerViewModel.setCompany(_notesController.text);
+        _addManagerViewModel.setCompany(_notesController.text);
       },
     );
     _cityController.addListener(
       () {
-        _editManagerViewModel.setCity(_notesController.text);
+        _addManagerViewModel.setCity(_notesController.text);
       },
     );
     _addressController.addListener(
       () {
-        _editManagerViewModel.setAddress(_notesController.text);
-      },
-    );
-    _managerDetailsViewModel.outputManagerOverviewApi.listen(
-      (event) {
-        if (mounted) {
-          // check whether the state object is in tree
-          setState(() => managerOverviewApiVar = event);
-          _usernameController.text =
-              managerOverviewApiVar?.data?.username ?? Constants.emptyStr;
-          _firstNameController.text =
-              managerOverviewApiVar?.data?.firstname ?? Constants.emptyStr;
-          _lastNameController.text =
-              managerOverviewApiVar?.data?.lastname ?? Constants.emptyStr;
-          _phoneController.text =
-              managerOverviewApiVar?.data?.phone ?? Constants.emptyStr;
-          isChecked = managerOverviewApiVar?.data?.status == 1
-              ? Constants.trueBool
-              : Constants.falseBool;
-        }
+        _addManagerViewModel.setAddress(_notesController.text);
       },
     );
   }
@@ -150,7 +124,7 @@ class _EditManagerState extends State<EditManager> {
   @override
   void dispose() {
     _dashboardViewModel.dispose();
-    _editManagerViewModel.dispose();
+    _addManagerViewModel.dispose();
     super.dispose();
   }
 
@@ -163,14 +137,14 @@ class _EditManagerState extends State<EditManager> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<FlowState>(
-      stream: _editManagerViewModel.outputState,
+      stream: _addManagerViewModel.outputState,
       builder: (context, AsyncSnapshot<FlowState> snapshot) {
         return snapshot.data?.getScreenWidget(
               context,
               _getScreenView(context),
               () async {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                _editManagerViewModel.editManager();
+                _addManagerViewModel.addManager();
               },
             ) ??
             _getScreenView(context);
@@ -203,7 +177,7 @@ class _EditManagerState extends State<EditManager> {
               ),
             ),
             title: Text(
-              AppStrings.updateManagerTitle,
+              AppStrings.addManagerTitle,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontSize: 18,
                   ),
@@ -214,14 +188,20 @@ class _EditManagerState extends State<EditManager> {
           child: Container(
             width: MediaQuery.of(context).size.width,
             color: ColorManager.secondary,
-            child: _getEditManagerContent(),
+            child: _getAddManagerContent(),
           ),
         ),
       ],
     );
   }
 
-  _getEditManagerContent() {
+  managers_list.SingleManagerData? _getParentManagerUsername(
+      parentManagerUsername) {
+    return parentManagerList
+        ?.firstWhere((element) => element.username == parentManagerUsername);
+  }
+
+  _getAddManagerContent() {
     return SingleChildScrollView(
       child: Container(
         margin: const EdgeInsets.only(
@@ -245,7 +225,7 @@ class _EditManagerState extends State<EditManager> {
                   Container(
                     margin: const EdgeInsets.only(right: AppSize.s10),
                     child: SvgPicture.asset(
-                      IconsAssets.edit,
+                      IconsAssets.add,
                       theme: const SvgTheme(
                         currentColor: ColorManager.whiteNeutral,
                       ),
@@ -254,7 +234,7 @@ class _EditManagerState extends State<EditManager> {
                     ),
                   ),
                   Text(
-                    AppStrings.editManagerTitle,
+                    AppStrings.addManagerTitle,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: ColorManager.whiteNeutral,
                         ),
@@ -370,19 +350,23 @@ class _EditManagerState extends State<EditManager> {
                           Container(
                             margin:
                                 const EdgeInsets.only(bottom: AppMargin.m25),
-                            child: getAddEditTextFieldInput(
-                              context,
-                              _usernameController,
-                              (val) {
-                                FocusScope.of(context).unfocus();
-                              },
-                              AppStrings.servUsername,
-                              Constants.falseBool,
-                              TextInputType.text,
-                              Constants.trueBool,
-                              Constants.trueBool,
-                              Constants.falseBool,
-                            ),
+                            child: StreamBuilder<bool>(
+                                stream:
+                                    _addManagerViewModel.outputIsUsernameValid,
+                                builder: (context, snapshot) {
+                                  return getAddEditTextFieldInput(
+                                    context,
+                                    _usernameController,
+                                    (val) {
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                    AppStrings.servUsername,
+                                    Constants.trueBool,
+                                    TextInputType.text,
+                                    snapshot.data,
+                                    Constants.trueBool,
+                                  );
+                                }),
                           ),
                           Container(
                             margin: const EdgeInsets.only(
@@ -390,7 +374,7 @@ class _EditManagerState extends State<EditManager> {
                             ),
                             child: PasswordTextInput(
                               stream:
-                                  _editManagerViewModel.outputIsPasswordValid,
+                                  _addManagerViewModel.outputIsPasswordValid,
                               controller: _passwordController,
                               // controller: rememberMe == true ? null : _managerPasswordController,
                               inputLabel: AppStrings.servPassword,
@@ -460,36 +444,46 @@ class _EditManagerState extends State<EditManager> {
                           Container(
                             margin:
                                 const EdgeInsets.only(bottom: AppMargin.m25),
-                            child: getAddEditTextFieldInput(
-                              context,
-                              _firstNameController,
-                              (val) {
-                                FocusScope.of(context).unfocus();
-                              },
-                              AppStrings.userFirstNameHint,
-                              Constants.falseBool,
-                              TextInputType.text,
-                              Constants.trueBool,
-                              Constants.trueBool,
-                              Constants.trueBool,
-                            ),
+                            child: StreamBuilder<bool>(
+                                stream:
+                                    _addManagerViewModel.outputIsFirstNameValid,
+                                builder: (context, snapshot) {
+                                  return getAddEditTextFieldInput(
+                                    context,
+                                    _firstNameController,
+                                    (val) {
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                    AppStrings.userFirstNameHint,
+                                    Constants.falseBool,
+                                    TextInputType.text,
+                                    snapshot.data,
+                                    Constants.trueBool,
+                                    Constants.trueBool,
+                                  );
+                                }),
                           ),
                           Container(
                             margin:
                                 const EdgeInsets.only(bottom: AppMargin.m25),
-                            child: getAddEditTextFieldInput(
-                              context,
-                              _lastNameController,
-                              (val) {
-                                FocusScope.of(context).unfocus();
-                              },
-                              AppStrings.userLastNameHint,
-                              Constants.falseBool,
-                              TextInputType.text,
-                              Constants.trueBool,
-                              Constants.trueBool,
-                              Constants.trueBool,
-                            ),
+                            child: StreamBuilder<bool>(
+                                stream:
+                                    _addManagerViewModel.outputIsLastNameValid,
+                                builder: (context, snapshot) {
+                                  return getAddEditTextFieldInput(
+                                    context,
+                                    _lastNameController,
+                                    (val) {
+                                      FocusScope.of(context).unfocus();
+                                    },
+                                    AppStrings.userLastNameHint,
+                                    Constants.falseBool,
+                                    TextInputType.text,
+                                    snapshot.data,
+                                    Constants.trueBool,
+                                    Constants.trueBool,
+                                  );
+                                }),
                           ),
                           Container(
                             margin:
@@ -588,93 +582,108 @@ class _EditManagerState extends State<EditManager> {
                     top: AppMargin.m35,
                     bottom: AppMargin.m50,
                   ),
-                  child: StreamBuilder<bool>(
-                    stream: _editManagerViewModel.outputAreAllInputsValid,
-                    builder: (context, snapshot) {
-                      return isStepOne
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(),
-                                ElevatedButtonWidget(
-                                  name: AppStrings.nextButton,
-                                  onPressed: () {
-                                    debugPrint(
-                                        "snapshot.data = ${snapshot.data}");
-                                    FocusScope.of(context).unfocus();
-                                    setState(() {
-                                      isStepOne = Constants.falseBool;
-                                    });
-                                  },
-                                ),
-                              ],
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                    foregroundColor: ColorManager.whiteNeutral,
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent,
-                                    elevation: 0,
-                                  ),
-                                  onPressed: () {
-                                    FocusScope.of(context).unfocus();
-
-                                    setState(() {
-                                      isStepOne = Constants.trueBool;
-                                    });
-                                  },
-                                  child: const Text(AppStrings.previousButton),
-                                ),
-                                ElevatedButtonWidget(
-                                  name: AppStrings.userActionSubmitButton,
-                                  assetName: IconsAssets.forward,
-                                  onPressed: () {
-                                    debugPrint(
-                                        "snapshot.data = ${snapshot.data}");
-
-                                    FocusScope.of(context).unfocus();
-
-                                    debugPrint(
-                                        "selectedParentManager = ${selectedParentManager?.username}");
-                                    debugPrint(
-                                        "selectedAclGroupPermission = ${selectedAclGroupPermission?.name}");
-
-                                    if (selectedParentManager ==
-                                        Constants.nullValue) {
-                                      selectedParentManager =
-                                          _getParentManagerUsername(
-                                        managerAuth?.client?.username,
+                  child: isStepOne
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(),
+                            StreamBuilder<bool>(
+                              stream:
+                                  _addManagerViewModel.outputIsUsernameValid,
+                              builder: (context, outputIsUsernameValid) {
+                                return StreamBuilder<bool>(
+                                    stream: _addManagerViewModel
+                                        .outputIsPasswordValid,
+                                    builder: (context, outputIsPasswordValid) {
+                                      return ElevatedButtonWidget(
+                                        name: AppStrings.nextButton,
+                                        onPressed: () {
+                                          debugPrint(
+                                              "selectedParentManager $selectedParentManager");
+                                          debugPrint(
+                                              "selectedAclGroupPermission = $selectedAclGroupPermission");
+                                          debugPrint(
+                                              "outputIsUsernameValid.data = ${outputIsUsernameValid.data}");
+                                          debugPrint(
+                                              "outputIsPasswordValid.data = ${outputIsPasswordValid.data}");
+                                          if (selectedParentManager ==
+                                              Constants.nullValue) {
+                                            selectedParentManager =
+                                                _getParentManagerUsername(
+                                                    managerAuth
+                                                        ?.client?.username);
+                                          }
+                                          if (selectedParentManager !=
+                                                  Constants.nullValue &&
+                                              selectedAclGroupPermission !=
+                                                  Constants.nullValue &&
+                                              (outputIsUsernameValid.data)! &&
+                                              (outputIsPasswordValid.data)!) {
+                                            FocusScope.of(context).unfocus();
+                                            setState(() {
+                                              isStepOne = Constants.falseBool;
+                                            });
+                                          }
+                                        },
                                       );
-                                    }
-                                    if (selectedAclGroupPermission ==
-                                        Constants.nullValue) {
-                                      selectedAclGroupPermission =
-                                          _getAclGroupPermissionUsername(
-                                        managerOverviewApiVar
-                                            ?.data?.aclGroupName,
-                                      );
-                                    }
-                                    debugPrint(
-                                        "selectedParentManager = ${selectedParentManager?.username}");
-                                    debugPrint(
-                                        "selectedAclGroupPermission = ${selectedAclGroupPermission?.name}");
-
-                                    _editManagerViewModel.saveFloatingButton(
-                                      selectedParentManager,
-                                      selectedAclGroupPermission,
-                                      isChecked,
-                                    );
-                                  },
-                                ),
-                              ],
-                            );
-                    },
-                  ),
+                                    });
+                              },
+                            ),
+                          ],
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                foregroundColor: ColorManager.whiteNeutral,
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                elevation: 0,
+                              ),
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                setState(() {
+                                  isStepOne = Constants.trueBool;
+                                });
+                              },
+                              child: const Text(AppStrings.previousButton),
+                            ),
+                            StreamBuilder<bool>(
+                                stream:
+                                    _addManagerViewModel.outputIsFirstNameValid,
+                                builder: (context, outputIsFirstNameValid) {
+                                  return StreamBuilder<bool>(
+                                      stream: _addManagerViewModel
+                                          .outputIsLastNameValid,
+                                      builder:
+                                          (context, outputIsLastNameValid) {
+                                        return ElevatedButtonWidget(
+                                          name:
+                                              AppStrings.userActionSubmitButton,
+                                          assetName: IconsAssets.forward,
+                                          onPressed: () {
+                                            FocusScope.of(context).unfocus();
+                                            bool isTextInputsValid =
+                                                (outputIsFirstNameValid
+                                                        .data)! &&
+                                                    (outputIsLastNameValid
+                                                        .data)!;
+                                            setState(() {});
+                                            _addManagerViewModel
+                                                .saveFloatingButton(
+                                              isTextInputsValid,
+                                              selectedParentManager,
+                                              selectedAclGroupPermission,
+                                            );
+                                          },
+                                        );
+                                      });
+                                }),
+                          ],
+                        ),
                 ),
               ],
             ),
@@ -682,17 +691,6 @@ class _EditManagerState extends State<EditManager> {
         ),
       ),
     );
-  }
-
-  SingleManagerData? _getParentManagerUsername(parentManagerUsername) {
-    return parentManagerList
-        ?.firstWhere((element) => element.username == parentManagerUsername);
-  }
-
-  SingleAclPermissionGroup? _getAclGroupPermissionUsername(
-      aclGroupPermissionUsername) {
-    return aclPermissionGroupList
-        ?.firstWhere((element) => element.name == aclGroupPermissionUsername);
   }
 
   _getParentManagerDropdown(context) {
@@ -723,7 +721,7 @@ class _EditManagerState extends State<EditManager> {
             bottom: AppMargin.m25,
           ),
           child: StreamBuilder<List<SingleManagerData>?>(
-            stream: _editManagerViewModel.outputParentManagerList,
+            stream: _addManagerViewModel.outputParentManagerList,
             builder: (_, snapshot0) {
               if (parentManagerList == Constants.nullValue ||
                   parentManagerList?.length == Constants.zeroNum) {
@@ -733,8 +731,8 @@ class _EditManagerState extends State<EditManager> {
               // ignore: prefer_is_empty
               return DropDownComponent<SingleManagerData?>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: managerOverviewApiVar?.data?.parentUsername ??
-                    AppStrings.usersParentHint,
+                hintStr:
+                    managerAuth?.client?.username ?? AppStrings.usersParentHint,
                 items: parentManagerList ?? [],
                 doOtherThings: (val) {
                   selectedParentManager = val;
@@ -777,7 +775,7 @@ class _EditManagerState extends State<EditManager> {
             bottom: AppMargin.m25,
           ),
           child: StreamBuilder<List<SingleAclPermissionGroup>>(
-            stream: _editManagerViewModel.outputAclPermissionGroupList,
+            stream: _addManagerViewModel.outputAclPermissionGroupList,
             builder: (_, snapshot0) {
               if (aclPermissionGroupList == Constants.nullValue ||
                   aclPermissionGroupList?.length == Constants.zeroNum) {
@@ -787,8 +785,7 @@ class _EditManagerState extends State<EditManager> {
               // ignore: prefer_is_empty
               return DropDownComponent<SingleAclPermissionGroup?>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: managerOverviewApiVar?.data?.aclGroupName ??
-                    AppStrings.usersProfileHint,
+                hintStr: AppStrings.usersProfileHint,
                 items: aclPermissionGroupList ?? [],
                 doOtherThings: (val) {
                   selectedAclGroupPermission = val;

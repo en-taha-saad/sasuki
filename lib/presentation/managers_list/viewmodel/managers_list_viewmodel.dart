@@ -42,7 +42,7 @@ class ManagersListViewModel extends BaseViewModel
     Constants.minusOne,
   );
   ManagerListDetails? managersList;
-  List<SingleManagerDetails>? listOfManagers;
+  ManagerListDetails? listOfManagers;
 
   ManagersListViewModel(
     this._managersListDetailsUsecase,
@@ -61,12 +61,12 @@ class ManagersListViewModel extends BaseViewModel
 
   /// get list of users
   final StreamController _listOfManagersController =
-      StreamController<List<SingleManagerDetails>?>.broadcast();
+      StreamController<ManagerListDetails?>.broadcast();
   @override
   Sink get inputManagersList => _listOfManagersController.sink;
 
   @override
-  Stream<List<SingleManagerDetails>?> get outputManagersList =>
+  Stream<ManagerListDetails> get outputManagersList =>
       _listOfManagersController.stream.map((listOfManagers) => listOfManagers);
 
   @override
@@ -106,7 +106,7 @@ class ManagersListViewModel extends BaseViewModel
         managersList = managersList0;
         inputState.add(ContentState());
         inputManagersListData.add(managersList);
-        inputManagersList.add(managersList?.data);
+        inputManagersList.add(managersList);
         getManagersListForPull();
       },
     );
@@ -130,7 +130,7 @@ class ManagersListViewModel extends BaseViewModel
       (managersList0) async {
         // right -> success (data)
         managersList = managersList0;
-        listOfManagers = managersList?.data;
+        listOfManagers = managersList;
         inputManagersListData.add(managersList);
         inputManagersList.add(listOfManagers);
         inputState.add(ContentState());
@@ -156,7 +156,7 @@ class ManagersListViewModel extends BaseViewModel
       (managersList0) async {
         // right -> success (data)
         managersList = managersList0;
-        listOfManagers = managersList?.data;
+        listOfManagers = managersList;
         inputManagersListData.add(managersList);
         inputManagersList.add(listOfManagers);
         inputState.add(ContentState());
@@ -182,10 +182,10 @@ class ManagersListViewModel extends BaseViewModel
       (managersList0) async {
         // right -> success (data)
         managersList = managersList0;
-        listOfManagers?.addAll((managersList?.data)!);
+        listOfManagers?.data?.addAll((managersList?.data)!);
         inputManagersListData.add(managersList);
         inputManagersList.add(listOfManagers);
-        debugPrint("users@ listOfUsers = ${listOfManagers?.length}");
+        debugPrint("users@ listOfUsers = ${listOfManagers?.data?.length}");
         debugPrint("users@ page = $page");
         inputState.add(ContentState());
       },
@@ -220,9 +220,9 @@ class ManagersListViewModel extends BaseViewModel
       (managersList0) async {
         // right -> success (data)
         managersList = managersList0;
-        listOfManagers = managersList0.data;
+        listOfManagers = managersList0;
         inputManagersList.add(listOfManagers);
-        debugPrint("Managers@ listOfManagers = ${listOfManagers?.length}");
+        debugPrint("Managers@ listOfManagers = ${listOfManagers?.data?.length}");
         debugPrint("Managers@ page = $page");
         inputState.add(ContentState());
       },
