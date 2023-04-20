@@ -68,7 +68,7 @@ class EditManagerViewModel extends BaseViewModel
     addManagerRequestObject = addManagerRequestObject.copyWith(
       parentId: addManagerRequestObject.parentId,
       aclGroupId: addManagerRequestObject.aclGroupId,
-      enabled: Constants.oneNum.toInt(),
+      enabled: addManagerRequestObject.enabled,
     );
     inputState.add(LoadingState(
       stateRendererType: StateRendererType.popupLoadingState,
@@ -108,10 +108,12 @@ class EditManagerViewModel extends BaseViewModel
   saveFloatingButton(
     managers_list.SingleManagerData? selectedParentManager,
     SingleAclPermissionGroup? singleAclPermissionGroup,
+    bool isChecked,
   ) {
     addManagerRequestObject = addManagerRequestObject.copyWith(
       parentId: selectedParentManager?.id,
       aclGroupId: singleAclPermissionGroup?.id,
+      enabled: isChecked ? Constants.oneNum.toInt() : Constants.zeroNum.toInt(),
     );
     inputUsername.add(Constants.emptyStr);
     editManager();

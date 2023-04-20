@@ -312,8 +312,6 @@ class _EditManagerState extends State<EditManager> {
                 ///
                 _getParentManagerDropdown(context),
                 _getAclGroupPermissionDropdown(context),
-
-                ///
                 Container(
                   margin: const EdgeInsets.only(bottom: AppMargin.m25),
                   child: Row(
@@ -344,8 +342,6 @@ class _EditManagerState extends State<EditManager> {
                     ],
                   ),
                 ),
-
-                /// TODO: add enable manager or disable it
 
                 ///
                 Container(
@@ -506,6 +502,7 @@ class _EditManagerState extends State<EditManager> {
                           _editManagerViewModel.saveFloatingButton(
                             selectedParentManager,
                             selectedAclGroupPermission,
+                            isChecked,
                           );
                         },
                       );
