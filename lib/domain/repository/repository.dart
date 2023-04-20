@@ -16,6 +16,7 @@ import 'package:sasuki/domain/models/filter_lists/parent_list.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
 import 'package:sasuki/domain/models/login/login.dart';
 import 'package:sasuki/domain/models/manager_action/manager_action.dart';
+import 'package:sasuki/domain/models/manager_details/manager_details.dart';
 import 'package:sasuki/domain/models/manager_details/manager_overview_api.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/models/manager_list_details/security_group.dart';
@@ -125,4 +126,6 @@ abstract class Repository {
     AddEditManagerRequestObject addEditManagerRequestObject,
     int managerId,
   );
+
+  Future<Either<Failure, ManagerDetails>> getManagerDetails(int managerId);
 }

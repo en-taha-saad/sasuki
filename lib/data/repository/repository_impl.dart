@@ -16,6 +16,7 @@ import 'package:sasuki/data/mappers/filterLists_mappers/parent_list_mapper.dart'
 import 'package:sasuki/data/mappers/filterLists_mappers/profile_list_mapper.dart';
 import 'package:sasuki/data/mappers/login_mappers/login_response_mapper.dart';
 import 'package:sasuki/data/mappers/manager_action_response_mapper/manager_action_response_mapper.dart';
+import 'package:sasuki/data/mappers/manager_apis_mappers/manager_details_responses_mappers.dart';
 import 'package:sasuki/data/mappers/manager_apis_mappers/manager_overview_api_responses_mappers.dart';
 import 'package:sasuki/data/mappers/manager_list_details_responses_mappers/manager_list_details_responses_mappers.dart';
 import 'package:sasuki/data/mappers/manager_list_details_responses_mappers/security_group_responses_mappers.dart';
@@ -50,6 +51,7 @@ import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
 import 'package:sasuki/domain/models/filter_lists/parent_list.dart';
 import 'package:sasuki/domain/models/login/login.dart';
 import 'package:sasuki/domain/models/manager_action/manager_action.dart';
+import 'package:sasuki/domain/models/manager_details/manager_details.dart';
 import 'package:sasuki/domain/models/manager_details/manager_overview_api.dart';
 import 'package:sasuki/domain/models/manager_list_details/security_group.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
@@ -1631,6 +1633,34 @@ class RepositoryImpl implements Repository {
               ApiInternalStatus.minusOneStatusCode,
               AppStrings.alreadyNamedError,
             ),
+          );
+        }
+      } catch (error) {
+        debugPrint("error = $error");
+
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // its not connected to internet so return a failure
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ManagerDetails>> getManagerDetails(
+      int managerId) async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet so we can call the api
+      try {
+        final response = await _remoteDataSource.getManagerDetails(managerId);
+        // ignore: unrelated_type_equality_checks
+        if (response.data != Constants.zeroNum) {
+          // success reutrn either right
+          return Right(response.toDomain());
+        } else {
+          // failure return either left business error
+          return Left(
+            Failure(response.status ?? 0, "${response.status ?? 0}"),
           );
         }
       } catch (error) {

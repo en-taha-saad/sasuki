@@ -304,7 +304,7 @@ class ManagerDetailsViewModel extends BaseViewModel
         inputState.add(
           LoadingState(
             stateRendererType: StateRendererType.popupSuccessState,
-            message: AppStrings.userDeletedSuccess,
+            message: AppStrings.managerDeletedSuccess,
           ),
         );
       },
@@ -338,7 +338,7 @@ class ManagerDetailsViewModel extends BaseViewModel
         inputState.add(
           LoadingState(
             stateRendererType: StateRendererType.popupSuccessState,
-            message: AppStrings.userRenamedSuccess,
+            message: AppStrings.managerRenamedSuccess,
           ),
         );
         Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
@@ -384,7 +384,7 @@ class ManagerDetailsViewModel extends BaseViewModel
         inputState.add(
           LoadingState(
             stateRendererType: StateRendererType.popupSuccessState,
-            message: AppStrings.amountAddedSuccessfully,
+            message: AppStrings.managerAmountAddedSuccessfully,
           ),
         );
         Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
@@ -428,7 +428,7 @@ class ManagerDetailsViewModel extends BaseViewModel
         inputState.add(
           LoadingState(
             stateRendererType: StateRendererType.popupSuccessState,
-            message: AppStrings.amountDeductedSuccessfully,
+            message: AppStrings.managerAmountDeductedSuccessfully,
           ),
         );
         Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {

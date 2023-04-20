@@ -127,7 +127,10 @@ class _DashboardViewState extends State<DashboardView> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         InkWell(
-                          child: SvgPicture.asset(IconsAssets.menu),
+                          child: Container(
+                            padding: const EdgeInsets.all(AppSize.s10),
+                            child: SvgPicture.asset(IconsAssets.menu),
+                          ),
                           onTap: () {
                             Nav.navTo(context, Routes.drawerRoute);
                           },

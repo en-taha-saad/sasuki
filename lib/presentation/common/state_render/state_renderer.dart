@@ -167,27 +167,34 @@ class StateRenderer extends StatelessWidget {
           if (stateRendererType == StateRendererType.toastErrorState) {
             retryActionFunction.call();
           } else {
-            Nav.popRoute(context);
-            if (title == AppStrings.userDeletedSuccess ||
-                title == AppStrings.managerDeletedSuccess ||
-                title == AppStrings.managerAddedSuccess ||
-                title == AppStrings.managerEditedSuccess ||
-                title == AppStrings.userActivatedSuccessfully ||
-                title == AppStrings.userExtendedSuccessfully) {
+            if (title == AppStrings.managerRenamedSuccess ||
+                title == AppStrings.managerAmountDeductedSuccessfully ||
+                title == AppStrings.managerAmountAddedSuccessfully) {
               Nav.popRoute(context);
-            }
-            if (title == AppStrings.userRenamedSuccess ||
-                title == AppStrings.userAddedSuccess ||
-                title == AppStrings.userEditedSuccess ||
-                title == AppStrings.amountAddedSuccessfully ||
-                title == AppStrings.amountDeductedSuccessfully ||
-                title == AppStrings.changeAppliedSuccessfully ||
-                title == AppStrings.addRewardPointsSuccessfully) {
+            } else {
               Nav.popRoute(context);
-              Nav.popRoute(context);
-            }
+              if (title == AppStrings.userDeletedSuccess ||
+                  title == AppStrings.managerDeletedSuccess ||
+                  title == AppStrings.managerAddedSuccess ||
+                  title == AppStrings.managerEditedSuccess ||
+                  title == AppStrings.managerDeletedSuccess ||
+                  title == AppStrings.userActivatedSuccessfully ||
+                  title == AppStrings.userExtendedSuccessfully) {
+                Nav.popRoute(context);
+              }
+              if (title == AppStrings.userRenamedSuccess ||
+                  title == AppStrings.userAddedSuccess ||
+                  title == AppStrings.userEditedSuccess ||
+                  title == AppStrings.amountAddedSuccessfully ||
+                  title == AppStrings.amountDeductedSuccessfully ||
+                  title == AppStrings.changeAppliedSuccessfully ||
+                  title == AppStrings.addRewardPointsSuccessfully) {
+                Nav.popRoute(context);
+                Nav.popRoute(context);
+              }
 
-            if (title == AppStrings.userProfileChangedSuccess) {}
+              if (title == AppStrings.userProfileChangedSuccess) {}
+            }
           }
         },
         child: Text(

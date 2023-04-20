@@ -10,6 +10,7 @@ import 'package:sasuki/data/responses/filter_lists_responses/parent_list.dart';
 import 'package:sasuki/data/responses/filter_lists_responses/profile_list.dart';
 import 'package:sasuki/data/responses/login_responses/login_responses.dart';
 import 'package:sasuki/data/responses/manager_action_response/manager_action_response.dart';
+import 'package:sasuki/data/responses/manager_details_responses/manager_details_responses.dart';
 import 'package:sasuki/data/responses/manager_details_responses/manager_overview_api_responses.dart';
 import 'package:sasuki/data/responses/manager_list_details_responses/manager_list_details_responses.dart';
 import 'package:sasuki/data/responses/manager_list_details_responses/security_group_responses.dart';
@@ -58,4 +59,5 @@ abstract class RemoteDataSource {
   Future<SecurityGroupResponses> getSecurityGroupList();
   Future<EditUserResponse> addManager(String payload);
   Future<UserActionResponse> editManager(String payload, int managerId);
+  Future<ManagerDetailsResponses> getManagerDetails(int managerId);
 }

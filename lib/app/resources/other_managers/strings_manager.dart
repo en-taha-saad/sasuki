@@ -35,6 +35,9 @@ class AppStrings {
   static const userExtendedSuccessfully = "User extended successfully";
   static const amountAddedSuccessfully = "Amount added successfully";
   static const amountDeductedSuccessfully = "Amount deducted successfully";
+  static const managerAmountAddedSuccessfully = "Amount added successfully";
+  static const managerAmountDeductedSuccessfully = "Amount deducted successfully";
+
   static const changeAppliedSuccessfully = "Change Applied successfully";
   static const addRewardPointsSuccessfully = "Reward Points Added successfully";
   static const managerDeletedSuccess = "Manager deleted successfully";

@@ -2,13 +2,11 @@ import 'dart:async';
 import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
-import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/usecase/acl_permission_group_list_usecase/acl_permission_group_list_usecase.dart';
 import 'package:sasuki/domain/usecase/add_manager_usecase/add_manager_usecase.dart';
-import 'package:sasuki/domain/usecase/edit_manager_usecase/edit_manager_usecase.dart';
 import 'package:sasuki/domain/usecase/managers_list_usecase/managers_list_usecase.dart';
 import 'package:sasuki/presentation/add_manager/viewmodel/add_manager_viewmodel_inputs.dart';
 import 'package:sasuki/presentation/add_manager/viewmodel/add_user_viewmodel_outputs.dart';
@@ -18,7 +16,6 @@ import 'package:sasuki/presentation/common/state_render/states/content_state.dar
 import 'package:sasuki/presentation/common/state_render/states/error_state.dart';
 import 'package:sasuki/presentation/common/state_render/states/loading_state.dart';
 import 'package:sasuki/presentation/common/state_render/states/state_renderer_type.dart';
-import 'package:sasuki/presentation/manager_details/viewmodel/manager_details_viewmodel.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart'
     as managers_list;
 
@@ -68,6 +65,7 @@ class AddManagerViewModel extends BaseViewModel
       aclGroupId: addManagerRequestObject.aclGroupId,
       enabled: Constants.oneNum.toInt(),
     );
+    debugPrint("addManagerRequestObject = $addManagerRequestObject");
     inputState.add(LoadingState(
       stateRendererType: StateRendererType.popupLoadingState,
     ));

@@ -101,22 +101,22 @@ class _AddManagerState extends State<AddManager> {
     );
     _emailController.addListener(
       () {
-        _addManagerViewModel.setEmail(_notesController.text);
+        _addManagerViewModel.setEmail(_emailController.text);
       },
     );
     _companyController.addListener(
       () {
-        _addManagerViewModel.setCompany(_notesController.text);
+        _addManagerViewModel.setCompany(_companyController.text);
       },
     );
     _cityController.addListener(
       () {
-        _addManagerViewModel.setCity(_notesController.text);
+        _addManagerViewModel.setCity(_cityController.text);
       },
     );
     _addressController.addListener(
       () {
-        _addManagerViewModel.setAddress(_notesController.text);
+        _addManagerViewModel.setAddress(_addressController.text);
       },
     );
   }

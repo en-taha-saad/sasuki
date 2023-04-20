@@ -16,6 +16,7 @@ import 'package:sasuki/app/shared_widgets/password_input.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
 import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/models/dashboard/auth.dart';
+import 'package:sasuki/domain/models/manager_details/manager_details.dart';
 import 'package:sasuki/domain/models/manager_details/manager_overview_api.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
@@ -54,6 +55,7 @@ class _EditManagerState extends State<EditManager> {
       instance<EditManagerViewModel>();
   final DashboardViewModel _dashboardViewModel = instance<DashboardViewModel>();
   ManagerOverviewApi? managerOverviewApiVar;
+  ManagerDetails? managerDetails;
   List<SingleAclPermissionGroup>? aclPermissionGroupList;
   List<managers_list.SingleManagerData>? parentManagerList;
   Auth? managerAuth;
@@ -108,22 +110,22 @@ class _EditManagerState extends State<EditManager> {
     );
     _emailController.addListener(
       () {
-        _editManagerViewModel.setEmail(_notesController.text);
+        _editManagerViewModel.setEmail(_emailController.text);
       },
     );
     _companyController.addListener(
       () {
-        _editManagerViewModel.setCompany(_notesController.text);
+        _editManagerViewModel.setCompany(_companyController.text);
       },
     );
     _cityController.addListener(
       () {
-        _editManagerViewModel.setCity(_notesController.text);
+        _editManagerViewModel.setCity(_cityController.text);
       },
     );
     _addressController.addListener(
       () {
-        _editManagerViewModel.setAddress(_notesController.text);
+        _editManagerViewModel.setAddress(_addressController.text);
       },
     );
     _managerDetailsViewModel.outputManagerOverviewApi.listen(
@@ -142,6 +144,26 @@ class _EditManagerState extends State<EditManager> {
           isChecked = managerOverviewApiVar?.data?.status == 1
               ? Constants.trueBool
               : Constants.falseBool;
+        }
+      },
+    );
+
+    _editManagerViewModel.outputManagerDetails.listen(
+      (event) {
+        if (mounted) {
+          // check whether the state object is in tree
+          setState(() => managerDetails = event);
+          _companyController.text =
+              managerDetails?.data?.company ?? Constants.emptyStr;
+          _notesController.text =
+              managerDetails?.data?.notes ?? Constants.emptyStr;
+          _addressController.text =
+              managerDetails?.data?.address ?? Constants.emptyStr;
+          _emailController.text =
+              managerDetails?.data?.email ?? Constants.emptyStr;
+
+          _cityController.text =
+              managerDetails?.data?.city ?? Constants.emptyStr;
         }
       },
     );

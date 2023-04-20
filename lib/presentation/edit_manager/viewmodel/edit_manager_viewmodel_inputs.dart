@@ -20,6 +20,9 @@ abstract class EditManagerViewModelInputs {
 
   Sink get inputAclPermissionGroupList;
   Sink get inputParentManagerList;
+  Sink get inputManagerDetails;
 
   editManager();
+
+  getManagerDetails();
 }

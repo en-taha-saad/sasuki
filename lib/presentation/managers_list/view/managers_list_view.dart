@@ -139,11 +139,14 @@ class _ManagersListViewState extends State<ManagersListView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        InkWell(
-                          child: SvgPicture.asset(IconsAssets.menu),
-                          onTap: () {
-                            Nav.navTo(context, Routes.drawerRoute);
-                          },
+                        Container(
+                          padding: const EdgeInsets.all(AppSize.s10),
+                          child: InkWell(
+                            child: SvgPicture.asset(IconsAssets.menu),
+                            onTap: () {
+                              Nav.navTo(context, Routes.drawerRoute);
+                            },
+                          ),
                         ),
                         Text(
                           AppStrings.managersListScreen,

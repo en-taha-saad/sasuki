@@ -12,6 +12,7 @@ import 'package:sasuki/data/responses/filter_lists_responses/parent_list.dart';
 import 'package:sasuki/data/responses/filter_lists_responses/profile_list.dart';
 import 'package:sasuki/data/responses/login_responses/login_responses.dart';
 import 'package:sasuki/data/responses/manager_action_response/manager_action_response.dart';
+import 'package:sasuki/data/responses/manager_details_responses/manager_details_responses.dart';
 import 'package:sasuki/data/responses/manager_details_responses/manager_overview_api_responses.dart';
 import 'package:sasuki/data/responses/manager_list_details_responses/manager_list_details_responses.dart';
 import 'package:sasuki/data/responses/manager_list_details_responses/security_group_responses.dart';
@@ -175,6 +176,10 @@ abstract class AppServiceClient {
 
   @POST("/manager")
   Future<EditUserResponse> addManager(@Field("payload") String payload);
+
+  @GET("/manager/{managerId}")
+  Future<ManagerDetailsResponses> getManageDetails(
+      @Path("managerId") int managerId);
 
   @PUT("/manager/{managerId}")
   Future<UserActionResponse> editManager(

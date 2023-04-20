@@ -84,14 +84,14 @@ class SingleUserCardStatistics extends StatelessWidget {
               ),
               Row(
                 children: [
-                  SingleUserCardStatisticsInform(
+                  singleUserCardStatisticsInform(
                     context,
                     activeUsers,
                     AppStrings.activeUsers,
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: AppSize.s55),
-                    child: SingleUserCardStatisticsInform(
+                    child: singleUserCardStatisticsInform(
                       context,
                       expiredUsers,
                       AppStrings.expiredUsers,
@@ -99,7 +99,7 @@ class SingleUserCardStatistics extends StatelessWidget {
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: AppSize.s55),
-                    child: SingleUserCardStatisticsInform(
+                    child: singleUserCardStatisticsInform(
                       context,
                       onlineUsers,
                       AppStrings.onlineUsers,
@@ -114,7 +114,7 @@ class SingleUserCardStatistics extends StatelessWidget {
     );
   }
 
-  Widget SingleUserCardStatisticsInform(
+  Widget singleUserCardStatisticsInform(
     context,
     String? value,
     String? label,

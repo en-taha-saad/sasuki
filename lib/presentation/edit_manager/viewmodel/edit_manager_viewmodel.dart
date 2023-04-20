@@ -6,8 +6,10 @@ import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
+import 'package:sasuki/domain/models/manager_details/manager_details.dart';
 import 'package:sasuki/domain/usecase/acl_permission_group_list_usecase/acl_permission_group_list_usecase.dart';
 import 'package:sasuki/domain/usecase/edit_manager_usecase/edit_manager_usecase.dart';
+import 'package:sasuki/domain/usecase/manager_details_usecases/manager_details_usecase.dart';
 import 'package:sasuki/domain/usecase/managers_list_usecase/managers_list_usecase.dart';
 import 'package:sasuki/presentation/base/base_viewmodel.dart';
 import 'package:sasuki/presentation/common/freezed_data_classes.dart';
@@ -26,11 +28,13 @@ class EditManagerViewModel extends BaseViewModel
   final EditManagerUseCase _editManagerUseCase;
   final ManagersListUsecase _managersListUsecase;
   final AclPermissionGroupListUsecase _aclPermissionGroupListUsecase;
+  final ManagerDetailsUseCase _managerDetailsUseCase;
 
   EditManagerViewModel(
     this._editManagerUseCase,
     this._managersListUsecase,
     this._aclPermissionGroupListUsecase,
+    this._managerDetailsUseCase,
   );
 
   final ManagerDetailsViewModel _managerDetailsViewModel =
@@ -58,6 +62,7 @@ class EditManagerViewModel extends BaseViewModel
   void start() {
     getParentManagerList();
     getAclPermissionGroupList();
+    getManagerDetails();
   }
 
   @override
@@ -318,4 +323,38 @@ class EditManagerViewModel extends BaseViewModel
       },
     );
   }
+
+  ///
+  final StreamController _getManagerDetailsController =
+      StreamController<ManagerDetails>.broadcast();
+  @override
+  getManagerDetails() async {
+    // ignore: void_checks
+    return (await _managerDetailsUseCase
+            .execute(_managerDetailsViewModel.commingManagerId!))
+        .fold(
+      (failure) {
+        // left -> failure
+        debugPrint("getManagerDetails failure = ${failure.message}");
+        inputState.add(
+          ErrorState(
+            StateRendererType.toastErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (managerDetails) async {
+        // right -> success (data)
+        inputManagerDetails.add(managerDetails);
+      },
+    );
+  }
+
+  @override
+  Sink get inputManagerDetails => _getManagerDetailsController.sink;
+
+  @override
+  Stream<ManagerDetails> get outputManagerDetails =>
+      _getManagerDetailsController.stream
+          .map((managerDetails) => managerDetails);
 }

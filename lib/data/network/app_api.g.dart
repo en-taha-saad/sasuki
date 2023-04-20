@@ -862,6 +862,29 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
+  Future<ManagerDetailsResponses> getManageDetails(managerId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ManagerDetailsResponses>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/manager/${managerId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ManagerDetailsResponses.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<UserActionResponse> editManager(
     managerId,
     payload,

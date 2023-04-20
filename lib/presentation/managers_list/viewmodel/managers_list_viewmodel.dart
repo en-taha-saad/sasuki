@@ -192,7 +192,7 @@ class ManagersListViewModel extends BaseViewModel
     );
   }
 
-  List<SingleManagerDetails>? emptyListOfManagers = [];
+  ManagerListDetails? emptyListOfManagers;
 
   @override
   Future getManagerFromSearch({
