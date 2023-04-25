@@ -46,7 +46,7 @@ ThemeData getApplicationTheme() {
           horizontal: AppPadding.p25,
           vertical: AppPadding.p10Point5,
         ),
-        disabledBackgroundColor: const Color(0xff2F4268),
+        disabledBackgroundColor: const Color(0xff2F4369),
         foregroundColor: ColorManager.whiteNeutral,
         backgroundColor: ColorManager.primaryshade1,
         textStyle: StylesManager.getMediumStyle(
@@ -87,7 +87,10 @@ ThemeData getApplicationTheme() {
       fillColor: ColorManager.primaryshade3,
       border: OutlineInputBorder(
         borderRadius: RadiusSizes.radius12,
-        borderSide: BorderSide.none,
+        borderSide: const BorderSide(
+          color: Color(0xff3D6085),
+          width: AppSize.s1,
+        ),
       ),
       contentPadding: const EdgeInsets.symmetric(
         horizontal: AppPadding.p20,

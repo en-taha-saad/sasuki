@@ -23,9 +23,6 @@ class ElevatedButtonWidget extends StatelessWidget {
     return SizedBox(
       height: AppSize.s48,
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          disabledBackgroundColor: const Color(0xff566E8F),
-        ),
         onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -44,8 +41,8 @@ class ElevatedButtonWidget extends StatelessWidget {
                     theme: const SvgTheme(
                       currentColor: ColorManager.whiteNeutral,
                     ),
-                      // ignore: deprecated_member_use
-                      color: ColorManager.whiteNeutral,
+                    // ignore: deprecated_member_use
+                    color: ColorManager.whiteNeutral,
                   )
                 : Container(),
           ],

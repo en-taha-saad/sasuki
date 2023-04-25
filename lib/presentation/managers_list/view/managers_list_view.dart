@@ -22,6 +22,7 @@ import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
 import 'package:sasuki/presentation/manager_details/viewmodel/manager_details_viewmodel.dart';
 import 'package:sasuki/presentation/managers_list/viewmodel/managers_list_viewmodel.dart';
+import 'package:intl/intl.dart' as intl;
 
 class ManagersListView extends StatefulWidget {
   const ManagersListView({Key? key}) : super(key: key);
@@ -408,7 +409,7 @@ class _ManagersListViewState extends State<ManagersListView> {
                   balance: managersListData.balance != Constants.nullValue ||
                           // ignore: unrelated_type_equality_checks
                           managersListData.balance != ""
-                      ? "${managersListData.balance}"
+                      ? "${_managersListViewModel.dataCaptcha?.data?.siteCurrency} ${intl.NumberFormat.decimalPattern().format(managersListData.balance)}"
                       : Constants.dash,
                   status: _getUserStatusString(managersListData),
                   statusColor: _getUserStatusColor(managersListData),

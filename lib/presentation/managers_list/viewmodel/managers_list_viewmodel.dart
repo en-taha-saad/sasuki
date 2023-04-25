@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
+import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart'
     as managers_list;
 import 'package:sasuki/domain/usecase/acl_permission_group_list_usecase/acl_permission_group_list_usecase.dart';
+import 'package:sasuki/domain/usecase/captcha_usecase/captcha_usecase.dart';
 import 'package:sasuki/domain/usecase/dashboard_usecase/auth_usecase.dart';
 import 'package:sasuki/domain/usecase/managers_list_details_usecase/managers_list_details_usecase.dart';
 import 'package:sasuki/domain/usecase/managers_list_usecase/managers_list_usecase.dart';
@@ -27,6 +29,7 @@ class ManagersListViewModel extends BaseViewModel
   final ManagersListUsecase _managersListUsecase;
   final AclPermissionGroupListUsecase _aclPermissionGroupListUsecase;
   final AuthUseCase _authUseCase;
+  final CaptchaUseCase? _captchaUseCase;
 
   ManagerRequestObject managerRequest = ManagerRequestObject(
     Constants.oneNum.toInt(),
@@ -49,8 +52,11 @@ class ManagersListViewModel extends BaseViewModel
     this._managersListUsecase,
     this._aclPermissionGroupListUsecase,
     this._authUseCase,
+    this._captchaUseCase,
   );
   int page = Constants.oneNum.toInt();
+  Captcha? dataCaptcha;
+
   @override
   Future start() async {
     await getManagersListData();
@@ -79,9 +85,9 @@ class ManagersListViewModel extends BaseViewModel
       groupId: Constants.minusOne,
       parentId: Constants.minusOne,
     );
+    _getCaptchaResponse();
     inputState.add(
       LoadingState(
-        // TODO: add shimmer
         mobileModuleScreen: MobileModuleScreen.managersList,
         stateRendererType: StateRendererType.fullScreenLoadingState,
       ),
@@ -222,7 +228,8 @@ class ManagersListViewModel extends BaseViewModel
         managersList = managersList0;
         listOfManagers = managersList0;
         inputManagersList.add(listOfManagers);
-        debugPrint("Managers@ listOfManagers = ${listOfManagers?.data?.length}");
+        debugPrint(
+            "Managers@ listOfManagers = ${listOfManagers?.data?.length}");
         debugPrint("Managers@ page = $page");
         inputState.add(ContentState());
       },
@@ -364,4 +371,34 @@ class ManagersListViewModel extends BaseViewModel
       },
     );
   }
+
+    _getCaptchaResponse() async {
+    // ignore: void_checks
+    return (await _captchaUseCase?.execute(Void))?.fold(
+      (failure) {
+        // left -> failure
+        debugPrint("failure failure = ${failure.message}");
+        inputState.add(
+          ErrorState(
+            StateRendererType.toastErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (Captcha dataCaptcha0) {
+        // right -> success (data)
+        dataCaptcha = dataCaptcha0;
+        inputDataCaptcha.add(dataCaptcha);
+      },
+    );
+  }
+
+  final StreamController _captchaController =
+      StreamController<Captcha>.broadcast();
+
+  Sink get inputDataCaptcha => _captchaController.sink;
+  Stream<Captcha> get outputDataCaptcha => _captchaController.stream.map(
+        (captcha) => captcha,
+      );
+
 }

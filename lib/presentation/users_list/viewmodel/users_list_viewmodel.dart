@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
+import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/filter_lists/connection_list.dart';
 import 'package:sasuki/domain/models/filter_lists/parent_list.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
@@ -70,6 +71,8 @@ class UsersListViewModel extends BaseViewModel
     this._authUseCase,
   );
   int page = Constants.oneNum.toInt();
+  Captcha? dataCaptcha;
+
   @override
   Future start() async {
     await getUsersListData();
@@ -405,4 +408,6 @@ class UsersListViewModel extends BaseViewModel
       },
     );
   }
+
+
 }

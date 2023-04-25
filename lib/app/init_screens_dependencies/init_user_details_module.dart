@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/domain/repository/repository.dart';
+import 'package:sasuki/domain/usecase/captcha_usecase/captcha_usecase.dart';
 import 'package:sasuki/domain/usecase/dashboard_usecase/auth_usecase.dart';
 import 'package:sasuki/domain/usecase/deposit_usecase/deposit_usecase.dart';
 import 'package:sasuki/domain/usecase/deposit_usecase/withdraw_usecase.dart';
@@ -102,6 +103,11 @@ initUserDetailsModule() async {
       () => PayDebtInformsUsecase(instance<Repository>()),
     );
   }
+  if (!GetIt.I.isRegistered<CaptchaUseCase>()) {
+    instance.registerFactory<CaptchaUseCase>(
+      () => CaptchaUseCase(instance<Repository>()),
+    );
+  }
 
   if (!GetIt.I.isRegistered<UserDetailsViewModel>()) {
     // user details view model instance
@@ -117,6 +123,7 @@ initUserDetailsModule() async {
         instance<WithdrawUsecase>(),
         instance<PaydebtUseCase>(),
         instance<PayDebtInformsUsecase>(),
+        instance<CaptchaUseCase>(),
       ),
     );
   }

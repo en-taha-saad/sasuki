@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/domain/repository/repository.dart';
+import 'package:sasuki/domain/usecase/captcha_usecase/captcha_usecase.dart';
 import 'package:sasuki/domain/usecase/dashboard_usecase/auth_usecase.dart';
 import 'package:sasuki/domain/usecase/manager_actions_usecases/add_rewardpoints_manager_usecase.dart';
 import 'package:sasuki/domain/usecase/manager_actions_usecases/deleted_manager_usecase.dart';
@@ -51,6 +52,11 @@ initManagerDetailsModule() async {
       () => AuthUseCase(instance<Repository>()),
     );
   }
+  if (!GetIt.I.isRegistered<CaptchaUseCase>()) {
+    instance.registerFactory<CaptchaUseCase>(
+      () => CaptchaUseCase(instance<Repository>()),
+    );
+  }
 
   if (!GetIt.I.isRegistered<ManagerDetailsViewModel>()) {
     // user details view model instance
@@ -62,6 +68,7 @@ initManagerDetailsModule() async {
         instance<RenamedManagerUseCase>(),
         instance<DeletedManagerUseCase>(),
         instance<AuthUseCase>(),
+        instance<CaptchaUseCase>(),
       ),
     );
   }

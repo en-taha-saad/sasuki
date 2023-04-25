@@ -9,12 +9,14 @@ import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/get_status_vals.dart';
 import 'package:sasuki/data/network/models/change_profile_request.dart';
+import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/dashboard_card_element.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
 import 'package:sasuki/domain/models/paydebt_informs/paydebt_informs.dart';
 import 'package:sasuki/domain/models/user_action/user_action.dart';
 import 'package:sasuki/domain/models/user_details/user_overview_api.dart';
 import 'package:sasuki/domain/models/user_details/user_api.dart';
+import 'package:sasuki/domain/usecase/captcha_usecase/captcha_usecase.dart';
 import 'package:sasuki/domain/usecase/dashboard_usecase/auth_usecase.dart';
 import 'package:sasuki/domain/usecase/deposit_usecase/deposit_usecase.dart';
 import 'package:sasuki/domain/usecase/deposit_usecase/withdraw_usecase.dart';
@@ -36,6 +38,7 @@ import 'package:sasuki/presentation/user_details/viewmodel/user_details_viewmode
 import 'package:sasuki/presentation/user_details/viewmodel/user_details_viewmodel_outputs.dart';
 import 'package:sasuki/presentation/users_list/viewmodel/users_list_viewmodel.dart';
 import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart' as intl;
 
 class UserDetailsViewModel extends BaseViewModel
     with UserDetailsViewModelInputs, UserDetailsViewModelOutputs {
@@ -49,6 +52,8 @@ class UserDetailsViewModel extends BaseViewModel
   final WithdrawUsecase _withdrawUsecase;
   final PaydebtUseCase _payDebtUsecase;
   final PayDebtInformsUsecase _payDebtInformsUsecase;
+  final CaptchaUseCase? _captchaUseCase;
+
   bool isThereAddUserCreationPermission = Constants.falseBool;
   final UsersListViewModel _usersListViewModel = instance<UsersListViewModel>();
   DepositWithdrawUserRequestObject depositWithdrawUserRequestObject =
@@ -82,9 +87,12 @@ class UserDetailsViewModel extends BaseViewModel
     this._withdrawUsecase,
     this._payDebtUsecase,
     this._payDebtInformsUsecase,
+    this._captchaUseCase,
   );
   UserApi? userApiVar;
   String? newUsername;
+  Captcha? dataCaptcha;
+
   UserOverviewApi? userOverviewApiVar;
   PaydebtInforms? paydebtInforms;
   int? commingUserId;
@@ -116,7 +124,7 @@ class UserDetailsViewModel extends BaseViewModel
         ),
         CardElement(
           AppStrings.userActivationMUserBalance,
-          userOverviewApi?.data?.balance.toString() ?? Constants.none,
+          "${dataCaptcha?.data?.siteCurrency} ${intl.NumberFormat.decimalPattern().format(userOverviewApi?.data?.balance ?? Constants.zeroNum)}",
           Constants.emptyStr,
         ),
         CardElement(
@@ -175,6 +183,7 @@ class UserDetailsViewModel extends BaseViewModel
   getUserApiOverview(int userId) async {
     commingUserId = userId;
     _getAuth();
+    _getCaptchaResponse();
     inputState.add(
       LoadingState(
         mobileModuleScreen: MobileModuleScreen.userDetails,
@@ -220,7 +229,7 @@ class UserDetailsViewModel extends BaseViewModel
       (auth0) {
         // right -> success (data)
         userActions = [];
-       
+
         _getPermissionsList(auth0.permissions);
       },
     );
@@ -669,6 +678,35 @@ class UserDetailsViewModel extends BaseViewModel
       },
     );
   }
+
+  _getCaptchaResponse() async {
+    // ignore: void_checks
+    return (await _captchaUseCase?.execute(Void))?.fold(
+      (failure) {
+        // left -> failure
+        debugPrint("failure failure = ${failure.message}");
+        inputState.add(
+          ErrorState(
+            StateRendererType.toastErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (Captcha dataCaptcha0) {
+        // right -> success (data)
+        dataCaptcha = dataCaptcha0;
+        inputDataCaptcha.add(dataCaptcha);
+      },
+    );
+  }
+
+  final StreamController _captchaController =
+      StreamController<Captcha>.broadcast();
+
+  Sink get inputDataCaptcha => _captchaController.sink;
+  Stream<Captcha> get outputDataCaptcha => _captchaController.stream.map(
+        (captcha) => captcha,
+      );
 }
 
 class SingleUserAction {

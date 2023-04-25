@@ -38,6 +38,7 @@ initUsersListModule() async {
     );
   }
 
+
   if (!GetIt.I.isRegistered<UsersListViewModel>()) {
     // users list view model instance
     instance.registerLazySingleton<UsersListViewModel>(() => UsersListViewModel(

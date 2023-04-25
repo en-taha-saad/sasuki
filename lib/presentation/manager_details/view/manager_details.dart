@@ -20,6 +20,7 @@ import 'package:sasuki/domain/models/manager_details/manager_overview_api.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
 import 'package:sasuki/presentation/manager_details/viewmodel/manager_details_viewmodel.dart';
+import 'package:intl/intl.dart' as intl;
 
 class ManagerDetailsView extends StatefulWidget {
   const ManagerDetailsView({Key? key}) : super(key: key);
@@ -370,14 +371,14 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
             children: [
               Text(
                 AppStrings.loanSwitch,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: ColorManager.blackNeutral,
                     ),
               ),
               StatefulBuilder(
                 builder: (BuildContext context, StateSetter setState) {
                   return Transform.scale(
-                    scale: 0.7,
+                    scale: 0.8,
                     child: Switch(
                       value: isChecked,
                       activeColor: ColorManager.primaryshade1,
@@ -396,7 +397,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
         ),
         _balanceLabel(
           (_viewModel.upperUsername)!,
-          (_viewModel.upperBalance)!,
+          (_viewModel.upperBalance?.toDouble())!,
         ),
         getActionTextFieldInput(
           context,
@@ -426,7 +427,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
             ),
           ),
           Text(
-            balance.toString(),
+            "${_viewModel.dataCaptcha?.data?.siteCurrency} ${intl.NumberFormat.decimalPattern().format(balance)}",
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: ColorManager.greyNeutral5,
                 ),

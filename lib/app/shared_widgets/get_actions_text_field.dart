@@ -37,7 +37,6 @@ Widget getActionTextFieldInput(
               ? AppStrings.inputIsEmpty
               : Constants.nullValue,
         ),
-        // TODO: ADD PLACEHOLDERS TO ALL TEXT FIELDS
         cursorColor: ColorManager.blackNeutral,
         onEditingComplete: () => FocusScope.of(context).unfocus(),
         onFieldSubmitted: onFieldSubmitted,

@@ -7,9 +7,11 @@ import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/dashboard_card_element.dart';
 import 'package:sasuki/domain/models/manager_action/manager_action.dart';
 import 'package:sasuki/domain/models/manager_details/manager_overview_api.dart';
+import 'package:sasuki/domain/usecase/captcha_usecase/captcha_usecase.dart';
 import 'package:sasuki/domain/usecase/dashboard_usecase/auth_usecase.dart';
 import 'package:sasuki/domain/usecase/manager_actions_usecases/deleted_manager_usecase.dart';
 import 'package:sasuki/domain/usecase/manager_actions_usecases/deposit_manager_usecase.dart';
@@ -26,6 +28,7 @@ import 'package:sasuki/presentation/manager_details/viewmodel/manager_details_vi
 import 'package:sasuki/presentation/manager_details/viewmodel/manager_details_viewmodel_outputs.dart';
 import 'package:sasuki/presentation/managers_list/viewmodel/managers_list_viewmodel.dart';
 import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart' as intl;
 
 class ManagerDetailsViewModel extends BaseViewModel
     with ManagerDetailsViewModelInputs, ManagerDetailsViewModelOutputs {
@@ -35,6 +38,7 @@ class ManagerDetailsViewModel extends BaseViewModel
   final RenamedManagerUseCase _renamedManagerUseCase;
   final DeletedManagerUseCase _deletedManagerUseCase;
   final AuthUseCase _authUseCase;
+  final CaptchaUseCase? _captchaUseCase;
 
   ManagerDetailsViewModel(
     this._managerOverviewApiUseCase,
@@ -43,6 +47,7 @@ class ManagerDetailsViewModel extends BaseViewModel
     this._renamedManagerUseCase,
     this._deletedManagerUseCase,
     this._authUseCase,
+    this._captchaUseCase,
   );
 
   final ManagersListViewModel _managersListViewModel =
@@ -59,10 +64,10 @@ class ManagerDetailsViewModel extends BaseViewModel
     Constants.falseBool,
   );
 
-  // UserApi? userApiVar;
   String? newUsername;
   double? upperBalance = Constants.zeroNum;
   String? upperUsername = Constants.emptyStr;
+  Captcha? dataCaptcha;
   ManagerOverviewApi? managerOverviewApiVar;
   int? commingManagerId;
 
@@ -92,7 +97,7 @@ class ManagerDetailsViewModel extends BaseViewModel
         ),
         CardElement(
           AppStrings.managerBalance,
-          managerOverviewApi?.data?.balance.toString() ?? Constants.none,
+          "${dataCaptcha?.data?.siteCurrency} ${intl.NumberFormat.decimalPattern().format(managerOverviewApi?.data?.balance ?? Constants.zeroNum)}",
           Constants.emptyStr,
         ),
         CardElement(
@@ -145,6 +150,7 @@ class ManagerDetailsViewModel extends BaseViewModel
   getManagerApiOverview(int managerId) async {
     commingManagerId = managerId;
     _getAuth();
+    _getCaptchaResponse();
     inputState.add(
       LoadingState(
         mobileModuleScreen: MobileModuleScreen.managerDetails,
@@ -191,6 +197,7 @@ class ManagerDetailsViewModel extends BaseViewModel
         managerActions = [];
         upperUsername = auth0.client?.username;
         upperBalance = auth0.client?.balance;
+
         _getPermissionsList(auth0.permissions);
       },
     );
@@ -437,6 +444,35 @@ class ManagerDetailsViewModel extends BaseViewModel
       },
     );
   }
+
+  _getCaptchaResponse() async {
+    // ignore: void_checks
+    return (await _captchaUseCase?.execute(Void))?.fold(
+      (failure) {
+        // left -> failure
+        debugPrint("failure failure = ${failure.message}");
+        inputState.add(
+          ErrorState(
+            StateRendererType.toastErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (Captcha dataCaptcha0) {
+        // right -> success (data)
+        dataCaptcha = dataCaptcha0;
+        inputDataCaptcha.add(dataCaptcha);
+      },
+    );
+  }
+
+  final StreamController _captchaController =
+      StreamController<Captcha>.broadcast();
+
+  Sink get inputDataCaptcha => _captchaController.sink;
+  Stream<Captcha> get outputDataCaptcha => _captchaController.stream.map(
+        (captcha) => captcha,
+      );
 }
 
 class SingleManagerAction {
