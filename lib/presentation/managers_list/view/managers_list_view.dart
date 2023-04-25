@@ -81,6 +81,10 @@ class _ManagersListViewState extends State<ManagersListView> {
             loadingMoreManagers = Constants.falseBool;
           });
         }
+      } else {
+        setState(() {
+          loadingMoreManagers = Constants.trueBool;
+        });
       }
     });
   }
@@ -226,8 +230,6 @@ class _ManagersListViewState extends State<ManagersListView> {
     );
   }
 
-// _getManagersList
-// _searchUsers
   bool showClearIcon = Constants.falseBool;
   _getSearchTextField() {
     return Stack(
@@ -301,7 +303,7 @@ class _ManagersListViewState extends State<ManagersListView> {
 
   _searchManagers() {
     FocusScope.of(context).unfocus();
-    setState(() => loadFilteredManagers = Constants.trueBool);
+    setState(() => loadFilteredManagers = Constants.falseBool);
     _managersListViewModel.getManagerFromSearch();
   }
 
@@ -374,7 +376,7 @@ class _ManagersListViewState extends State<ManagersListView> {
             : const Center(
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(
-                    ColorManager.whiteNeutral,
+                    ColorManager.orangeAnnotations,
                   ),
                 ),
               );
