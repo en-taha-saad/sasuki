@@ -90,6 +90,10 @@ class _UsersListViewState extends State<UsersListView> {
             loadingMoreUsers = Constants.falseBool;
           });
         }
+      } else {
+        setState(() {
+          loadingMoreUsers = Constants.trueBool;
+        });
       }
     });
   }
