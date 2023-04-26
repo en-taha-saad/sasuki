@@ -5,4 +5,7 @@ enum MobileModuleScreen {
   userDetails,
   managerDetails,
   activationInforms,
+  activationsReports,
+  managerInvoices,
+  managerJournal,
 }
