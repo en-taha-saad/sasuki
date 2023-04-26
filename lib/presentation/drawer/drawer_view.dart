@@ -250,59 +250,175 @@ class DrawerView extends StatelessWidget {
 
   _getDrawerContent(context) {
     return SingleChildScrollView(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: listOfDrawerBars
-              .map(
-                (element) => InkWell(
-                  onTap: onDrawerBarTapped(element, context),
-                  child: Column(
-                    children: [
-                      if (element == listOfDrawerBars.first)
-                        const SizedBox(height: AppSize.s25),
-                      Container(
-                        margin: (listOfDrawerBars.indexOf(element) ==
-                                    AppSize.s3 ||
-                                listOfDrawerBars.indexOf(element) == AppSize.s5)
-                            ? null
-                            : const EdgeInsets.only(bottom: AppSize.s20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              element.icon!,
-                              height: 16,
-                              width: 16,
-                            ),
-                            const SizedBox(width: AppSize.s20),
-                            Text(
-                              element.title,
-                              style: StylesManager.getRegularStyle(
-                                color: ColorManager.whiteNeutral,
-                                fontSize: 14,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: listOfDrawerBars
+            .map(
+              (element) => InkWell(
+                onTap: onDrawerBarTapped(element, context),
+                child: Column(
+                  children: [
+                    if (element == listOfDrawerBars.first)
+                      const SizedBox(height: AppSize.s25),
+                    Container(
+                      margin: (listOfDrawerBars.indexOf(element) ==
+                                  AppSize.s3 ||
+                              listOfDrawerBars.indexOf(element) == AppSize.s5)
+                          ? null
+                          : const EdgeInsets.only(bottom: AppSize.s20),
+                      child: element.title != AppStrings.drawerReports
+                          ? Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: AppPadding.p25),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    element.icon!,
+                                    height: 16,
+                                    width: 16,
+                                  ),
+                                  const SizedBox(width: AppSize.s20),
+                                  Text(
+                                    element.title,
+                                    style: StylesManager.getRegularStyle(
+                                      color: ColorManager.whiteNeutral,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (listOfDrawerBars.indexOf(element) == AppSize.s3 ||
-                          listOfDrawerBars.indexOf(element) == AppSize.s5)
-                        Divider(
+                            )
+                          : ExpandableReports(title: element.title),
+                    ),
+                    if (listOfDrawerBars.indexOf(element) == AppSize.s3 ||
+                        listOfDrawerBars.indexOf(element) == AppSize.s5)
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: AppPadding.p25),
+                        child: Divider(
                           color: ColorManager.greyNeutral.withOpacity(
                             AppSize.s0point25,
                           ),
                         ),
-                    ],
+                      ),
+                  ],
+                ),
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+}
+
+class ExpandableReports extends StatefulWidget {
+  const ExpandableReports({this.title, super.key});
+  final String? title;
+
+  @override
+  State<ExpandableReports> createState() => _ExpandableReportsState();
+}
+
+class _ExpandableReportsState extends State<ExpandableReports> {
+  String expandIcon = IconsAssets.add;
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      controlAffinity: ListTileControlAffinity.trailing,
+      clipBehavior: Clip.hardEdge,
+      maintainState: true,
+      onExpansionChanged: (value) {
+        if (value) {
+          if (value) {
+            expandIcon = IconsAssets.add;
+          } else {
+            expandIcon = "-";
+          }
+
+          setState(() {});
+        }
+      },
+      trailing: SvgPicture.asset(
+        expandIcon,
+        height: 16,
+        width: 16,
+      ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            IconsAssets.reports,
+            height: 16,
+            width: 16,
+          ),
+          const SizedBox(width: AppSize.s20),
+          Text(
+            widget.title!,
+            style: StylesManager.getRegularStyle(
+              color: ColorManager.whiteNeutral,
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+      children: [
+        Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            color: ColorManager.primaryshade3,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                  bottom: AppSize.s15,
+                  top: AppSize.s10,
+                  left: AppSize.s62,
+                ),
+                child: Text(
+                  widget.title!,
+                  style: StylesManager.getRegularStyle(
+                    color: ColorManager.whiteNeutral,
+                    fontSize: 14,
                   ),
                 ),
-              )
-              .toList(),
+              ),
+              Container(
+                margin: const EdgeInsets.only(
+                  bottom: AppSize.s15,
+                  left: AppSize.s62,
+                ),
+                child: Text(
+                  widget.title!,
+                  style: StylesManager.getRegularStyle(
+                    color: ColorManager.whiteNeutral,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(
+                  bottom: AppSize.s15,
+                  left: AppSize.s62,
+                ),
+                child: Text(
+                  widget.title!,
+                  style: StylesManager.getRegularStyle(
+                    color: ColorManager.whiteNeutral,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

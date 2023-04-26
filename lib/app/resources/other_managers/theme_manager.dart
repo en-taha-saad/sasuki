@@ -28,6 +28,24 @@ ThemeData getApplicationTheme() {
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
 
+    expansionTileTheme: const ExpansionTileThemeData(
+      iconColor: ColorManager.whiteNeutral,
+      textColor: ColorManager.whiteNeutral,
+      backgroundColor: ColorManager.transparent,
+      childrenPadding: EdgeInsets.symmetric(
+        horizontal: AppPadding.p0,
+        vertical: AppPadding.p0,
+      ),
+      collapsedBackgroundColor: ColorManager.transparent,
+      collapsedIconColor: ColorManager.whiteNeutral,
+      collapsedTextColor: ColorManager.whiteNeutral,
+      expandedAlignment: Alignment.centerLeft,
+      tilePadding: EdgeInsets.symmetric(
+        horizontal: AppPadding.p25,
+        vertical: AppPadding.p0,
+      ),
+    ),
+
     // card button theme
     cardTheme: CardTheme(
       color: ColorManager.primaryshade3,
