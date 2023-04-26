@@ -5,6 +5,8 @@ import 'package:sasuki/data/network/models/loginrequest.dart';
 import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/models/activate_method/activate_method.dart';
 import 'package:sasuki/domain/models/activation_informs/activation_informs.dart';
+import 'package:sasuki/domain/models/activations_reports/activations_reports.dart'
+    as activations_reports;
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/choosing_server/server.dart';
 import 'package:sasuki/domain/models/choosing_server/servers.dart';
@@ -18,8 +20,10 @@ import 'package:sasuki/domain/models/login/login.dart';
 import 'package:sasuki/domain/models/manager_action/manager_action.dart';
 import 'package:sasuki/domain/models/manager_details/manager_details.dart';
 import 'package:sasuki/domain/models/manager_details/manager_overview_api.dart';
+import 'package:sasuki/domain/models/manager_journal/manager_journal.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/models/manager_list_details/security_group.dart';
+import 'package:sasuki/domain/models/managers_invoices/managers_invoices.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
 import 'package:sasuki/domain/models/paydebt_informs/paydebt_informs.dart';
 import 'package:sasuki/domain/models/user_action/edit_user.dart';
@@ -128,4 +132,17 @@ abstract class Repository {
   );
 
   Future<Either<Failure, ManagerDetails>> getManagerDetails(int managerId);
+
+  Future<Either<Failure, activations_reports.ActivationsReports>>
+      getActivationsReports(
+    ActivationReportsRequestObject activationReportsRequestObject,
+  );
+
+  Future<Either<Failure, ManagersInvoices>> getManagerInvoices(
+    ManagerInvoicesRequestObject managerInvoicesRequestObject,
+  );
+
+  Future<Either<Failure, ManagerJournal>> getManagerJournal(
+    ManagerJournalRequestObject managerInvoicesRequestObject,
+  );
 }

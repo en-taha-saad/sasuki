@@ -120,8 +120,6 @@ class PayDebtRequestObject with _$PayDebtRequestObject {
   ) = _PayDebtRequestObject;
 }
 
-
-
 @freezed
 class DepositWithdrawPayDebtManagerRequestObject
     with _$DepositWithdrawPayDebtManagerRequestObject {
@@ -172,4 +170,45 @@ class ManagerRequestObject with _$ManagerRequestObject {
   ) = _ManagerRequestObject;
 }
 
+@freezed
+class ActivationReportsRequestObject with _$ActivationReportsRequestObject {
+  factory ActivationReportsRequestObject(
+    int page,
+    int count,
+    String sortBy,
+    String direction,
+    String search,
+    List<String> columns,
+    int managerId,
+    int subManagers,
+    int profileId,
+    int groupId,
+    String activationMethod,
+    String dateStart,
+    String dateEnd,
+  ) = _ActivationReportsRequestObject;
+}
 
+@freezed
+class ManagerInvoicesRequestObject with _$ManagerInvoicesRequestObject {
+  factory ManagerInvoicesRequestObject(
+    int page,
+    int count,
+    String sortBy,
+    String direction,
+    String search,
+    List<String> columns,
+  ) = _ManagerInvoicesRequestObject;
+}
+
+@freezed
+class ManagerJournalRequestObject with _$ManagerJournalRequestObject {
+  factory ManagerJournalRequestObject(
+    int page,
+    int count,
+    String sortBy,
+    String direction,
+    String search,
+    List<String> columns,
+  ) = _ManagerJournalRequestObject;
+}

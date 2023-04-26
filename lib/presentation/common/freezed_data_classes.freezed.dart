@@ -3352,3 +3352,864 @@ abstract class _ManagerRequestObject implements ManagerRequestObject {
   _$$_ManagerRequestObjectCopyWith<_$_ManagerRequestObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$ActivationReportsRequestObject {
+  int get page => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
+  String get sortBy => throw _privateConstructorUsedError;
+  String get direction => throw _privateConstructorUsedError;
+  String get search => throw _privateConstructorUsedError;
+  List<String> get columns => throw _privateConstructorUsedError;
+  int get managerId => throw _privateConstructorUsedError;
+  int get subManagers => throw _privateConstructorUsedError;
+  int get profileId => throw _privateConstructorUsedError;
+  int get groupId => throw _privateConstructorUsedError;
+  String get activationMethod => throw _privateConstructorUsedError;
+  String get dateStart => throw _privateConstructorUsedError;
+  String get dateEnd => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ActivationReportsRequestObjectCopyWith<ActivationReportsRequestObject>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ActivationReportsRequestObjectCopyWith<$Res> {
+  factory $ActivationReportsRequestObjectCopyWith(
+          ActivationReportsRequestObject value,
+          $Res Function(ActivationReportsRequestObject) then) =
+      _$ActivationReportsRequestObjectCopyWithImpl<$Res,
+          ActivationReportsRequestObject>;
+  @useResult
+  $Res call(
+      {int page,
+      int count,
+      String sortBy,
+      String direction,
+      String search,
+      List<String> columns,
+      int managerId,
+      int subManagers,
+      int profileId,
+      int groupId,
+      String activationMethod,
+      String dateStart,
+      String dateEnd});
+}
+
+/// @nodoc
+class _$ActivationReportsRequestObjectCopyWithImpl<$Res,
+        $Val extends ActivationReportsRequestObject>
+    implements $ActivationReportsRequestObjectCopyWith<$Res> {
+  _$ActivationReportsRequestObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+    Object? managerId = null,
+    Object? subManagers = null,
+    Object? profileId = null,
+    Object? groupId = null,
+    Object? activationMethod = null,
+    Object? dateStart = null,
+    Object? dateEnd = null,
+  }) {
+    return _then(_value.copyWith(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      sortBy: null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String,
+      search: null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+      columns: null == columns
+          ? _value.columns
+          : columns // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      managerId: null == managerId
+          ? _value.managerId
+          : managerId // ignore: cast_nullable_to_non_nullable
+              as int,
+      subManagers: null == subManagers
+          ? _value.subManagers
+          : subManagers // ignore: cast_nullable_to_non_nullable
+              as int,
+      profileId: null == profileId
+          ? _value.profileId
+          : profileId // ignore: cast_nullable_to_non_nullable
+              as int,
+      groupId: null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int,
+      activationMethod: null == activationMethod
+          ? _value.activationMethod
+          : activationMethod // ignore: cast_nullable_to_non_nullable
+              as String,
+      dateStart: null == dateStart
+          ? _value.dateStart
+          : dateStart // ignore: cast_nullable_to_non_nullable
+              as String,
+      dateEnd: null == dateEnd
+          ? _value.dateEnd
+          : dateEnd // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ActivationReportsRequestObjectCopyWith<$Res>
+    implements $ActivationReportsRequestObjectCopyWith<$Res> {
+  factory _$$_ActivationReportsRequestObjectCopyWith(
+          _$_ActivationReportsRequestObject value,
+          $Res Function(_$_ActivationReportsRequestObject) then) =
+      __$$_ActivationReportsRequestObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int page,
+      int count,
+      String sortBy,
+      String direction,
+      String search,
+      List<String> columns,
+      int managerId,
+      int subManagers,
+      int profileId,
+      int groupId,
+      String activationMethod,
+      String dateStart,
+      String dateEnd});
+}
+
+/// @nodoc
+class __$$_ActivationReportsRequestObjectCopyWithImpl<$Res>
+    extends _$ActivationReportsRequestObjectCopyWithImpl<$Res,
+        _$_ActivationReportsRequestObject>
+    implements _$$_ActivationReportsRequestObjectCopyWith<$Res> {
+  __$$_ActivationReportsRequestObjectCopyWithImpl(
+      _$_ActivationReportsRequestObject _value,
+      $Res Function(_$_ActivationReportsRequestObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+    Object? managerId = null,
+    Object? subManagers = null,
+    Object? profileId = null,
+    Object? groupId = null,
+    Object? activationMethod = null,
+    Object? dateStart = null,
+    Object? dateEnd = null,
+  }) {
+    return _then(_$_ActivationReportsRequestObject(
+      null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == columns
+          ? _value._columns
+          : columns // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      null == managerId
+          ? _value.managerId
+          : managerId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == subManagers
+          ? _value.subManagers
+          : subManagers // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == profileId
+          ? _value.profileId
+          : profileId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == groupId
+          ? _value.groupId
+          : groupId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == activationMethod
+          ? _value.activationMethod
+          : activationMethod // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == dateStart
+          ? _value.dateStart
+          : dateStart // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == dateEnd
+          ? _value.dateEnd
+          : dateEnd // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ActivationReportsRequestObject
+    implements _ActivationReportsRequestObject {
+  _$_ActivationReportsRequestObject(
+      this.page,
+      this.count,
+      this.sortBy,
+      this.direction,
+      this.search,
+      final List<String> columns,
+      this.managerId,
+      this.subManagers,
+      this.profileId,
+      this.groupId,
+      this.activationMethod,
+      this.dateStart,
+      this.dateEnd)
+      : _columns = columns;
+
+  @override
+  final int page;
+  @override
+  final int count;
+  @override
+  final String sortBy;
+  @override
+  final String direction;
+  @override
+  final String search;
+  final List<String> _columns;
+  @override
+  List<String> get columns {
+    if (_columns is EqualUnmodifiableListView) return _columns;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_columns);
+  }
+
+  @override
+  final int managerId;
+  @override
+  final int subManagers;
+  @override
+  final int profileId;
+  @override
+  final int groupId;
+  @override
+  final String activationMethod;
+  @override
+  final String dateStart;
+  @override
+  final String dateEnd;
+
+  @override
+  String toString() {
+    return 'ActivationReportsRequestObject(page: $page, count: $count, sortBy: $sortBy, direction: $direction, search: $search, columns: $columns, managerId: $managerId, subManagers: $subManagers, profileId: $profileId, groupId: $groupId, activationMethod: $activationMethod, dateStart: $dateStart, dateEnd: $dateEnd)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ActivationReportsRequestObject &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
+            (identical(other.search, search) || other.search == search) &&
+            const DeepCollectionEquality().equals(other._columns, _columns) &&
+            (identical(other.managerId, managerId) ||
+                other.managerId == managerId) &&
+            (identical(other.subManagers, subManagers) ||
+                other.subManagers == subManagers) &&
+            (identical(other.profileId, profileId) ||
+                other.profileId == profileId) &&
+            (identical(other.groupId, groupId) || other.groupId == groupId) &&
+            (identical(other.activationMethod, activationMethod) ||
+                other.activationMethod == activationMethod) &&
+            (identical(other.dateStart, dateStart) ||
+                other.dateStart == dateStart) &&
+            (identical(other.dateEnd, dateEnd) || other.dateEnd == dateEnd));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      page,
+      count,
+      sortBy,
+      direction,
+      search,
+      const DeepCollectionEquality().hash(_columns),
+      managerId,
+      subManagers,
+      profileId,
+      groupId,
+      activationMethod,
+      dateStart,
+      dateEnd);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ActivationReportsRequestObjectCopyWith<_$_ActivationReportsRequestObject>
+      get copyWith => __$$_ActivationReportsRequestObjectCopyWithImpl<
+          _$_ActivationReportsRequestObject>(this, _$identity);
+}
+
+abstract class _ActivationReportsRequestObject
+    implements ActivationReportsRequestObject {
+  factory _ActivationReportsRequestObject(
+      final int page,
+      final int count,
+      final String sortBy,
+      final String direction,
+      final String search,
+      final List<String> columns,
+      final int managerId,
+      final int subManagers,
+      final int profileId,
+      final int groupId,
+      final String activationMethod,
+      final String dateStart,
+      final String dateEnd) = _$_ActivationReportsRequestObject;
+
+  @override
+  int get page;
+  @override
+  int get count;
+  @override
+  String get sortBy;
+  @override
+  String get direction;
+  @override
+  String get search;
+  @override
+  List<String> get columns;
+  @override
+  int get managerId;
+  @override
+  int get subManagers;
+  @override
+  int get profileId;
+  @override
+  int get groupId;
+  @override
+  String get activationMethod;
+  @override
+  String get dateStart;
+  @override
+  String get dateEnd;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ActivationReportsRequestObjectCopyWith<_$_ActivationReportsRequestObject>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ManagerInvoicesRequestObject {
+  int get page => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
+  String get sortBy => throw _privateConstructorUsedError;
+  String get direction => throw _privateConstructorUsedError;
+  String get search => throw _privateConstructorUsedError;
+  List<String> get columns => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ManagerInvoicesRequestObjectCopyWith<ManagerInvoicesRequestObject>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ManagerInvoicesRequestObjectCopyWith<$Res> {
+  factory $ManagerInvoicesRequestObjectCopyWith(
+          ManagerInvoicesRequestObject value,
+          $Res Function(ManagerInvoicesRequestObject) then) =
+      _$ManagerInvoicesRequestObjectCopyWithImpl<$Res,
+          ManagerInvoicesRequestObject>;
+  @useResult
+  $Res call(
+      {int page,
+      int count,
+      String sortBy,
+      String direction,
+      String search,
+      List<String> columns});
+}
+
+/// @nodoc
+class _$ManagerInvoicesRequestObjectCopyWithImpl<$Res,
+        $Val extends ManagerInvoicesRequestObject>
+    implements $ManagerInvoicesRequestObjectCopyWith<$Res> {
+  _$ManagerInvoicesRequestObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+  }) {
+    return _then(_value.copyWith(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      sortBy: null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String,
+      search: null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+      columns: null == columns
+          ? _value.columns
+          : columns // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ManagerInvoicesRequestObjectCopyWith<$Res>
+    implements $ManagerInvoicesRequestObjectCopyWith<$Res> {
+  factory _$$_ManagerInvoicesRequestObjectCopyWith(
+          _$_ManagerInvoicesRequestObject value,
+          $Res Function(_$_ManagerInvoicesRequestObject) then) =
+      __$$_ManagerInvoicesRequestObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int page,
+      int count,
+      String sortBy,
+      String direction,
+      String search,
+      List<String> columns});
+}
+
+/// @nodoc
+class __$$_ManagerInvoicesRequestObjectCopyWithImpl<$Res>
+    extends _$ManagerInvoicesRequestObjectCopyWithImpl<$Res,
+        _$_ManagerInvoicesRequestObject>
+    implements _$$_ManagerInvoicesRequestObjectCopyWith<$Res> {
+  __$$_ManagerInvoicesRequestObjectCopyWithImpl(
+      _$_ManagerInvoicesRequestObject _value,
+      $Res Function(_$_ManagerInvoicesRequestObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+  }) {
+    return _then(_$_ManagerInvoicesRequestObject(
+      null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == columns
+          ? _value._columns
+          : columns // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ManagerInvoicesRequestObject implements _ManagerInvoicesRequestObject {
+  _$_ManagerInvoicesRequestObject(this.page, this.count, this.sortBy,
+      this.direction, this.search, final List<String> columns)
+      : _columns = columns;
+
+  @override
+  final int page;
+  @override
+  final int count;
+  @override
+  final String sortBy;
+  @override
+  final String direction;
+  @override
+  final String search;
+  final List<String> _columns;
+  @override
+  List<String> get columns {
+    if (_columns is EqualUnmodifiableListView) return _columns;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_columns);
+  }
+
+  @override
+  String toString() {
+    return 'ManagerInvoicesRequestObject(page: $page, count: $count, sortBy: $sortBy, direction: $direction, search: $search, columns: $columns)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ManagerInvoicesRequestObject &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
+            (identical(other.search, search) || other.search == search) &&
+            const DeepCollectionEquality().equals(other._columns, _columns));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, page, count, sortBy, direction,
+      search, const DeepCollectionEquality().hash(_columns));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ManagerInvoicesRequestObjectCopyWith<_$_ManagerInvoicesRequestObject>
+      get copyWith => __$$_ManagerInvoicesRequestObjectCopyWithImpl<
+          _$_ManagerInvoicesRequestObject>(this, _$identity);
+}
+
+abstract class _ManagerInvoicesRequestObject
+    implements ManagerInvoicesRequestObject {
+  factory _ManagerInvoicesRequestObject(
+      final int page,
+      final int count,
+      final String sortBy,
+      final String direction,
+      final String search,
+      final List<String> columns) = _$_ManagerInvoicesRequestObject;
+
+  @override
+  int get page;
+  @override
+  int get count;
+  @override
+  String get sortBy;
+  @override
+  String get direction;
+  @override
+  String get search;
+  @override
+  List<String> get columns;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ManagerInvoicesRequestObjectCopyWith<_$_ManagerInvoicesRequestObject>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ManagerJournalRequestObject {
+  int get page => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
+  String get sortBy => throw _privateConstructorUsedError;
+  String get direction => throw _privateConstructorUsedError;
+  String get search => throw _privateConstructorUsedError;
+  List<String> get columns => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ManagerJournalRequestObjectCopyWith<ManagerJournalRequestObject>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ManagerJournalRequestObjectCopyWith<$Res> {
+  factory $ManagerJournalRequestObjectCopyWith(
+          ManagerJournalRequestObject value,
+          $Res Function(ManagerJournalRequestObject) then) =
+      _$ManagerJournalRequestObjectCopyWithImpl<$Res,
+          ManagerJournalRequestObject>;
+  @useResult
+  $Res call(
+      {int page,
+      int count,
+      String sortBy,
+      String direction,
+      String search,
+      List<String> columns});
+}
+
+/// @nodoc
+class _$ManagerJournalRequestObjectCopyWithImpl<$Res,
+        $Val extends ManagerJournalRequestObject>
+    implements $ManagerJournalRequestObjectCopyWith<$Res> {
+  _$ManagerJournalRequestObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+  }) {
+    return _then(_value.copyWith(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      sortBy: null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String,
+      search: null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+      columns: null == columns
+          ? _value.columns
+          : columns // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ManagerJournalRequestObjectCopyWith<$Res>
+    implements $ManagerJournalRequestObjectCopyWith<$Res> {
+  factory _$$_ManagerJournalRequestObjectCopyWith(
+          _$_ManagerJournalRequestObject value,
+          $Res Function(_$_ManagerJournalRequestObject) then) =
+      __$$_ManagerJournalRequestObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int page,
+      int count,
+      String sortBy,
+      String direction,
+      String search,
+      List<String> columns});
+}
+
+/// @nodoc
+class __$$_ManagerJournalRequestObjectCopyWithImpl<$Res>
+    extends _$ManagerJournalRequestObjectCopyWithImpl<$Res,
+        _$_ManagerJournalRequestObject>
+    implements _$$_ManagerJournalRequestObjectCopyWith<$Res> {
+  __$$_ManagerJournalRequestObjectCopyWithImpl(
+      _$_ManagerJournalRequestObject _value,
+      $Res Function(_$_ManagerJournalRequestObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+  }) {
+    return _then(_$_ManagerJournalRequestObject(
+      null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == columns
+          ? _value._columns
+          : columns // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ManagerJournalRequestObject implements _ManagerJournalRequestObject {
+  _$_ManagerJournalRequestObject(this.page, this.count, this.sortBy,
+      this.direction, this.search, final List<String> columns)
+      : _columns = columns;
+
+  @override
+  final int page;
+  @override
+  final int count;
+  @override
+  final String sortBy;
+  @override
+  final String direction;
+  @override
+  final String search;
+  final List<String> _columns;
+  @override
+  List<String> get columns {
+    if (_columns is EqualUnmodifiableListView) return _columns;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_columns);
+  }
+
+  @override
+  String toString() {
+    return 'ManagerJournalRequestObject(page: $page, count: $count, sortBy: $sortBy, direction: $direction, search: $search, columns: $columns)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ManagerJournalRequestObject &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
+            (identical(other.search, search) || other.search == search) &&
+            const DeepCollectionEquality().equals(other._columns, _columns));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, page, count, sortBy, direction,
+      search, const DeepCollectionEquality().hash(_columns));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ManagerJournalRequestObjectCopyWith<_$_ManagerJournalRequestObject>
+      get copyWith => __$$_ManagerJournalRequestObjectCopyWithImpl<
+          _$_ManagerJournalRequestObject>(this, _$identity);
+}
+
+abstract class _ManagerJournalRequestObject
+    implements ManagerJournalRequestObject {
+  factory _ManagerJournalRequestObject(
+      final int page,
+      final int count,
+      final String sortBy,
+      final String direction,
+      final String search,
+      final List<String> columns) = _$_ManagerJournalRequestObject;
+
+  @override
+  int get page;
+  @override
+  int get count;
+  @override
+  String get sortBy;
+  @override
+  String get direction;
+  @override
+  String get search;
+  @override
+  List<String> get columns;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ManagerJournalRequestObjectCopyWith<_$_ManagerJournalRequestObject>
+      get copyWith => throw _privateConstructorUsedError;
+}

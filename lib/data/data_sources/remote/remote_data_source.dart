@@ -1,6 +1,7 @@
 import 'package:sasuki/data/responses/acl_permission_group_list_responses/acl_permission_group_list_responses.dart';
 import 'package:sasuki/data/responses/activate_method_responses/activate_method_responses.dart';
 import 'package:sasuki/data/responses/activation_informs_responses/activation_informs_responses.dart';
+import 'package:sasuki/data/responses/activations_reports_responses/activations_reports_responses.dart';
 import 'package:sasuki/data/responses/captcha_responses/captcha_responses.dart';
 import 'package:sasuki/data/responses/dashboard_responses/auth_responses.dart';
 import 'package:sasuki/data/responses/dashboard_responses/dashboard_data_responses.dart';
@@ -12,8 +13,10 @@ import 'package:sasuki/data/responses/login_responses/login_responses.dart';
 import 'package:sasuki/data/responses/manager_action_response/manager_action_response.dart';
 import 'package:sasuki/data/responses/manager_details_responses/manager_details_responses.dart';
 import 'package:sasuki/data/responses/manager_details_responses/manager_overview_api_responses.dart';
+import 'package:sasuki/data/responses/manager_journal_responses/manager_journal_responses.dart';
 import 'package:sasuki/data/responses/manager_list_details_responses/manager_list_details_responses.dart';
 import 'package:sasuki/data/responses/manager_list_details_responses/security_group_responses.dart';
+import 'package:sasuki/data/responses/managers_invoices_responses/managers_invoices_responses.dart';
 import 'package:sasuki/data/responses/managers_list_responses/managers_list_responses.dart';
 import 'package:sasuki/data/responses/paydebt_informs_responses/paydebt_informs_responses.dart';
 import 'package:sasuki/data/responses/user_action_response/user_action_response.dart';
@@ -60,4 +63,15 @@ abstract class RemoteDataSource {
   Future<EditUserResponse> addManager(String payload);
   Future<UserActionResponse> editManager(String payload, int managerId);
   Future<ManagerDetailsResponses> getManagerDetails(int managerId);
+  Future<ActivationsReportsResponse> getActivationsReports(
+    String payload,
+  );
+
+  Future<ManagersInvoicesResponses> getManagerInvoices(
+    String payload,
+  );
+
+  Future<ManagerJournalResponses> getManagerJournal(
+    String payload,
+  );
 }

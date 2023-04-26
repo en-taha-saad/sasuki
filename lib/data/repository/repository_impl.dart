@@ -8,6 +8,7 @@ import 'package:sasuki/data/data_sources/remote/remote_data_source.dart';
 import 'package:sasuki/data/mappers/acl_permission_group_list_responses_mappers/acl_permission_group_list_responses_mappers.dart';
 import 'package:sasuki/data/mappers/activate_method_responses_mappers/activate_method_responses_mappers.dart';
 import 'package:sasuki/data/mappers/activation_informs_responses_mappers/activation_informs_responses_mappers.dart';
+import 'package:sasuki/data/mappers/activations_reports_responses_mappers/activations_reports_responses_mappers.dart';
 import 'package:sasuki/data/mappers/captcha_mappers/captcha_response_mapper.dart';
 import 'package:sasuki/data/mappers/dashboard_mappers/dashboard_responses_mappers.dart';
 import 'package:sasuki/data/mappers/extend_user_responses_mappers/allowed_extersion_methods_responses_mappers.dart';
@@ -18,8 +19,10 @@ import 'package:sasuki/data/mappers/login_mappers/login_response_mapper.dart';
 import 'package:sasuki/data/mappers/manager_action_response_mapper/manager_action_response_mapper.dart';
 import 'package:sasuki/data/mappers/manager_apis_mappers/manager_details_responses_mappers.dart';
 import 'package:sasuki/data/mappers/manager_apis_mappers/manager_overview_api_responses_mappers.dart';
+import 'package:sasuki/data/mappers/manager_journal_responses_mappers/manager_journal_responses_mappers.dart';
 import 'package:sasuki/data/mappers/manager_list_details_responses_mappers/manager_list_details_responses_mappers.dart';
 import 'package:sasuki/data/mappers/manager_list_details_responses_mappers/security_group_responses_mappers.dart';
+import 'package:sasuki/data/mappers/managers_invoices_responses_mappers/managers_invoices_responses_mappers.dart';
 import 'package:sasuki/data/mappers/managers_list_responses_mappers/managers_list_responses_mappers.dart';
 import 'package:sasuki/data/mappers/paydebt_informs_responses_mappers/paydebt_informs_responses_mappers.dart';
 import 'package:sasuki/data/mappers/user_action_response_mapper/user_action_response_mapper.dart';
@@ -41,6 +44,8 @@ import 'package:sasuki/data/responses/servers_responses/servers_responses.dart';
 import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/models/activate_method/activate_method.dart';
 import 'package:sasuki/domain/models/activation_informs/activation_informs.dart';
+import 'package:sasuki/domain/models/activations_reports/activations_reports.dart'
+    as activations_reports;
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/choosing_server/server.dart';
 import 'package:sasuki/domain/models/dashboard/dashboard.dart';
@@ -53,7 +58,9 @@ import 'package:sasuki/domain/models/login/login.dart';
 import 'package:sasuki/domain/models/manager_action/manager_action.dart';
 import 'package:sasuki/domain/models/manager_details/manager_details.dart';
 import 'package:sasuki/domain/models/manager_details/manager_overview_api.dart';
+import 'package:sasuki/domain/models/manager_journal/manager_journal.dart';
 import 'package:sasuki/domain/models/manager_list_details/security_group.dart';
+import 'package:sasuki/domain/models/managers_invoices/managers_invoices.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/models/paydebt_informs/paydebt_informs.dart';
@@ -1661,6 +1668,140 @@ class RepositoryImpl implements Repository {
           // failure return either left business error
           return Left(
             Failure(response.status ?? 0, "${response.status ?? 0}"),
+          );
+        }
+      } catch (error) {
+        debugPrint("error = $error");
+
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // its not connected to internet so return a failure
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, activations_reports.ActivationsReports>>
+      getActivationsReports(
+    ActivationReportsRequestObject activationReportsRequestObject,
+  ) async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet so we can call the api
+      try {
+        final response = await _remoteDataSource.getActivationsReports(
+          getPayload(
+            {
+              "page": 1,
+              "count": 10,
+              "sortBy": "id",
+              "direction": "desc",
+              "search": "",
+              "columns": [],
+              "manager_id": -1,
+              "sub_managers": 1,
+              "profile_id": activationReportsRequestObject.profileId,
+              "group_id": -1,
+              "activation_method": "any",
+              "date_start": "",
+              "date_end": ""
+            },
+          ),
+        );
+        if (response.total == Constants.nullValue) {
+          // success reutrn either right
+          return Right(response.toDomain());
+        } else {
+          // failure return either left business error
+          return Left(
+            Failure(
+              ApiInternalStatus.minusOneStatusCode,
+              AppStrings.alreadyNamedError,
+            ),
+          );
+        }
+      } catch (error) {
+        debugPrint("error = $error");
+
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // its not connected to internet so return a failure
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ManagersInvoices>> getManagerInvoices(
+    ManagerInvoicesRequestObject managerInvoicesRequestObject,
+  ) async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet so we can call the api
+      try {
+        final response = await _remoteDataSource.getManagerInvoices(
+          getPayload(
+            {
+              "page": 1,
+              "count": 10,
+              "sortBy": "created_at",
+              "direction": "desc",
+              "search": "",
+              "columns": []
+            },
+          ),
+        );
+        if (response.total == Constants.nullValue) {
+          // success reutrn either right
+          return Right(response.toDomain());
+        } else {
+          // failure return either left business error
+          return Left(
+            Failure(
+              ApiInternalStatus.minusOneStatusCode,
+              AppStrings.alreadyNamedError,
+            ),
+          );
+        }
+      } catch (error) {
+        debugPrint("error = $error");
+
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // its not connected to internet so return a failure
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ManagerJournal>> getManagerJournal(
+    ManagerJournalRequestObject managerInvoicesRequestObject,
+  ) async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet so we can call the api
+      try {
+        final response = await _remoteDataSource.getManagerJournal(
+          getPayload(
+            {
+              "page": 1,
+              "count": 10,
+              "sortBy": "created_at",
+              "direction": "desc",
+              "search": "",
+              "columns": []
+            },
+          ),
+        );
+        if (response.total == Constants.nullValue) {
+          // success reutrn either right
+          return Right(response.toDomain());
+        } else {
+          // failure return either left business error
+          return Left(
+            Failure(
+              ApiInternalStatus.minusOneStatusCode,
+              AppStrings.alreadyNamedError,
+            ),
           );
         }
       } catch (error) {
