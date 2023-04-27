@@ -36,6 +36,7 @@ ThemeData getApplicationTheme() {
         horizontal: AppPadding.p0,
         vertical: AppPadding.p0,
       ),
+      
       collapsedBackgroundColor: ColorManager.transparent,
       collapsedIconColor: ColorManager.whiteNeutral,
       collapsedTextColor: ColorManager.whiteNeutral,

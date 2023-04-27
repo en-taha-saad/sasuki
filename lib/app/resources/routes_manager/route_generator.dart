@@ -161,6 +161,60 @@ class RouteGenerator {
           settings: settings,
         );
 
+      ///
+      // case Routes.reportsActivationsRoute:
+      //   initReportsActivationsModule();
+      //   return MaterialPageRoute(
+      //     builder: (_) => const AppBackground(
+      //       child: ReportsActivationsView(),
+      //     ),
+      //     settings: settings,
+      //   );
+      // case Routes.singleReportsActivationsRoute:
+      //   initSingleReportsActivationsModule();
+      //   return MaterialPageRoute(
+      //     builder: (_) => const AppBackground(
+      //       child: ReportsActivationsView(),
+      //     ),
+      //     settings: settings,
+      //   );
+
+      ///
+      // case Routes.reportsInvoicesRoute:
+      //   initReportsInvoicesModule();
+      //   return MaterialPageRoute(
+      //     builder: (_) => const AppBackground(
+      //       child: ReportsInvoicesView(),
+      //     ),
+      //     settings: settings,
+      //   );
+      // case Routes.singleReportsInvoicesRoute:
+      //   initSingleReportsInvoicesModule();
+      //   return MaterialPageRoute(
+      //     builder: (_) => const AppBackground(
+      //       child: SingleReportsInvoicesView(),
+      //     ),
+      //     settings: settings,
+      //   );
+
+      ///
+      // case Routes.reportsJournalRoute:
+      //   initReportsJournalModule();
+      //   return MaterialPageRoute(
+      //     builder: (_) => const AppBackground(
+      //       child: ReportsJournalView(),
+      //     ),
+      //     settings: settings,
+      //   );
+      // case Routes.singleReportsJournalRoute:
+      //   initSingleReportsJournalModule();
+      //   return MaterialPageRoute(
+      //     builder: (_) => const AppBackground(
+      //       child: SingleReportsJournalView(),
+      //     ),
+      //     settings: settings,
+      //   );
+
       default:
         return unDefinedRoute();
     }

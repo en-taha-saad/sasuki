@@ -10,6 +10,7 @@ import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
+import 'package:sasuki/app/shared_widgets/expandable_reports.dart';
 import 'package:sasuki/domain/models/drawer/drawer_single_bar.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/presentation/dashboard/viewmodel/dashboard_viewmodel.dart';
@@ -112,9 +113,6 @@ class DrawerView extends StatelessWidget {
         case AppStrings.drawerManagers:
           _manageDrawerNavigations(Routes.managersListRoute, context);
           break;
-        // case AppStrings.drawerReports:
-        //   _manageDrawerNavigations(AppStrings.drawerReports, context);
-        //   break;
         // case AppStrings.drawerActivityLog:
         //   _manageDrawerNavigations(AppStrings.drawerActivityLog, context);
         //   break;
@@ -131,6 +129,36 @@ class DrawerView extends StatelessWidget {
       }
     };
   }
+
+  List<SingleReport> listOfReports(context) => [
+        SingleReport(
+          title: AppStrings.drawerReportsActivations,
+          action: () {
+            _manageDrawerNavigations(
+              AppStrings.drawerReportsActivations,
+              context,
+            );
+          },
+        ),
+        SingleReport(
+          title: AppStrings.drawerReportsInvoices,
+          action: () {
+            _manageDrawerNavigations(
+              AppStrings.drawerReportsInvoices,
+              context,
+            );
+          },
+        ),
+        SingleReport(
+          title: AppStrings.drawerReportsJournal,
+          action: () {
+            _manageDrawerNavigations(
+              AppStrings.drawerReportsJournal,
+              context,
+            );
+          },
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -263,8 +291,8 @@ class DrawerView extends StatelessWidget {
                       const SizedBox(height: AppSize.s25),
                     Container(
                       margin: (listOfDrawerBars.indexOf(element) ==
-                                  AppSize.s3 ||
-                              listOfDrawerBars.indexOf(element) == AppSize.s5)
+                                  AppSize.s2 ||
+                              listOfDrawerBars.indexOf(element) == AppSize.s4)
                           ? null
                           : const EdgeInsets.only(bottom: AppSize.s20),
                       child: element.title != AppStrings.drawerReports
@@ -291,10 +319,13 @@ class DrawerView extends StatelessWidget {
                                 ],
                               ),
                             )
-                          : ExpandableReports(title: element.title),
+                          : ExpandableReports(
+                              title: element.title,
+                              listOfReports: listOfReports(context),
+                            ),
                     ),
-                    if (listOfDrawerBars.indexOf(element) == AppSize.s3 ||
-                        listOfDrawerBars.indexOf(element) == AppSize.s5)
+                    if (listOfDrawerBars.indexOf(element) == AppSize.s2 ||
+                        listOfDrawerBars.indexOf(element) == AppSize.s4)
                       Container(
                         margin: const EdgeInsets.symmetric(
                             horizontal: AppPadding.p25),
@@ -310,115 +341,6 @@ class DrawerView extends StatelessWidget {
             )
             .toList(),
       ),
-    );
-  }
-}
-
-class ExpandableReports extends StatefulWidget {
-  const ExpandableReports({this.title, super.key});
-  final String? title;
-
-  @override
-  State<ExpandableReports> createState() => _ExpandableReportsState();
-}
-
-class _ExpandableReportsState extends State<ExpandableReports> {
-  String expandIcon = IconsAssets.add;
-  @override
-  Widget build(BuildContext context) {
-    return ExpansionTile(
-      controlAffinity: ListTileControlAffinity.trailing,
-      clipBehavior: Clip.hardEdge,
-      maintainState: true,
-      onExpansionChanged: (value) {
-        if (value) {
-          if (value) {
-            expandIcon = IconsAssets.add;
-          } else {
-            expandIcon = "-";
-          }
-
-          setState(() {});
-        }
-      },
-      trailing: SvgPicture.asset(
-        expandIcon,
-        height: 16,
-        width: 16,
-      ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            IconsAssets.reports,
-            height: 16,
-            width: 16,
-          ),
-          const SizedBox(width: AppSize.s20),
-          Text(
-            widget.title!,
-            style: StylesManager.getRegularStyle(
-              color: ColorManager.whiteNeutral,
-              fontSize: 14,
-            ),
-          ),
-        ],
-      ),
-      children: [
-        Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            color: ColorManager.primaryshade3,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(
-                  bottom: AppSize.s15,
-                  top: AppSize.s10,
-                  left: AppSize.s62,
-                ),
-                child: Text(
-                  widget.title!,
-                  style: StylesManager.getRegularStyle(
-                    color: ColorManager.whiteNeutral,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(
-                  bottom: AppSize.s15,
-                  left: AppSize.s62,
-                ),
-                child: Text(
-                  widget.title!,
-                  style: StylesManager.getRegularStyle(
-                    color: ColorManager.whiteNeutral,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(
-                  bottom: AppSize.s15,
-                  left: AppSize.s62,
-                ),
-                child: Text(
-                  widget.title!,
-                  style: StylesManager.getRegularStyle(
-                    color: ColorManager.whiteNeutral,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }

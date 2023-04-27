@@ -43,6 +43,7 @@ class IconsAssets {
       "${ImagePaths.sharedIconsPath}information.svg";
   static const String person = "${ImagePaths.sharedIconsPath}person.svg";
   static const String add = "${ImagePaths.sharedIconsPath}add.svg";
+  static const String minus = "${ImagePaths.sharedIconsPath}minus.svg";
   static const String dropdown = "${ImagePaths.sharedIconsPath}dropdown.svg";
   static const String exit = "${ImagePaths.sharedIconsPath}exit.svg";
   static const String forward = "${ImagePaths.sharedIconsPath}forward.svg";

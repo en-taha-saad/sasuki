@@ -17,4 +17,14 @@ class Routes {
 
   static const String addManagerRoute = "/addManagerRoute";
   static const String editManagerRoute = "/editManagerRoute";
+
+  static const String reportsActivationsRoute = "/reportsActivationsRoute";
+  static const String reportsInvoicesRoute = "/reportsInvoicesRoute";
+  static const String reportsJournalRoute = "/reportsJournalRoute";
+
+  static const String singleReportsActivationsRoute =
+      "/singleReportsActivationsRoute";
+  static const String singleReportsInvoicesRoute =
+      "/singleReportsInvoicesRoute";
+  static const String singleReportsJournalRoute = "/singleReportsJournalRoute";
 }

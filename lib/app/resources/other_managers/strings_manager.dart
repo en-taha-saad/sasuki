@@ -36,7 +36,8 @@ class AppStrings {
   static const amountAddedSuccessfully = "Amount added successfully";
   static const amountDeductedSuccessfully = "Amount deducted successfully";
   static const managerAmountAddedSuccessfully = "Amount added successfully";
-  static const managerAmountDeductedSuccessfully = "Amount deducted successfully";
+  static const managerAmountDeductedSuccessfully =
+      "Amount deducted successfully";
 
   static const changeAppliedSuccessfully = "Change Applied successfully";
   static const addRewardPointsSuccessfully = "Reward Points Added successfully";
@@ -96,6 +97,10 @@ class AppStrings {
   static const drawerOnlineUsers = "Online Users";
   static const drawerManagers = "Managers";
   static const drawerReports = "Reports";
+  static const drawerReportsActivations = "Activations";
+  static const drawerReportsInvoices = "Manager Invoices";
+  static const drawerReportsJournal = "Manager Journal";
+
   static const drawerActivityLog = "Activity Log";
   static const drawerLogout = "Logout";
 
