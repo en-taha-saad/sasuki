@@ -10,6 +10,7 @@ import 'package:sasuki/app/init_screens_dependencies/init_extend_user_module.dar
 import 'package:sasuki/app/init_screens_dependencies/init_login_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_manager_details_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_managers_list_module.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_reports_activations_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_user_activation_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_user_details_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_users_list_module.dart';
@@ -29,6 +30,7 @@ import 'package:sasuki/presentation/extend_user/view/extend_user_view.dart';
 import 'package:sasuki/presentation/login/view/login_view.dart';
 import 'package:sasuki/presentation/manager_details/view/manager_details.dart';
 import 'package:sasuki/presentation/managers_list/view/managers_list_view.dart';
+import 'package:sasuki/presentation/reports_activations/view/reports_activations.dart';
 import 'package:sasuki/presentation/splash/splash_view.dart';
 import 'package:sasuki/presentation/user_activation/view/user_activation_view.dart';
 import 'package:sasuki/presentation/user_details/view/user_details.dart';
@@ -162,14 +164,14 @@ class RouteGenerator {
         );
 
       ///
-      // case Routes.reportsActivationsRoute:
-      //   initReportsActivationsModule();
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AppBackground(
-      //       child: ReportsActivationsView(),
-      //     ),
-      //     settings: settings,
-      //   );
+      case Routes.reportsActivationsRoute:
+        initReportsActivationsModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: ReportsActivationsView(),
+          ),
+          settings: settings,
+        );
       // case Routes.singleReportsActivationsRoute:
       //   initSingleReportsActivationsModule();
       //   return MaterialPageRoute(
