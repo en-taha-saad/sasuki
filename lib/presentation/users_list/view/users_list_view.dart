@@ -343,25 +343,25 @@ class _UsersListViewState extends State<UsersListView> {
         return !loadFilteredUsers
             // ignore: prefer_is_empty
             ? snapshot.data?.length != Constants.zeroNum
-                ? SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    controller: _scrollController,
-                    child: loadingMoreUsers
-                        ? Column(
-                            children: [
-                              _singleUser(snapshot.data, context),
-                              const SizedBox(height: AppSize.s20),
-                              const Center(
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    ColorManager.whiteNeutral,
-                                  ),
+                ? loadingMoreUsers
+                    ? SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        controller: _scrollController,
+                        child: Column(
+                          children: [
+                            _singleUser(snapshot.data, context),
+                            const SizedBox(height: AppSize.s20),
+                            const Center(
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  ColorManager.whiteNeutral,
                                 ),
                               ),
-                            ],
-                          )
-                        : _singleUser(snapshot.data, context),
-                  )
+                            ),
+                          ],
+                        ),
+                      )
+                    : _singleUser(snapshot.data, context)
                 : Container(
                     margin: const EdgeInsets.only(top: AppMargin.m38),
                     child: Center(

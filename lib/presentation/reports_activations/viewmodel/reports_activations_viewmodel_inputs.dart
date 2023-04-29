@@ -1,5 +1,8 @@
 abstract class ReportsActivationsViewModelInputs {
   Future getReportsActivations();
+  Future refreshReportsActivations();
+    Future getFilteredActivationsList();
+
   Future getReportsActivationsForPull();
   Future getNextReportsActivations();
   Future getProfileList();

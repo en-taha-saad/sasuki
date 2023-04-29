@@ -57,10 +57,10 @@ class ManagerDetails {
 
 class ProfileDetails {
   int? id;
-  String? username;
+  String? name;
 
   ProfileDetails(
     this.id,
-    this.username,
+    this.name,
   );
 }

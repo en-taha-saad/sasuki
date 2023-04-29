@@ -54,7 +54,7 @@ extension ProfileDetailsResponseMapper on ProfileDetailsResponse? {
   ProfileDetails toDomain() {
     return ProfileDetails(
       this?.id.orZero(),
-      this?.username.orEmpty(),
+      this?.name.orEmpty(),
     );
   }
 }

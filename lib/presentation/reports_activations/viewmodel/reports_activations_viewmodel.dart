@@ -54,6 +54,8 @@ class ReportsActivationsViewModel extends BaseViewModel
 
   @override
   void start() async {
+    _getCaptchaResponse();
+
     await getNextReportsActivations();
   }
 
@@ -65,7 +67,6 @@ class ReportsActivationsViewModel extends BaseViewModel
     activationReportsRequestObject = activationReportsRequestObject.copyWith(
       profileId: Constants.minusOne,
     );
-    _getCaptchaResponse();
     inputState.add(
       LoadingState(
         mobileModuleScreen: MobileModuleScreen.activationsReports,
@@ -139,7 +140,8 @@ class ReportsActivationsViewModel extends BaseViewModel
             failure.message,
           ),
         );
-        debugPrint("getActivationsReportsStreamingly failure = ${failure.message}");
+        debugPrint(
+            "getActivationsReportsStreamingly failure = ${failure.message}");
       },
       (activationsReports0) async {
         // right -> success (data)
@@ -254,4 +256,63 @@ class ReportsActivationsViewModel extends BaseViewModel
   Stream<Captcha> get outputDataCaptcha => _captchaController.stream.map(
         (captcha) => captcha,
       );
+
+  @override
+  refreshReportsActivations() async {
+    activationReportsRequestObject = activationReportsRequestObject.copyWith(
+      page: Constants.oneNum.toInt(),
+    );
+    // ignore: void_checks
+    return (await _activationsReportsUsecase
+            .execute(activationReportsRequestObject))
+        .fold(
+      (failure) {
+        // left -> failure
+        debugPrint("refreshReportsActivations failure = ${failure.message}");
+        inputState.add(
+          ErrorState(
+            StateRendererType.toastErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (activationsReports0) async {
+        // right -> success (data)
+        activationsReports = activationsReports0;
+        inputReportsActivations.add(activationsReports);
+        inputState.add(ContentState());
+      },
+    );
+  }
+
+  @override
+  Future getFilteredActivationsList({int? profileId}) async {
+    inputReportsActivations.add(ActivationsReports([], 0));
+    activationReportsRequestObject = activationReportsRequestObject.copyWith(
+      page: Constants.oneNum.toInt(),
+      profileId: profileId ?? Constants.minusOne,
+    );
+    // ignore: void_checks
+    return (await _activationsReportsUsecase
+            .execute(activationReportsRequestObject))
+        .fold(
+      (failure) {
+        // left -> failure
+        debugPrint("getFilteredActivationsList failure = ${failure.code}");
+        inputState.add(
+          ErrorState(
+            StateRendererType.toastErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (activationsReports0) async {
+        // right -> success (data)
+        activationsReports = activationsReports0;
+        inputReportsActivations.add(activationsReports);
+        debugPrint("users@ page = $page");
+        inputState.add(ContentState());
+      },
+    );
+  }
 }

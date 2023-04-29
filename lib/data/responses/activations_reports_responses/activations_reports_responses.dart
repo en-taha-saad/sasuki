@@ -98,12 +98,12 @@ class ManagerDetailsResponse {
 class ProfileDetailsResponse {
   @JsonKey(name: 'id')
   int? id;
-  @JsonKey(name: 'username')
-  String? username;
+  @JsonKey(name: 'name')
+  String? name;
 
   ProfileDetailsResponse(
     this.id,
-    this.username,
+    this.name,
   );
   Map<String, dynamic> toJson() => _$ProfileDetailsResponseToJson(this);
   factory ProfileDetailsResponse.fromJson(Map<String, dynamic> json) =>

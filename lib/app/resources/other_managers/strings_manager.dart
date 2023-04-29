@@ -96,7 +96,9 @@ class AppStrings {
   static const drawerUsersList = "Users List";
   static const drawerOnlineUsers = "Online Users";
   static const drawerManagers = "Managers";
+  static const manager = "Manager";
   static const drawerReports = "Reports";
+  static const activationReports = "Activation Report";
   static const drawerReportsActivations = "Activations";
   static const drawerReportsInvoices = "Manager Invoices";
   static const drawerReportsJournal = "Manager Journal";
@@ -280,6 +282,7 @@ class AppStrings {
   static const editCurrentUserTitle = "Edit User";
   static const userFirstNameHint = "First Name";
   static const userLastNameHint = "Last Name";
+  static const userNameHint = "Name";
   static const userPhoneHint = "Phone";
   static const userNotesHint = "Notes";
   static const userCompanyHint = "Company";

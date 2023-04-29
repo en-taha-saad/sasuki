@@ -94,12 +94,12 @@ ProfileDetailsResponse _$ProfileDetailsResponseFromJson(
         Map<String, dynamic> json) =>
     ProfileDetailsResponse(
       json['id'] as int?,
-      json['username'] as String?,
+      json['name'] as String?,
     );
 
 Map<String, dynamic> _$ProfileDetailsResponseToJson(
         ProfileDetailsResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'username': instance.username,
+      'name': instance.name,
     };
