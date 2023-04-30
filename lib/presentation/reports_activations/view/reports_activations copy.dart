@@ -8,7 +8,6 @@ import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
-import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
@@ -200,7 +199,10 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
                       ],
                     ),
                   ),
-                  _getActivationListContent(),
+                  SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: _getActivationListContent(),
+                  ),
                 ],
               ),
             ),
@@ -255,27 +257,25 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
             // ignore: prefer_is_empty
             ? snapshot.data?.data?.length != Constants.zeroNum
                 ? loadingMoreActivations
-                    ? Expanded(
-                        child: SingleChildScrollView(
-                          controller: _scrollController,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          child: Column(
-                            children: [
-                              _singleActivation(
-                                snapshot.data,
-                                context,
-                                _viewModel.dataCaptcha,
-                              ),
-                              const SizedBox(height: AppSize.s20),
-                              const Center(
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    ColorManager.whiteNeutral,
-                                  ),
+                    ? SingleChildScrollView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: _scrollController,
+                        child: Column(
+                          children: [
+                            _singleActivation(
+                              snapshot.data,
+                              context,
+                              _viewModel.dataCaptcha,
+                            ),
+                            const SizedBox(height: AppSize.s20),
+                            const Center(
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  ColorManager.whiteNeutral,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       )
                     : _singleActivation(
@@ -338,14 +338,7 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
               return InkWell(
                 onTap: () {
                   // TODO: Navigate to activation details screen
-                  Nav.navTo(
-                    context,
-                    Routes.singleReportsActivationsRoute,
-                    TransferredDataBetweenActivationScreen(
-                      activation: activation,
-                      dataCaptcha: dataCaptcha,
-                    ),
-                  );
+                  // Nav.navTo(context, Routes.userDetailsRoute);
                 },
                 child: SingleActivationCard(
                   activation: activation,
@@ -652,10 +645,4 @@ class SingleActivationCard extends StatelessWidget {
       ],
     );
   }
-}
-
-class TransferredDataBetweenActivationScreen {
-  Activation? activation;
-  Captcha? dataCaptcha;
-  TransferredDataBetweenActivationScreen({this.activation, this.dataCaptcha});
 }

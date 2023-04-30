@@ -31,6 +31,7 @@ import 'package:sasuki/presentation/login/view/login_view.dart';
 import 'package:sasuki/presentation/manager_details/view/manager_details.dart';
 import 'package:sasuki/presentation/managers_list/view/managers_list_view.dart';
 import 'package:sasuki/presentation/reports_activations/view/reports_activations.dart';
+import 'package:sasuki/presentation/single_activation/view/single_activation.dart';
 import 'package:sasuki/presentation/splash/splash_view.dart';
 import 'package:sasuki/presentation/user_activation/view/user_activation_view.dart';
 import 'package:sasuki/presentation/user_details/view/user_details.dart';
@@ -172,14 +173,13 @@ class RouteGenerator {
           ),
           settings: settings,
         );
-      // case Routes.singleReportsActivationsRoute:
-      //   initSingleReportsActivationsModule();
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AppBackground(
-      //       child: ReportsActivationsView(),
-      //     ),
-      //     settings: settings,
-      //   );
+      case Routes.singleReportsActivationsRoute:
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: SingleActivationView(),
+          ),
+          settings: settings,
+        );
 
       ///
       // case Routes.reportsInvoicesRoute:

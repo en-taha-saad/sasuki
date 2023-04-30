@@ -45,6 +45,7 @@ class IconsAssets {
       "${ImagePaths.sharedIconsPath}tickcircle.svg";
 
   static const String person = "${ImagePaths.sharedIconsPath}person.svg";
+  static const String documenttext1 = "${ImagePaths.sharedIconsPath}documenttext1.svg";
   static const String add = "${ImagePaths.sharedIconsPath}add.svg";
   static const String minus = "${ImagePaths.sharedIconsPath}minus.svg";
   static const String dropdown = "${ImagePaths.sharedIconsPath}dropdown.svg";
