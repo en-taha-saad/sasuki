@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
-import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
-import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
@@ -20,7 +18,6 @@ import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
 import 'package:sasuki/presentation/reports_activations/viewmodel/reports_activations_viewmodel.dart';
-import 'package:intl/intl.dart' as intl;
 
 class ReportsActivationsView extends StatefulWidget {
   const ReportsActivationsView({Key? key}) : super(key: key);
@@ -321,7 +318,6 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
             (activation) {
               return InkWell(
                 onTap: () {
-                  // TODO: Navigate to activation details screen
                   Nav.navTo(
                     context,
                     Routes.singleReportsActivationsRoute,

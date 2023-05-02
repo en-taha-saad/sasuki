@@ -9,6 +9,7 @@ import 'package:sasuki/app/init_screens_dependencies/init_edit_user_module.dart'
 import 'package:sasuki/app/init_screens_dependencies/init_extend_user_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_login_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_manager_details_module.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_managers_invoices_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_managers_list_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_reports_activations_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_user_activation_module.dart';
@@ -29,9 +30,11 @@ import 'package:sasuki/presentation/edit_user/view/edit_user_view.dart';
 import 'package:sasuki/presentation/extend_user/view/extend_user_view.dart';
 import 'package:sasuki/presentation/login/view/login_view.dart';
 import 'package:sasuki/presentation/manager_details/view/manager_details.dart';
+import 'package:sasuki/presentation/managers_invoices/view/managers_invoices.dart';
 import 'package:sasuki/presentation/managers_list/view/managers_list_view.dart';
 import 'package:sasuki/presentation/reports_activations/view/reports_activations.dart';
-import 'package:sasuki/presentation/single_activation/view/single_activation.dart';
+import 'package:sasuki/presentation/single_activation/single_activation.dart';
+import 'package:sasuki/presentation/single_invoice/single_invoice.dart';
 import 'package:sasuki/presentation/splash/splash_view.dart';
 import 'package:sasuki/presentation/user_activation/view/user_activation_view.dart';
 import 'package:sasuki/presentation/user_details/view/user_details.dart';
@@ -182,22 +185,21 @@ class RouteGenerator {
         );
 
       ///
-      // case Routes.reportsInvoicesRoute:
-      //   initReportsInvoicesModule();
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AppBackground(
-      //       child: ReportsInvoicesView(),
-      //     ),
-      //     settings: settings,
-      //   );
-      // case Routes.singleReportsInvoicesRoute:
-      //   initSingleReportsInvoicesModule();
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AppBackground(
-      //       child: SingleReportsInvoicesView(),
-      //     ),
-      //     settings: settings,
-      //   );
+      case Routes.reportsInvoicesRoute:
+        initManagersInvoicesModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: ManagersInvoicesView(),
+          ),
+          settings: settings,
+        );
+      case Routes.singleReportsInvoicesRoute:
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: SingleInvoiceView(),
+          ),
+          settings: settings,
+        );
 
       ///
       // case Routes.reportsJournalRoute:

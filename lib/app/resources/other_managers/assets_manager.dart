@@ -43,9 +43,17 @@ class IconsAssets {
       "${ImagePaths.sharedIconsPath}information.svg";
   static const String tickcircle =
       "${ImagePaths.sharedIconsPath}tickcircle.svg";
+  static const String reciept1 = "${ImagePaths.sharedIconsPath}receipt1.svg";
+  static const String reciepttext =
+      "${ImagePaths.sharedIconsPath}receipttext.svg";
+  static const String paid = "${ImagePaths.sharedIconsPath}paid.svg";
+  static const String messagetext1 = "${ImagePaths.sharedIconsPath}messagetext1.svg";
+  static const String messages2 = "${ImagePaths.sharedIconsPath}messages2.svg";
+
 
   static const String person = "${ImagePaths.sharedIconsPath}person.svg";
-  static const String documenttext1 = "${ImagePaths.sharedIconsPath}documenttext1.svg";
+  static const String documenttext1 =
+      "${ImagePaths.sharedIconsPath}documenttext1.svg";
   static const String add = "${ImagePaths.sharedIconsPath}add.svg";
   static const String minus = "${ImagePaths.sharedIconsPath}minus.svg";
   static const String dropdown = "${ImagePaths.sharedIconsPath}dropdown.svg";

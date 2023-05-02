@@ -156,6 +156,7 @@ class AppStrings {
   static const userOverviewDailyTaffic = "Daily Taffic";
   static const userOverviewUptime = "Uptime";
   static const userOverviewusername = "Username";
+  static const userOverviewInvoiceNo = "Invoice No.";
   static const userOverviewFullName = "Full Name";
   static const userOverviewProfile = "Profile";
   static const managerPermissionGroup = "Permission Group";
@@ -283,6 +284,7 @@ class AppStrings {
   static const userFirstNameHint = "First Name";
   static const userLastNameHint = "Last Name";
   static const userNameHint = "Name";
+  static const userNameType = "Type";
   static const userPhoneHint = "Phone";
   static const userNotesHint = "Notes";
   static const userCompanyHint = "Company";
