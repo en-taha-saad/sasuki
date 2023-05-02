@@ -50,18 +50,17 @@ class ReportsActivationsViewModel extends BaseViewModel
   ActivationsReports? activationsReports;
   int page = Constants.oneNum.toInt();
   Captcha? dataCaptcha;
-  List<Activation>? listOfActivations;
+  ActivationsReports? listOfActivations;
 
   @override
   void start() async {
     _getCaptchaResponse();
 
-    await getNextReportsActivations();
+    await getReportsActivations();
   }
 
   @override
   void dispose() {}
-
   @override
   Future getReportsActivations() async {
     activationReportsRequestObject = activationReportsRequestObject.copyWith(
@@ -120,9 +119,11 @@ class ReportsActivationsViewModel extends BaseViewModel
       (activationsReports0) async {
         // right -> success (data)
         activationsReports = activationsReports0;
-        listOfActivations?.addAll((activationsReports?.data)!);
-        inputReportsActivations.add(activationsReports);
+        listOfActivations?.data?.addAll((activationsReports?.data)!);
+        inputReportsActivations.add(listOfActivations);
         inputState.add(ContentState());
+        // make function to get next page
+        // getReportsActivationsForPull();
       },
     );
   }
@@ -174,8 +175,8 @@ class ReportsActivationsViewModel extends BaseViewModel
       (activationsReports0) async {
         // right -> success (data)
         activationsReports = activationsReports0;
-        listOfActivations = activationsReports?.data;
-        inputReportsActivations.add(activationsReports);
+        listOfActivations = activationsReports;
+        inputReportsActivations.add(listOfActivations);
         inputState.add(ContentState());
       },
     );
@@ -279,7 +280,8 @@ class ReportsActivationsViewModel extends BaseViewModel
       (activationsReports0) async {
         // right -> success (data)
         activationsReports = activationsReports0;
-        inputReportsActivations.add(activationsReports);
+        listOfActivations = activationsReports;
+        inputReportsActivations.add(listOfActivations);
         inputState.add(ContentState());
       },
     );

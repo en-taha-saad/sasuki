@@ -12,6 +12,7 @@ import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/dashboard_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/managerlist_shimmer_loading.dart';
+import 'package:sasuki/presentation/common/loading_shimmers_screens/reports_activations_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/userlist_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/state_render/states/mobile_module_screen.dart';
 import 'package:sasuki/presentation/common/state_render/states/state_renderer_type.dart';
@@ -221,6 +222,8 @@ class StateRenderer extends StatelessWidget {
         return const UserListShimmerLoading();
       case MobileModuleScreen.managersList:
         return const ManagerListShimmerLoading();
+      case MobileModuleScreen.activationsReports:
+        return const ReportsActivationsShimmerLoading();
       // case MobileModuleScreen.userDetails:
       //   return const UserDetailsShimmerLoading();
       // case MobileModuleScreen.managerDetails:

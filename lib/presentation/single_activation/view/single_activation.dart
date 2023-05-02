@@ -10,10 +10,10 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/app/shared_widgets/single_activation_card.dart';
 import 'package:sasuki/domain/models/activations_reports/activations_reports.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:sasuki/domain/models/captcha/captcha.dart';
-import 'package:sasuki/presentation/reports_activations/view/reports_activations.dart';
 
 class SingleActivationView extends StatefulWidget {
   const SingleActivationView({Key? key}) : super(key: key);

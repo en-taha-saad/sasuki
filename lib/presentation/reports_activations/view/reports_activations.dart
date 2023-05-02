@@ -13,6 +13,7 @@ import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
+import 'package:sasuki/app/shared_widgets/single_activation_card.dart';
 import 'package:sasuki/domain/models/activations_reports/activations_reports.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
@@ -117,8 +118,8 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
   }
 
   Widget _getContentWidget(context) {
-    return SingleChildScrollView(
-      physics: const NeverScrollableScrollPhysics(),
+    return Container(
+      color: ColorManager.secondary,
       child: Column(
         children: [
           Container(
@@ -138,72 +139,57 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
             ),
           ),
           Container(
-            width: MediaQuery.of(context).size.width,
-            color: ColorManager.secondary,
-            child: Container(
-              margin: const EdgeInsets.only(
-                bottom: AppMargin.m50,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    color: ColorManager.whiteNeutral.withOpacity(0.2),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSize.s20,
-                      vertical: AppSize.s10,
+            color: ColorManager.whiteNeutral.withOpacity(0.2),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSize.s20,
+              vertical: AppSize.s10,
+            ),
+            margin: const EdgeInsets.only(
+              bottom: AppSize.s20,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: AppSize.s10),
+                      child: SvgPicture.asset(
+                        IconsAssets.tickcircle,
+                        theme: const SvgTheme(
+                          currentColor: ColorManager.whiteNeutral,
+                        ),
+                        // ignore: deprecated_member_use
+                        color: ColorManager.whiteNeutral,
+                      ),
                     ),
-                    margin: const EdgeInsets.only(
-                      bottom: AppSize.s20,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(right: AppSize.s10),
-                              child: SvgPicture.asset(
-                                IconsAssets.tickcircle,
-                                theme: const SvgTheme(
-                                  currentColor: ColorManager.whiteNeutral,
-                                ),
-                                // ignore: deprecated_member_use
+                    Text(
+                      AppStrings.activationReports,
+                      style:
+                          Theme.of(context).textTheme.headlineMedium?.copyWith(
                                 color: ColorManager.whiteNeutral,
                               ),
-                            ),
-                            Text(
-                              AppStrings.activationReports,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium
-                                  ?.copyWith(
-                                    color: ColorManager.whiteNeutral,
-                                  ),
-                            ),
-                          ],
-                        ),
-                        InkWell(
-                          onTap: _showFilterDialog,
-                          child: SvgPicture.asset(
-                            IconsAssets.filter,
-                            theme: const SvgTheme(
-                              currentColor: ColorManager.whiteNeutral,
-                            ),
-                            // ignore: deprecated_member_use
-                            color: ColorManager.whiteNeutral,
-                          ),
-                        ),
-                      ],
                     ),
+                  ],
+                ),
+                InkWell(
+                  onTap: _showFilterDialog,
+                  child: SvgPicture.asset(
+                    IconsAssets.filter,
+                    theme: const SvgTheme(
+                      currentColor: ColorManager.whiteNeutral,
+                    ),
+                    // ignore: deprecated_member_use
+                    color: ColorManager.whiteNeutral,
                   ),
-                  _getActivationListContent(),
-                ],
-              ),
+                ),
+              ],
             ),
+          ),
+          Expanded(
+            child: _getActivationListContent(),
           ),
         ],
       ),
@@ -254,12 +240,11 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
         return !loadFilteredActivations
             // ignore: prefer_is_empty
             ? snapshot.data?.data?.length != Constants.zeroNum
-                ? loadingMoreActivations
-                    ? Expanded(
-                        child: SingleChildScrollView(
-                          controller: _scrollController,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          child: Column(
+                ? SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    controller: _scrollController,
+                    child: loadingMoreActivations
+                        ? Column(
                             children: [
                               _singleActivation(
                                 snapshot.data,
@@ -275,14 +260,13 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
                                 ),
                               ),
                             ],
+                          )
+                        : _singleActivation(
+                            snapshot.data,
+                            context,
+                            _viewModel.dataCaptcha,
                           ),
-                        ),
-                      )
-                    : _singleActivation(
-                        snapshot.data,
-                        context,
-                        _viewModel.dataCaptcha,
-                      )
+                  )
                 : Container(
                     margin: const EdgeInsets.only(top: AppMargin.m38),
                     child: Center(
@@ -525,137 +509,4 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
       ],
     );
   }
-}
-
-class SingleActivationCard extends StatelessWidget {
-  const SingleActivationCard({this.dataCaptcha, this.activation, Key? key})
-      : super(key: key);
-  final Activation? activation;
-  final Captcha? dataCaptcha;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppMargin.m25),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _getSingleLabeledData(
-                context,
-                AppStrings.userOverviewusername,
-                activation?.userDetails?.username ?? Constants.dash,
-              ),
-              Text(
-                "${dataCaptcha?.data?.siteCurrency} ${intl.NumberFormat.decimalPattern().format(double.parse((activation?.price)!))}",
-                style: StylesManager.getMediumStyle(
-                  fontSize: FontSize.sSubtitle5,
-                ),
-              ),
-            ],
-          ),
-          _getSingleLabeledData(
-            context,
-            AppStrings.userNameHint,
-            activation?.userDetails?.firstname != Constants.nullValue
-                ? "${activation?.userDetails?.firstname} ${activation?.userDetails?.lastname ?? Constants.dash}"
-                : Constants.dash,
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: AppMargin.m10),
-            child: _getSingleLabeledData(
-              context,
-              AppStrings.manager,
-              activation?.managerDetails?.username ?? Constants.dash,
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: AppSize.s22,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppMargin.m15,
-                  vertical: 3.5,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppSize.s15),
-                  color: ColorManager.greyNeutral,
-                ),
-                child: Center(
-                  child: Text(
-                    activation?.profileDetails?.name ?? Constants.dash,
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: ColorManager.blackNeutral,
-                        ),
-                  ),
-                ),
-              ),
-              Text(
-                formatDateTime((activation?.createdAt)!),
-                style: StylesManager.getMediumStyle(
-                  fontSize: FontSize.sCaption1,
-                  color: ColorManager.greyNeutral,
-                ),
-              )
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: AppMargin.m25),
-            child: Divider(
-              color: ColorManager.greyNeutral.withOpacity(
-                AppSize.s0point25,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  String formatDateTime(String inputDateTime) {
-    DateTime parsedDateTime = DateTime.parse(inputDateTime);
-    intl.DateFormat outputFormat = intl.DateFormat('dd, MMMM yyyy | HH:mm:ss');
-    String formattedDateTime = outputFormat.format(parsedDateTime);
-    return formattedDateTime;
-  }
-
-  Widget _getSingleLabeledData(
-    BuildContext context,
-    String? label,
-    String? value,
-  ) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(right: AppMargin.m15),
-          width: 60,
-          child: Text(
-            label!,
-            style: StylesManager.getMediumStyle(
-              fontSize: FontSize.sCaption1,
-              color: ColorManager.greyNeutral,
-            ),
-          ),
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.4,
-          child: Text(
-            value!,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class TransferredDataBetweenActivationScreen {
-  Activation? activation;
-  Captcha? dataCaptcha;
-  TransferredDataBetweenActivationScreen({this.activation, this.dataCaptcha});
 }
