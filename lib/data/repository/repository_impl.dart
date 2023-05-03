@@ -1792,7 +1792,7 @@ class RepositoryImpl implements Repository {
             },
           ),
         );
-        if (response.total == Constants.nullValue) {
+        if (response.total != Constants.nullValue) {
           // success reutrn either right
           return Right(response.toDomain());
         } else {

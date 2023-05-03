@@ -215,7 +215,6 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getFullScreenLoadingWidget(MobileModuleScreen? mobileModuleScreen) {
-    // TODO : add shimmer loading for all screens
     switch (mobileModuleScreen) {
       case MobileModuleScreen.dashboard:
         return const DashboardShimmerLoading();
@@ -228,7 +227,7 @@ class StateRenderer extends StatelessWidget {
       case MobileModuleScreen.managerInvoices:
         return const ManagersInvoicesShimmerLoading();
       case MobileModuleScreen.managerJournal:
-      // return const ManagersInvoicesShimmerLoading();
+        return const ManagersInvoicesShimmerLoading();
 
       default:
         return Container();

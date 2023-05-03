@@ -153,8 +153,7 @@ class DrawerView extends StatelessWidget {
           title: AppStrings.drawerReportsJournal,
           action: () {
             _manageDrawerNavigations(
-              // TODO: add route
-              AppStrings.drawerReportsJournal,
+              Routes.reportsJournalRoute,
               context,
             );
           },

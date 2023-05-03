@@ -10,6 +10,7 @@ import 'package:sasuki/app/init_screens_dependencies/init_extend_user_module.dar
 import 'package:sasuki/app/init_screens_dependencies/init_login_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_manager_details_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_managers_invoices_module.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_managers_journal_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_managers_list_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_reports_activations_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_user_activation_module.dart';
@@ -31,10 +32,12 @@ import 'package:sasuki/presentation/extend_user/view/extend_user_view.dart';
 import 'package:sasuki/presentation/login/view/login_view.dart';
 import 'package:sasuki/presentation/manager_details/view/manager_details.dart';
 import 'package:sasuki/presentation/managers_invoices/view/managers_invoices.dart';
+import 'package:sasuki/presentation/managers_journal/view/managers_journal.dart';
 import 'package:sasuki/presentation/managers_list/view/managers_list_view.dart';
 import 'package:sasuki/presentation/reports_activations/view/reports_activations.dart';
 import 'package:sasuki/presentation/single_activation/single_activation.dart';
 import 'package:sasuki/presentation/single_invoice/single_invoice.dart';
+import 'package:sasuki/presentation/single_journal/single_journal.dart';
 import 'package:sasuki/presentation/splash/splash_view.dart';
 import 'package:sasuki/presentation/user_activation/view/user_activation_view.dart';
 import 'package:sasuki/presentation/user_details/view/user_details.dart';
@@ -202,22 +205,21 @@ class RouteGenerator {
         );
 
       ///
-      // case Routes.reportsJournalRoute:
-      //   initReportsJournalModule();
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AppBackground(
-      //       child: ReportsJournalView(),
-      //     ),
-      //     settings: settings,
-      //   );
-      // case Routes.singleReportsJournalRoute:
-      //   initSingleReportsJournalModule();
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AppBackground(
-      //       child: SingleReportsJournalView(),
-      //     ),
-      //     settings: settings,
-      //   );
+      case Routes.reportsJournalRoute:
+        initManagersJournalModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: ManagersJournalView(),
+          ),
+          settings: settings,
+        );
+      case Routes.singleReportsJournalRoute:
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: SingleJournalView(),
+          ),
+          settings: settings,
+        );
 
       default:
         return unDefinedRoute();

@@ -97,6 +97,7 @@ class AppStrings {
   static const drawerOnlineUsers = "Online Users";
   static const drawerManagers = "Managers";
   static const manager = "Manager";
+  static const reportBalance = "Balance";
   static const drawerReports = "Reports";
   static const activationReports = "Activation Report";
   static const drawerReportsActivations = "Activations";
@@ -157,6 +158,7 @@ class AppStrings {
   static const userOverviewUptime = "Uptime";
   static const userOverviewusername = "Username";
   static const userOverviewInvoiceNo = "Invoice No.";
+  static const userOverviewCredit = "Credit";
   static const userOverviewFullName = "Full Name";
   static const userOverviewProfile = "Profile";
   static const managerPermissionGroup = "Permission Group";
@@ -285,6 +287,7 @@ class AppStrings {
   static const userLastNameHint = "Last Name";
   static const userNameHint = "Name";
   static const userNameType = "Type";
+  static const userNameDebt = "Debt";
   static const userPhoneHint = "Phone";
   static const userNotesHint = "Notes";
   static const userCompanyHint = "Company";
