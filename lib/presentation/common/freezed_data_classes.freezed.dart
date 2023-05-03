@@ -4213,3 +4213,170 @@ abstract class _ManagerJournalRequestObject
   _$$_ManagerJournalRequestObjectCopyWith<_$_ManagerJournalRequestObject>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$DepositObject {
+  int get amount => throw _privateConstructorUsedError;
+  String get method => throw _privateConstructorUsedError;
+  String get methodName => throw _privateConstructorUsedError;
+  String get pin => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $DepositObjectCopyWith<DepositObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DepositObjectCopyWith<$Res> {
+  factory $DepositObjectCopyWith(
+          DepositObject value, $Res Function(DepositObject) then) =
+      _$DepositObjectCopyWithImpl<$Res, DepositObject>;
+  @useResult
+  $Res call({int amount, String method, String methodName, String pin});
+}
+
+/// @nodoc
+class _$DepositObjectCopyWithImpl<$Res, $Val extends DepositObject>
+    implements $DepositObjectCopyWith<$Res> {
+  _$DepositObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? amount = null,
+    Object? method = null,
+    Object? methodName = null,
+    Object? pin = null,
+  }) {
+    return _then(_value.copyWith(
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int,
+      method: null == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String,
+      methodName: null == methodName
+          ? _value.methodName
+          : methodName // ignore: cast_nullable_to_non_nullable
+              as String,
+      pin: null == pin
+          ? _value.pin
+          : pin // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_DepositObjectCopyWith<$Res>
+    implements $DepositObjectCopyWith<$Res> {
+  factory _$$_DepositObjectCopyWith(
+          _$_DepositObject value, $Res Function(_$_DepositObject) then) =
+      __$$_DepositObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int amount, String method, String methodName, String pin});
+}
+
+/// @nodoc
+class __$$_DepositObjectCopyWithImpl<$Res>
+    extends _$DepositObjectCopyWithImpl<$Res, _$_DepositObject>
+    implements _$$_DepositObjectCopyWith<$Res> {
+  __$$_DepositObjectCopyWithImpl(
+      _$_DepositObject _value, $Res Function(_$_DepositObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? amount = null,
+    Object? method = null,
+    Object? methodName = null,
+    Object? pin = null,
+  }) {
+    return _then(_$_DepositObject(
+      null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == methodName
+          ? _value.methodName
+          : methodName // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == pin
+          ? _value.pin
+          : pin // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DepositObject implements _DepositObject {
+  _$_DepositObject(this.amount, this.method, this.methodName, this.pin);
+
+  @override
+  final int amount;
+  @override
+  final String method;
+  @override
+  final String methodName;
+  @override
+  final String pin;
+
+  @override
+  String toString() {
+    return 'DepositObject(amount: $amount, method: $method, methodName: $methodName, pin: $pin)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DepositObject &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.method, method) || other.method == method) &&
+            (identical(other.methodName, methodName) ||
+                other.methodName == methodName) &&
+            (identical(other.pin, pin) || other.pin == pin));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, amount, method, methodName, pin);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DepositObjectCopyWith<_$_DepositObject> get copyWith =>
+      __$$_DepositObjectCopyWithImpl<_$_DepositObject>(this, _$identity);
+}
+
+abstract class _DepositObject implements DepositObject {
+  factory _DepositObject(final int amount, final String method,
+      final String methodName, final String pin) = _$_DepositObject;
+
+  @override
+  int get amount;
+  @override
+  String get method;
+  @override
+  String get methodName;
+  @override
+  String get pin;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DepositObjectCopyWith<_$_DepositObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}

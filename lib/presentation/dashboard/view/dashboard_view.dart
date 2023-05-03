@@ -57,9 +57,7 @@ class _DashboardViewState extends State<DashboardView> {
     timer = Timer.periodic(
       const Duration(seconds: Constants.delay60Seconds),
       (Timer t) {
-        // ignore: todo
-        // TODO: add logic to refresh data
-        // _viewModel.getDataStreamingly();
+        _viewModel.getDataStreamingly();
       },
     );
 

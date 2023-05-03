@@ -212,3 +212,13 @@ class ManagerJournalRequestObject with _$ManagerJournalRequestObject {
     List<String> columns,
   ) = _ManagerJournalRequestObject;
 }
+
+@freezed
+class DepositObject with _$DepositObject {
+  factory DepositObject(
+    int amount,
+    String method,
+    String methodName,
+    String pin,
+  ) = _DepositObject;
+}

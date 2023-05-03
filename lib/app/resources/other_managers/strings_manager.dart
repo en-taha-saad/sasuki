@@ -78,6 +78,7 @@ class AppStrings {
   static const servISPName = "ISP Name";
   static const servServerAddress = "Server Address";
   static const servUsername = "Username";
+  static const servAmount = "Amount";
   static const servUsernameHint = "Add username";
   static const servPassword = "Password";
   static const servPasswordHint = "Add password";
@@ -234,6 +235,7 @@ class AppStrings {
   static const managerRenamedSuccess = "Username renamed successfully";
 
   static const addUserTitle = "Add User";
+  static const depositTile = "Deposit";
   static const editUserTitle = "Edit User";
   static const editManagerTitle = "Edit Manager";
   static const updateUserTitle = "Update User";
@@ -281,6 +283,7 @@ class AppStrings {
   static const extendServiceCardTitle = "Extend Service";
 
   static const createNewUserTitle = "Create New User";
+  static const selfDeposit = "Self Deposit";
   static const createNewManagerTitle = "Create New Manager";
   static const editCurrentUserTitle = "Edit User";
   static const userFirstNameHint = "First Name";
