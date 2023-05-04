@@ -38,6 +38,7 @@ class AppStrings {
   static const managerAmountAddedSuccessfully = "Amount added successfully";
   static const managerAmountDeductedSuccessfully =
       "Amount deducted successfully";
+  static const depositPaymentSuccessfully = "Amount added successfully";
 
   static const changeAppliedSuccessfully = "Change Applied successfully";
   static const addRewardPointsSuccessfully = "Reward Points Added successfully";
@@ -79,6 +80,7 @@ class AppStrings {
   static const servServerAddress = "Server Address";
   static const servUsername = "Username";
   static const servAmount = "Amount";
+  static const servPin = "Pin";
   static const servUsernameHint = "Add username";
   static const servPassword = "Password";
   static const servPasswordHint = "Add password";
@@ -217,6 +219,7 @@ class AppStrings {
   static const userActionExtend = "Extend";
   static const userActionSubmitButton = "Submit";
   static const nextButton = "Next";
+  static const depositButton = "Deposit";
   static const userActionChangeProfile = "Change Profile";
   static const userActionChange = "Change";
   static const userActionDeposit = "Deposit";
@@ -315,6 +318,7 @@ class AppStrings {
   static const usersParentHint = "Select Parent";
   static const managersAclPermissionHint = "Select Permission";
   static const usersProfileHint = "Select Profile";
+  static const usersPaymentMethodHint = "Select Payment Method";
   static const usersExtendHint = "Select Activation Method";
 
   static const changeProfileHint = "Select Option";
@@ -332,6 +336,7 @@ class AppStrings {
 
   static const usersConnection = "Connection";
   static const usersProfile = "Profile";
+  static const usersPaymentMethod = "Payment Method";
   static const managerSecurityGroup = "Security Group";
   static const usersApply = "Apply";
   static const usersReset = "Reset";

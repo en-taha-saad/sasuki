@@ -4,6 +4,7 @@ import 'package:sasuki/app/init_screens_dependencies/init_add_server_module.dart
 import 'package:sasuki/app/init_screens_dependencies/init_add_user_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_choose_server_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_dashboard_module.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_deposit_payment_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_edit_manager_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_edit_user_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_extend_user_module.dart';
@@ -25,6 +26,7 @@ import 'package:sasuki/presentation/add_server/view/add_server_view.dart';
 import 'package:sasuki/presentation/add_user/view/add_user_view.dart';
 import 'package:sasuki/presentation/choose_server/view/choose_server_view.dart';
 import 'package:sasuki/presentation/dashboard/view/dashboard_view.dart';
+import 'package:sasuki/presentation/deposit_screen/view/deposit_screen_view.dart';
 import 'package:sasuki/presentation/drawer/drawer_view.dart';
 import 'package:sasuki/presentation/edit_manager/view/edit_manager_view.dart';
 import 'package:sasuki/presentation/edit_user/view/edit_user_view.dart';
@@ -217,6 +219,14 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
             child: SingleJournalView(),
+          ),
+          settings: settings,
+        );
+      case Routes.depositPaymentRoute:
+        initAdDepositPaymentdManagerModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: DepositScreen(),
           ),
           settings: settings,
         );

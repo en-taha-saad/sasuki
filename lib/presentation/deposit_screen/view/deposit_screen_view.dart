@@ -5,9 +5,8 @@ import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
-import 'package:sasuki/app/shared_widgets/get_addedit_text_field.dart';
+import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
-import 'package:sasuki/domain/models/filter_lists/profile_list.dart';
 import 'package:sasuki/domain/models/payment_methods/payment_methods.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
@@ -33,7 +32,8 @@ class _DepositScreenState extends State<DepositScreen> {
 
   PaymentMethods? paymentMethods;
   SinglePaymentMethod? selectedPaymentMethod;
-
+  bool isZaincash = Constants.falseBool;
+  bool isVoucher = Constants.falseBool;
   _bind() {
     _depositScreenViewModel.start();
     _amountController.addListener(
@@ -160,48 +160,112 @@ class _DepositScreenState extends State<DepositScreen> {
             ),
             child: Column(
               children: [
-                _getPaymentMethodDropdown(AppStrings.usersProfile, context),
-                Container(
-                  margin: const EdgeInsets.only(
-                    bottom: AppMargin.m25,
-                  ),
-                  child: StreamBuilder<bool>(
-                    stream: _depositScreenViewModel.outputIsAmountEntered,
-                    builder: (context, snapshot) {
-                      return getAddEditTextFieldInput(
-                        context,
-                        _amountController,
-                        (val) {
-                          FocusScope.of(context).unfocus();
-                        },
-                        AppStrings.servAmount,
-                        Constants.falseBool,
-                        TextInputType.text,
-                        snapshot.data,
-                        Constants.trueBool,
-                      );
-                    },
-                  ),
+                _getPaymentMethodDropdown(
+                  AppStrings.usersPaymentMethod,
+                  context,
                 ),
+                isZaincash == Constants.trueBool
+                    ? Container(
+                        margin: const EdgeInsets.only(
+                          bottom: AppMargin.m25,
+                        ),
+                        child: StreamBuilder<bool>(
+                          stream: _depositScreenViewModel.outputIsAmountEntered,
+                          builder: (context, snapshot) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(
+                                      bottom: AppMargin.m10),
+                                  child: Text(
+                                    AppStrings.servAmount,
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+                                  ),
+                                ),
+                                TextFormField(
+                                  controller: _amountController,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                    errorText: snapshot.data == true
+                                        ? AppStrings.inputIsEmpty
+                                        : null,
+                                  ),
+                                  onEditingComplete: () =>
+                                      FocusScope.of(context).unfocus(),
+                                  onFieldSubmitted: (st) =>
+                                      FocusScope.of(context).unfocus(),
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      )
+                    : Container(),
+                if (isVoucher)
+                  isVoucher == Constants.trueBool
+                      ? Container(
+                          margin: const EdgeInsets.only(
+                            bottom: AppMargin.m25,
+                          ),
+                          child: StreamBuilder<bool>(
+                            stream: _depositScreenViewModel.outputIsPinEntered,
+                            builder: (context, snapshot) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(
+                                        bottom: AppMargin.m10),
+                                    child: Text(
+                                      AppStrings.servPin,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                  ),
+                                  TextFormField(
+                                    controller: _pinController,
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                      errorText: snapshot.data == true
+                                          ? AppStrings.inputIsEmpty
+                                          : null,
+                                    ),
+                                    onEditingComplete: () =>
+                                        FocusScope.of(context).unfocus(),
+                                    onFieldSubmitted: (st) =>
+                                        FocusScope.of(context).unfocus(),
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        )
+                      : Container(),
                 Container(
                   margin: const EdgeInsets.only(
-                    bottom: AppMargin.m25,
+                    top: AppMargin.m35,
+                    bottom: AppMargin.m50,
                   ),
-                  child: StreamBuilder<bool>(
-                    stream: _depositScreenViewModel.outputIsPinEntered,
-                    builder: (context, snapshot) {
-                      return getAddEditTextFieldInput(
-                        context,
-                        _pinController,
-                        (val) {
-                          FocusScope.of(context).unfocus();
-                        },
-                        AppStrings.servAmount,
-                        Constants.falseBool,
-                        TextInputType.text,
-                        snapshot.data,
-                        Constants.trueBool,
-                      );
+                  child: ElevatedButtonWidget(
+                    name: AppStrings.depositButton,
+                    assetName: IconsAssets.forward,
+                    onPressed: () {
+                      if (_amountController.text.isNotEmpty ||
+                          _pinController.text.isNotEmpty) {
+                        FocusScope.of(context).unfocus();
+                        _depositScreenViewModel.saveFloatingButton(
+                          true,
+                          selectedPaymentMethod,
+                        );
+                      }
                     },
                   ),
                 ),
@@ -236,16 +300,43 @@ class _DepositScreenState extends State<DepositScreen> {
                   paymentMethods?.data?.length == Constants.zeroNum) {
                 paymentMethods = snapshot0.data;
               }
-              debugPrint("paymentMethods: $paymentMethods");
               // ignore: prefer_is_empty
               return DropDownComponent<SinglePaymentMethod>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.usersProfileHint,
+                hintStr: AppStrings.usersPaymentMethodHint,
                 items: paymentMethods?.data ?? [],
                 doOtherThings: (val) {
                   selectedPaymentMethod = val;
+                  debugPrint(
+                      "@selectedPaymentMethod: ${selectedPaymentMethod?.country} ${selectedPaymentMethod?.id} ${selectedPaymentMethod?.name}");
+                  if (selectedPaymentMethod?.name == "ZainCash") {
+                    setState(() {
+                      isZaincash = Constants.trueBool;
+                      isVoucher = Constants.falseBool;
+                    });
+                    _depositScreenViewModel.inputIsAmountEntered.add(
+                      Constants.trueBool,
+                    );
+                    _depositScreenViewModel.inputIsPinEntered.add(
+                      Constants.falseBool,
+                    );
+                    _depositScreenViewModel.inputPin.add(Constants.emptyStr);
+                  }
+                  if (selectedPaymentMethod?.name == "Voucher") {
+                    setState(() {
+                      isVoucher = Constants.trueBool;
+                      isZaincash = Constants.falseBool;
+                    });
+                    _depositScreenViewModel.inputIsAmountEntered.add(
+                      Constants.falseBool,
+                    );
+                    _depositScreenViewModel.inputIsPinEntered.add(
+                      Constants.trueBool,
+                    );
+                    _depositScreenViewModel.inputAmount.add(Constants.emptyStr);
+                  }
                 },
-                displayFn: (item) => (item as ProfileData).name,
+                displayFn: (item) => ((item as SinglePaymentMethod).name)!,
                 textAndHintColor: ColorManager.whiteNeutral,
               );
             },

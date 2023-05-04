@@ -26,6 +26,8 @@ import 'package:sasuki/domain/models/manager_list_details/security_group.dart';
 import 'package:sasuki/domain/models/managers_invoices/managers_invoices.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
 import 'package:sasuki/domain/models/paydebt_informs/paydebt_informs.dart';
+import 'package:sasuki/domain/models/payment_methods/deposit_action.dart';
+import 'package:sasuki/domain/models/payment_methods/payment_methods.dart';
 import 'package:sasuki/domain/models/user_action/edit_user.dart';
 import 'package:sasuki/domain/models/user_action/user_action.dart';
 import 'package:sasuki/domain/models/user_details/user_api.dart';
@@ -145,4 +147,10 @@ abstract class Repository {
   Future<Either<Failure, ManagerJournal>> getManagerJournal(
     ManagerJournalRequestObject managerInvoicesRequestObject,
   );
+
+  Future<Either<Failure, DepositAction>> depositPayment(
+    DepositObject depositObject,
+  );
+
+  Future<Either<Failure, PaymentMethods>> getPaymentMethods();
 }

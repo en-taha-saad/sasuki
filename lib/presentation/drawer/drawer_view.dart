@@ -116,9 +116,9 @@ class DrawerView extends StatelessWidget {
         // case AppStrings.drawerActivityLog:
         //   _manageDrawerNavigations(AppStrings.drawerActivityLog, context);
         //   break;
-        // case AppStrings.drawerDepositButton:
-        //   _manageDrawerNavigations(AppStrings.drawerDepositButton, context);
-        //   break;
+        case AppStrings.drawerDepositButton:
+          _manageDrawerNavigations(Routes.depositPaymentRoute, context);
+          break;
         case AppStrings.drawerLogout:
           _appPrefs.removeIsUserLoggedInStatus();
           _appPrefs.removeToken();

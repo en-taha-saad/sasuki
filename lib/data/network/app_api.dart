@@ -21,6 +21,8 @@ import 'package:sasuki/data/responses/manager_list_details_responses/security_gr
 import 'package:sasuki/data/responses/managers_invoices_responses/managers_invoices_responses.dart';
 import 'package:sasuki/data/responses/managers_list_responses/managers_list_responses.dart';
 import 'package:sasuki/data/responses/paydebt_informs_responses/paydebt_informs_responses.dart';
+import 'package:sasuki/data/responses/payment_methods_responses/deposit_action_responses.dart';
+import 'package:sasuki/data/responses/payment_methods_responses/payment_methods_responses.dart';
 import 'package:sasuki/data/responses/user_action_response/user_action_response.dart';
 import 'package:sasuki/data/responses/user_details_responses/user_api_responses.dart';
 import 'package:sasuki/data/responses/user_details_responses/user_overview_api_responses.dart';
@@ -204,4 +206,15 @@ abstract class AppServiceClient {
   Future<ManagerJournalResponses> getManagerJournal(
     @Field("payload") String payload,
   );
+
+  @POST("/paymentgateway/requestSelfDeposit")
+  Future<DepositActionResponse> depositPayment(
+    @Field("payload") String payload
+  );
+
+
+  @GET("/paymentgateway/list/acp")
+  Future<PaymentMethodsResponses> getPaymentMethods();
+
+
 }

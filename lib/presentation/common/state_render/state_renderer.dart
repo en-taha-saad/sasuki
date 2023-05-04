@@ -180,6 +180,7 @@ class StateRenderer extends StatelessWidget {
                   title == AppStrings.managerDeletedSuccess ||
                   title == AppStrings.managerAddedSuccess ||
                   title == AppStrings.managerEditedSuccess ||
+                  title == AppStrings.depositPaymentSuccessfully ||
                   title == AppStrings.managerDeletedSuccess ||
                   title == AppStrings.userActivatedSuccessfully ||
                   title == AppStrings.userExtendedSuccessfully) {

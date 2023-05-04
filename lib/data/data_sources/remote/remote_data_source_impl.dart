@@ -26,6 +26,8 @@ import 'package:sasuki/data/responses/managers_invoices_responses/managers_invoi
 import 'package:sasuki/data/responses/managers_list_responses/managers_list_responses.dart';
 import 'package:sasuki/data/responses/manager_list_details_responses/manager_list_details_responses.dart';
 import 'package:sasuki/data/responses/paydebt_informs_responses/paydebt_informs_responses.dart';
+import 'package:sasuki/data/responses/payment_methods_responses/deposit_action_responses.dart';
+import 'package:sasuki/data/responses/payment_methods_responses/payment_methods_responses.dart';
 import 'package:sasuki/data/responses/user_action_response/user_action_response.dart';
 import 'package:sasuki/data/responses/user_details_responses/user_overview_api_responses.dart';
 import 'package:sasuki/data/responses/user_details_responses/user_api_responses.dart';
@@ -263,5 +265,15 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<ManagerJournalResponses> getManagerJournal(String payload) async {
     return await _appServiceClient.getManagerJournal(payload);
+  }
+
+  @override
+  Future<DepositActionResponse> depositPayment(String payload) async {
+    return await _appServiceClient.depositPayment(payload);
+  }
+
+  @override
+  Future<PaymentMethodsResponses> getPaymentMethods() async {
+    return await _appServiceClient.getPaymentMethods();
   }
 }

@@ -25,6 +25,8 @@ import 'package:sasuki/data/mappers/manager_list_details_responses_mappers/secur
 import 'package:sasuki/data/mappers/managers_invoices_responses_mappers/managers_invoices_responses_mappers.dart';
 import 'package:sasuki/data/mappers/managers_list_responses_mappers/managers_list_responses_mappers.dart';
 import 'package:sasuki/data/mappers/paydebt_informs_responses_mappers/paydebt_informs_responses_mappers.dart';
+import 'package:sasuki/data/mappers/payment_methods_responses_mappers/deposit_action_responses_mappers.dart';
+import 'package:sasuki/data/mappers/payment_methods_responses_mappers/payment_methods_responses_mappers.dart';
 import 'package:sasuki/data/mappers/user_action_response_mapper/user_action_response_mapper.dart';
 import 'package:sasuki/data/mappers/serversList_mappers/server_response_mapper.dart';
 import 'package:sasuki/data/mappers/serversList_mappers/serverslist_response_mapper.dart';
@@ -64,6 +66,8 @@ import 'package:sasuki/domain/models/managers_invoices/managers_invoices.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
 import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/models/paydebt_informs/paydebt_informs.dart';
+import 'package:sasuki/domain/models/payment_methods/deposit_action.dart';
+import 'package:sasuki/domain/models/payment_methods/payment_methods.dart';
 import 'package:sasuki/domain/models/user_action/edit_user.dart';
 import 'package:sasuki/domain/models/user_action/user_action.dart';
 import 'package:sasuki/domain/models/user_details/user_overview_api.dart';
@@ -1716,7 +1720,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               ApiInternalStatus.minusOneStatusCode,
-              AppStrings.alreadyNamedError,
+              "unexpected",
             ),
           );
         }
@@ -1758,7 +1762,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               ApiInternalStatus.minusOneStatusCode,
-              AppStrings.alreadyNamedError,
+              response.total.toString(),
             ),
           );
         }
@@ -1800,8 +1804,73 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               ApiInternalStatus.minusOneStatusCode,
-              AppStrings.alreadyNamedError,
+              response.total.toString(),
             ),
+          );
+        }
+      } catch (error) {
+        debugPrint("error = $error");
+
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // its not connected to internet so return a failure
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, DepositAction>> depositPayment(
+    DepositObject depositObject,
+  ) async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet so we can call the api
+      try {
+        final response = await _remoteDataSource.depositPayment(
+          getPayload({
+            "amount": depositObject.amount,
+            "method": depositObject.method,
+            "method_name": depositObject.methodName,
+            "pin": depositObject.pin,
+          }),
+        );
+        if (response.status == ApiInternalStatus.success) {
+          // success reutrn either right
+          return Right(response.toDomain());
+        } else {
+          // failure return either left business error
+          return Left(
+            Failure(
+              ApiInternalStatus.minusOneStatusCode,
+              response.data!,
+            ),
+          );
+        }
+      } catch (error) {
+        debugPrint("error = $error");
+
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // its not connected to internet so return a failure
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, PaymentMethods>> getPaymentMethods() async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet so we can call the api
+      try {
+        final response = await _remoteDataSource.getPaymentMethods();
+        // ignore: unrelated_type_equality_checks
+        if (response.data != Constants.zeroNum) {
+          // success reutrn either right
+          return Right(response.toDomain());
+        } else {
+          // failure return either left business error
+          return Left(
+            Failure(response.status ?? 0, "${response.status ?? 0}"),
           );
         }
       } catch (error) {

@@ -43,11 +43,11 @@ class DepositScreenViewModel extends BaseViewModel
 
   @override
   depositPayment() async {
-    depositObject = DepositObject.copyWith(
+    depositObject = depositObject.copyWith(
       amount: depositObject.amount,
       pin: depositObject.pin,
       methodName: depositObject.methodName,
-      paymentMethodId: depositObject.paymentMethodId,
+      method: depositObject.method,
     );
     inputState.add(LoadingState(
       stateRendererType: StateRendererType.popupLoadingState,
@@ -69,7 +69,7 @@ class DepositScreenViewModel extends BaseViewModel
         inputState.add(
           LoadingState(
             stateRendererType: StateRendererType.popupSuccessState,
-            message: AppStrings.depositSuccessfully,
+            message: AppStrings.depositPaymentSuccessfully,
           ),
         );
         Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
@@ -96,9 +96,14 @@ class DepositScreenViewModel extends BaseViewModel
       (paymentMethodList0) async {
         // right -> success (data)
         List<SinglePaymentMethod> paymentMethodList = [];
-        debugPrint("getProfileList = ${paymentMethodList0.data.length}");
-        paymentMethodList.addAll(paymentMethodList0.data);
-        inputPaymentMethodList.add(paymentMethodList);
+        debugPrint("getPaymentMethodList =  ${paymentMethodList0.data?.length}");
+        paymentMethodList.addAll((paymentMethodList0.data)!);
+        inputPaymentMethodList.add(
+          PaymentMethods(
+            paymentMethodList0.status,
+            paymentMethodList,
+          ),
+        );
       },
     );
   }

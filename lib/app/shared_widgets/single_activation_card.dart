@@ -10,7 +10,6 @@ import 'package:sasuki/app/shared_widgets/text_shimmer.dart';
 import 'package:sasuki/domain/models/activations_reports/activations_reports.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:sasuki/domain/models/managers_invoices/managers_invoices.dart';
 
 class SingleActivationCard extends StatelessWidget {
   const SingleActivationCard({
