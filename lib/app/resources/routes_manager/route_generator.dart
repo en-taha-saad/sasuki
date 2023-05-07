@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sasuki/app/init_screens_dependencies/init_activity_log_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_add_manager_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_add_server_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_add_user_module.dart';
@@ -21,6 +22,7 @@ import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/shared_funs/create_route.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
+import 'package:sasuki/presentation/activity_log/view/activity_log_view.dart';
 import 'package:sasuki/presentation/add_manager/view/add_manager_view.dart';
 import 'package:sasuki/presentation/add_server/view/add_server_view.dart';
 import 'package:sasuki/presentation/add_user/view/add_user_view.dart';
@@ -227,6 +229,15 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
             child: DepositScreen(),
+          ),
+          settings: settings,
+        );
+
+      case Routes.activityLogsRoute:
+        initActivityLogModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: ActivityLogView(),
           ),
           settings: settings,
         );

@@ -28,4 +28,5 @@ class Routes {
       "/singleReportsInvoicesRoute";
   static const String singleReportsJournalRoute = "/singleReportsJournalRoute";
   static const String depositPaymentRoute = "/depositPaymentRoute";
+  static const String activityLogsRoute = "/activityLogsRoute";
 }

@@ -113,9 +113,9 @@ class DrawerView extends StatelessWidget {
         case AppStrings.drawerManagers:
           _manageDrawerNavigations(Routes.managersListRoute, context);
           break;
-        // case AppStrings.drawerActivityLog:
-        //   _manageDrawerNavigations(AppStrings.drawerActivityLog, context);
-        //   break;
+        case AppStrings.drawerActivityLog:
+          _manageDrawerNavigations(Routes.activityLogsRoute, context);
+          break;
         case AppStrings.drawerDepositButton:
           _manageDrawerNavigations(Routes.depositPaymentRoute, context);
           break;

@@ -3,6 +3,7 @@ import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/domain/repository/repository.dart';
 import 'package:sasuki/domain/usecase/activity_log_usecases/activity_log_events_usecase.dart';
 import 'package:sasuki/domain/usecase/activity_log_usecases/activity_log_list_usecase.dart';
+import 'package:sasuki/presentation/activity_log/viewmodel/activity_log_viewmodel.dart';
 
 initActivityLogModule() async {
   if (!GetIt.I.isRegistered<ActivityLogListUseCase>()) {
@@ -17,12 +18,12 @@ initActivityLogModule() async {
     );
   }
 
-  // if (!GetIt.I.isRegistered<ActivityLogViewModel>()) {
-  //   // users list view model instance
-  //   instance
-  //       .registerLazySingleton<ActivityLogViewModel>(() => ActivityLogViewModel(
-  //             instance<ActivityLogListUseCase>(),
-  //             instance<ActivityLogEventsUseCase>(),
-  //           ));
-  // }
+  if (!GetIt.I.isRegistered<ActivityLogViewModel>()) {
+    // users list view model instance
+    instance
+        .registerLazySingleton<ActivityLogViewModel>(() => ActivityLogViewModel(
+              instance<ActivityLogEventsUseCase>(),
+              instance<ActivityLogListUseCase>(),
+            ));
+  }
 }
