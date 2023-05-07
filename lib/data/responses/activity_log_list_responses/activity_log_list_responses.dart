@@ -32,7 +32,7 @@ class ActivityLogRes {
   @JsonKey(name: 'ip')
   String? ip;
   @JsonKey(name: 'manager_details')
-  ManagerDetails? managerDetails;
+    ManagerDetailsRes? managerDetails;
 
   ActivityLogRes(
     this.id,
@@ -51,7 +51,7 @@ class ActivityLogRes {
 }
 
 @JsonSerializable()
-class ManagerDetails {
+class   ManagerDetailsRes {
   @JsonKey(name: 'id')
   int? id;
   @JsonKey(name: 'username')
@@ -61,10 +61,10 @@ class ManagerDetails {
   @JsonKey(name: 'lastname')
   String? lastName;
 
-  ManagerDetails(this.id, this.username, this.firstName, this.lastName);
+    ManagerDetailsRes(this.id, this.username, this.firstName, this.lastName);
 
-  factory ManagerDetails.fromJson(Map<String, dynamic> json) =>
-      _$ManagerDetailsFromJson(json);
+  factory   ManagerDetailsRes.fromJson(Map<String, dynamic> json) =>
+      _$ManagerDetailsResFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ManagerDetailsToJson(this);
+  Map<String, dynamic> toJson() => _$ManagerDetailsResToJson(this);
 }

@@ -34,7 +34,7 @@ ActivityLogRes _$ActivityLogResFromJson(Map<String, dynamic> json) =>
       json['ip'] as String?,
       json['manager_details'] == null
           ? null
-          : ManagerDetails.fromJson(
+          : ManagerDetailsRes.fromJson(
               json['manager_details'] as Map<String, dynamic>),
     );
 
@@ -49,15 +49,15 @@ Map<String, dynamic> _$ActivityLogResToJson(ActivityLogRes instance) =>
       'manager_details': instance.managerDetails,
     };
 
-ManagerDetails _$ManagerDetailsFromJson(Map<String, dynamic> json) =>
-    ManagerDetails(
+ManagerDetailsRes _$ManagerDetailsResFromJson(Map<String, dynamic> json) =>
+    ManagerDetailsRes(
       json['id'] as int?,
       json['username'] as String?,
       json['firstname'] as String?,
       json['lastname'] as String?,
     );
 
-Map<String, dynamic> _$ManagerDetailsToJson(ManagerDetails instance) =>
+Map<String, dynamic> _$ManagerDetailsResToJson(ManagerDetailsRes instance) =>
     <String, dynamic>{
       'id': instance.id,
       'username': instance.username,
