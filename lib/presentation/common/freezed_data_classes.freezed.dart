@@ -4380,3 +4380,278 @@ abstract class _DepositObject implements DepositObject {
   _$$_DepositObjectCopyWith<_$_DepositObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$ActivityLogRequestObject {
+  int get page => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
+  String get sortBy => throw _privateConstructorUsedError;
+  String get direction => throw _privateConstructorUsedError;
+  String get search => throw _privateConstructorUsedError;
+  List<String> get columns => throw _privateConstructorUsedError;
+  int get managerId => throw _privateConstructorUsedError;
+  String get event => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ActivityLogRequestObjectCopyWith<ActivityLogRequestObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ActivityLogRequestObjectCopyWith<$Res> {
+  factory $ActivityLogRequestObjectCopyWith(ActivityLogRequestObject value,
+          $Res Function(ActivityLogRequestObject) then) =
+      _$ActivityLogRequestObjectCopyWithImpl<$Res, ActivityLogRequestObject>;
+  @useResult
+  $Res call(
+      {int page,
+      int count,
+      String sortBy,
+      String direction,
+      String search,
+      List<String> columns,
+      int managerId,
+      String event});
+}
+
+/// @nodoc
+class _$ActivityLogRequestObjectCopyWithImpl<$Res,
+        $Val extends ActivityLogRequestObject>
+    implements $ActivityLogRequestObjectCopyWith<$Res> {
+  _$ActivityLogRequestObjectCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+    Object? managerId = null,
+    Object? event = null,
+  }) {
+    return _then(_value.copyWith(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      sortBy: null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      direction: null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String,
+      search: null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+      columns: null == columns
+          ? _value.columns
+          : columns // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      managerId: null == managerId
+          ? _value.managerId
+          : managerId // ignore: cast_nullable_to_non_nullable
+              as int,
+      event: null == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ActivityLogRequestObjectCopyWith<$Res>
+    implements $ActivityLogRequestObjectCopyWith<$Res> {
+  factory _$$_ActivityLogRequestObjectCopyWith(
+          _$_ActivityLogRequestObject value,
+          $Res Function(_$_ActivityLogRequestObject) then) =
+      __$$_ActivityLogRequestObjectCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int page,
+      int count,
+      String sortBy,
+      String direction,
+      String search,
+      List<String> columns,
+      int managerId,
+      String event});
+}
+
+/// @nodoc
+class __$$_ActivityLogRequestObjectCopyWithImpl<$Res>
+    extends _$ActivityLogRequestObjectCopyWithImpl<$Res,
+        _$_ActivityLogRequestObject>
+    implements _$$_ActivityLogRequestObjectCopyWith<$Res> {
+  __$$_ActivityLogRequestObjectCopyWithImpl(_$_ActivityLogRequestObject _value,
+      $Res Function(_$_ActivityLogRequestObject) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? count = null,
+    Object? sortBy = null,
+    Object? direction = null,
+    Object? search = null,
+    Object? columns = null,
+    Object? managerId = null,
+    Object? event = null,
+  }) {
+    return _then(_$_ActivityLogRequestObject(
+      null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == direction
+          ? _value.direction
+          : direction // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == columns
+          ? _value._columns
+          : columns // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      null == managerId
+          ? _value.managerId
+          : managerId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ActivityLogRequestObject implements _ActivityLogRequestObject {
+  _$_ActivityLogRequestObject(
+      this.page,
+      this.count,
+      this.sortBy,
+      this.direction,
+      this.search,
+      final List<String> columns,
+      this.managerId,
+      this.event)
+      : _columns = columns;
+
+  @override
+  final int page;
+  @override
+  final int count;
+  @override
+  final String sortBy;
+  @override
+  final String direction;
+  @override
+  final String search;
+  final List<String> _columns;
+  @override
+  List<String> get columns {
+    if (_columns is EqualUnmodifiableListView) return _columns;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_columns);
+  }
+
+  @override
+  final int managerId;
+  @override
+  final String event;
+
+  @override
+  String toString() {
+    return 'ActivityLogRequestObject(page: $page, count: $count, sortBy: $sortBy, direction: $direction, search: $search, columns: $columns, managerId: $managerId, event: $event)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ActivityLogRequestObject &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
+            (identical(other.direction, direction) ||
+                other.direction == direction) &&
+            (identical(other.search, search) || other.search == search) &&
+            const DeepCollectionEquality().equals(other._columns, _columns) &&
+            (identical(other.managerId, managerId) ||
+                other.managerId == managerId) &&
+            (identical(other.event, event) || other.event == event));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, page, count, sortBy, direction,
+      search, const DeepCollectionEquality().hash(_columns), managerId, event);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ActivityLogRequestObjectCopyWith<_$_ActivityLogRequestObject>
+      get copyWith => __$$_ActivityLogRequestObjectCopyWithImpl<
+          _$_ActivityLogRequestObject>(this, _$identity);
+}
+
+abstract class _ActivityLogRequestObject implements ActivityLogRequestObject {
+  factory _ActivityLogRequestObject(
+      final int page,
+      final int count,
+      final String sortBy,
+      final String direction,
+      final String search,
+      final List<String> columns,
+      final int managerId,
+      final String event) = _$_ActivityLogRequestObject;
+
+  @override
+  int get page;
+  @override
+  int get count;
+  @override
+  String get sortBy;
+  @override
+  String get direction;
+  @override
+  String get search;
+  @override
+  List<String> get columns;
+  @override
+  int get managerId;
+  @override
+  String get event;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ActivityLogRequestObjectCopyWith<_$_ActivityLogRequestObject>
+      get copyWith => throw _privateConstructorUsedError;
+}

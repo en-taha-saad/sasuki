@@ -222,3 +222,17 @@ class DepositObject with _$DepositObject {
     String pin,
   ) = _DepositObject;
 }
+
+@freezed
+class ActivityLogRequestObject with _$ActivityLogRequestObject {
+  factory ActivityLogRequestObject(
+    int page,
+    int count,
+    String sortBy,
+    String direction,
+    String search,
+    List<String> columns,
+    int managerId,
+    String event,
+  ) = _ActivityLogRequestObject;
+}
