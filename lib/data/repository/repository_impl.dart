@@ -9,6 +9,8 @@ import 'package:sasuki/data/mappers/acl_permission_group_list_responses_mappers/
 import 'package:sasuki/data/mappers/activate_method_responses_mappers/activate_method_responses_mappers.dart';
 import 'package:sasuki/data/mappers/activation_informs_responses_mappers/activation_informs_responses_mappers.dart';
 import 'package:sasuki/data/mappers/activations_reports_responses_mappers/activations_reports_responses_mappers.dart';
+import 'package:sasuki/data/mappers/activity_log_events_responses_mappers/activity_log_events_responses_mappers.dart';
+import 'package:sasuki/data/mappers/activity_log_list_responses_mappers/activity_log_list_responses_mappers.dart';
 import 'package:sasuki/data/mappers/captcha_mappers/captcha_response_mapper.dart';
 import 'package:sasuki/data/mappers/dashboard_mappers/dashboard_responses_mappers.dart';
 import 'package:sasuki/data/mappers/extend_user_responses_mappers/allowed_extersion_methods_responses_mappers.dart';
@@ -48,6 +50,8 @@ import 'package:sasuki/domain/models/activate_method/activate_method.dart';
 import 'package:sasuki/domain/models/activation_informs/activation_informs.dart';
 import 'package:sasuki/domain/models/activations_reports/activations_reports.dart'
     as activations_reports;
+import 'package:sasuki/domain/models/activity_log_list/activity_log_list.dart';
+import 'package:sasuki/domain/models/activity_log_events/activity_log_events.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/choosing_server/server.dart';
 import 'package:sasuki/domain/models/dashboard/dashboard.dart';
@@ -1871,6 +1875,76 @@ class RepositoryImpl implements Repository {
           // failure return either left business error
           return Left(
             Failure(response.status ?? 0, "${response.status ?? 0}"),
+          );
+        }
+      } catch (error) {
+        debugPrint("error = $error");
+
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // its not connected to internet so return a failure
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ActivityLogEvents>> getActivityLogEvent() async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet so we can call the api
+      try {
+        final response = await _remoteDataSource.getActivityLogEvent();
+        // ignore: unrelated_type_equality_checks
+        if (response.data != Constants.zeroNum) {
+          // success reutrn either right
+          return Right(response.toDomain());
+        } else {
+          // failure return either left business error
+          return Left(
+            Failure(response.status ?? 0, "${response.status ?? 0}"),
+          );
+        }
+      } catch (error) {
+        debugPrint("error = $error");
+
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // its not connected to internet so return a failure
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, ActivityLogList>> getActivityLogList(
+      ActivityLogRequestObject activityLogRequestObject) async {
+    if (await _networkInfo.isConnected) {
+      // its connected to internet so we can call the api
+      try {
+        final response = await _remoteDataSource.getActivityLogList(
+          getPayload(
+            {
+              "page": activityLogRequestObject.page,
+              "count": activityLogRequestObject.count,
+              "sortBy": activityLogRequestObject.sortBy,
+              "direction": activityLogRequestObject.direction,
+              "search": activityLogRequestObject.search,
+              "columns": activityLogRequestObject.columns,
+              "manager_id": activityLogRequestObject.managerId,
+              "event": activityLogRequestObject.event,
+            },
+          ),
+        );
+        if (response.total != Constants.nullValue) {
+          // success reutrn either right
+          return Right(response.toDomain());
+        } else {
+          // failure return either left business error
+          return Left(
+            Failure(
+              ApiInternalStatus.minusOneStatusCode,
+              "unexpected",
+            ),
           );
         }
       } catch (error) {

@@ -9,6 +9,8 @@ import 'package:sasuki/data/responses/acl_permission_group_list_responses/acl_pe
 import 'package:sasuki/data/responses/activate_method_responses/activate_method_responses.dart';
 import 'package:sasuki/data/responses/activation_informs_responses/activation_informs_responses.dart';
 import 'package:sasuki/data/responses/activations_reports_responses/activations_reports_responses.dart';
+import 'package:sasuki/data/responses/activity_log_list_responses/activity_log_list_responses.dart';
+import 'package:sasuki/data/responses/activity_log_events_responses/activity_log_events_responses.dart';
 import 'package:sasuki/data/responses/captcha_responses/captcha_responses.dart';
 import 'package:sasuki/data/responses/dashboard_responses/dashboard_data_responses.dart';
 import 'package:sasuki/data/responses/dashboard_responses/auth_responses.dart';
@@ -275,5 +277,15 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<PaymentMethodsResponses> getPaymentMethods() async {
     return await _appServiceClient.getPaymentMethods();
+  }
+
+  @override
+  Future<ActivityLogEventsResponses> getActivityLogEvent() async {
+    return await _appServiceClient.getActivityLogEvent();
+  }
+
+  @override
+  Future<ActivityLogListResponses> getActivityLogList(String payload) async {
+    return await _appServiceClient.getActivityLogList(payload);
   }
 }

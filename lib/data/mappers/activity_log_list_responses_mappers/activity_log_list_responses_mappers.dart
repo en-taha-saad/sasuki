@@ -28,8 +28,8 @@ extension ActivityLogResMapper on ActivityLogRes? {
 }
 
 extension ManagerDetailsResMapper on ManagerDetailsRes? {
-  ManagerDetails toDomain() {
-    return ManagerDetails(
+  ManagerDetailsLog toDomain() {
+    return ManagerDetailsLog(
       this?.id.orZero() ?? Constants.zeroNum.toInt(),
       this?.username.orEmpty() ?? Constants.emptyStr,
       this?.firstName.orEmpty() ?? Constants.emptyStr,

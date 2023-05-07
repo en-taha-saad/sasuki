@@ -7,6 +7,8 @@ import 'package:sasuki/domain/models/activate_method/activate_method.dart';
 import 'package:sasuki/domain/models/activation_informs/activation_informs.dart';
 import 'package:sasuki/domain/models/activations_reports/activations_reports.dart'
     as activations_reports;
+import 'package:sasuki/domain/models/activity_log_events/activity_log_events.dart';
+import 'package:sasuki/domain/models/activity_log_list/activity_log_list.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/choosing_server/server.dart';
 import 'package:sasuki/domain/models/choosing_server/servers.dart';
@@ -153,4 +155,10 @@ abstract class Repository {
   );
 
   Future<Either<Failure, PaymentMethods>> getPaymentMethods();
+
+  Future<Either<Failure, ActivityLogList>> getActivityLogList(
+    ActivityLogRequestObject activityLogRequestObject,
+  );
+
+  Future<Either<Failure, ActivityLogEvents>> getActivityLogEvent();
 }

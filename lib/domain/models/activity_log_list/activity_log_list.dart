@@ -12,7 +12,7 @@ class ActivityLog {
   String? event;
   String? description;
   String? ip;
-  ManagerDetails? managerDetails;
+  ManagerDetailsLog? managerDetails;
 
   ActivityLog(
     this.id,
@@ -25,11 +25,11 @@ class ActivityLog {
   );
 }
 
-class ManagerDetails {
+class ManagerDetailsLog {
   int? id;
   String? username;
   String? firstName;
   String? lastName;
 
-  ManagerDetails(this.id, this.username, this.firstName, this.lastName);
+  ManagerDetailsLog(this.id, this.username, this.firstName, this.lastName);
 }
