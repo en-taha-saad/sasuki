@@ -6,23 +6,19 @@ import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
-import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
-import 'package:sasuki/app/shared_widgets/single_manager_card.dart';
-import 'package:sasuki/app/shared_widgets/single_manager_card_statistics.dart';
-import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
-import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
+import 'package:sasuki/app/shared_widgets/single_activity_log_card.dart';
+import 'package:sasuki/domain/models/activity_log_events/activity_log_events.dart';
+import 'package:sasuki/domain/models/activity_log_list/activity_log_list.dart';
 import 'package:sasuki/domain/models/managers_list/managers_list.dart';
 import 'package:sasuki/presentation/activity_log/viewmodel/activity_log_viewmodel.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
-import 'package:sasuki/presentation/manager_details/viewmodel/manager_details_viewmodel.dart';
-import 'package:intl/intl.dart' as intl;
 
 class ActivityLogView extends StatefulWidget {
   const ActivityLogView({Key? key}) : super(key: key);
@@ -33,31 +29,30 @@ class ActivityLogView extends StatefulWidget {
 }
 
 class _ActivityLogViewState extends State<ActivityLogView> {
-  final ActivityLogViewModel _managersListViewModel =
+  final ActivityLogViewModel _activityLogViewModel =
       instance<ActivityLogViewModel>();
   final ScrollController _scrollController = ScrollController();
   final _searchInputController = TextEditingController();
-  bool loadingMoreManagers = Constants.falseBool;
-  bool loadFilteredManagers = Constants.falseBool;
+  bool loadingMoreActivityLogs = Constants.falseBool;
+  bool loadFilteredActivityLogs = Constants.falseBool;
   bool showFilterWidget = Constants.falseBool;
-  List<SingleManagerData>? parentManagerList;
-  SingleManagerData? selectedparentManager;
-  List<SingleAclPermissionGroup>? aclPermissionGroupList;
-  SingleAclPermissionGroup? selectedAclPermissionGroup;
+  List<SingleManagerData>? activityLogEventsList;
+  List<ActivityLogEvent>? activityLogEvents;
+  ActivityLogEvent? selectedActivityLogEvent;
 
   _bind() async {
-    await _managersListViewModel.start();
+    await _activityLogViewModel.start();
     _handleNext();
     _searchInputController.addListener(
       () {
-        _managersListViewModel.setSearchInput(_searchInputController.text);
+        _activityLogViewModel.setSearchInput(_searchInputController.text);
       },
     );
   }
 
   @override
   void dispose() {
-    _managersListViewModel.dispose();
+    _activityLogViewModel.dispose();
     super.dispose();
   }
 
@@ -72,18 +67,18 @@ class _ActivityLogViewState extends State<ActivityLogView> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         setState(() {
-          loadingMoreManagers = Constants.trueBool;
+          loadingMoreActivityLogs = Constants.trueBool;
         });
-        _managersListViewModel.getNextManagersList();
+        _activityLogViewModel.getNextActivityLogListData();
         if (_scrollController.position.pixels !=
             _scrollController.position.maxScrollExtent) {
           setState(() {
-            loadingMoreManagers = Constants.falseBool;
+            loadingMoreActivityLogs = Constants.falseBool;
           });
         }
       } else {
         setState(() {
-          loadingMoreManagers = Constants.trueBool;
+          loadingMoreActivityLogs = Constants.trueBool;
         });
       }
     });
@@ -92,7 +87,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<FlowState>(
-      stream: _managersListViewModel.outputState,
+      stream: _activityLogViewModel.outputState,
       builder: (context, AsyncSnapshot<FlowState> snapshot) {
         return snapshot.data?.getScreenWidget(
               context,
@@ -106,7 +101,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
 
   Widget _getScreenView() {
     return RefreshIndicator(
-      onRefresh: () async => _managersListViewModel.refreshManagersList(),
+      onRefresh: () async => _activityLogViewModel.refreshActivityLogListData(),
       triggerMode: RefreshIndicatorTriggerMode.anywhere,
       backgroundColor: ColorManager.whiteNeutral,
       color: ColorManager.backgroundCenter,
@@ -126,107 +121,86 @@ class _ActivityLogViewState extends State<ActivityLogView> {
   }
 
   Widget _getContentWidget() {
-    return Column(
-      children: [
-        Container(
-          color: ColorManager.primaryshade1,
-          child: Column(
-            children: [
-              AppSize.statusBarHeight(context),
-              const SizedBox(height: AppSize.s20),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(AppSize.s10),
-                          child: InkWell(
-                            child: SvgPicture.asset(IconsAssets.menu),
-                            onTap: () {
-                              Nav.navTo(context, Routes.drawerRoute);
-                            },
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color(0xff1B2A52),
+      ),
+      child: Column(
+        children: [
+          Container(
+            color: ColorManager.primaryshade1,
+            child: Column(
+              children: [
+                AppSize.statusBarHeight(context),
+                const SizedBox(height: AppSize.s20),
+                Container(
+                  margin: const EdgeInsets.only(
+                    left: AppPadding.p25,
+                    right: AppPadding.p25,
+                    bottom: AppPadding.p20,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(AppSize.s10),
+                            child: InkWell(
+                              child: SvgPicture.asset(IconsAssets.back),
+                              onTap: () {
+                                Nav.popRoute(context);
+                              },
+                            ),
                           ),
-                        ),
-                        Text(
-                          AppStrings.managersListScreen,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(
-                                fontSize: 18,
-                              ),
-                        ),
-                        Container(),
-                      ],
-                    ),
-                    const SizedBox(height: AppSize.s20),
-                    StreamBuilder<ManagerListDetails?>(
-                      stream: _managersListViewModel.outputManagersList,
-                      builder: (context, snapshot) {
-                        return SingleManagerCardStatistics(
-                          isShimmer: Constants.falseBool,
-                          totalManagers:
-                              "${snapshot.data?.total ?? Constants.dash}",
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: AppSize.s15),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: getScreenWidth(context) * 0.6,
-                child: _getSearchTextField(),
-              ),
-              InkWell(
-                onTap: _showFilterDialog,
-                child: SvgPicture.asset(
-                  IconsAssets.filter,
-                  width: AppSize.s18,
-                  height: AppSize.s18,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  _managersListViewModel.isThereAddManagerCreationPermission
-                      ? Nav.navTo(context, Routes.addManagerRoute)
-                      : null;
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(AppPadding.p7),
-                  decoration: const BoxDecoration(
-                    color: ColorManager.primaryshade1,
-                    shape: BoxShape.circle,
+                          Text(
+                            AppStrings.drawerActivityLog,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  fontSize: 18,
+                                ),
+                          ),
+                          Container(),
+                        ],
+                      ),
+                    ],
                   ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSize.s15),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: getScreenWidth(context) * 0.8,
+                  child: _getSearchTextField(),
+                ),
+                InkWell(
+                  onTap: _showFilterDialog,
                   child: SvgPicture.asset(
-                    IconsAssets.add,
-                    width: AppSize.s24,
-                    height: AppSize.s24,
+                    IconsAssets.filter,
+                    width: AppSize.s18,
+                    height: AppSize.s18,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: AppSize.s15),
-        Expanded(
-          child: _getManagersList(),
-        ),
-      ],
+          const SizedBox(height: AppSize.s15),
+          Expanded(
+            child: _getActivityLogsList(),
+          ),
+        ],
+      ),
     );
   }
 
@@ -236,14 +210,14 @@ class _ActivityLogViewState extends State<ActivityLogView> {
       children: [
         TextFormField(
           controller: _searchInputController,
-          onEditingComplete: _searchManagers,
+          onEditingComplete: _searchActivityLogs,
           onTap: () {
             setState(() {
               showClearIcon = Constants.trueBool;
             });
           },
           onFieldSubmitted: (value) {
-            _searchManagers();
+            _searchActivityLogs();
             setState(() {
               showClearIcon = Constants.falseBool;
             });
@@ -287,7 +261,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
                     );
                     FocusScope.of(context).unfocus();
                     _searchInputController.clear();
-                    _searchManagers();
+                    _searchActivityLogs();
                   },
                   child: const Icon(
                     Icons.clear,
@@ -301,15 +275,15 @@ class _ActivityLogViewState extends State<ActivityLogView> {
     );
   }
 
-  _searchManagers() {
+  _searchActivityLogs() {
     FocusScope.of(context).unfocus();
-    setState(() => loadFilteredManagers = Constants.falseBool);
-    _managersListViewModel.getManagerFromSearch();
+    setState(() => loadFilteredActivityLogs = Constants.falseBool);
+    _activityLogViewModel.getActivityLogFromSearch();
   }
 
-  Widget _getManagersList() {
-    return StreamBuilder<ManagerListDetails?>(
-      stream: _managersListViewModel.outputManagersList,
+  Widget _getActivityLogsList() {
+    return StreamBuilder<ActivityLogList?>(
+      stream: _activityLogViewModel.outputActivityLogListData,
       builder: (context, snapshot) {
         // ignore: prefer_is_empty
         if (snapshot.data?.data?.length == Constants.oneNum ||
@@ -317,20 +291,21 @@ class _ActivityLogViewState extends State<ActivityLogView> {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Future.delayed(
               Duration(seconds: Constants.oneNum.toInt()),
-              () => setState(() => loadFilteredManagers = Constants.falseBool),
+              () => setState(
+                  () => loadFilteredActivityLogs = Constants.falseBool),
             );
           });
         }
-        return !loadFilteredManagers
+        return !loadFilteredActivityLogs
             // ignore: prefer_is_empty
             ? snapshot.data?.data?.length != Constants.zeroNum
                 ? SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     controller: _scrollController,
-                    child: loadingMoreManagers
+                    child: loadingMoreActivityLogs
                         ? Column(
                             children: [
-                              _singleManager(snapshot.data?.data, context),
+                              _singleActivityLog(snapshot.data?.data, context),
                               const SizedBox(height: AppSize.s20),
                               const Center(
                                 child: CircularProgressIndicator(
@@ -341,7 +316,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
                               ),
                             ],
                           )
-                        : _singleManager(snapshot.data?.data, context),
+                        : _singleActivityLog(snapshot.data?.data, context),
                   )
                 : Container(
                     margin: const EdgeInsets.only(top: AppMargin.m38),
@@ -360,8 +335,9 @@ class _ActivityLogViewState extends State<ActivityLogView> {
                           IconButton(
                             onPressed: () {
                               FocusScope.of(context).unfocus();
-                              setState(() => loadFilteredManagers = true);
-                              _managersListViewModel.refreshManagersList();
+                              setState(() => loadFilteredActivityLogs = true);
+                              _activityLogViewModel
+                                  .refreshActivityLogListData();
                             },
                             icon: const Icon(
                               Icons.refresh,
@@ -384,43 +360,15 @@ class _ActivityLogViewState extends State<ActivityLogView> {
     );
   }
 
-  Widget _singleManager(
-      List<SingleManagerDetails>? listOfManagers, BuildContext context) {
+  Widget _singleActivityLog(
+      List<ActivityLog?>? listOfActivityLogs, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
-      children: listOfManagers?.map(
-            (managersListData) {
-              return InkWell(
-                onTap: () {
-                  Nav.navTo(context, Routes.managerDetailsRoute);
-                  instance<ManagerDetailsViewModel>()
-                      .getManagerApiOverview(managersListData.id!);
-                },
-                child: SingleManagerCard(
-                  fullName: managersListData.firstname != Constants.nullValue ||
-                          managersListData.lastname != ""
-                      ? "${managersListData.firstname} ${managersListData.lastname}"
-                      : Constants.dash,
-                  permissionGroup: managersListData.aclGroupDetails?.name !=
-                              Constants.nullValue ||
-                          managersListData.aclGroupDetails?.name != ""
-                      ? "${managersListData.aclGroupDetails?.name}"
-                      : Constants.dash,
-                  balance: managersListData.balance != Constants.nullValue ||
-                          // ignore: unrelated_type_equality_checks
-                          managersListData.balance != ""
-                      ? "${_managersListViewModel.dataCaptcha?.data?.siteCurrency} ${intl.NumberFormat.decimalPattern().format(managersListData.balance)}"
-                      : Constants.dash,
-                  status: _getUserStatusString(managersListData),
-                  statusColor: _getUserStatusColor(managersListData),
-                  usersCount: managersListData.usersCount != Constants.nullValue
-                      ? "${managersListData.usersCount}"
-                      : Constants.dash,
-                  username: managersListData.username,
-                ),
-              );
+      children: listOfActivityLogs?.map(
+            (activityLog) {
+              return SingleActivityLog(activityLog: activityLog);
             },
           ).toList() ??
           [],
@@ -436,15 +384,9 @@ class _ActivityLogViewState extends State<ActivityLogView> {
       useSafeArea: Constants.trueBool,
       builder: (context) => _filterDialog(context),
     );
-    if (parentManagerList == Constants.nullValue ||
-        parentManagerList?.length == Constants.zeroDouble) {
-      await _managersListViewModel.getParentManagerList();
-
-      ///
-      if (aclPermissionGroupList == Constants.nullValue ||
-          aclPermissionGroupList?.length == Constants.zeroDouble) {
-        await _managersListViewModel.getAclPermissionGroupList();
-      }
+    if (activityLogEvents == Constants.nullValue ||
+        activityLogEvents?.length == Constants.zeroDouble) {
+      await _activityLogViewModel.getActivityLogEvents();
     }
     showFilterWidget = !showFilterWidget;
     setState(() {});
@@ -501,10 +443,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
                 ),
               ],
             ),
-            // TOOD: uncomment this when parrent list is ready
-            _getParentManagerDropdown(AppStrings.usersParent, context),
-            _getAclPermissionGroupDropdown(
-                AppStrings.managerPermission, context),
+            _getEventsDropdown(AppStrings.eventFilter, context),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -532,31 +471,30 @@ class _ActivityLogViewState extends State<ActivityLogView> {
 
   void _resetFilters() {
     setState(() {
-      selectedparentManager = Constants.nullValue;
+      selectedActivityLogEvent = Constants.nullValue;
       showFilterWidget = !showFilterWidget;
-      loadFilteredManagers = Constants.trueBool;
+      loadFilteredActivityLogs = Constants.trueBool;
     });
     _searchInputController.clear();
-    _managersListViewModel.setSearchInput(Constants.emptyStr);
-    _managersListViewModel.getManagerFromSearch();
+    _activityLogViewModel.setSearchInput(Constants.emptyStr);
+    _activityLogViewModel.getActivityLogFromSearch();
     Nav.popRoute(context);
   }
 
   void _applyFilters() {
     setState(() {
       showFilterWidget = !showFilterWidget;
-      loadFilteredManagers = Constants.trueBool;
+      loadFilteredActivityLogs = Constants.trueBool;
     });
     _searchInputController.clear();
-    _managersListViewModel.setSearchInput(Constants.emptyStr);
-    _managersListViewModel.getManagerFromSearch(
-      parentId: selectedparentManager?.id,
-      aclPermissionGroup: selectedAclPermissionGroup?.id,
+    _activityLogViewModel.setSearchInput(Constants.emptyStr);
+    _activityLogViewModel.getActivityLogFromSearch(
+      event: selectedActivityLogEvent?.event,
     );
     Nav.popRoute(context);
   }
 
-  _getParentManagerDropdown(String inputTitle, context) {
+  _getEventsDropdown(String inputTitle, context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -566,25 +504,25 @@ class _ActivityLogViewState extends State<ActivityLogView> {
           inputTitle,
           style: Theme.of(context).textTheme.labelLarge,
         ),
-        StreamBuilder<List<SingleManagerData>?>(
-          stream: _managersListViewModel.outputParentManagerList,
+        StreamBuilder<ActivityLogEvents>(
+          stream: _activityLogViewModel.outputActivityLogEvents,
           builder: (_, snapshot0) {
-            if (parentManagerList == Constants.nullValue ||
-                parentManagerList?.length == Constants.zeroNum) {
-              parentManagerList = snapshot0.data;
+            if (activityLogEvents == Constants.nullValue ||
+                activityLogEvents?.length == Constants.zeroNum) {
+              activityLogEvents = snapshot0.data?.data;
             }
-            debugPrint("parentManagerList: $parentManagerList");
+            debugPrint("activityLogEvents: $activityLogEvents");
             // ignore: prefer_is_empty
             return Container(
               margin: const EdgeInsets.only(top: AppMargin.m15),
-              child: DropDownComponent<SingleManagerData?>(
+              child: DropDownComponent<ActivityLogEvent?>(
                 isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.usersParentHint,
-                items: parentManagerList ?? [],
+                hintStr: AppStrings.allEventsHint,
+                items: activityLogEvents ?? [],
                 doOtherThings: (val) {
-                  selectedparentManager = val;
+                  selectedActivityLogEvent = val;
                 },
-                displayFn: (item) => (item as SingleManagerData).username ?? "",
+                displayFn: (item) => (item as ActivityLogEvent).event ?? "",
                 textAndHintColor: ColorManager.whiteNeutral,
               ),
             );
@@ -592,56 +530,5 @@ class _ActivityLogViewState extends State<ActivityLogView> {
         ),
       ],
     );
-  }
-
-  _getAclPermissionGroupDropdown(String inputTitle, context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const SizedBox(height: AppSize.s15),
-        Text(
-          inputTitle,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        StreamBuilder<List<SingleAclPermissionGroup>?>(
-          stream: _managersListViewModel.outputAclPermissionGroupList,
-          builder: (_, snapshot0) {
-            if (aclPermissionGroupList == Constants.nullValue ||
-                aclPermissionGroupList?.length == Constants.zeroNum) {
-              aclPermissionGroupList = snapshot0.data;
-            }
-            debugPrint("aclPermissionGroupList: $aclPermissionGroupList");
-            // ignore: prefer_is_empty
-            return Container(
-              margin: const EdgeInsets.only(top: AppMargin.m15),
-              child: DropDownComponent<SingleAclPermissionGroup?>(
-                isThisServersDropdown: Constants.falseBool,
-                hintStr: AppStrings.managersAclPermissionHint,
-                items: aclPermissionGroupList ?? [],
-                doOtherThings: (val) {
-                  selectedAclPermissionGroup = val;
-                },
-                displayFn: (item) =>
-                    (item as SingleAclPermissionGroup).name ?? "",
-                textAndHintColor: ColorManager.whiteNeutral,
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  _getUserStatusString(SingleManagerDetails singleManagerDetails) {
-    return singleManagerDetails.enabled == Constants.zeroNum
-        ? AppStrings.disabledManager
-        : AppStrings.enabledManager;
-  }
-
-  _getUserStatusColor(SingleManagerDetails singleManagerDetails) {
-    return singleManagerDetails.enabled == Constants.zeroNum
-        ? ColorManager.orangeAnnotations
-        : ColorManager.greenAnnotations;
   }
 }

@@ -314,8 +314,10 @@ class AppStrings {
 
   static const usersAdvancedFilter = "Filter";
   static const usersParent = "Parent";
+  static const eventFilter = "Event";
   static const managerPermission = "Permission";
   static const usersParentHint = "Select Parent";
+  static const allEventsHint = "All Events";
   static const managersAclPermissionHint = "Select Permission";
   static const usersProfileHint = "Select Profile";
   static const usersPaymentMethodHint = "Select Payment Method";

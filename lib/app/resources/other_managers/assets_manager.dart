@@ -39,6 +39,9 @@ class IconsAssets {
   static const String clearInput = "${ImagePaths.sharedIconsPath}clear.svg";
   static const String statusup = "${ImagePaths.sharedIconsPath}statusup.svg";
 
+  static const String global = "${ImagePaths.sharedIconsPath}global.svg";
+  static const String calendar = "${ImagePaths.sharedIconsPath}calendar.svg";
+
   static const String information =
       "${ImagePaths.sharedIconsPath}information.svg";
   static const String tickcircle =

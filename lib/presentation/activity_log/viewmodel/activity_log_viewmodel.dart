@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/domain/models/activity_log_list/activity_log_list.dart';
 import 'package:sasuki/domain/models/activity_log_events/activity_log_events.dart';
-import 'package:sasuki/domain/models/manager_list_details/manager_list_details.dart';
 import 'package:sasuki/domain/usecase/activity_log_usecases/activity_log_events_usecase.dart';
 import 'package:sasuki/domain/usecase/activity_log_usecases/activity_log_list_usecase.dart';
 import 'package:sasuki/presentation/activity_log/viewmodel/activity_log_viewmodel_inputs.dart';
@@ -87,7 +86,7 @@ class ActivityLogViewModel extends BaseViewModel
   }
 
   final StreamController _listOfactivityLogsController =
-      StreamController<ManagerListDetails?>.broadcast();
+      StreamController<ActivityLogList?>.broadcast();
   @override
   Sink get inputActivityLogListData => _listOfactivityLogsController.sink;
 
@@ -177,7 +176,7 @@ class ActivityLogViewModel extends BaseViewModel
         // right -> success (data)
         activityLogList = activityLogList0;
         listOfactivityLogs?.data?.addAll((activityLogList?.data)!);
-        inputActivityLogListData.add(activityLogList);
+        inputActivityLogListData.add(listOfactivityLogs);
         inputState.add(ContentState());
       },
     );
@@ -188,14 +187,15 @@ class ActivityLogViewModel extends BaseViewModel
     inputActivityLogListData.add(emptyListOfActivityLogs);
     activityLogRequestObject = activityLogRequestObject.copyWith(
       page: Constants.oneNum.toInt(),
-      event: event!,
+      event: event ?? Constants.emptyStr,
     );
+    debugPrint("event = $event");
     // ignore: void_checks
     return (await _activityLogListUseCase.execute(activityLogRequestObject))
         .fold(
       (failure) {
         // left -> failure
-        debugPrint("getActivityLogFromSearch failure = ${failure.code}");
+        debugPrint("getActivityLogFromSearch failure = ${failure.message}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -209,7 +209,7 @@ class ActivityLogViewModel extends BaseViewModel
         // right -> success (data)
         activityLogList = activityLogList0;
         listOfactivityLogs = activityLogList;
-        inputActivityLogListData.add(activityLogList);
+        inputActivityLogListData.add(listOfactivityLogs);
         inputState.add(ContentState());
       },
     );
