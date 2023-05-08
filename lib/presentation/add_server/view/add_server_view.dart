@@ -65,15 +65,15 @@ class _AddServerViewState extends State<AddServerView> {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        isFooterHided ? Container() : getScreenFooter(),
+        getScreenFooter(),
         SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: AppSize.s100),
+              const SizedBox(height: AppSize.s56),
               getScreenSmallLogo(),
               const SizedBox(height: AppSize.s25),
               getScreenContent(context),
-              const SizedBox(height: AppSize.s100),
+              const SizedBox(height: 205),
             ],
           ),
         ),
@@ -121,7 +121,7 @@ class _AddServerViewState extends State<AddServerView> {
               );
             },
           ),
-          const SizedBox(height: AppSize.s10),
+          const SizedBox(height: AppSize.s15),
           InkWell(
             onTap: () => Nav.replaceTo(context, Routes.chooseServerRoute),
             child: Text(
@@ -133,8 +133,6 @@ class _AddServerViewState extends State<AddServerView> {
       ),
     );
   }
-
-  var isFooterHided = Constants.trueBool;
 
   Widget _getDataContentWidget() {
     return Form(
@@ -151,16 +149,8 @@ class _AddServerViewState extends State<AddServerView> {
             inputHint: AppStrings.servISPNameHint,
             errorText: AppStrings.ispError,
             autofocus: Constants.trueBool,
-            onTap: () {
-              setState(() {
-                isFooterHided = Constants.trueBool;
-              });
-            },
-            onFieldSubmitted: (value) {
-              setState(() {
-                isFooterHided = Constants.falseBool;
-              });
-            },
+            onTap: () {},
+            onFieldSubmitted: (value) {},
           ),
           const SizedBox(height: AppSize.s25),
           _getSingleTextField(
@@ -170,18 +160,9 @@ class _AddServerViewState extends State<AddServerView> {
             inputHint: AppStrings.servServerAddressHint,
             errorText: AppStrings.serverAddressError,
             autofocus: Constants.falseBool,
-            onTap: () {
-              setState(() {
-                isFooterHided = Constants.trueBool;
-              });
-            },
-            onFieldSubmitted: (value) {
-              setState(() {
-                isFooterHided = Constants.falseBool;
-              });
-            },
+            onTap: () {},
+            onFieldSubmitted: (value) {},
           ),
-          const SizedBox(height: AppSize.s25),
         ],
       ),
     );

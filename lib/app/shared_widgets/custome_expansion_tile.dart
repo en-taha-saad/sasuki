@@ -205,7 +205,6 @@ class _CustomeExpansionTileState extends State<CustomeExpansionTile>
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          // TODO: EDIT THE VERTICAL SPACE
           ListTileTheme.merge(
             dense: true,
             horizontalTitleGap: AppPadding.p0,
@@ -213,18 +212,27 @@ class _CustomeExpansionTileState extends State<CustomeExpansionTile>
             contentPadding: EdgeInsets.zero,
             iconColor: _iconColor.value ?? expansionTileTheme.iconColor,
             textColor: _headerColor.value,
-            child: ListTile(
+            child: InkWell(
               onTap: _handleTap,
-              dense: true,
-              horizontalTitleGap: AppPadding.p0,
-              minVerticalPadding: AppPadding.p0,
-              contentPadding:
-                  widget.tilePadding ?? expansionTileTheme.tilePadding,
-              leading: widget.leading ?? _buildLeadingIcon(context),
-              title: widget.title,
-              style: ListTileStyle.list,
-              subtitle: widget.subtitle,
-              trailing: widget.trailing ?? _buildTrailingIcon(context),
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p25,
+                ),
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: AppPadding.p10),
+                  child: Row(
+                    children: [
+                      widget.leading ??
+                          _buildLeadingIcon(context) ??
+                          Container(),
+                      Expanded(child: widget.title),
+                      widget.trailing ??
+                          _buildTrailingIcon(context) ??
+                          Container(),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
           ClipRect(

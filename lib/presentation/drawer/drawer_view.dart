@@ -294,7 +294,9 @@ class DrawerView extends StatelessWidget {
                                   AppSize.s2 ||
                               listOfDrawerBars.indexOf(element) == AppSize.s4)
                           ? null
-                          : const EdgeInsets.only(bottom: AppSize.s20),
+                          : listOfDrawerBars.indexOf(element) == AppSize.s3
+                              ? const EdgeInsets.only(bottom: AppSize.s10)
+                              : const EdgeInsets.only(bottom: AppSize.s20),
                       child: element.title != AppStrings.drawerReports
                           ? Container(
                               margin: const EdgeInsets.symmetric(
@@ -313,7 +315,7 @@ class DrawerView extends StatelessWidget {
                                     element.title,
                                     style: StylesManager.getRegularStyle(
                                       color: ColorManager.whiteNeutral,
-                                      fontSize: 14,
+                                      fontSize: 16,
                                     ),
                                   ),
                                 ],

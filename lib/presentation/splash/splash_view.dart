@@ -9,6 +9,7 @@ import 'package:sasuki/app/init_screens_dependencies/init_choose_server_module.d
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
+import 'package:sasuki/app/shared_widgets/footer.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -84,8 +85,7 @@ class _SplashViewState extends State<SplashView> {
         const Spacer(),
         Image.asset(ImageAssets.mainLogo),
         const Spacer(),
-        SvgPicture.asset(ImageAssets.secondaryLogo),
-        SvgPicture.asset(ImageAssets.teritaryLogo),
+        getScreenFooter(),
       ],
     );
   }

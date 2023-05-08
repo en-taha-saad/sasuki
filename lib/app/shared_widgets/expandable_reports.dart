@@ -42,7 +42,7 @@ class _ExpandableReportsState extends State<ExpandableReports> {
             widget.title!,
             style: StylesManager.getRegularStyle(
               color: ColorManager.whiteNeutral,
-              fontSize: 14,
+              fontSize: 16,
             ),
           ),
         ],
@@ -61,10 +61,13 @@ class _ExpandableReportsState extends State<ExpandableReports> {
                   (e) => InkWell(
                     onTap: e.action,
                     child: Container(
-                      margin: const EdgeInsets.only(
-                        bottom: AppSize.s15,
+                      width: double.infinity,
+                      margin: EdgeInsets.only(
+                        bottom: e.title == "Manager Journal"
+                            ? AppSize.s15
+                            : AppSize.s10,
                         top: AppSize.s10,
-                        left: AppSize.s62,
+                        left: AppSize.s60,
                       ),
                       child: Text(
                         e.title!,

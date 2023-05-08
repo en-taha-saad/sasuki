@@ -97,54 +97,56 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
           .map<DropdownMenuItem<T>>(
             (item) => DropdownMenuItem<T>(
               value: item as T?,
-              // alignment: Alignment.center,
               child: widget.isThisServersDropdown
-                  ? Center(
-                      child: Column(
-                        children: [
-                          Card(
-                            color: ColorManager.transparent,
-                            elevation: AppSize.s0,
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: AppSize.s8,
-                              vertical: AppSize.s4,
-                            ),
-                            clipBehavior: Clip.hardEdge,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  widget.displayFn(item),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.copyWith(
-                                        color: ColorManager.blackNeutral,
+                  ? Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(AppSize.s15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                widget.displayFn(item),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge
+                                    ?.copyWith(
+                                      color: ColorManager.blackNeutral,
+                                    ),
+                              ),
+                              InkWell(
+                                onTap: () => deleteServerDialog(
+                                  item as Server,
+                                  context,
+                                ),
+                                child: SvgPicture.asset(
+                                  IconsAssets.trashUserAction,
+                                  // ignore: deprecated_member_use
+                                  color: ColorManager.blackNeutral,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                            left: AppSize.s15,
+                            right: AppSize.s15,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: widget.items.last != item
+                                  ? BorderSide(
+                                      color:
+                                          ColorManager.greyNeutral.withOpacity(
+                                        AppSize.s0point25,
                                       ),
-                                ),
-                                InkWell(
-                                  onTap: () => deleteServerDialog(
-                                    item as Server,
-                                    context,
-                                  ),
-                                  child: SvgPicture.asset(
-                                    IconsAssets.trashUserAction,
-                                    // ignore: deprecated_member_use
-                                    color: ColorManager.blackNeutral,
-                                  ),
-                                ),
-                              ],
+                                    )
+                                  : BorderSide.none,
                             ),
                           ),
-                          if (widget.items.last != item)
-                            Divider(
-                              color: ColorManager.greyNeutral.withOpacity(
-                                AppSize.s0point25,
-                              ),
-                              height: AppSize.s1,
-                            ),
-                        ],
-                      ),
+                        ),
+                      ],
                     )
                   : Text(
                       widget.displayFn(item),

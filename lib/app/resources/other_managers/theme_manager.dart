@@ -36,11 +36,11 @@ ThemeData getApplicationTheme() {
         horizontal: AppPadding.p0,
         vertical: AppPadding.p0,
       ),
-      
       collapsedBackgroundColor: ColorManager.transparent,
       collapsedIconColor: ColorManager.whiteNeutral,
       collapsedTextColor: ColorManager.whiteNeutral,
       expandedAlignment: Alignment.centerLeft,
+      
       tilePadding: EdgeInsets.symmetric(
         horizontal: AppPadding.p25,
         vertical: AppPadding.p0,
@@ -61,6 +61,7 @@ ThemeData getApplicationTheme() {
     // elevated button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        shadowColor: ColorManager.transparent,
         padding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p25,
           vertical: AppPadding.p10Point5,

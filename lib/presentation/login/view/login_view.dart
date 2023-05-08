@@ -137,14 +137,11 @@ class _LoginViewState extends State<LoginView> {
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
-        setState(() {
-          isFooterHided = Constants.trueBool;
-        });
       },
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          isFooterHided ? Container() : getScreenFooter(),
+          getScreenFooter(),
           SingleChildScrollView(
             child: Column(
               children: [
@@ -220,7 +217,7 @@ class _LoginViewState extends State<LoginView> {
         ),
         const SizedBox(height: AppSize.s25),
         _getLoginContentWidget(),
-        const SizedBox(height: AppSize.s50),
+        const SizedBox(height: 44),
         StreamBuilder<bool>(
           stream: _viewModel.outputAreAllInputsValid,
           builder: (context, snapshot) {
@@ -236,7 +233,6 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  var isFooterHided = Constants.trueBool;
   Widget _getLoginContentWidget() {
     return Form(
       key: _formKey,
@@ -253,16 +249,8 @@ class _LoginViewState extends State<LoginView> {
             inputHint: AppStrings.servUsernameHint,
             errorText: AppStrings.servInvalidUsername,
             autofocus: Constants.trueBool,
-            onTap: () {
-              setState(() {
-                isFooterHided = Constants.trueBool;
-              });
-            },
-            onFieldSubmitted: (value) {
-              setState(() {
-                isFooterHided = Constants.falseBool;
-              });
-            },
+            onTap: () {},
+            onFieldSubmitted: (value) {},
           ),
           const SizedBox(height: AppSize.s25),
           PasswordTextInput(
@@ -274,16 +262,8 @@ class _LoginViewState extends State<LoginView> {
             errorText: AppStrings.servInvalidPassword,
             autofocus: Constants.falseBool,
             showPassword: Constants.trueBool,
-            onTap: () {
-              setState(() {
-                isFooterHided = Constants.trueBool;
-              });
-            },
-            onFieldSubmitted: (value) {
-              setState(() {
-                isFooterHided = Constants.falseBool;
-              });
-            },
+            onTap: () {},
+            onFieldSubmitted: (value) {},
           ),
           const SizedBox(height: AppSize.s25),
           _rememberMeCheckBoxWidget(),
