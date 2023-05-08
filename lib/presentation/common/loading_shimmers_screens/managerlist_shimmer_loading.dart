@@ -62,7 +62,7 @@ class ManagerListShimmerLoading extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: getScreenWidth(context) * 0.6,
-                    child: _getSearchTextField(),
+                    child: _getSearchTextField(context),
                   ),
                   SvgPicture.asset(
                     IconsAssets.filter,
@@ -94,10 +94,13 @@ class ManagerListShimmerLoading extends StatelessWidget {
     );
   }
 
-  _getSearchTextField() {
+  _getSearchTextField(context) {
     return Stack(
       children: [
         TextFormField(
+           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: ColorManager.whiteNeutral,
+              ),
           enabled: Constants.falseBool,
           decoration: const InputDecoration(
             hintText: AppStrings.usersSearchusers,

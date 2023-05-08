@@ -145,6 +145,7 @@ ThemeData getApplicationTheme() {
           width: AppSize.s1point5,
         ),
       ),
+      
     ),
 
     // text theme

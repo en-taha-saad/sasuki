@@ -151,29 +151,38 @@ class _UsersListViewState extends State<UsersListView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    Stack(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(AppSize.s10),
-                          child: InkWell(
-                            child: SvgPicture.asset(IconsAssets.menu),
-                            onTap: () {
-                              Nav.navTo(context, Routes.drawerRoute);
-                            },
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.only(
+                                top: AppPadding.p4,
+                              ),
+                              child: InkWell(
+                                child: SvgPicture.asset(IconsAssets.menu),
+                                onTap: () {
+                                  Nav.navTo(context, Routes.drawerRoute);
+                                },
+                              ),
+                            ),
+                            Container(),
+                          ],
+                        ),
+                        Center(
+                          child: Text(
+                            AppStrings.usersUsersList,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  fontSize: 18,
+                                ),
                           ),
                         ),
-                        Text(
-                          AppStrings.usersUsersList,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(
-                                fontSize: 18,
-                              ),
-                        ),
-                        Container(),
                       ],
                     ),
                     const SizedBox(height: AppSize.s20),
@@ -268,7 +277,7 @@ class _UsersListViewState extends State<UsersListView> {
             });
           },
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ColorManager.greyNeutral,
+                color: ColorManager.whiteNeutral,
               ),
           decoration: InputDecoration(
             hintText: AppStrings.usersSearchusers,
@@ -343,25 +352,25 @@ class _UsersListViewState extends State<UsersListView> {
         return !loadFilteredUsers
             // ignore: prefer_is_empty
             ? snapshot.data?.length != Constants.zeroNum
-                ? loadingMoreUsers
-                    ? SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        controller: _scrollController,
-                        child: Column(
-                          children: [
-                            _singleUser(snapshot.data, context),
-                            const SizedBox(height: AppSize.s20),
-                            const Center(
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  ColorManager.whiteNeutral,
+                ? SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    controller: _scrollController,
+                    child: loadingMoreUsers
+                        ? Column(
+                            children: [
+                              _singleUser(snapshot.data, context),
+                              const SizedBox(height: AppSize.s20),
+                              const Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    ColorManager.whiteNeutral,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : _singleUser(snapshot.data, context)
+                            ],
+                          )
+                        : _singleUser(snapshot.data, context),
+                  )
                 : Container(
                     margin: const EdgeInsets.only(top: AppMargin.m38),
                     child: Center(

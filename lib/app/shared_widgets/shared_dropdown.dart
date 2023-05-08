@@ -99,20 +99,27 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
               value: item as T?,
               child: widget.isThisServersDropdown
                   ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           padding: const EdgeInsets.all(AppSize.s15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                widget.displayFn(item),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                      color: ColorManager.blackNeutral,
-                                    ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.7,
+                                child: Text(
+                                  widget.displayFn(item),
+                                  softWrap: true,
+                                  maxLines: 3,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        color: ColorManager.blackNeutral,
+                                      ),
+                                ),
                               ),
                               InkWell(
                                 onTap: () => deleteServerDialog(

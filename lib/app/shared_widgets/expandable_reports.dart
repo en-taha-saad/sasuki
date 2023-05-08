@@ -73,7 +73,7 @@ class _ExpandableReportsState extends State<ExpandableReports> {
                         e.title!,
                         style: StylesManager.getRegularStyle(
                           color: ColorManager.whiteNeutral,
-                          fontSize: 14,
+                          fontSize: 16,
                         ),
                       ),
                     ),

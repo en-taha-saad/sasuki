@@ -222,8 +222,8 @@ class _ActivityLogViewState extends State<ActivityLogView> {
               showClearIcon = Constants.falseBool;
             });
           },
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ColorManager.greyNeutral,
+           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: ColorManager.whiteNeutral,
               ),
           decoration: InputDecoration(
             hintText: AppStrings.usersSearchusers,

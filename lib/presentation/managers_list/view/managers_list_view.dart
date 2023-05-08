@@ -249,7 +249,7 @@ class _ManagersListViewState extends State<ManagersListView> {
             });
           },
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ColorManager.greyNeutral,
+                color: ColorManager.whiteNeutral,
               ),
           decoration: InputDecoration(
             hintText: AppStrings.usersSearchusers,

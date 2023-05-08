@@ -210,7 +210,7 @@ class SingleUserCard extends StatelessWidget {
                             ),
                       ),
               ),
-              SizedBox(height: getScreenHeight(context) * 0.07),
+              const SizedBox(height: 65),
               Container(
                 margin: const EdgeInsets.only(right: AppMargin.m8),
                 child: Row(

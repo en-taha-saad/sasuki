@@ -210,18 +210,27 @@ class DrawerView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: InkWell(
-                        child: SvgPicture.asset(IconsAssets.cancel),
-                        onTap: () => Nav.popRoute(context),
+                    Container(
+                      margin: const EdgeInsets.only(top: AppPadding.p5),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: InkWell(
+                          child: SvgPicture.asset(IconsAssets.cancel),
+                          onTap: () => Nav.popRoute(context),
+                        ),
                       ),
                     ),
                     Align(
                       alignment: Alignment.center,
-                      child: Text(
-                        _viewModel.selectedServer?.name ?? Constants.emptyStr,
-                        style: Theme.of(context).textTheme.displayMedium,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: Text(
+                          _viewModel.selectedServer?.name ?? Constants.emptyStr,
+                          softWrap: true,
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
                       ),
                     ),
                     const SizedBox(height: AppSize.s20),

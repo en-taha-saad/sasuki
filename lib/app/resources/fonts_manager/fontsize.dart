@@ -1,7 +1,7 @@
 class FontSize {
   ///
   static const double sHeading1 = 30;
-  static const double sHeading2 = 24;
+  static const double sHeading2 = 20;
   static const double sHeading3 = 22;
   static const double sHeading4 = 20;
   static const double sHeading5 = 16;

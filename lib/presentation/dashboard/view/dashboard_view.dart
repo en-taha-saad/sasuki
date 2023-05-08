@@ -123,20 +123,29 @@ class _DashboardViewState extends State<DashboardView> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         InkWell(
                           child: Container(
-                            padding: const EdgeInsets.all(AppSize.s10),
+                            padding: const EdgeInsets.only(
+                              top: AppSize.s12,
+                            ),
                             child: SvgPicture.asset(IconsAssets.menu),
                           ),
                           onTap: () {
                             Nav.navTo(context, Routes.drawerRoute);
                           },
                         ),
-                        Text(
-                          _viewModel.selectedServer?.name ?? Constants.emptyStr,
-                          style: Theme.of(context).textTheme.displayMedium,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          child: Text(
+                            _viewModel.selectedServer?.name ??
+                                Constants.emptyStr,
+                            softWrap: true,
+                            textAlign: TextAlign.center,
+                            maxLines: 3,
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
                         ),
                         Container(),
                       ],
