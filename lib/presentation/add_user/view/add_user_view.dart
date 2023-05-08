@@ -137,23 +137,19 @@ class _AddUserState extends State<AddUser> {
         AppSize.statusBarHeight(context),
         Container(
           margin: const EdgeInsets.only(
-            right: AppMargin.m25,
-            left: AppMargin.m25,
-            bottom: AppMargin.m5,
+          //   right: AppMargin.m25,
+            left: AppMargin.m5,
+          //   bottom: AppMargin.m5,
           ),
           child: AppBar(
+            
             elevation: AppSize.s0,
             backgroundColor: Colors.transparent,
             centerTitle: Constants.trueBool,
             titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-            leading: Container(
-              margin: const EdgeInsets.only(
-                right: AppMargin.m20,
-              ),
-              child: IconButton(
-                icon: SvgPicture.asset(IconsAssets.back),
-                onPressed: () => Nav.popRoute(context),
-              ),
+            leading: IconButton(
+              icon: SvgPicture.asset(IconsAssets.back),
+              onPressed: () => Nav.popRoute(context),
             ),
             title: Text(
               AppStrings.addUserTitle,

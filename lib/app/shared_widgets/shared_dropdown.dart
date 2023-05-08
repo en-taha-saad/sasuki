@@ -99,8 +99,8 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
               value: item as T?,
               child: widget.isThisServersDropdown
                   ? Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           padding: const EdgeInsets.all(AppSize.s15),

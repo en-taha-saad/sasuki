@@ -55,11 +55,11 @@ class DrawerView extends StatelessWidget {
       IconsAssets.activityLog,
     ),
 
-    ///
-    DrawerSingleBar(
-      AppStrings.drawerDepositButton,
-      IconsAssets.deposit,
-    ),
+    // ///
+    // DrawerSingleBar(
+    //   AppStrings.drawerDepositButton,
+    //   IconsAssets.deposit,
+    // ),
     DrawerSingleBar(
       AppStrings.drawerLogout,
       IconsAssets.logout,
@@ -116,9 +116,9 @@ class DrawerView extends StatelessWidget {
         case AppStrings.drawerActivityLog:
           _manageDrawerNavigations(Routes.activityLogsRoute, context);
           break;
-        case AppStrings.drawerDepositButton:
-          _manageDrawerNavigations(Routes.depositPaymentRoute, context);
-          break;
+        // case AppStrings.drawerDepositButton:
+        //   _manageDrawerNavigations(Routes.depositPaymentRoute, context);
+        //   break;
         case AppStrings.drawerLogout:
           _appPrefs.removeIsUserLoggedInStatus();
           _appPrefs.removeToken();
