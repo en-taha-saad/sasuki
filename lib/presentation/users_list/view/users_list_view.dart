@@ -9,6 +9,7 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
@@ -488,7 +489,16 @@ class _UsersListViewState extends State<UsersListView> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        color: ColorManager.backgroundCenter,
+        decoration: BoxDecoration(
+          color: const Color(0xff2D3B60),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xff000000).withOpacity(0.25),
+              blurRadius: AppSize.s2,
+              offset: const Offset(0, AppSize.s2),
+            ),
+          ],
+        ),
         padding: const EdgeInsets.only(
           right: AppMargin.m25,
           left: AppMargin.m25,
@@ -603,6 +613,13 @@ class _UsersListViewState extends State<UsersListView> {
               child: DropDownComponent<SingleParentData?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Color(0x26ffffff),
+                    width: 1.0,
+                  ),
+                  borderRadius: RadiusSizes.radius12,
+                ),
                 items: parentList ?? [],
                 doOtherThings: (val) {
                   selectedparent = val;
@@ -640,6 +657,13 @@ class _UsersListViewState extends State<UsersListView> {
               child: DropDownComponent<StatusFilterList?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersStatusAny,
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Color(0x26ffffff),
+                    width: 1.0,
+                  ),
+                  borderRadius: RadiusSizes.radius12,
+                ),
                 items: statusFilterList ?? [],
                 doOtherThings: (val) {
                   selectedstatusFilter = val;
@@ -677,6 +701,13 @@ class _UsersListViewState extends State<UsersListView> {
               child: DropDownComponent<ConnectionFilterList?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersStatusAny,
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Color(0x26ffffff),
+                    width: 1.0,
+                  ),
+                  borderRadius: RadiusSizes.radius12,
+                ),
                 items: connectionFilterList ?? [],
                 doOtherThings: (val) {
                   selectedconnectionFilter = val;
@@ -716,6 +747,13 @@ class _UsersListViewState extends State<UsersListView> {
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,
                 items: profileList ?? [],
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Color(0x26ffffff),
+                    width: 1.0,
+                  ),
+                  borderRadius: RadiusSizes.radius12,
+                ),
                 doOtherThings: (val) {
                   selectedprofile = val;
                 },

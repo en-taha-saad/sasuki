@@ -9,6 +9,7 @@ import 'package:sasuki/app/init_screens_dependencies/init_choose_server_module.d
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
+import 'package:sasuki/app/shared_funs/change_status_bar_color.dart';
 import 'package:sasuki/app/shared_widgets/footer.dart';
 
 class SplashView extends StatefulWidget {
@@ -24,6 +25,8 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   void initState() {
+    changeStatusBarColor();
+
     _startDelay();
     super.initState();
   }
@@ -74,6 +77,8 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   void dispose() {
+    changeStatusBarColor();
+
     _timer?.cancel();
     super.dispose();
   }

@@ -150,14 +150,9 @@ class _ExtendUserViewState extends State<ExtendUserView> {
             AppSize.statusBarHeight(context),
             Container(
               margin: const EdgeInsets.only(
-               
                 bottom: AppMargin.m5,
               ),
               child: AppBar(
-                elevation: AppSize.s0,
-            backgroundColor: const Color(0xff2D3B60),
-                centerTitle: Constants.trueBool,
-                titleTextStyle: Theme.of(context).textTheme.headlineMedium,
                 leading: Container(
                   margin: const EdgeInsets.only(
                     right: AppMargin.m20,
@@ -248,15 +243,15 @@ class _ExtendUserViewState extends State<ExtendUserView> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: AppMargin.m10),
-                child: Text(
-                  "Activation Method",
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: ColorManager.blackNeutral,
-                      ),
-                ),
+            Container(
+              margin: const EdgeInsets.only(bottom: AppMargin.m10),
+              child: Text(
+                "Activation Method",
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: ColorManager.blackNeutral,
+                    ),
               ),
+            ),
             Container(
               margin: const EdgeInsets.only(bottom: AppMargin.m25),
               child: DropDownComponent<ActivationMethod>(
@@ -271,15 +266,15 @@ class _ExtendUserViewState extends State<ExtendUserView> {
                 textAndHintColor: ColorManager.blackNeutral,
               ),
             ),
-              Container(
-                margin: const EdgeInsets.only(bottom: AppMargin.m10),
-                child: Text(
-                  "Extension",
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: ColorManager.blackNeutral,
-                      ),
-                ),
+            Container(
+              margin: const EdgeInsets.only(bottom: AppMargin.m10),
+              child: Text(
+                "Extension",
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: ColorManager.blackNeutral,
+                    ),
               ),
+            ),
             DropDownComponent<Extension>(
               isThisServersDropdown: Constants.falseBool,
               hintStr: AppStrings.changeProfileHint,

@@ -309,15 +309,6 @@ class UserDetailsViewModel extends BaseViewModel
         ),
       );
     }
-
-    if (permissions.contains(AppStrings.userPermissionDelete)) {
-      userActions.add(
-        SingleUserAction(
-          AppStrings.userActionDelete,
-          IconsAssets.trashUserAction,
-        ),
-      );
-    }
   }
 
   @override

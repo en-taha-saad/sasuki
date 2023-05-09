@@ -100,12 +100,9 @@ class ReportsActivationsShimmerLoading extends StatelessWidget {
 
   AppBar _getActivationAppBar(context) {
     return AppBar(
-      elevation: AppSize.s0,
-      backgroundColor: Colors.transparent,
-      centerTitle: Constants.trueBool,
+     
       toolbarHeight: 40,
       titleSpacing: 0,
-      titleTextStyle: Theme.of(context).textTheme.headlineMedium,
       leading: Container(
         margin: const EdgeInsets.only(
           right: AppMargin.m20,

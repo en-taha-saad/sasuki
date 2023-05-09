@@ -23,6 +23,7 @@ class DropDownComponent<T> extends StatefulWidget {
   final Color? textAndHintColor;
   final ChooseServerViewModel? viewModel;
   final Color? dropdownColor;
+  final InputBorder? border;
   const DropDownComponent({
     Key? key,
     required this.items,
@@ -30,6 +31,7 @@ class DropDownComponent<T> extends StatefulWidget {
     required this.doOtherThings,
     required this.isThisServersDropdown,
     this.dropdownColor,
+    this.border,
     this.hintStr,
     this.viewModel,
     this.isThisActionDropdown,
@@ -179,6 +181,9 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
       alignment: Alignment.centerLeft,
       decoration: InputDecoration(
         fillColor: widget.dropdownColor,
+        // border: widget.border,
+        enabledBorder: widget.border,
+        focusedBorder: widget.border,
         hintText: widget.isThisServersDropdown
             ? AppStrings.dropDownHint
             : widget.hintStr!,

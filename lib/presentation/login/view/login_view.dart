@@ -15,6 +15,7 @@ import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/app/shared_funs/change_status_bar_color.dart';
 import 'package:sasuki/app/shared_funs/get_data_from_base64string.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/footer.dart';
@@ -104,12 +105,15 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void dispose() {
+    changeStatusBarColor();
     _viewModel.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
+    changeStatusBarColor();
+
     _bind();
     super.initState();
   }

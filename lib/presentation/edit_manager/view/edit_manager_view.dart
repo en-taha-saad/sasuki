@@ -210,11 +210,8 @@ class _EditManagerState extends State<EditManager> {
             bottom: AppMargin.m5,
           ),
           child: AppBar(
-            elevation: AppSize.s0,
-            backgroundColor: const Color(0xff2D3B60),
-            centerTitle: Constants.trueBool,
-            titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-            leading: Container(
+           
+             leading: Container(
               margin: const EdgeInsets.only(
                 right: AppMargin.m20,
               ),

@@ -8,6 +8,7 @@ import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/app/shared_funs/change_status_bar_color.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/footer.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
@@ -30,6 +31,8 @@ class ChooseServerView extends StatefulWidget {
 class _ChooseServerViewState extends State<ChooseServerView> {
   @override
   void initState() {
+    changeStatusBarColor();
+
     _bind();
     super.initState();
   }
@@ -42,6 +45,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
 
   @override
   void dispose() {
+    changeStatusBarColor();
     _viewModel.dispose();
     super.dispose();
   }

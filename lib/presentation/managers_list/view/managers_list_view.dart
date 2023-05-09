@@ -9,6 +9,7 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
@@ -453,9 +454,11 @@ class _ManagersListViewState extends State<ManagersListView> {
   _filterDialog(BuildContext context) {
     return Dialog(
       insetAnimationCurve: Curves.fastLinearToSlowEaseIn,
-      insetPadding: const EdgeInsets.only(
+      insetPadding: EdgeInsets.only(
         left: Constants.zeroDouble,
         right: Constants.zeroDouble,
+        top: MediaQuery.of(context).size.height * 0.1,
+        bottom: MediaQuery.of(context).size.height * 0.4,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.s0),
@@ -470,7 +473,16 @@ class _ManagersListViewState extends State<ManagersListView> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        color: ColorManager.backgroundCenter,
+        decoration: BoxDecoration(
+          color: const Color(0xff2D3B60),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xff000000).withOpacity(0.25),
+              blurRadius: AppSize.s2,
+              offset: const Offset(0, AppSize.s2),
+            ),
+          ],
+        ),
         padding: const EdgeInsets.only(
           right: AppMargin.m25,
           left: AppMargin.m25,
@@ -580,6 +592,13 @@ class _ManagersListViewState extends State<ManagersListView> {
               child: DropDownComponent<SingleManagerData?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Color(0x26ffffff),
+                    width: 1.0,
+                  ),
+                  borderRadius: RadiusSizes.radius12,
+                ),
                 items: parentManagerList ?? [],
                 doOtherThings: (val) {
                   selectedparentManager = val;
@@ -619,6 +638,13 @@ class _ManagersListViewState extends State<ManagersListView> {
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.managersAclPermissionHint,
                 items: aclPermissionGroupList ?? [],
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Color(0x26ffffff),
+                    width: 1.0,
+                  ),
+                  borderRadius: RadiusSizes.radius12,
+                ),
                 doOtherThings: (val) {
                   selectedAclPermissionGroup = val;
                 },

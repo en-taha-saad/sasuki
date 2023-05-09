@@ -169,31 +169,21 @@ class _UserActivationViewState extends State<UserActivationView> {
         Column(
           children: [
             AppSize.statusBarHeight(context),
-            Container(
-              margin: const EdgeInsets.only(
-               
-                bottom: AppMargin.m5,
+            AppBar(
+              leading: Container(
+                margin: const EdgeInsets.only(
+                  right: AppMargin.m20,
+                ),
+                child: IconButton(
+                  icon: SvgPicture.asset(IconsAssets.back),
+                  onPressed: () => Nav.popRoute(context),
+                ),
               ),
-              child: AppBar(
-                elevation: AppSize.s0,
-                backgroundColor: const Color(0xff2D3B60),
-                centerTitle: Constants.trueBool,
-                titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-                leading: Container(
-                  margin: const EdgeInsets.only(
-                    right: AppMargin.m20,
-                  ),
-                  child: IconButton(
-                    icon: SvgPicture.asset(IconsAssets.back),
-                    onPressed: () => Nav.popRoute(context),
-                  ),
-                ),
-                title: Text(
-                  AppStrings.activateUserTitle,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontSize: 18,
-                      ),
-                ),
+              title: Text(
+                AppStrings.activateUserTitle,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: 18,
+                    ),
               ),
             ),
             Expanded(

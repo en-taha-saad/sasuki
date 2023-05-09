@@ -17,8 +17,13 @@ ThemeData getApplicationTheme() {
       secondary: ColorManager.secondary,
     ),
     primarySwatch: Colors.blue,
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       backgroundColor: ColorManager.primaryshade1,
+      elevation: AppSize.s0,
+      centerTitle: Constants.trueBool,
+      titleTextStyle: StylesManager.getMediumStyle(
+        fontSize: FontSize.sHeading5,
+      ),
     ),
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.all<Color>(ColorManager.whiteNeutral),

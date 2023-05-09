@@ -136,18 +136,14 @@ class _AddUserState extends State<AddUser> {
       children: [
         // TODO: change the color of the status bar here
         AppSize.statusBarHeight(context),
-        
+
         Container(
           margin: const EdgeInsets.only(
-          //   right: AppMargin.m25,
+            //   right: AppMargin.m25,
             left: AppMargin.m5,
-          //   bottom: AppMargin.m5,
+            //   bottom: AppMargin.m5,
           ),
           child: AppBar(
-            elevation: AppSize.s0,
-            backgroundColor: const Color(0xff2D3B60),
-            centerTitle: Constants.trueBool,
-            titleTextStyle: Theme.of(context).textTheme.headlineMedium,
             leading: IconButton(
               icon: SvgPicture.asset(IconsAssets.back),
               onPressed: () => Nav.popRoute(context),
