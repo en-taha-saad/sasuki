@@ -135,8 +135,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
                 const SizedBox(height: AppSize.s20),
                 Container(
                   margin: const EdgeInsets.only(
-                    left: AppPadding.p25,
-                    right: AppPadding.p25,
+                   
                     bottom: AppPadding.p20,
                   ),
                   child: Column(

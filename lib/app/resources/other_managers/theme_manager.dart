@@ -18,7 +18,7 @@ ThemeData getApplicationTheme() {
     ),
     primarySwatch: Colors.blue,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.green,
+      backgroundColor: ColorManager.primaryshade1,
     ),
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.all<Color>(ColorManager.whiteNeutral),
@@ -40,7 +40,6 @@ ThemeData getApplicationTheme() {
       collapsedIconColor: ColorManager.whiteNeutral,
       collapsedTextColor: ColorManager.whiteNeutral,
       expandedAlignment: Alignment.centerLeft,
-      
       tilePadding: EdgeInsets.symmetric(
         horizontal: AppPadding.p25,
         vertical: AppPadding.p0,
@@ -66,7 +65,7 @@ ThemeData getApplicationTheme() {
           horizontal: AppPadding.p25,
           vertical: AppPadding.p10Point5,
         ),
-        disabledBackgroundColor: const Color(0xff2F4369),
+        disabledBackgroundColor: const Color(0xff394769),
         foregroundColor: ColorManager.whiteNeutral,
         backgroundColor: ColorManager.primaryshade1,
         textStyle: StylesManager.getMediumStyle(
@@ -104,13 +103,10 @@ ThemeData getApplicationTheme() {
     inputDecorationTheme: InputDecorationTheme(
       filled: Constants.trueBool,
       isDense: Constants.trueBool,
-      fillColor: ColorManager.primaryshade3,
+      fillColor: const Color(0xff273A69),
       border: OutlineInputBorder(
         borderRadius: RadiusSizes.radius12,
-        borderSide: const BorderSide(
-          color: Color(0xff3D6085),
-          width: AppSize.s1,
-        ),
+        borderSide: BorderSide.none,
       ),
       contentPadding: const EdgeInsets.symmetric(
         horizontal: AppPadding.p20,
@@ -145,7 +141,6 @@ ThemeData getApplicationTheme() {
           width: AppSize.s1point5,
         ),
       ),
-      
     ),
 
     // text theme

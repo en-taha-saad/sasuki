@@ -8,7 +8,6 @@ import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
-import 'package:sasuki/app/shared_funs/screen_hieght.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/text_shimmer.dart';
 
@@ -38,7 +37,7 @@ class SingleUserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: ColorManager.primaryshade3,
+        color: const Color(0xff21325E),
         borderRadius: RadiusSizes.radius12,
       ),
       margin: const EdgeInsets.only(
@@ -57,7 +56,7 @@ class SingleUserCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(AppPadding.p12),
                 decoration: BoxDecoration(
-                  color: ColorManager.secondary,
+                  color: const Color(0xff1B2A52),
                   borderRadius: RadiusSizes.radius12,
                 ),
                 child: SvgPicture.asset(

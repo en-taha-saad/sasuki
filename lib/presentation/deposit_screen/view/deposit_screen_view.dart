@@ -90,7 +90,7 @@ class _DepositScreenState extends State<DepositScreen> {
           ),
           child: AppBar(
             elevation: AppSize.s0,
-            backgroundColor: Colors.transparent,
+            backgroundColor: const Color(0xff2D3B60),
             centerTitle: Constants.trueBool,
             titleTextStyle: Theme.of(context).textTheme.headlineMedium,
             leading: Container(

@@ -150,13 +150,12 @@ class _ExtendUserViewState extends State<ExtendUserView> {
             AppSize.statusBarHeight(context),
             Container(
               margin: const EdgeInsets.only(
-                right: AppMargin.m25,
-                left: AppMargin.m25,
+               
                 bottom: AppMargin.m5,
               ),
               child: AppBar(
                 elevation: AppSize.s0,
-                backgroundColor: Colors.transparent,
+            backgroundColor: const Color(0xff2D3B60),
                 centerTitle: Constants.trueBool,
                 titleTextStyle: Theme.of(context).textTheme.headlineMedium,
                 leading: Container(
