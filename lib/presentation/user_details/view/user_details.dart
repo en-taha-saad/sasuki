@@ -126,12 +126,11 @@ class _UserDetailsViewState extends State<UserDetailsView> {
 
   AppBar _getUserActions(context) {
     return AppBar(
-    
       toolbarHeight: 40,
       titleSpacing: 0,
       leading: Container(
         margin: const EdgeInsets.only(
-          right: AppMargin.m20,
+          right: AppMargin.m30,
         ),
         child: IconButton(
           icon: SvgPicture.asset(IconsAssets.back),
@@ -217,81 +216,69 @@ class _UserDetailsViewState extends State<UserDetailsView> {
 
   Widget _getStatisticsCard(context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-          margin: const EdgeInsets.only(right: AppSize.s35),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                AppStrings.userOverviewStatus,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontSize: FontSize.sHeading4,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: AppSize.s8,
+                  height: AppSize.s8,
+                  margin: const EdgeInsets.only(
+                    right: AppSize.s6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: getStatusColor(
+                      getStatusString(userOverviewApiVar?.data?.status),
                     ),
-              ),
-              Row(
-                children: [
-                  Container(
-                    width: AppSize.s8,
-                    height: AppSize.s8,
-                    margin: const EdgeInsets.only(
-                      right: AppSize.s6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: getStatusColor(
-                        getStatusString(userOverviewApiVar?.data?.status),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Text(
+                  getStatusString(userOverviewApiVar?.data?.status),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontSize: FontSize.sBody1,
                       ),
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  Text(
-                    getStatusString(userOverviewApiVar?.data?.status),
-                    style: StylesManager.getRegularStyle(
-                      color: ColorManager.greyNeutral3,
-                      fontSize: FontSize.sBody3,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(right: AppSize.s35),
-          height: AppSize.s30,
-          width: AppSize.s1,
-          decoration: BoxDecoration(
-            color: ColorManager.greyNeutral.withOpacity(0.25),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(AppSize.s15),
+                ),
+              ],
             ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(right: AppSize.s35),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                userOverviewApiVar?.data?.remainingRxtx == Constants.nullValue
-                    ? Constants.dash
-                    : (userOverviewApiVar?.data?.remainingRxtx)! < 0
-                        ? "0"
-                        : "${userOverviewApiVar?.data?.remainingRxtx}",
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontSize: FontSize.sHeading4,
-                    ),
+            Container(
+              margin: const EdgeInsets.only(
+                left: AppSize.s14,
               ),
-              Text(
-                AppStrings.userOverviewDailyTaffic,
+              child: Text(
+                AppStrings.userOverviewStatus,
                 style: StylesManager.getRegularStyle(
                   color: ColorManager.greyNeutral3,
-                  fontSize: FontSize.sBody3,
+                  fontSize: FontSize.sCaption1,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              userOverviewApiVar?.data?.remainingRxtx == Constants.nullValue
+                  ? Constants.dash
+                  : (userOverviewApiVar?.data?.remainingRxtx)! < 0
+                      ? "0"
+                      : "${userOverviewApiVar?.data?.remainingRxtx}",
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontSize: FontSize.sBody1,
+                  ),
+            ),
+            Text(
+              AppStrings.userOverviewDailyTaffic,
+              style: StylesManager.getRegularStyle(
+                color: ColorManager.greyNeutral3,
+                fontSize: FontSize.sCaption1,
+              ),
+            ),
+          ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -303,14 +290,14 @@ class _UserDetailsViewState extends State<UserDetailsView> {
                       ? "0"
                       : "${userOverviewApiVar?.data?.remainingUptime}",
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: FontSize.sHeading4,
+                    fontSize: FontSize.sBody1,
                   ),
             ),
             Text(
               AppStrings.userOverviewUptime,
               style: StylesManager.getRegularStyle(
                 color: ColorManager.greyNeutral3,
-                fontSize: FontSize.sBody3,
+                fontSize: FontSize.sCaption1,
               ),
             ),
           ],
@@ -411,6 +398,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
 
   Widget _getRenameUsernameDialogContent() {
     return getActionTextFieldInput(
+      "",
       context,
       _newUsernameController,
       (val) {
@@ -459,7 +447,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           child: Text(
             "Profile",
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: ColorManager.greyNeutral5,
+                  color: ColorManager.blackNeutral,
                 ),
           ),
         ),
@@ -508,7 +496,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   Widget _getDeleteDialogContent() {
     return Text(
       "${AppStrings.actionDeleteUserdialogTitle} ${userOverviewApiVar?.data?.username}?",
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             color: ColorManager.blackNeutral,
           ),
     );
@@ -546,6 +534,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
           child: getActionTextFieldInput(
+            "0",
             context,
             _amountController,
             (val) {},
@@ -555,6 +544,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           ),
         ),
         getActionTextFieldInput(
+          "Add your comment",
           context,
           _commentController,
           (val) {},
@@ -597,6 +587,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
           child: getActionTextFieldInput(
+            "0",
             context,
             _amountController,
             (val) {},
@@ -606,6 +597,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           ),
         ),
         getActionTextFieldInput(
+          "Add your comment",
           context,
           _commentController,
           (val) {},
@@ -656,6 +648,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
           child: getActionTextFieldInput(
+            "0",
             context,
             _amountController,
             (val) {},
@@ -667,6 +660,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
           child: getActionTextFieldInput(
+            "Add your comment",
             context,
             _commentController,
             (val) {},
@@ -674,23 +668,26 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             Constants.falseBool,
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              AppStrings.totaldebtDialogText,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: ColorManager.blackNeutral,
-                  ),
-            ),
-            Text(
-              "${_viewModel.paydebtInforms?.data?.total}",
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: ColorManager.blackNeutral,
-                  ),
-            ),
-          ],
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                AppStrings.totaldebtDialogText,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: ColorManager.blackNeutral,
+                    ),
+              ),
+              Text(
+                "${_viewModel.paydebtInforms?.data?.total}",
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: ColorManager.blackNeutral,
+                    ),
+              ),
+            ],
+          ),
         ),
       ],
     );

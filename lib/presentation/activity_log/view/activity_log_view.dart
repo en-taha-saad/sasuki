@@ -138,36 +138,50 @@ class _ActivityLogViewState extends State<ActivityLogView> {
                   margin: const EdgeInsets.only(
                     bottom: AppPadding.p20,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(AppSize.s10),
-                            child: InkWell(
-                              child: SvgPicture.asset(IconsAssets.back),
-                              onTap: () {
-                                Nav.popRoute(context);
-                              },
-                            ),
-                          ),
-                          Text(
-                            AppStrings.drawerActivityLog,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(
-                                  fontSize: 18,
+                  child: Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Stack(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.only(
+                                    top: AppPadding.p4,
+                                  ),
+                                  child: InkWell(
+                                    child: SvgPicture.asset(IconsAssets.back),
+                                    onTap: () {
+                                      Nav.popRoute(context);
+                                    },
+                                  ),
                                 ),
-                          ),
-                          Container(),
-                        ],
-                      ),
-                    ],
+                                Container(),
+                              ],
+                            ),
+                            Center(
+                              child: Text(
+                                AppStrings.drawerActivityLog,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(
+                                      fontSize: 18,
+                                    ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Container(),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

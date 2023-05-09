@@ -134,7 +134,7 @@ class _SingleActivationViewState extends State<SingleActivationView> {
       titleSpacing: 0,
       leading: Container(
         margin: const EdgeInsets.only(
-          right: AppMargin.m20,
+          right: AppMargin.m30,
         ),
         child: IconButton(
           icon: SvgPicture.asset(IconsAssets.back),

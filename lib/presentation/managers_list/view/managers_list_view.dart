@@ -141,27 +141,37 @@ class _ManagersListViewState extends State<ManagersListView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    Stack(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(AppSize.s10),
-                          child: InkWell(
-                            child: SvgPicture.asset(IconsAssets.menu),
-                            onTap: () {
-                              Nav.navTo(context, Routes.drawerRoute);
-                            },
-                          ),
-                        ),
-                        Text(
-                          AppStrings.managersListScreen,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium
-                              ?.copyWith(
-                                fontSize: 18,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.only(
+                                top: AppPadding.p4,
                               ),
+                              child: InkWell(
+                                child: SvgPicture.asset(IconsAssets.menu),
+                                onTap: () {
+                                  Nav.navTo(context, Routes.drawerRoute);
+                                },
+                              ),
+                            ),
+                            Container(),
+                          ],
+                        ),
+                        Center(
+                          child: Text(
+                            AppStrings.managersListScreen,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  fontSize: 18,
+                                ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                         Container(),
                       ],

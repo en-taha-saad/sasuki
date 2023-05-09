@@ -134,14 +134,10 @@ class _AddUserState extends State<AddUser> {
   Widget _getScreenView(context) {
     return Column(
       children: [
-        // TODO: change the color of the status bar here
         AppSize.statusBarHeight(context),
-
         Container(
           margin: const EdgeInsets.only(
-            //   right: AppMargin.m25,
             left: AppMargin.m5,
-            //   bottom: AppMargin.m5,
           ),
           child: AppBar(
             leading: IconButton(

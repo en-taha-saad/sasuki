@@ -9,7 +9,7 @@ showActionDialog(BuildContext context, Widget? child) {
   return showDialog(
     context: context,
     barrierColor: ColorManager.backgroundCenter.withOpacity(AppSize.s0point4),
-    barrierDismissible: Constants.falseBool,
+    barrierDismissible: Constants.trueBool,
     builder: (BuildContext context) {
       return Dialog(
         insetPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p15),

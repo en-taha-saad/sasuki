@@ -182,15 +182,10 @@ class _EditUserState extends State<EditUser> {
           ),
           child: AppBar(
            
-             leading: Container(
-              margin: const EdgeInsets.only(
-                right: AppMargin.m20,
-              ),
-              child: IconButton(
-                icon: SvgPicture.asset(IconsAssets.back),
-                onPressed: () => Nav.popRoute(context),
-              ),
-            ),
+             leading: IconButton(
+               icon: SvgPicture.asset(IconsAssets.back),
+               onPressed: () => Nav.popRoute(context),
+             ),
             title: Text(
               AppStrings.updateUserTitle,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(

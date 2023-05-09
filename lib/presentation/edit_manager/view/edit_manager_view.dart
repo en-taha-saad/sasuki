@@ -206,19 +206,12 @@ class _EditManagerState extends State<EditManager> {
         AppSize.statusBarHeight(context),
         Container(
           margin: const EdgeInsets.only(
-           
             bottom: AppMargin.m5,
           ),
           child: AppBar(
-           
-             leading: Container(
-              margin: const EdgeInsets.only(
-                right: AppMargin.m20,
-              ),
-              child: IconButton(
-                icon: SvgPicture.asset(IconsAssets.back),
-                onPressed: () => Nav.popRoute(context),
-              ),
+            leading: IconButton(
+              icon: SvgPicture.asset(IconsAssets.back),
+              onPressed: () => Nav.popRoute(context),
             ),
             title: Text(
               AppStrings.updateManagerTitle,
@@ -450,16 +443,16 @@ class _EditManagerState extends State<EditManager> {
                                   builder: (BuildContext context,
                                       StateSetter setState) {
                                     return Transform.scale(
-                                      scale: 0.7,
+                                      scale: 0.6,
                                       child: Switch(
                                         value: isChecked,
-                                        activeColor: ColorManager.primaryshade1,
-                                        activeTrackColor:
-                                            const Color(0xffDCDFE3),
-                                        inactiveThumbColor:
-                                            ColorManager.primaryshade1,
-                                        inactiveTrackColor:
-                                            const Color(0xffDCDFE3),
+                                                                 activeColor: ColorManager.primaryshade1,
+                          activeTrackColor: const Color(0xffDCDFE3),
+                          materialTapTargetSize: MaterialTapTargetSize.padded,
+                          splashRadius: 3,
+                          inactiveThumbColor: ColorManager.blackNeutral,
+                          inactiveTrackColor: const Color(0xffDCDFE3),
+
                                         onChanged: (bool value) {
                                           setState(() => isChecked = value);
                                         },

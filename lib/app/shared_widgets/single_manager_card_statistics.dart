@@ -32,7 +32,7 @@ class SingleManagerCardStatistics extends StatelessWidget {
             margin: const EdgeInsets.only(
               right: AppSize.s15,
               top: AppSize.s13,
-              bottom: AppSize.s13,
+              // bottom: AppSize.s13,
             ),
             child: SvgPicture.asset(
               IconsAssets.statusup,
@@ -52,7 +52,7 @@ class SingleManagerCardStatistics extends StatelessWidget {
                     AppStrings.totalManagers,
                     style: StylesManager.getRegularStyle(
                       color: ColorManager.greyNeutral3,
-                      fontSize: FontSize.sBody3,
+                      fontSize: FontSize.sCaption1,
                     ),
                   ),
                   isShimmer != Constants.nullValue &&
@@ -68,7 +68,7 @@ class SingleManagerCardStatistics extends StatelessWidget {
                               .textTheme
                               .headlineMedium
                               ?.copyWith(
-                                fontSize: FontSize.sHeading2,
+                                fontSize: FontSize.sBody1,
                               ),
                         ),
                 ],

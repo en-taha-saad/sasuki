@@ -62,6 +62,8 @@ ThemeData getApplicationTheme() {
       ),
     ),
 
+
+
     // elevated button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(

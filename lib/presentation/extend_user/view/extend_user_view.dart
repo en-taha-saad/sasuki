@@ -148,26 +148,16 @@ class _ExtendUserViewState extends State<ExtendUserView> {
         Column(
           children: [
             AppSize.statusBarHeight(context),
-            Container(
-              margin: const EdgeInsets.only(
-                bottom: AppMargin.m5,
+            AppBar(
+              leading: IconButton(
+                icon: SvgPicture.asset(IconsAssets.back),
+                onPressed: () => Nav.popRoute(context),
               ),
-              child: AppBar(
-                leading: Container(
-                  margin: const EdgeInsets.only(
-                    right: AppMargin.m20,
-                  ),
-                  child: IconButton(
-                    icon: SvgPicture.asset(IconsAssets.back),
-                    onPressed: () => Nav.popRoute(context),
-                  ),
-                ),
-                title: Text(
-                  AppStrings.extendUserTitle,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontSize: 18,
-                      ),
-                ),
+              title: Text(
+                AppStrings.extendUserTitle,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: 18,
+                    ),
               ),
             ),
             Expanded(

@@ -50,8 +50,8 @@ Widget getActionDialogContent(
             margin: const EdgeInsets.only(
               bottom: AppMargin.m20,
             ),
-            child: const Divider(
-              color: ColorManager.greyNeutral,
+            child: Divider(
+              color: ColorManager.greyNeutral.withOpacity(0.25),
               height: AppSize.s1,
               thickness: AppSize.s1,
             )),

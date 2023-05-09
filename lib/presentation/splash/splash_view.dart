@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:sasuki/app/app_inits_funs/app_prefs.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';

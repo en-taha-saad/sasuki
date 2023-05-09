@@ -170,14 +170,9 @@ class _UserActivationViewState extends State<UserActivationView> {
           children: [
             AppSize.statusBarHeight(context),
             AppBar(
-              leading: Container(
-                margin: const EdgeInsets.only(
-                  right: AppMargin.m20,
-                ),
-                child: IconButton(
-                  icon: SvgPicture.asset(IconsAssets.back),
-                  onPressed: () => Nav.popRoute(context),
-                ),
+              leading: IconButton(
+                icon: SvgPicture.asset(IconsAssets.back),
+                onPressed: () => Nav.popRoute(context),
               ),
               title: Text(
                 AppStrings.activateUserTitle,
@@ -306,6 +301,7 @@ class _UserActivationViewState extends State<UserActivationView> {
                 Container(
                   margin: const EdgeInsets.only(bottom: AppMargin.m25),
                   child: getActionTextFieldInput(
+                    "Add you pin",
                     context,
                     _pinController,
                     (val) {},
@@ -316,6 +312,7 @@ class _UserActivationViewState extends State<UserActivationView> {
               Container(
                 margin: const EdgeInsets.only(bottom: AppMargin.m25),
                 child: getActionTextFieldInput(
+                  "0",
                   context,
                   _userPriceController,
                   (val) {},
@@ -327,6 +324,7 @@ class _UserActivationViewState extends State<UserActivationView> {
               Container(
                 margin: const EdgeInsets.only(bottom: AppMargin.m25),
                 child: getActionTextFieldInput(
+                  "Add your comment",
                   context,
                   _commentController,
                   (val) {},
@@ -348,13 +346,15 @@ class _UserActivationViewState extends State<UserActivationView> {
                   StatefulBuilder(
                     builder: (BuildContext context, StateSetter setState) {
                       return Transform.scale(
-                        scale: 0.7,
+                        scale: 0.6,
                         child: Switch(
-                          value: isChecked,
                           activeColor: ColorManager.primaryshade1,
                           activeTrackColor: const Color(0xffDCDFE3),
-                          inactiveThumbColor: ColorManager.primaryshade1,
+                          materialTapTargetSize: MaterialTapTargetSize.padded,
+                          splashRadius: 3,
+                          inactiveThumbColor: ColorManager.blackNeutral,
                           inactiveTrackColor: const Color(0xffDCDFE3),
+                          value: isChecked,
                           onChanged: (bool value) {
                             setState(() => isChecked = value);
                           },

@@ -57,8 +57,7 @@ class _DashboardViewState extends State<DashboardView> {
     timer = Timer.periodic(
       const Duration(seconds: Constants.delay60Seconds),
       (Timer t) {
-        // TODO: implement timer
-        // _viewModel.getDataStreamingly();
+        _viewModel.getDataStreamingly();
       },
     );
 

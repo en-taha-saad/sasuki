@@ -256,7 +256,7 @@ class _LoginViewState extends State<LoginView> {
             onTap: () {},
             onFieldSubmitted: (value) {},
           ),
-          const SizedBox(height: AppSize.s25),
+          const SizedBox(height: AppSize.s15),
           PasswordTextInput(
             stream: _viewModel.outputIsPasswordValid,
             controller: _userPasswordController,
@@ -269,7 +269,7 @@ class _LoginViewState extends State<LoginView> {
             onTap: () {},
             onFieldSubmitted: (value) {},
           ),
-          const SizedBox(height: AppSize.s25),
+          const SizedBox(height: AppSize.s15),
           _rememberMeCheckBoxWidget(),
         ],
       ),

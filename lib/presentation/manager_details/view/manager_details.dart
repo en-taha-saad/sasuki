@@ -113,12 +113,11 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
 
   AppBar _getManagerActions(context) {
     return AppBar(
-   
       toolbarHeight: 40,
       titleSpacing: 0,
       leading: Container(
         margin: const EdgeInsets.only(
-          right: AppMargin.m20,
+          right: AppMargin.m30,
         ),
         child: IconButton(
           icon: SvgPicture.asset(IconsAssets.back),
@@ -271,6 +270,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
 
   Widget _getRenameUsernameDialogContent() {
     return getActionTextFieldInput(
+      "",
       context,
       _newUsernameController,
       (val) {
@@ -352,6 +352,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
           child: getActionTextFieldInput(
+            "0",
             context,
             _amountController,
             (val) {},
@@ -375,13 +376,16 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
               StatefulBuilder(
                 builder: (BuildContext context, StateSetter setState) {
                   return Transform.scale(
-                    scale: 0.8,
+                    scale: 0.6,
                     child: Switch(
                       value: isChecked,
-                      activeColor: ColorManager.primaryshade1,
-                      activeTrackColor: const Color(0xffDCDFE3),
-                      inactiveThumbColor: ColorManager.primaryshade1,
-                      inactiveTrackColor: const Color(0xffDCDFE3),
+                                             activeColor: ColorManager.primaryshade1,
+                          activeTrackColor: const Color(0xffDCDFE3),
+                          materialTapTargetSize: MaterialTapTargetSize.padded,
+                          splashRadius: 3,
+                          inactiveThumbColor: ColorManager.blackNeutral,
+                          inactiveTrackColor: const Color(0xffDCDFE3),
+
                       onChanged: (bool value) {
                         setState(() => isChecked = value);
                       },
@@ -397,6 +401,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
           (_viewModel.upperBalance?.toDouble())!,
         ),
         getActionTextFieldInput(
+          "Add you comment",
           context,
           _commentController,
           (val) {},
@@ -472,6 +477,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
         Container(
           margin: const EdgeInsets.only(bottom: AppMargin.m25),
           child: getActionTextFieldInput(
+            "0",
             context,
             _amountController,
             (val) {},
@@ -481,6 +487,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
           ),
         ),
         getActionTextFieldInput(
+          "Add you comment",
           context,
           _commentController,
           (val) {},

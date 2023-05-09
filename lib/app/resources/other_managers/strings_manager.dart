@@ -157,7 +157,7 @@ class AppStrings {
   static const userOverviewUserInformation = "User Information";
   static const managerOverviewUserInformation = "Manager Information";
   static const userOverviewServiceInformation = "Service Information";
-  static const userOverviewDailyTaffic = "Daily Taffic";
+  static const userOverviewDailyTaffic = "Daily Traffic";
   static const userOverviewUptime = "Uptime";
   static const userOverviewusername = "Username";
   static const userOverviewInvoiceNo = "Invoice No.";
@@ -226,7 +226,7 @@ class AppStrings {
   static const userActionWithdrawal = "Withdrawal";
   static const userActionPayDebt = "Pay";
   static const userActionPay = "Pay Debt";
-  static const userActionDeleteDialogTitle = "Delete Username";
+  static const userActionDeleteDialogTitle = "Delete User";
   static const managerActionDeleteDialogTitle = "Delete Manager";
   static const userActionDelete = "Delete";
 

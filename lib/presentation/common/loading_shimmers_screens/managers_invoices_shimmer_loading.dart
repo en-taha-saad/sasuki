@@ -96,7 +96,7 @@ class ManagersInvoicesShimmerLoading extends StatelessWidget {
       titleSpacing: 0,
       leading: Container(
         margin: const EdgeInsets.only(
-          right: AppMargin.m20,
+          right: AppMargin.m30,
         ),
         child: SvgPicture.asset(IconsAssets.back),
       ),

@@ -200,7 +200,7 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
       titleSpacing: 0,
       leading: Container(
         margin: const EdgeInsets.only(
-          right: AppMargin.m20,
+          right: AppMargin.m30,
         ),
         child: IconButton(
           icon: SvgPicture.asset(IconsAssets.back),
