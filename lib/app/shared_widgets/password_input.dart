@@ -37,7 +37,7 @@ class PasswordTextInput extends StatefulWidget {
 }
 
 class _PasswordTextInputState extends State<PasswordTextInput> {
-  bool showHidePassword = Constants.falseBool;
+  bool showHidePassword = Constants.trueBool;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<bool>(

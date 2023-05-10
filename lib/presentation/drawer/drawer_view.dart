@@ -12,14 +12,12 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/shared_widgets/expandable_reports.dart';
 import 'package:sasuki/domain/models/drawer/drawer_single_bar.dart';
-import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
 import 'package:sasuki/presentation/dashboard/viewmodel/dashboard_viewmodel.dart';
 import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
-import 'package:sasuki/presentation/common/state_render/states/flow_state_extension.dart';
 
 // ignore: must_be_immutable
 class DrawerView extends StatelessWidget {
@@ -27,66 +25,69 @@ class DrawerView extends StatelessWidget {
   var currentRoute;
 
   DrawerView(this.currentRoute, {super.key});
+
   final AppPreferences _appPrefs = instance<AppPreferences>();
 
   final DashboardViewModel _viewModel = instance<DashboardViewModel>();
-  List<DrawerSingleBar> listOfDrawerBars = [
-    ///
-    DrawerSingleBar(
-      AppStrings.drawerDashboard,
-      IconsAssets.dashboard,
-    ),
-    DrawerSingleBar(
-      AppStrings.drawerUsersList,
-      IconsAssets.usersList,
-    ),
-    DrawerSingleBar(
-      AppStrings.drawerManagers,
-      IconsAssets.managers,
-    ),
 
-    ///
-    DrawerSingleBar(
-      AppStrings.drawerReports,
-      IconsAssets.reports,
-    ),
-    DrawerSingleBar(
-      AppStrings.drawerActivityLog,
-      IconsAssets.activityLog,
-    ),
+  List<DrawerSingleBar> listOfDrawerBars = [];
 
-    // ///
-    // DrawerSingleBar(
-    //   AppStrings.drawerDepositButton,
-    //   IconsAssets.deposit,
-    // ),
-    DrawerSingleBar(
-      AppStrings.drawerLogout,
-      IconsAssets.logout,
-    ),
-  ];
+  List<DrawerSingleBar> getListOfDrawerItems() {
+    listOfDrawerBars.add(
+      DrawerSingleBar(
+        AppStrings.drawerDashboard,
+        IconsAssets.dashboard,
+      ),
+    );
 
-  // TODO: add permissions
-  /*
-  {
-  "permissions": [
-    "prm_managers_index",
-    "prm_users_index",
-    "prm_users_index_all",
-      ]
-}
-  */
-  List<DrawerSingleBar> listOfDrawer() {
-    for (String permission in (_viewModel.auth?.permissions)!) {
-      if (permission == AppStrings.admin) {
-        listOfDrawerBars.add(
-          DrawerSingleBar(
-            AppStrings.drawerDashboard,
-            IconsAssets.dashboard,
-          ),
-        );
-      }
+    if ((_viewModel.auth?.permissions.contains("prm_users_index"))!) {
+      listOfDrawerBars.add(
+        DrawerSingleBar(
+          AppStrings.drawerUsersList,
+          IconsAssets.usersList,
+        ),
+      );
     }
+    if ((_viewModel.auth?.permissions.contains("prm_managers_index"))!) {
+      listOfDrawerBars.add(
+        DrawerSingleBar(
+          AppStrings.drawerManagers,
+          IconsAssets.managers,
+        ),
+      );
+    }
+    if ((_viewModel.auth?.permissions
+            .contains("prm_report_managers_invoices"))! ||
+        (_viewModel.auth?.permissions
+            .contains("prm_report_managers_journal"))! ||
+        (_viewModel.auth?.permissions.contains("prm_report_activations"))!) {
+      listOfDrawerBars.add(
+        DrawerSingleBar(
+          AppStrings.drawerReports,
+          IconsAssets.reports,
+        ),
+      );
+    }
+    if ((_viewModel.auth?.permissions.contains("prm_report_syslog"))!) {
+      listOfDrawerBars.add(
+        DrawerSingleBar(
+          AppStrings.drawerActivityLog,
+          IconsAssets.activityLog,
+        ),
+      );
+    }
+    // if ((_viewModel.auth?.permissions.contains("prm_managers_deposit"))!) {
+    //   DrawerSingleBar(
+    //     AppStrings.drawerDepositButton,
+    //     IconsAssets.deposit,
+    //   );
+    // }
+    listOfDrawerBars.add(
+      DrawerSingleBar(
+        AppStrings.drawerLogout,
+        IconsAssets.logout,
+      ),
+    );
     return listOfDrawerBars;
   }
 
@@ -130,7 +131,11 @@ class DrawerView extends StatelessWidget {
     };
   }
 
-  List<SingleReport> listOfReports(context) => [
+  List<SingleReport> listOfReports = [];
+
+  getListOfReports(context) {
+    if ((_viewModel.auth?.permissions.contains("prm_report_activations"))!) {
+      listOfReports.add(
         SingleReport(
           title: AppStrings.drawerReportsActivations,
           action: () {
@@ -140,6 +145,12 @@ class DrawerView extends StatelessWidget {
             );
           },
         ),
+      );
+    }
+
+    if ((_viewModel.auth?.permissions
+        .contains("prm_report_managers_invoices"))!) {
+      listOfReports.add(
         SingleReport(
           title: AppStrings.drawerReportsInvoices,
           action: () {
@@ -149,6 +160,12 @@ class DrawerView extends StatelessWidget {
             );
           },
         ),
+      );
+    }
+
+    if ((_viewModel.auth?.permissions
+        .contains("prm_report_managers_journal"))!) {
+      listOfReports.add(
         SingleReport(
           title: AppStrings.drawerReportsJournal,
           action: () {
@@ -158,43 +175,17 @@ class DrawerView extends StatelessWidget {
             );
           },
         ),
-      ];
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => Constants.falseBool,
-      child: StreamBuilder<FlowState>(
-        stream: _viewModel.outputState,
-        builder: (context, AsyncSnapshot<FlowState> snapshot) {
-          return snapshot.data?.getScreenWidget(
-                context,
-                _getScreenView(context),
-                () async {
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  await _viewModel.getDataStreamingly();
-                },
-              ) ??
-              _getScreenView(context);
-        },
-      ),
-    );
-  }
-
-  Widget _getScreenView(context) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-        await _viewModel.getDataStreamingly();
-      },
-      triggerMode: RefreshIndicatorTriggerMode.anywhere,
-      backgroundColor: ColorManager.whiteNeutral,
-      color: ColorManager.backgroundCenter,
-      child: _getContentWidget(context),
-    );
+    return _getContentWidget(context);
   }
 
   Widget _getContentWidget(context) {
+    getListOfDrawerItems();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -332,7 +323,7 @@ class DrawerView extends StatelessWidget {
                             )
                           : ExpandableReports(
                               title: element.title,
-                              listOfReports: listOfReports(context),
+                              listOfReports: listOfReports,
                             ),
                     ),
                     if (listOfDrawerBars.indexOf(element) == AppSize.s2 ||

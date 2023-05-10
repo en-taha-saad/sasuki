@@ -112,9 +112,9 @@ class DashboardViewModel extends BaseViewModel
 
   @override
   void dispose() {
-    // _dashboardController.close();
-    // _authController.close();
-    // _captchaController.close();
+    _dashboardController.close();
+    _authController.close();
+    _captchaController.close();
   }
 
   @override
@@ -199,7 +199,7 @@ class DashboardViewModel extends BaseViewModel
       (auth0) {
         // right -> success (data)
         auth = auth0;
-        debugPrint("auth = ${auth?.status}");
+        debugPrint("auth = ${auth?.permissions}");
         inputDashboardData.add(dashboardData);
         getDataStreamingly();
         inputState.add(ContentState());

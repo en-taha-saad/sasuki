@@ -31,7 +31,8 @@ class DashboardView extends StatefulWidget {
   _DashboardViewState createState() => _DashboardViewState();
 }
 
-class _DashboardViewState extends State<DashboardView> {
+class _DashboardViewState extends State<DashboardView>
+    {
   final DashboardViewModel _viewModel = instance<DashboardViewModel>();
   Timer? timer;
 
@@ -49,22 +50,29 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   void dispose() {
     _viewModel.dispose();
+    _cancelTimer();
     super.dispose();
-    timer?.cancel();
   }
 
   @override
   void initState() {
-    timer = Timer.periodic(
-      const Duration(seconds: Constants.delay60Seconds),
-      (Timer t) {
-        // TODO: uncomment this line
-        // _viewModel.getDataStreamingly();
-      },
-    );
-
+    _startTimer();
     _bind();
     super.initState();
+  }
+
+
+  void _startTimer() {
+    timer = Timer.periodic(
+      const Duration(seconds: 60),
+      (Timer t) {
+        _viewModel.getDataStreamingly();
+      },
+    );
+  }
+
+  void _cancelTimer() {
+    timer?.cancel();
   }
 
   @override
@@ -134,6 +142,7 @@ class _DashboardViewState extends State<DashboardView> {
                             child: SvgPicture.asset(IconsAssets.menu),
                           ),
                           onTap: () {
+                            _cancelTimer();
                             Nav.navTo(context, Routes.drawerRoute);
                           },
                         ),

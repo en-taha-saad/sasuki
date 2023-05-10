@@ -31,6 +31,7 @@ class ChooseServerViewModel extends BaseViewModel
     this._selectedServerUsecase,
     this._removeServerUsecase,
   );
+
   @override
   void start() {
     _getServers();
@@ -42,7 +43,7 @@ class ChooseServerViewModel extends BaseViewModel
     _isSelectedServerStreamController.close();
     _listOfServersStreamController.close();
     _isNotSelectedServerStreamController.close();
-    _isNotSelectedServerStreamController.close();
+    _isSelectedServerStreamController.close();
   }
 
   _getSelectedServer() async {
@@ -115,8 +116,10 @@ class ChooseServerViewModel extends BaseViewModel
   ///
   final StreamController _listOfServersStreamController =
       BehaviorSubject<ServersList>();
+
   @override
   Sink get inputListOfServers => _listOfServersStreamController.sink;
+
   @override
   Stream<ServersList> get outputGotListOfServers =>
       _listOfServersStreamController.stream.map(
@@ -126,8 +129,10 @@ class ChooseServerViewModel extends BaseViewModel
   ///
   final StreamController _selectedServerStreamController =
       BehaviorSubject<Server?>();
+
   @override
   Sink get inputSelectedServer => _selectedServerStreamController.sink;
+
   @override
   Stream<Server?> get outputSelectedServer =>
       _selectedServerStreamController.stream.map(
@@ -137,9 +142,11 @@ class ChooseServerViewModel extends BaseViewModel
   ///
   final StreamController _isNotSelectedServerStreamController =
       BehaviorSubject<bool?>();
+
   @override
   Sink get inputIsNotSelectedServer =>
       _isNotSelectedServerStreamController.sink;
+
   @override
   Stream<bool?> get outputIsNotSelectedServer =>
       _isNotSelectedServerStreamController.stream.map(
@@ -149,8 +156,10 @@ class ChooseServerViewModel extends BaseViewModel
   ///
   final StreamController _isSelectedServerStreamController =
       BehaviorSubject<bool?>();
+
   @override
   Sink get inputIsSelectedServer => _isSelectedServerStreamController.sink;
+
   @override
   Stream<bool> get outputIsSelectedServer =>
       _isSelectedServerStreamController.stream.map(
