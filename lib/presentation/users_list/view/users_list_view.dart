@@ -260,6 +260,7 @@ class _UsersListViewState extends State<UsersListView> {
   }
 
   bool showClearIcon = Constants.falseBool;
+
   _getSearchTextField() {
     return Stack(
       children: [

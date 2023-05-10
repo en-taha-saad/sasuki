@@ -69,7 +69,7 @@ class ManagersInvoicesShimmerLoading extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      AppStrings.drawerReportsInvoices,
+                      Constants.dash,
                       style:
                           Theme.of(context).textTheme.headlineMedium?.copyWith(
                                 color: ColorManager.whiteNeutral,
@@ -91,14 +91,16 @@ class ManagersInvoicesShimmerLoading extends StatelessWidget {
 
   AppBar _getInvoiceAppBar(context) {
     return AppBar(
-      
       toolbarHeight: 40,
       titleSpacing: 0,
       leading: Container(
         margin: const EdgeInsets.only(
           right: AppMargin.m30,
         ),
-        child: SvgPicture.asset(IconsAssets.back),
+        // child: IconButton(
+        //   icon: SvgPicture.asset(IconsAssets.back),
+        //   onPressed: () {},
+        // ),
       ),
       title: Text(
         AppStrings.drawerReports,

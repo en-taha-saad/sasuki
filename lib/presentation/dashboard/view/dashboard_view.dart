@@ -34,6 +34,7 @@ class DashboardView extends StatefulWidget {
 class _DashboardViewState extends State<DashboardView> {
   final DashboardViewModel _viewModel = instance<DashboardViewModel>();
   Timer? timer;
+
   _bind() {
     _viewModel.start();
     _viewModel.outputDashboardData.listen(

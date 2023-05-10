@@ -26,67 +26,70 @@ class ManagerListShimmerLoading extends StatelessWidget {
   Widget _getContentWidget(context) {
     return Column(
       children: [
-        AppSize.statusBarHeight(context),
-        const SizedBox(height: AppSize.s20),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+          color: ColorManager.primaryshade1,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(AppSize.s10),
-                    child: SvgPicture.asset(IconsAssets.menu),
-                  ),
-                  Text(
-                    AppStrings.managersListScreen,
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontSize: 18,
-                        ),
-                  ),
-                  Container(),
-                ],
-              ),
+              AppSize.statusBarHeight(context),
               const SizedBox(height: AppSize.s20),
-              const SingleManagerCardStatistics(
-                isShimmer: Constants.trueBool,
-                totalManagers: Constants.dash,
-              ),
-              const SizedBox(height: AppSize.s15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: getScreenWidth(context) * 0.6,
-                    child: _getSearchTextField(context),
-                  ),
-                  SvgPicture.asset(
-                    IconsAssets.filter,
-                    width: AppSize.s18,
-                    height: AppSize.s18,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(AppPadding.p7),
-                    decoration: const BoxDecoration(
-                      color: ColorManager.primaryshade1,
-                      shape: BoxShape.circle,
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Stack(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(),
+                            Container(),
+                          ],
+                        ),
+                        Center(
+                          child: Text(
+                            AppStrings.managersListScreen,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  fontSize: 18,
+                                ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Container(),
+                      ],
                     ),
-                    child: SvgPicture.asset(
-                      IconsAssets.add,
-                      width: AppSize.s24,
-                      height: AppSize.s24,
+                    const SizedBox(height: AppSize.s20),
+                    const SingleManagerCardStatistics(
+                      isShimmer: Constants.trueBool,
+                      totalManagers: Constants.dash,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              const SizedBox(height: AppSize.s15),
             ],
           ),
         ),
+        const SizedBox(height: AppSize.s15),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: getScreenWidth(context) * 0.6,
+                child: _getSearchTextField(context),
+              ),
+              Container(),
+              Container(),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppSize.s15),
         Expanded(
           child: _getManagersList(),
         ),
@@ -98,7 +101,7 @@ class ManagerListShimmerLoading extends StatelessWidget {
     return Stack(
       children: [
         TextFormField(
-           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: ColorManager.whiteNeutral,
               ),
           enabled: Constants.falseBool,

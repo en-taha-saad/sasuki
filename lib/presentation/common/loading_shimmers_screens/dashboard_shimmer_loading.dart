@@ -26,75 +26,79 @@ class DashboardShimmerLoading extends StatelessWidget {
   }
 
   Widget _getContentWidget(context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          AppSize.statusBarHeight(context),
-          Container(
-            margin: const EdgeInsets.only(
-              right: AppMargin.m25,
-              left: AppMargin.m25,
-              top: AppMargin.m20,
-              bottom: AppMargin.m25,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(IconsAssets.menu),
-                    const ShimmerText(
-                      baseColor: ColorManager.whiteNeutral,
-                      highlightColor: ColorManager.greyNeutral,
-                      width: AppSize.s50,
-                    ),
-                    Container(),
-                  ],
-                ),
-                const SizedBox(height: AppSize.s20),
-                Text(
-                  AppStrings.welcome,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color:
-                            ColorManager.whiteNeutral.withOpacity(AppSize.s0_5),
-                        height: AppSize.s1_5,
+    return Container(
+      color: ColorManager.primaryshade1,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            AppSize.statusBarHeight(context),
+            Container(
+              margin: const EdgeInsets.only(
+                right: AppMargin.m25,
+                left: AppMargin.m25,
+                top: AppMargin.m20,
+                bottom: AppMargin.m25,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: const ShimmerText(
+                          baseColor: ColorManager.whiteNeutral,
+                          highlightColor: ColorManager.greyNeutral,
+                          width: AppSize.s50,
+                        ),
                       ),
-                ),
-                const ShimmerText(
-                  baseColor: ColorManager.whiteNeutral,
-                  highlightColor: ColorManager.backgroundCenter,
-                  width: AppSize.s50,
-                ),
-                const SizedBox(height: AppSize.s10),
-                const ShimmerText(
-                  baseColor: ColorManager.greyNeutral,
-                  highlightColor: ColorManager.backgroundCenter,
-                  width: AppSize.s40,
-                ),
-                Text(
-                  AppStrings.availableBalance,
-                  style: StylesManager.getMediumStyle(
-                    color: ColorManager.whiteNeutral.withOpacity(
-                      AppSize.s0_5,
-                    ),
-                    height: AppSize.s1_5,
-                    fontSize: FontSize.sSubtitle5,
+                      Container(),
+                    ],
                   ),
-                ),
-              ],
+                  const SizedBox(height: AppSize.s20),
+                  Text(
+                    AppStrings.welcome,
+                    style: StylesManager.getRegularStyle(
+                      color: ColorManager.greyNeutral3,
+                      fontSize: FontSize.sSubtitle2,
+                      height: AppSize.s1_5,
+                    ),
+                  ),
+                  const ShimmerText(
+                    baseColor: ColorManager.whiteNeutral,
+                    highlightColor: ColorManager.backgroundCenter,
+                    width: AppSize.s50,
+                  ),
+                  const SizedBox(height: AppSize.s10),
+                  const ShimmerText(
+                    baseColor: ColorManager.greyNeutral,
+                    highlightColor: ColorManager.backgroundCenter,
+                    width: AppSize.s40,
+                  ),
+                  Text(
+                    AppStrings.availableBalance,
+                    style: StylesManager.getRegularStyle(
+                      color: ColorManager.greyNeutral3,
+                      fontSize: FontSize.sSubtitle2,
+                      height: AppSize.s1_5,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            color: ColorManager.secondary,
-            child: _getDashboardContent(context),
-          ),
-        ],
+            Container(
+              width: MediaQuery.of(context).size.width,
+              color: ColorManager.secondary,
+              child: _getDashboardContent(context),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -189,5 +193,4 @@ class DashboardShimmerLoading extends StatelessWidget {
       ],
     );
   }
-
 }

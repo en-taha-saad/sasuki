@@ -68,6 +68,7 @@ class DashboardViewModel extends BaseViewModel
           "${dashboard?.data?.expiringSoonCount ?? Constants.dash}",
         ),
       ];
+
   List<CardElement> listOfSalesAndFinance(Dashboard? dashboard) => [
         CardElement(
           AppStrings.dashboardNewRegistrations,
@@ -124,7 +125,6 @@ class DashboardViewModel extends BaseViewModel
         stateRendererType: StateRendererType.fullScreenLoadingState,
       ),
     );
-    // ignore: void_checks
     return (await _dashboardDataUseCase.execute(Void)).fold(
       (failure) {
         // left -> failure
@@ -209,8 +209,10 @@ class DashboardViewModel extends BaseViewModel
 
   @override
   Sink get inputDashboardData => _dashboardController.sink;
+
   @override
   Sink get inputAuthData => _authController.sink;
+
   @override
   Sink get inputDataCaptcha => _captchaController.sink;
 
@@ -218,10 +220,12 @@ class DashboardViewModel extends BaseViewModel
   Stream<Dashboard> get outputDashboardData => _dashboardController.stream.map(
         (dashboard) => dashboard,
       );
+
   @override
   Stream<Auth> get outputAuthData => _authController.stream.map(
         (auth) => auth,
       );
+
   @override
   Stream<Captcha> get outputDataCaptcha => _captchaController.stream.map(
         (captcha) => captcha,

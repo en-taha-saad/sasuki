@@ -26,65 +26,72 @@ class UserListShimmerLoading extends StatelessWidget {
   Widget _getContentWidget(context) {
     return Column(
       children: [
-        AppSize.statusBarHeight(context),
-        const SizedBox(height: AppSize.s20),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+          color: ColorManager.primaryshade1,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(IconsAssets.menu),
-                  Text(
-                    AppStrings.usersUsersList,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  Container(),
-                ],
-              ),
+              AppSize.statusBarHeight(context),
               const SizedBox(height: AppSize.s20),
-              const SingleUserCardStatistics(
-                isShimmer: Constants.trueBool,
-                totalUsers: Constants.dash,
-                activeUsers: Constants.dash,
-                expiredUsers: Constants.dash,
-                onlineUsers: Constants.dash,
-              ),
-              const SizedBox(height: AppSize.s15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: getScreenWidth(context) * 0.6,
-                    child: _getSearchTextField(),
-                  ),
-                  SvgPicture.asset(
-                    IconsAssets.filter,
-                    width: AppSize.s18,
-                    height: AppSize.s18,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(AppPadding.p7),
-                    decoration: const BoxDecoration(
-                      color: ColorManager.primaryshade1,
-                      shape: BoxShape.circle,
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Stack(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(),
+                            Container(),
+                          ],
+                        ),
+                        Center(
+                          child: Text(
+                            AppStrings.usersUsersList,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  fontSize: 18,
+                                ),
+                          ),
+                        ),
+                      ],
                     ),
-                    child: SvgPicture.asset(
-                      IconsAssets.add,
-                      width: AppSize.s24,
-                      height: AppSize.s24,
+                    const SizedBox(height: AppSize.s20),
+                    const SingleUserCardStatistics(
+                      isShimmer: Constants.trueBool,
+                      totalUsers: Constants.dash,
+                      activeUsers: Constants.dash,
+                      expiredUsers: Constants.dash,
+                      onlineUsers: Constants.dash,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              const SizedBox(height: AppSize.s15),
             ],
           ),
         ),
+        const SizedBox(height: AppSize.s15),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: getScreenWidth(context) * 0.6,
+                child: _getSearchTextField(),
+              ),
+              Container(),
+              Container(),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppSize.s15),
         Expanded(
           child: _getUsersList(),
         ),
@@ -116,8 +123,8 @@ class UserListShimmerLoading extends StatelessWidget {
                 theme: const SvgTheme(
                   currentColor: ColorManager.greyNeutral,
                 ),
-                  // ignore: deprecated_member_use
-                  color: ColorManager.greyNeutral,
+                // ignore: deprecated_member_use
+                color: ColorManager.greyNeutral,
               ),
               SvgPicture.asset(
                 height: AppSize.s18,
@@ -126,8 +133,8 @@ class UserListShimmerLoading extends StatelessWidget {
                 theme: const SvgTheme(
                   currentColor: ColorManager.greyNeutral,
                 ),
-                  // ignore: deprecated_member_use
-                  color: ColorManager.greyNeutral,
+                // ignore: deprecated_member_use
+                color: ColorManager.greyNeutral,
               ),
             ],
           ),

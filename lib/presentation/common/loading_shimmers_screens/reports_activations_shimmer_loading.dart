@@ -100,14 +100,13 @@ class ReportsActivationsShimmerLoading extends StatelessWidget {
 
   AppBar _getActivationAppBar(context) {
     return AppBar(
-     
       toolbarHeight: 40,
       titleSpacing: 0,
       leading: Container(
         margin: const EdgeInsets.only(
           right: AppMargin.m30,
         ),
-        child: SvgPicture.asset(IconsAssets.back),
+        // child: SvgPicture.asset(IconsAssets.back),
       ),
       title: Text(
         AppStrings.drawerReports,

@@ -123,6 +123,7 @@ class _ManagersInvoicesViewState extends State<ManagersInvoicesView> {
               ],
             ),
           ),
+
           Container(
             color: ColorManager.whiteNeutral.withOpacity(0.2),
             padding: const EdgeInsets.symmetric(
@@ -173,7 +174,6 @@ class _ManagersInvoicesViewState extends State<ManagersInvoicesView> {
 
   AppBar _getInvoiceAppBar(context) {
     return AppBar(
-    
       toolbarHeight: 40,
       titleSpacing: 0,
       leading: Container(
