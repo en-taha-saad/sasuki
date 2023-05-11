@@ -112,9 +112,10 @@ class DashboardViewModel extends BaseViewModel
 
   @override
   void dispose() {
-    _dashboardController.close();
-    _authController.close();
-    _captchaController.close();
+    // _dashboardController.close();
+    // _authController.close();
+    // _captchaController.close();
+    super.dispose();
   }
 
   @override

@@ -49,7 +49,11 @@ class ManagersJournalViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _managersJournalController.close();
+    _captchaController.close();
+    super.dispose();
+  }
   @override
   Future getManagersJournal() async {
     inputState.add(

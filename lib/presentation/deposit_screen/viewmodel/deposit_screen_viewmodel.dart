@@ -39,7 +39,14 @@ class DepositScreenViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _isPinEnteredStreamController.close();
+    _isAmountEnteredStreamController.close();
+    _paymentMethodListStreamController.close();
+    _amountStreamController.close();
+    _pinStreamController.close();
+    super.dispose();
+  }
 
   @override
   depositPayment() async {

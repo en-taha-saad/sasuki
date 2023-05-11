@@ -56,7 +56,17 @@ class AddManagerViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _areAllInputsValidStreamController.close();
+    _passwordController.close();
+    _userNameController.close();
+    _firstNameController.close();
+    _lastNameController.close();
+    _getParentManagerListController.close();
+    _getAclPermissionGroupListController.close();
+    super.dispose();
+
+  }
 
   @override
   addManager() async {

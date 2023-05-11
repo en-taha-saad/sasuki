@@ -44,6 +44,8 @@ class ChooseServerViewModel extends BaseViewModel
     _listOfServersStreamController.close();
     _isNotSelectedServerStreamController.close();
     _isSelectedServerStreamController.close();
+    _selectedServerStreamController.close();
+    super.dispose();
   }
 
   _getSelectedServer() async {

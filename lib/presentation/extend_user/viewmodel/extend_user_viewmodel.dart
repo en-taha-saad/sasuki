@@ -88,7 +88,11 @@ class ExtendUserViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _extendUserInformsController.close();
+    _allowedExtensionsController.close();
+    super.dispose();
+  }
 
   @override
   getExtendUserInforms(int userId) async {

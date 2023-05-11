@@ -177,7 +177,12 @@ class UserDetailsViewModel extends BaseViewModel
   void start() {}
 
   @override
-  void dispose() {}
+  void dispose() {
+    _userOverviewApiController.close();
+    _getProfileListController.close();
+    _captchaController.close();
+    super.dispose();
+  }
 
   @override
   getUserApiOverview(int userId) async {

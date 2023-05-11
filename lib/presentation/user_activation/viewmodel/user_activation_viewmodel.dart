@@ -101,7 +101,10 @@ class UserActivationViewModel extends BaseViewModel
   void start() {}
 
   @override
-  void dispose() {}
+  void dispose() {
+    _activationInformsController.close();
+    super.dispose();
+  }
 
   @override
   getActivationInforms(int userId) async {

@@ -79,7 +79,16 @@ class UsersListViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _usersListController.close();
+    _listOfUsersController.close();
+    _searchInputController.close();
+    _getParentListController.close();
+    _getStatusListController.close();
+    _getConnectionListController.close();
+    _getProfileListController.close();
+    super.dispose();
+  }
 
   ///
   final StreamController _usersListController =

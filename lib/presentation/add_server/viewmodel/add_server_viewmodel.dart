@@ -22,6 +22,7 @@ class AddServerViewModel extends BaseViewModel
     _ispNameStreamController.close();
     _hostNameController.close();
     _areAllInputsValidStreamController.close();
+    super.dispose();
   }
 
   addServer() async {

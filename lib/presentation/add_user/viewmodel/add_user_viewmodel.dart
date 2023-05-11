@@ -73,7 +73,14 @@ class AddUserViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _areAllInputsValidStreamController.close();
+    _passwordController.close();
+    _userNameController.close();
+    _getProfileListController.close();
+    _getParentListController.close();
+    super.dispose();
+  }
 
   @override
   addUser() async {

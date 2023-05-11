@@ -60,7 +60,13 @@ class ReportsActivationsViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _reportsActivationsController.close();
+    _getProfileListController.close();
+    _captchaController.close();
+
+    super.dispose();
+  }
   @override
   Future getReportsActivations() async {
     activationReportsRequestObject = activationReportsRequestObject.copyWith(

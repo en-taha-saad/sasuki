@@ -144,7 +144,11 @@ class ManagerDetailsViewModel extends BaseViewModel
   void start() {}
 
   @override
-  void dispose() {}
+  void dispose() {
+    _managerOverviewApiController.close();
+    _captchaController.close();
+    super.dispose();
+  }
 
   @override
   getManagerApiOverview(int managerId) async {

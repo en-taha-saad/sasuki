@@ -63,7 +63,15 @@ class ManagersListViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _listOfManagersController.close();
+    _searchInputController.close();
+    _getparentManagerListController.close();
+    _getAclPermissionGroupListController.close();
+    _managersListController.close();
+    _captchaController.close();
+    super.dispose();
+  }
 
   /// get list of users
   final StreamController _listOfManagersController =

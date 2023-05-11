@@ -49,7 +49,11 @@ class ManagersInvoicesViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _managersInvoicesController.close();
+    _captchaController.close();
+    super.dispose();
+  }
   @override
   Future getManagersInvoices() async {
     inputState.add(

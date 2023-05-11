@@ -211,25 +211,25 @@ class _ManagersListViewState extends State<ManagersListView> {
                   height: AppSize.s18,
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  _managersListViewModel.isThereAddManagerCreationPermission
-                      ? Nav.navTo(context, Routes.addManagerRoute)
-                      : null;
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(AppPadding.p7),
-                  decoration: const BoxDecoration(
-                    color: ColorManager.primaryshade1,
-                    shape: BoxShape.circle,
-                  ),
-                  child: SvgPicture.asset(
-                    IconsAssets.add,
-                    width: AppSize.s24,
-                    height: AppSize.s24,
-                  ),
-                ),
-              ),
+              _managersListViewModel.isThereAddManagerCreationPermission
+                  ? InkWell(
+                      onTap: () {
+                        Nav.navTo(context, Routes.addManagerRoute);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(AppPadding.p7),
+                        decoration: const BoxDecoration(
+                          color: ColorManager.primaryshade1,
+                          shape: BoxShape.circle,
+                        ),
+                        child: SvgPicture.asset(
+                          IconsAssets.add,
+                          width: AppSize.s24,
+                          height: AppSize.s24,
+                        ),
+                      ),
+                    )
+                  : Container(),
             ],
           ),
         ),
@@ -242,6 +242,7 @@ class _ManagersListViewState extends State<ManagersListView> {
   }
 
   bool showClearIcon = Constants.falseBool;
+
   _getSearchTextField() {
     return Stack(
       children: [

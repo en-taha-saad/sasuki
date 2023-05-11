@@ -181,11 +181,14 @@ class DrawerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    listOfReports = [];
+    listOfDrawerBars = [];
+    getListOfDrawerItems();
+    getListOfReports(context);
     return _getContentWidget(context);
   }
 
   Widget _getContentWidget(context) {
-    getListOfDrawerItems();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -290,9 +293,13 @@ class DrawerView extends StatelessWidget {
                     if (element == listOfDrawerBars.first)
                       const SizedBox(height: AppSize.s25),
                     Container(
-                      margin: (listOfDrawerBars.indexOf(element) ==
-                                  AppSize.s2 ||
-                              listOfDrawerBars.indexOf(element) == AppSize.s4)
+                      margin: ((listOfDrawerBars.indexOf(element) ==
+                                      AppSize.s2 &&
+                                  element.title == AppStrings.drawerManagers) ||
+                              (listOfDrawerBars.indexOf(element) ==
+                                      AppSize.s4 &&
+                                  element.title ==
+                                      AppStrings.drawerActivityLog))
                           ? null
                           : listOfDrawerBars.indexOf(element) == AppSize.s3
                               ? const EdgeInsets.only(bottom: AppSize.s10)
@@ -326,8 +333,13 @@ class DrawerView extends StatelessWidget {
                               listOfReports: listOfReports,
                             ),
                     ),
-                    if (listOfDrawerBars.indexOf(element) == AppSize.s2 ||
-                        listOfDrawerBars.indexOf(element) == AppSize.s4)
+                    if ((listOfDrawerBars.indexOf(element) ==
+                        AppSize.s2 &&
+                        element.title == AppStrings.drawerManagers) ||
+                        (listOfDrawerBars.indexOf(element) ==
+                            AppSize.s4 &&
+                            element.title ==
+                                AppStrings.drawerActivityLog))
                       Container(
                         margin: const EdgeInsets.symmetric(
                             horizontal: AppPadding.p25),

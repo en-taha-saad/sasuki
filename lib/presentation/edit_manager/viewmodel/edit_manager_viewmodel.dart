@@ -66,7 +66,17 @@ class EditManagerViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _areAllInputsValidStreamController.close();
+    _passwordController.close();
+    _userNameController.close();
+    _firstNameController.close();
+    _lastNameController.close();
+    _getAclPermissionGroupListController.close();
+    _getParentManagerListController.close();
+    _getManagerDetailsController.close();
+    super.dispose();
+  }
 
   @override
   editManager() async {
@@ -256,7 +266,6 @@ class EditManagerViewModel extends BaseViewModel
       (lastName) => _isLastNameValid(lastName),
     );
   }
-
   ///
   final StreamController _getAclPermissionGroupListController =
       StreamController<List<SingleAclPermissionGroup>>.broadcast();

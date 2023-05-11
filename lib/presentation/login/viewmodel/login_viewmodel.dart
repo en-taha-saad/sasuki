@@ -67,7 +67,6 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void dispose() {
-    super.dispose();
     _userNameController.close();
     _passwordController.close();
     _captchaController.close();
@@ -76,6 +75,7 @@ class LoginViewModel extends BaseViewModel
     _is2AuthRequiredStreamController.close();
     _areAllInputsValidStreamController.close();
     isUserLoggedinSuccessfullyStreamController.close();
+    super.dispose();
   }
 
   @override

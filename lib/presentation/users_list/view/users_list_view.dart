@@ -231,23 +231,25 @@ class _UsersListViewState extends State<UsersListView> {
                   height: AppSize.s18,
                 ),
               ),
-              InkWell(
-                onTap: _usersListViewModel.isThereAddUserCreationPermission
-                    ? () => Nav.navTo(context, Routes.addUserRoute)
-                    : null,
-                child: Container(
-                  padding: const EdgeInsets.all(AppPadding.p7),
-                  decoration: const BoxDecoration(
-                    color: ColorManager.primaryshade1,
-                    shape: BoxShape.circle,
-                  ),
-                  child: SvgPicture.asset(
-                    IconsAssets.add,
-                    width: AppSize.s24,
-                    height: AppSize.s24,
-                  ),
-                ),
-              ),
+              _usersListViewModel.isThereAddUserCreationPermission
+                  ? InkWell(
+                      onTap: () {
+                        Nav.navTo(context, Routes.addUserRoute);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(AppPadding.p7),
+                        decoration: const BoxDecoration(
+                          color: ColorManager.primaryshade1,
+                          shape: BoxShape.circle,
+                        ),
+                        child: SvgPicture.asset(
+                          IconsAssets.add,
+                          width: AppSize.s24,
+                          height: AppSize.s24,
+                        ),
+                      ),
+                    )
+                  : Container(),
             ],
           ),
         ),

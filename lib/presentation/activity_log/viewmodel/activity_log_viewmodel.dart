@@ -42,6 +42,7 @@ class ActivityLogViewModel extends BaseViewModel
     this._activityLogEventsUseCase,
     this._activityLogListUseCase,
   );
+
   int page = Constants.oneNum.toInt();
 
   @override
@@ -50,7 +51,13 @@ class ActivityLogViewModel extends BaseViewModel
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    _listOfactivityLogsController.close();
+    _searchInputController.close();
+    _getActivityLogsController.close();
+    super.dispose();
+  }
+
   @override
   getActivityLogListData() async {
     inputState.add(
@@ -87,6 +94,7 @@ class ActivityLogViewModel extends BaseViewModel
 
   final StreamController _listOfactivityLogsController =
       StreamController<ActivityLogList?>.broadcast();
+
   @override
   Sink get inputActivityLogListData => _listOfactivityLogsController.sink;
 
@@ -218,9 +226,12 @@ class ActivityLogViewModel extends BaseViewModel
   /// search manager
   final StreamController _searchInputController =
       StreamController<String>.broadcast();
+
   @override
   Sink get inputSearch => _searchInputController.sink;
+
   bool _isSearchInputValid(String searchInput) => searchInput.isNotEmpty;
+
   @override
   Stream<bool> get outputIsSearchInputValid {
     return _searchInputController.stream.map(
@@ -238,8 +249,10 @@ class ActivityLogViewModel extends BaseViewModel
   ///
   final StreamController _getActivityLogsController =
       StreamController<ActivityLogEvents>.broadcast();
+
   @override
   Sink get inputActivityLogEvents => _getActivityLogsController.sink;
+
   @override
   Stream<ActivityLogEvents> get outputActivityLogEvents =>
       _getActivityLogsController.stream
