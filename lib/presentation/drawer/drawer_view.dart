@@ -181,11 +181,14 @@ class DrawerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    listOfReports = [];
+    listOfDrawerBars = [];
+    getListOfReports(context);
+    getListOfDrawerItems();
     return _getContentWidget(context);
   }
 
   Widget _getContentWidget(context) {
-    getListOfDrawerItems();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
