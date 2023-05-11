@@ -43,6 +43,7 @@ class ActivityLogViewModel extends BaseViewModel
     this._activityLogListUseCase,
   );
   int page = Constants.oneNum.toInt();
+  int? totalActivityLogs = 0;
 
   @override
   Future start() async {
@@ -80,6 +81,7 @@ class ActivityLogViewModel extends BaseViewModel
         activityLogList = activityLogList0;
         inputState.add(ContentState());
         inputActivityLogListData.add(activityLogList);
+        totalActivityLogs = activityLogList?.total;
         getActivityLogListDataForPull();
       },
     );
@@ -177,6 +179,7 @@ class ActivityLogViewModel extends BaseViewModel
         activityLogList = activityLogList0;
         listOfactivityLogs?.data?.addAll((activityLogList?.data)!);
         inputActivityLogListData.add(listOfactivityLogs);
+        totalActivityLogs = activityLogList?.total;
         inputState.add(ContentState());
       },
     );

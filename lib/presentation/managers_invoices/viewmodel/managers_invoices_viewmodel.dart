@@ -40,6 +40,7 @@ class ManagersInvoicesViewModel extends BaseViewModel
   int page = Constants.oneNum.toInt();
   Captcha? dataCaptcha;
   ManagersInvoices? listOfInvoices;
+  int? totalInvoices = 0;
 
   @override
   void start() async {
@@ -77,6 +78,7 @@ class ManagersInvoicesViewModel extends BaseViewModel
         managerInvoices = managerInvoices0;
         inputState.add(ContentState());
         inputManagersInvoices.add(managerInvoices);
+        totalInvoices = managerInvoices?.total;
         getManagersInvoicesForPull();
       },
     );
@@ -104,6 +106,7 @@ class ManagersInvoicesViewModel extends BaseViewModel
         managerInvoices = managerInvoices0;
         listOfInvoices?.data?.addAll((managerInvoices?.data)!);
         inputManagersInvoices.add(listOfInvoices);
+        totalInvoices = managerInvoices?.total;
         inputState.add(ContentState());
         // make function to get next page
         // getReportsActivationsForPull();

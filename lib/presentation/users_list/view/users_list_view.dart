@@ -337,6 +337,8 @@ class _UsersListViewState extends State<UsersListView> {
     _usersListViewModel.getUserFromSearch();
   }
 
+  bool hidLoadingMoreUsers = Constants.falseBool;
+
   Widget _getUsersList() {
     return StreamBuilder<List<UsersListData>?>(
       stream: _usersListViewModel.outputUsersList,
@@ -347,10 +349,21 @@ class _UsersListViewState extends State<UsersListView> {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Future.delayed(
               Duration(seconds: Constants.oneNum.toInt()),
-              () => setState(() => loadFilteredUsers = Constants.falseBool),
+              () => setState(() {
+                loadFilteredUsers = Constants.falseBool;
+              }),
             );
           });
         }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Future.delayed(
+            Duration(seconds: Constants.oneNum.toInt()),
+            () => setState(() {
+              hidLoadingMoreUsers =
+                  _usersListViewModel.totalUsers == snapshot.data?.length;
+            }),
+          );
+        });
         return !loadFilteredUsers
             // ignore: prefer_is_empty
             ? snapshot.data?.length != Constants.zeroNum
@@ -362,13 +375,16 @@ class _UsersListViewState extends State<UsersListView> {
                             children: [
                               _singleUser(snapshot.data, context),
                               const SizedBox(height: AppSize.s20),
-                              const Center(
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    ColorManager.whiteNeutral,
-                                  ),
-                                ),
-                              ),
+                              !hidLoadingMoreUsers && (snapshot.data?.length)! >8
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          ColorManager.whiteNeutral,
+                                        ),
+                                      ),
+                                    )
+                                  : Container(),
                             ],
                           )
                         : _singleUser(snapshot.data, context),

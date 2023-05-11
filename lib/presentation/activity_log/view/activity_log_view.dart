@@ -40,6 +40,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
   List<SingleManagerData>? activityLogEventsList;
   List<ActivityLogEvent>? activityLogEvents;
   ActivityLogEvent? selectedActivityLogEvent;
+  bool hidLoadingMoreActivityLogs = Constants.falseBool;
 
   _bind() async {
     await _activityLogViewModel.start();
@@ -218,6 +219,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
   }
 
   bool showClearIcon = Constants.falseBool;
+
   _getSearchTextField() {
     return Stack(
       children: [
@@ -309,6 +311,16 @@ class _ActivityLogViewState extends State<ActivityLogView> {
             );
           });
         }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Future.delayed(
+            Duration(seconds: Constants.oneNum.toInt()),
+            () => setState(() {
+              hidLoadingMoreActivityLogs =
+                  _activityLogViewModel.totalActivityLogs ==
+                      snapshot.data?.data?.length;
+            }),
+          );
+        });
         return !loadFilteredActivityLogs
             // ignore: prefer_is_empty
             ? snapshot.data?.data?.length != Constants.zeroNum
@@ -320,13 +332,16 @@ class _ActivityLogViewState extends State<ActivityLogView> {
                             children: [
                               _singleActivityLog(snapshot.data?.data, context),
                               const SizedBox(height: AppSize.s20),
-                              const Center(
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    ColorManager.whiteNeutral,
-                                  ),
-                                ),
-                              ),
+                              !hidLoadingMoreActivityLogs && (snapshot.data?.data?.length)! >8
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          ColorManager.whiteNeutral,
+                                        ),
+                                      ),
+                                    )
+                                  : Container(),
                             ],
                           )
                         : _singleActivityLog(snapshot.data?.data, context),

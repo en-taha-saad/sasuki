@@ -37,6 +37,7 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
   bool showFilterWidget = Constants.falseBool;
   List<ProfileData>? profileList;
   ProfileData? selectedprofile;
+  bool hidLoadingMoreActivations = Constants.falseBool;
 
   _bind() {
     _viewModel.start();
@@ -231,6 +232,16 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
             );
           });
         }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Future.delayed(
+            Duration(seconds: Constants.oneNum.toInt()),
+                () => setState(() {
+                  hidLoadingMoreActivations =
+                  _viewModel.totalActivations == snapshot.data?.data?.length;
+            }),
+          );
+        });
+
         return !loadFilteredActivations
             // ignore: prefer_is_empty
             ? snapshot.data?.data?.length != Constants.zeroNum
@@ -246,13 +257,16 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
                                 _viewModel.dataCaptcha,
                               ),
                               const SizedBox(height: AppSize.s20),
-                              const Center(
+                              !hidLoadingMoreActivations && (snapshot.data?.data?.length)! >8
+                                  ? const Center(
                                 child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                  valueColor:
+                                  AlwaysStoppedAnimation<Color>(
                                     ColorManager.whiteNeutral,
                                   ),
                                 ),
-                              ),
+                              )
+                                  : Container(),
                             ],
                           )
                         : _singleActivation(

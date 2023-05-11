@@ -40,6 +40,7 @@ class ManagersJournalViewModel extends BaseViewModel
   int page = Constants.oneNum.toInt();
   Captcha? dataCaptcha;
   ManagerJournal? listOfJournal;
+  int? totalJournal = 0;
 
   @override
   void start() async {
@@ -77,6 +78,7 @@ class ManagersJournalViewModel extends BaseViewModel
         managerJournal = managerJournal0;
         inputState.add(ContentState());
         inputManagersJournal.add(managerJournal);
+        totalJournal = managerJournal?.total;
         getManagersJournalForPull();
       },
     );
@@ -104,6 +106,8 @@ class ManagersJournalViewModel extends BaseViewModel
         managerJournal = managerJournal0;
         listOfJournal?.data?.addAll((managerJournal?.data)!);
         inputManagersJournal.add(listOfJournal);
+        totalJournal = managerJournal?.total;
+
         inputState.add(ContentState());
         // make function to get next page
         // getReportsActivationsForPull();

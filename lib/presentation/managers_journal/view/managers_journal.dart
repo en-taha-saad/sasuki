@@ -29,6 +29,7 @@ class _ManagersJournalViewState extends State<ManagersJournalView> {
       instance<ManagersJournalViewModel>();
   final ScrollController _scrollController = ScrollController();
   bool loadingMoreJournal = Constants.falseBool;
+  bool hidLoadingMoreJournal = Constants.falseBool;
 
   _bind() {
     _viewModel.start();
@@ -208,6 +209,16 @@ class _ManagersJournalViewState extends State<ManagersJournalView> {
             );
           });
         }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Future.delayed(
+            Duration(seconds: Constants.oneNum.toInt()),
+                () => setState(() {
+                  hidLoadingMoreJournal =
+                      _viewModel.totalJournal == snapshot.data?.data?.length;
+            }),
+          );
+        });
+
         return snapshot.data?.data?.length != Constants.zeroNum
             ? SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -221,13 +232,16 @@ class _ManagersJournalViewState extends State<ManagersJournalView> {
                             _viewModel.dataCaptcha,
                           ),
                           const SizedBox(height: AppSize.s20),
-                          const Center(
+                          !hidLoadingMoreJournal && (snapshot.data?.data?.length)! >8
+                              ? const Center(
                             child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
+                              valueColor:
+                              AlwaysStoppedAnimation<Color>(
                                 ColorManager.whiteNeutral,
                               ),
                             ),
-                          ),
+                          )
+                              : Container(),
                         ],
                       )
                     : _singleJournal(

@@ -45,6 +45,7 @@ class _ManagersListViewState extends State<ManagersListView> {
   SingleManagerData? selectedparentManager;
   List<SingleAclPermissionGroup>? aclPermissionGroupList;
   SingleAclPermissionGroup? selectedAclPermissionGroup;
+  bool hidLoadingMoreManagers = Constants.falseBool;
 
   _bind() async {
     await _managersListViewModel.start();
@@ -332,6 +333,15 @@ class _ManagersListViewState extends State<ManagersListView> {
             );
           });
         }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Future.delayed(
+            Duration(seconds: Constants.oneNum.toInt()),
+                () => setState(() {
+              hidLoadingMoreManagers =
+                  _managersListViewModel.totalManagers == snapshot.data?.data?.length;
+            }),
+          );
+        });
         return !loadFilteredManagers
             // ignore: prefer_is_empty
             ? snapshot.data?.data?.length != Constants.zeroNum
@@ -343,13 +353,16 @@ class _ManagersListViewState extends State<ManagersListView> {
                             children: [
                               _singleManager(snapshot.data?.data, context),
                               const SizedBox(height: AppSize.s20),
-                              const Center(
+                              !hidLoadingMoreManagers && (snapshot.data?.data?.length)! >8
+                                  ? const Center(
                                 child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                  valueColor:
+                                  AlwaysStoppedAnimation<Color>(
                                     ColorManager.whiteNeutral,
                                   ),
                                 ),
-                              ),
+                              )
+                                  : Container(),
                             ],
                           )
                         : _singleManager(snapshot.data?.data, context),

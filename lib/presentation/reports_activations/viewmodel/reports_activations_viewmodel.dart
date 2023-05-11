@@ -24,6 +24,7 @@ class ReportsActivationsViewModel extends BaseViewModel
   final ActivationsReportsUsecase _activationsReportsUsecase;
   final ProfileListUseCase _profileListUseCase;
   final CaptchaUseCase? _captchaUseCase;
+  int? totalActivations = 0;
 
   ReportsActivationsViewModel(
     this._activationsReportsUsecase,
@@ -93,6 +94,7 @@ class ReportsActivationsViewModel extends BaseViewModel
         activationsReports = activationsReports0;
         inputState.add(ContentState());
         inputReportsActivations.add(activationsReports);
+        totalActivations = activationsReports?.total;
         getReportsActivationsForPull();
       },
     );
@@ -121,6 +123,7 @@ class ReportsActivationsViewModel extends BaseViewModel
         activationsReports = activationsReports0;
         listOfActivations?.data?.addAll((activationsReports?.data)!);
         inputReportsActivations.add(listOfActivations);
+        totalActivations = activationsReports?.total;
         inputState.add(ContentState());
         // make function to get next page
         // getReportsActivationsForPull();

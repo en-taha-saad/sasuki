@@ -29,6 +29,7 @@ class _ManagersInvoicesViewState extends State<ManagersInvoicesView> {
       instance<ManagersInvoicesViewModel>();
   final ScrollController _scrollController = ScrollController();
   bool loadingMoreInvoices = Constants.falseBool;
+  bool hidLoadingMoreInvoices = Constants.falseBool;
 
   _bind() {
     _viewModel.start();
@@ -208,6 +209,15 @@ class _ManagersInvoicesViewState extends State<ManagersInvoicesView> {
             );
           });
         }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Future.delayed(
+            Duration(seconds: Constants.oneNum.toInt()),
+                () => setState(() {
+              hidLoadingMoreInvoices =
+                  _viewModel.totalInvoices == snapshot.data?.data?.length;
+            }),
+          );
+        });
         return snapshot.data?.data?.length != Constants.zeroNum
             ? SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -221,13 +231,16 @@ class _ManagersInvoicesViewState extends State<ManagersInvoicesView> {
                             _viewModel.dataCaptcha,
                           ),
                           const SizedBox(height: AppSize.s20),
-                          const Center(
+                          !hidLoadingMoreInvoices && (snapshot.data?.data?.length)! >8
+                              ? const Center(
                             child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
+                              valueColor:
+                              AlwaysStoppedAnimation<Color>(
                                 ColorManager.whiteNeutral,
                               ),
                             ),
-                          ),
+                          )
+                              : Container(),
                         ],
                       )
                     : _singleInvoice(

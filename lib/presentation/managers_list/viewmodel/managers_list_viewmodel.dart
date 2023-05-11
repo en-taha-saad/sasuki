@@ -56,6 +56,7 @@ class ManagersListViewModel extends BaseViewModel
   );
   int page = Constants.oneNum.toInt();
   Captcha? dataCaptcha;
+  int? totalManagers = 0;
 
   @override
   Future start() async {
@@ -113,6 +114,7 @@ class ManagersListViewModel extends BaseViewModel
         inputState.add(ContentState());
         inputManagersListData.add(managersList);
         inputManagersList.add(managersList);
+        totalManagers = managersList?.total;
         getManagersListForPull();
       },
     );
@@ -193,6 +195,7 @@ class ManagersListViewModel extends BaseViewModel
         inputManagersList.add(listOfManagers);
         debugPrint("users@ listOfUsers = ${listOfManagers?.data?.length}");
         debugPrint("users@ page = $page");
+        totalManagers = managersList?.total;
         inputState.add(ContentState());
       },
     );
