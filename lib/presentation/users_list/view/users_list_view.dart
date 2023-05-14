@@ -1,3 +1,6 @@
+import 'package:sasuki/app/shared_widgets/get_loading_state_widget.dart';
+import 'package:sasuki/app/shared_widgets/load_more.dart';
+import 'package:sasuki/app/shared_widgets/get_empty_state_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
@@ -339,93 +342,53 @@ class _UsersListViewState extends State<UsersListView> {
 
   bool hidLoadingMoreUsers = Constants.falseBool;
 
+  _prepareUserList(List<UsersListData>? data) {
+    // ignore: prefer_is_empty
+    if (data?.length == Constants.oneNum || data?.length == Constants.zeroNum) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(
+          Duration(seconds: Constants.oneNum.toInt()),
+          () => setState(() => loadFilteredUsers = Constants.falseBool),
+        );
+      });
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(
+        Duration(seconds: Constants.oneNum.toInt()),
+        () => setState(() => hidLoadingMoreUsers =
+            _usersListViewModel.totalUsers == data?.length),
+      );
+    });
+  }
+
   Widget _getUsersList() {
     return StreamBuilder<List<UsersListData>?>(
       stream: _usersListViewModel.outputUsersList,
       builder: (context, snapshot) {
-        // ignore: prefer_is_empty
-        if (snapshot.data?.length == Constants.oneNum ||
-            snapshot.data?.length == Constants.zeroNum) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Future.delayed(
-              Duration(seconds: Constants.oneNum.toInt()),
-              () => setState(() {
-                loadFilteredUsers = Constants.falseBool;
-              }),
-            );
-          });
-        }
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Future.delayed(
-            Duration(seconds: Constants.oneNum.toInt()),
-            () => setState(() {
-              hidLoadingMoreUsers =
-                  _usersListViewModel.totalUsers == snapshot.data?.length;
-            }),
-          );
-        });
+        _prepareUserList(snapshot.data);
         return !loadFilteredUsers
             // ignore: prefer_is_empty
             ? snapshot.data?.length != Constants.zeroNum
                 ? SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     controller: _scrollController,
-                    child: loadingMoreUsers
-                        ? Column(
-                            children: [
-                              _singleUser(snapshot.data, context),
-                              const SizedBox(height: AppSize.s20),
-                              !hidLoadingMoreUsers && (snapshot.data?.length)! >8
-                                  ? const Center(
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          ColorManager.whiteNeutral,
-                                        ),
-                                      ),
-                                    )
-                                  : Container(),
-                            ],
-                          )
-                        : _singleUser(snapshot.data, context),
-                  )
-                : Container(
-                    margin: const EdgeInsets.only(top: AppMargin.m38),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(ImageAssets.emptyState),
-                          const SizedBox(height: AppSize.s20),
-                          Text(
-                            AppStrings.noUsersFound,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const SizedBox(height: AppSize.s10),
-                          IconButton(
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                              setState(() => loadFilteredUsers = true);
-                              _usersListViewModel.refreshUsersList();
-                            },
-                            icon: const Icon(
-                              Icons.refresh,
-                              size: AppSize.s32,
-                              color: ColorManager.greyNeutral,
-                            ),
-                          ),
-                        ],
-                      ),
+                    child: loadMore<UsersListData>(
+                      loadingMoreItems: loadingMoreUsers,
+                      hidLoadingMoreItems: hidLoadingMoreUsers,
+                      context: context,
+                      singleItem: _singleUser,
+                      data: snapshot.data,
                     ),
                   )
-            : const Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    ColorManager.whiteNeutral,
-                  ),
-                ),
-              );
+                : getEmptyStateWidget(
+                    context,
+                    () {
+                      FocusScope.of(context).unfocus();
+                      setState(() => loadFilteredUsers = true);
+                      _usersListViewModel.refreshUsersList();
+                    },
+                  )
+            : getLoadingStateWidget();
       },
     );
   }
