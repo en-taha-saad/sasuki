@@ -617,26 +617,22 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         AppStrings.userActionPayDebt,
         AppStrings.payDebtInputDialogtitle,
         IconsAssets.moneyUserAction,
-        _viewModel.paydebtInforms?.data?.total != Constants.nullValue &&
-                _viewModel.paydebtInforms?.data?.total != Constants.zeroNum
+        (
+                (_viewModel.paydebtInforms?.data?.total !=
+                        Constants.nullValue &&
+                    _viewModel.paydebtInforms?.data?.total !=
+                        Constants.zeroNum) && (_amountController.text.isNotEmpty))
             ? () {
-                if (_amountController.text.isNotEmpty) {
-                  if (_viewModel.paydebtInforms?.data?.total !=
-                          Constants.nullValue &&
-                      _viewModel.paydebtInforms?.data?.total !=
-                          Constants.zeroNum) {
-                    FocusScope.of(context).unfocus();
-                    Nav.popRoute(context);
-                    _viewModel.payDebtAction(
-                      _amountController.text,
-                      _commentController.text,
-                    );
-                    _amountController.clear();
-                    _commentController.clear();
-                  }
-                }
+                FocusScope.of(context).unfocus();
+                Nav.popRoute(context);
+                _viewModel.payDebtAction(
+                  _amountController.text,
+                  _commentController.text,
+                );
+                _amountController.clear();
+                _commentController.clear();
               }
-            : Constants.nullValue,
+            : null,
       ),
     );
   }

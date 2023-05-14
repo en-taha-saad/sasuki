@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/app_inits_funs/constants.dart';import 'package:sasuki/app/shared_widgets/custom_switch.dart';
+
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/fonts_manager/fontsize.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
@@ -405,21 +406,13 @@ class _AddManagerState extends State<AddManager> {
                                 StatefulBuilder(
                                   builder: (BuildContext context,
                                       StateSetter setState) {
-                                    return Transform.scale(
-                                      scale: 0.6,
-                                      child: Switch(
-                                        value: isChecked,
-                                                                 activeColor: ColorManager.primaryshade1,
-                          activeTrackColor: const Color(0xffDCDFE3),
-                          materialTapTargetSize: MaterialTapTargetSize.padded,
-                          splashRadius: 3,
-                          inactiveThumbColor: ColorManager.blackNeutral,
-                          inactiveTrackColor: const Color(0xffDCDFE3),
-
-                                        onChanged: (bool value) {
-                                          setState(() => isChecked = value);
-                                        },
-                                      ),
+                                    return CustomSwitch(
+                                      value: isChecked,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          isChecked = value;
+                                        });
+                                      },
                                     );
                                   },
                                 ),

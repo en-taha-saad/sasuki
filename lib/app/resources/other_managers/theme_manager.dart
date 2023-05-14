@@ -72,6 +72,7 @@ ThemeData getApplicationTheme() {
           horizontal: AppPadding.p25,
           vertical: AppPadding.p10Point5,
         ),
+        // disabledBackgroundColor: ColorManager.blackNeutral,
         disabledBackgroundColor: const Color(0xff394769),
         foregroundColor: ColorManager.whiteNeutral,
         backgroundColor: ColorManager.primaryshade1,
