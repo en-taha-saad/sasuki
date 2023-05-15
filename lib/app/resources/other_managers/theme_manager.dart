@@ -20,6 +20,8 @@ ThemeData getApplicationTheme() {
     appBarTheme: AppBarTheme(
       backgroundColor: ColorManager.primaryshade1,
       elevation: AppSize.s0,
+      toolbarHeight: 35,
+      titleSpacing: 0,
       centerTitle: Constants.trueBool,
       titleTextStyle: StylesManager.getMediumStyle(
         fontSize: FontSize.sHeading5,
@@ -62,8 +64,6 @@ ThemeData getApplicationTheme() {
       ),
     ),
 
-
-
     // elevated button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -73,7 +73,7 @@ ThemeData getApplicationTheme() {
           vertical: AppPadding.p10Point5,
         ),
         // disabledBackgroundColor: ColorManager.blackNeutral,
-        disabledBackgroundColor: const Color(0xff394769),
+        disabledBackgroundColor: const Color(0xff41527B),
         foregroundColor: ColorManager.whiteNeutral,
         backgroundColor: ColorManager.primaryshade1,
         textStyle: StylesManager.getMediumStyle(

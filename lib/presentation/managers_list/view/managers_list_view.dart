@@ -1,3 +1,7 @@
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
+import 'package:sasuki/app/shared_widgets/get_loading_state_widget.dart';
+import 'package:sasuki/app/shared_widgets/load_more.dart';
+import 'package:sasuki/app/shared_widgets/get_empty_state_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
@@ -135,60 +139,20 @@ class _ManagersListViewState extends State<ManagersListView> {
           child: Column(
             children: [
               AppSize.statusBarHeight(context),
-              const SizedBox(height: AppSize.s20),
+              getCustomAppBar(context, AppStrings.managersListScreen, false),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.only(
-                                top: AppPadding.p4,
-                              ),
-                              child: InkWell(
-                                child: SvgPicture.asset(IconsAssets.menu),
-                                onTap: () {
-                                  Nav.navTo(context, Routes.drawerRoute);
-                                },
-                              ),
-                            ),
-                            Container(),
-                          ],
-                        ),
-                        Center(
-                          child: Text(
-                            AppStrings.managersListScreen,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(
-                                  fontSize: 18,
-                                ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Container(),
-                      ],
-                    ),
-                    const SizedBox(height: AppSize.s20),
-                    StreamBuilder<ManagerListDetails?>(
-                      stream: _managersListViewModel.outputManagersList,
-                      builder: (context, snapshot) {
-                        return SingleManagerCardStatistics(
-                          isShimmer: Constants.falseBool,
-                          totalManagers:
-                              "${snapshot.data?.total ?? Constants.dash}",
-                        );
-                      },
-                    ),
-                  ],
+                margin: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p25,
+                ),
+                child: StreamBuilder<ManagerListDetails?>(
+                  stream: _managersListViewModel.outputManagersList,
+                  builder: (context, snapshot) {
+                    return SingleManagerCardStatistics(
+                      isShimmer: Constants.falseBool,
+                      totalManagers:
+                          "${snapshot.data?.total ?? Constants.dash}",
+                    );
+                  },
                 ),
               ),
             ],
@@ -204,14 +168,14 @@ class _ManagersListViewState extends State<ManagersListView> {
                 width: getScreenWidth(context) * 0.6,
                 child: _getSearchTextField(),
               ),
-              InkWell(
-                onTap: _showFilterDialog,
-                child: SvgPicture.asset(
-                  IconsAssets.filter,
-                  width: AppSize.s18,
-                  height: AppSize.s18,
+             IconButton(
+                  onPressed: _showFilterDialog,
+                  icon: SvgPicture.asset(
+                    IconsAssets.filter,
+                    width: AppSize.s18,
+                    height: AppSize.s18,
+                  ),
                 ),
-              ),
               InkWell(
                 onTap: () {
                   _managersListViewModel.isThereAddManagerCreationPermission
@@ -243,6 +207,7 @@ class _ManagersListViewState extends State<ManagersListView> {
   }
 
   bool showClearIcon = Constants.falseBool;
+
   _getSearchTextField() {
     return Stack(
       children: [
@@ -315,95 +280,60 @@ class _ManagersListViewState extends State<ManagersListView> {
 
   _searchManagers() {
     FocusScope.of(context).unfocus();
-    setState(() => loadFilteredManagers = Constants.falseBool);
+    setState(() => loadFilteredManagers = Constants.trueBool);
     _managersListViewModel.getManagerFromSearch();
+  }
+
+  _prepareManagersList(List<SingleManagerDetails>? data) {
+    // ignore: prefer_is_empty
+    if (data?.length == Constants.oneNum || data?.length == Constants.zeroNum) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(
+          Duration(seconds: Constants.oneNum.toInt()),
+          () => setState(() => loadFilteredManagers = Constants.trueBool),
+        );
+      });
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(
+        Duration(seconds: Constants.oneNum.toInt()),
+        () {
+          setState(() => hidLoadingMoreManagers =
+              _managersListViewModel.totalManagers == data?.length);
+        },
+      );
+    });
   }
 
   Widget _getManagersList() {
     return StreamBuilder<ManagerListDetails?>(
       stream: _managersListViewModel.outputManagersList,
       builder: (context, snapshot) {
-        // ignore: prefer_is_empty
-        if (snapshot.data?.data?.length == Constants.oneNum ||
-            snapshot.data?.data?.length == Constants.zeroNum) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Future.delayed(
-              Duration(seconds: Constants.oneNum.toInt()),
-              () => setState(() => loadFilteredManagers = Constants.falseBool),
-            );
-          });
-        }
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Future.delayed(
-            Duration(seconds: Constants.oneNum.toInt()),
-                () => setState(() {
-              hidLoadingMoreManagers =
-                  _managersListViewModel.totalManagers == snapshot.data?.data?.length;
-            }),
-          );
-        });
-        return !loadFilteredManagers
+        _prepareManagersList(snapshot.data?.data);
+        return loadFilteredManagers != true
             // ignore: prefer_is_empty
             ? snapshot.data?.data?.length != Constants.zeroNum
                 ? SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     controller: _scrollController,
-                    child: loadingMoreManagers
-                        ? Column(
-                            children: [
-                              _singleManager(snapshot.data?.data, context),
-                              const SizedBox(height: AppSize.s20),
-                              !hidLoadingMoreManagers && (snapshot.data?.data?.length)! >8
-                                  ? const Center(
-                                child: CircularProgressIndicator(
-                                  valueColor:
-                                  AlwaysStoppedAnimation<Color>(
-                                    ColorManager.whiteNeutral,
-                                  ),
-                                ),
-                              )
-                                  : Container(),
-                            ],
-                          )
-                        : _singleManager(snapshot.data?.data, context),
-                  )
-                : Container(
-                    margin: const EdgeInsets.only(top: AppMargin.m38),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(ImageAssets.emptyState),
-                          const SizedBox(height: AppSize.s20),
-                          Text(
-                            AppStrings.noUsersFound,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          const SizedBox(height: AppSize.s10),
-                          IconButton(
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-                              setState(() => loadFilteredManagers = true);
-                              _managersListViewModel.refreshManagersList();
-                            },
-                            icon: const Icon(
-                              Icons.refresh,
-                              size: AppSize.s32,
-                              color: ColorManager.greyNeutral,
-                            ),
-                          ),
-                        ],
-                      ),
+                    child: loadMore<SingleManagerDetails>(
+                      loadingMoreItems: loadingMoreManagers,
+                      hidLoadingMoreItems: hidLoadingMoreManagers,
+                      context: context,
+                      singleItem: _singleManager,
+                      data: snapshot.data?.data,
                     ),
                   )
-            : const Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    ColorManager.orangeAnnotations,
-                  ),
-                ),
-              );
+                : getEmptyStateWidget(
+                    context,
+                    () {
+                      FocusScope.of(context).unfocus();
+                      setState(() => loadFilteredManagers = true);
+                      _managersListViewModel.refreshManagersList();
+                    },
+                  )
+            : getLoadingStateWidget();
       },
     );
   }
@@ -568,6 +498,7 @@ class _ManagersListViewState extends State<ManagersListView> {
   void _resetFilters() {
     setState(() {
       selectedparentManager = Constants.nullValue;
+      selectedAclPermissionGroup = Constants.nullValue;
       showFilterWidget = !showFilterWidget;
       loadFilteredManagers = Constants.trueBool;
     });

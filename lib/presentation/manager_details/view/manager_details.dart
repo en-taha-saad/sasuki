@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:sasuki/app/app_inits_funs/constants.dart';import 'package:sasuki/app/shared_widgets/custom_switch.dart';
+import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/shared_widgets/custom_switch.dart';
 
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
@@ -91,12 +92,10 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
             children: [
               AppSize.statusBarHeight(context),
               Container(
-                margin: const EdgeInsets.only(
-                  right: AppMargin.m25,
-                  left: AppMargin.m25,
-                  bottom: AppMargin.m25,
+                margin: const EdgeInsets.symmetric(
+                  vertical: AppMargin.m20,
                 ),
-                child: _getManagerActions(context),
+                child: _getAppBarWithActions(context),
               ),
             ],
           ),
@@ -112,18 +111,15 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
     );
   }
 
-  AppBar _getManagerActions(context) {
+  AppBar _getAppBarWithActions(context) {
     return AppBar(
-      toolbarHeight: 40,
-      titleSpacing: 0,
-      leading: Container(
-        margin: const EdgeInsets.only(
-          right: AppMargin.m30,
+      leading: IconButton(
+        icon: SvgPicture.asset(
+          IconsAssets.back,
+          height: 16,
+          width: 16,
         ),
-        child: IconButton(
-          icon: SvgPicture.asset(IconsAssets.back),
-          onPressed: () => Nav.popRoute(context),
-        ),
+        onPressed: () => Nav.popRoute(context),
       ),
       title: Text(
         AppStrings.managerOverviewTitle,
@@ -135,18 +131,16 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
         PopupMenuButton<SingleManagerAction>(
           onSelected: (SingleManagerAction choice) =>
               _openActions(choice, context),
-          color: ColorManager.whiteNeutral,
           elevation: Constants.zeroDouble,
-          icon: Container(
-            margin: const EdgeInsets.only(left: AppMargin.m20),
-            child: SvgPicture.asset(
-              IconsAssets.actions,
-              theme: const SvgTheme(
-                currentColor: ColorManager.whiteNeutral,
-              ),
-              // ignore: deprecated_member_use
-              color: ColorManager.whiteNeutral,
+          icon: SvgPicture.asset(
+            IconsAssets.actions,
+            height: 16,
+            width: 16,
+            theme: const SvgTheme(
+              currentColor: ColorManager.whiteNeutral,
             ),
+            // ignore: deprecated_member_use
+            color: ColorManager.whiteNeutral,
           ),
           enabled: Constants.trueBool,
           surfaceTintColor: ColorManager.primaryshade3,

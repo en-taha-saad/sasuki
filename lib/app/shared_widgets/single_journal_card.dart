@@ -85,7 +85,7 @@ class SingleJournalCard extends StatelessWidget {
             ],
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: AppMargin.m25),
+            margin: const EdgeInsets.symmetric(vertical: AppMargin.m5),
             child: Divider(
               color: ColorManager.greyNeutral.withOpacity(
                 AppSize.s0point25,

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
-import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
 import 'package:sasuki/app/shared_widgets/single_activity_log_card.dart';
 import 'package:sasuki/domain/models/activity_log_events/activity_log_events.dart';
@@ -134,57 +135,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
             child: Column(
               children: [
                 AppSize.statusBarHeight(context),
-                const SizedBox(height: AppSize.s20),
-                Container(
-                  margin: const EdgeInsets.only(
-                    bottom: AppPadding.p20,
-                  ),
-                  child: Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Stack(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                    top: AppPadding.p4,
-                                  ),
-                                  child: InkWell(
-                                    child: SvgPicture.asset(IconsAssets.back),
-                                    onTap: () {
-                                      Nav.popRoute(context);
-                                    },
-                                  ),
-                                ),
-                                Container(),
-                              ],
-                            ),
-                            Center(
-                              child: Text(
-                                AppStrings.drawerActivityLog,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(
-                                      fontSize: 18,
-                                    ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Container(),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                getCustomAppBar(context, AppStrings.drawerActivityLog, false),
               ],
             ),
           ),
@@ -195,12 +146,12 @@ class _ActivityLogViewState extends State<ActivityLogView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: getScreenWidth(context) * 0.8,
+                  width: getScreenWidth(context) * 0.7,
                   child: _getSearchTextField(),
                 ),
-                InkWell(
-                  onTap: _showFilterDialog,
-                  child: SvgPicture.asset(
+                IconButton(
+                  onPressed: _showFilterDialog,
+                  icon: SvgPicture.asset(
                     IconsAssets.filter,
                     width: AppSize.s18,
                     height: AppSize.s18,
@@ -332,7 +283,8 @@ class _ActivityLogViewState extends State<ActivityLogView> {
                             children: [
                               _singleActivityLog(snapshot.data?.data, context),
                               const SizedBox(height: AppSize.s20),
-                              !hidLoadingMoreActivityLogs && (snapshot.data?.data?.length)! >8
+                              !hidLoadingMoreActivityLogs &&
+                                      (snapshot.data?.data?.length)! > 8
                                   ? const Center(
                                       child: CircularProgressIndicator(
                                         valueColor:
@@ -342,6 +294,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
                                       ),
                                     )
                                   : Container(),
+                              const SizedBox(height: AppSize.s20),
                             ],
                           )
                         : _singleActivityLog(snapshot.data?.data, context),
@@ -426,8 +379,8 @@ class _ActivityLogViewState extends State<ActivityLogView> {
       insetPadding: EdgeInsets.only(
         left: Constants.zeroDouble,
         right: Constants.zeroDouble,
-        top: MediaQuery.of(context).size.height * 0.1,
-        bottom: MediaQuery.of(context).size.height * 0.4,
+        top: MediaQuery.of(context).size.height * 0.08,
+        bottom: MediaQuery.of(context).size.height * 0.5,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.s0),

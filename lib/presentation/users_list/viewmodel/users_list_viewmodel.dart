@@ -262,8 +262,6 @@ class UsersListViewModel extends BaseViewModel
         usersList = usersList0;
         listOfUsers = usersList0.data;
         inputUsersList.add(listOfUsers);
-        debugPrint("users@ listOfUsers = ${listOfUsers?.length}");
-        debugPrint("users@ page = $page");
         inputState.add(ContentState());
       },
     );

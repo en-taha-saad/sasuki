@@ -9,6 +9,7 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/single_invoice_card.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/managers_invoices/managers_invoices.dart';
@@ -113,22 +114,14 @@ class _ManagersInvoicesViewState extends State<ManagersInvoicesView> {
             child: Column(
               children: [
                 AppSize.statusBarHeight(context),
-                Container(
-                  margin: const EdgeInsets.only(
-                    right: AppMargin.m25,
-                    left: AppMargin.m25,
-                    bottom: AppMargin.m25,
-                  ),
-                  child: _getInvoiceAppBar(context),
-                ),
+                getCustomAppBar(context, AppStrings.drawerReports, true),
               ],
             ),
           ),
-
           Container(
             color: ColorManager.whiteNeutral.withOpacity(0.2),
             padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.s20,
+              horizontal: AppSize.s25,
               vertical: AppSize.s10,
             ),
             margin: const EdgeInsets.only(
@@ -173,51 +166,10 @@ class _ManagersInvoicesViewState extends State<ManagersInvoicesView> {
     );
   }
 
-  AppBar _getInvoiceAppBar(context) {
-    return AppBar(
-      toolbarHeight: 40,
-      titleSpacing: 0,
-      leading: Container(
-        margin: const EdgeInsets.only(
-          right: AppMargin.m30,
-        ),
-        child: IconButton(
-          icon: SvgPicture.asset(IconsAssets.back),
-          onPressed: () => Nav.popRoute(context),
-        ),
-      ),
-      title: Text(
-        AppStrings.drawerReports,
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontSize: 18,
-            ),
-      ),
-    );
-  }
-
   _getInvoiceListContent() {
     return StreamBuilder<ManagersInvoices>(
       stream: _viewModel.outputManagersInvoices,
       builder: (context, snapshot) {
-        // ignore: prefer_is_empty
-        if (snapshot.data?.data?.length == Constants.oneNum ||
-            snapshot.data?.data?.length == Constants.zeroNum) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Future.delayed(
-              Duration(seconds: Constants.oneNum.toInt()),
-              () => setState(() {}),
-            );
-          });
-        }
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          Future.delayed(
-            Duration(seconds: Constants.oneNum.toInt()),
-                () => setState(() {
-              hidLoadingMoreInvoices =
-                  _viewModel.totalInvoices == snapshot.data?.data?.length;
-            }),
-          );
-        });
         return snapshot.data?.data?.length != Constants.zeroNum
             ? SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -231,16 +183,17 @@ class _ManagersInvoicesViewState extends State<ManagersInvoicesView> {
                             _viewModel.dataCaptcha,
                           ),
                           const SizedBox(height: AppSize.s20),
-                          !hidLoadingMoreInvoices && (snapshot.data?.data?.length)! >8
+                          !hidLoadingMoreInvoices &&
+                                  (snapshot.data?.data?.length)! > 8
                               ? const Center(
-                            child: CircularProgressIndicator(
-                              valueColor:
-                              AlwaysStoppedAnimation<Color>(
-                                ColorManager.whiteNeutral,
-                              ),
-                            ),
-                          )
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      ColorManager.whiteNeutral,
+                                    ),
+                                  ),
+                                )
                               : Container(),
+                          const SizedBox(height: AppSize.s20),
                         ],
                       )
                     : _singleInvoice(

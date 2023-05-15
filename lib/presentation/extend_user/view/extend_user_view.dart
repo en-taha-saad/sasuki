@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
@@ -11,6 +10,7 @@ import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/get_action_dialog_content.dart';
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
 import 'package:sasuki/app/shared_widgets/showdialog.dart';
 import 'package:sasuki/app/shared_widgets/single_list_tile.dart';
@@ -148,18 +148,7 @@ class _ExtendUserViewState extends State<ExtendUserView> {
         Column(
           children: [
             AppSize.statusBarHeight(context),
-            AppBar(
-              leading: IconButton(
-                icon: SvgPicture.asset(IconsAssets.back),
-                onPressed: () => Nav.popRoute(context),
-              ),
-              title: Text(
-                AppStrings.extendUserTitle,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontSize: 18,
-                    ),
-              ),
-            ),
+            getCustomAppBar(context, AppStrings.extendUserTitle, true),
             Expanded(
               child: Container(
                 width: MediaQuery.of(context).size.width,

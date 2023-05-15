@@ -4,8 +4,8 @@ import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
-import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
 import 'package:sasuki/domain/models/payment_methods/payment_methods.dart';
 import 'package:sasuki/presentation/common/state_render/states/flow_state.dart';
@@ -82,31 +82,7 @@ class _DepositScreenState extends State<DepositScreen> {
     return Column(
       children: [
         AppSize.statusBarHeight(context),
-        Container(
-          margin: const EdgeInsets.only(
-            right: AppMargin.m25,
-            left: AppMargin.m25,
-            bottom: AppMargin.m5,
-          ),
-          child: AppBar(
-            
-            leading: Container(
-              margin: const EdgeInsets.only(
-                right: AppMargin.m30,
-              ),
-              child: IconButton(
-                icon: SvgPicture.asset(IconsAssets.back),
-                onPressed: () => Nav.popRoute(context),
-              ),
-            ),
-            title: Text(
-              AppStrings.depositTile,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: 18,
-                  ),
-            ),
-          ),
-        ),
+        getCustomAppBar(context, AppStrings.depositTile, true),
         Expanded(
           child: Container(
             width: MediaQuery.of(context).size.width,

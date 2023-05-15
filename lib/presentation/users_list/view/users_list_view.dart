@@ -1,3 +1,4 @@
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/get_loading_state_widget.dart';
 import 'package:sasuki/app/shared_widgets/load_more.dart';
 import 'package:sasuki/app/shared_widgets/get_empty_state_widget.dart';
@@ -148,69 +149,30 @@ class _UsersListViewState extends State<UsersListView> {
           child: Column(
             children: [
               AppSize.statusBarHeight(context),
-              const SizedBox(height: AppSize.s20),
+              getCustomAppBar(context, AppStrings.usersUsersList, false),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.only(
-                                top: AppPadding.p4,
-                              ),
-                              child: InkWell(
-                                child: SvgPicture.asset(IconsAssets.menu),
-                                onTap: () {
-                                  Nav.navTo(context, Routes.drawerRoute);
-                                },
-                              ),
-                            ),
-                            Container(),
-                          ],
-                        ),
-                        Center(
-                          child: Text(
-                            AppStrings.usersUsersList,
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(
-                                  fontSize: 18,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: AppSize.s20),
-                    StreamBuilder<UsersList>(
-                      stream: _usersListViewModel.outputUsersListData,
-                      builder: (context, outputUsersListData) {
-                        return StreamBuilder<Dashboard>(
-                            stream: _dashboardViewModel.outputDashboardData,
-                            builder: (context, outputDashboardData) {
-                              return SingleUserCardStatistics(
-                                isShimmer: Constants.falseBool,
-                                totalUsers:
-                                    "${outputUsersListData.data?.total ?? Constants.dash}",
-                                activeUsers:
-                                    "${outputDashboardData.data?.data?.activeUsersCount ?? Constants.dash}",
-                                expiredUsers:
-                                    "${outputDashboardData.data?.data?.expiredUsersCount ?? Constants.dash}",
-                                onlineUsers:
-                                    "${outputDashboardData.data?.data?.usersOnlineCount ?? Constants.dash}",
-                              );
-                            });
-                      },
-                    ),
-                  ],
+                margin: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p25,
+                ),
+                child: StreamBuilder<UsersList>(
+                  stream: _usersListViewModel.outputUsersListData,
+                  builder: (context, outputUsersListData) {
+                    return StreamBuilder<Dashboard>(
+                        stream: _dashboardViewModel.outputDashboardData,
+                        builder: (context, outputDashboardData) {
+                          return SingleUserCardStatistics(
+                            isShimmer: Constants.falseBool,
+                            totalUsers:
+                                "${outputUsersListData.data?.total ?? Constants.dash}",
+                            activeUsers:
+                                "${outputDashboardData.data?.data?.activeUsersCount ?? Constants.dash}",
+                            expiredUsers:
+                                "${outputDashboardData.data?.data?.expiredUsersCount ?? Constants.dash}",
+                            onlineUsers:
+                                "${outputDashboardData.data?.data?.usersOnlineCount ?? Constants.dash}",
+                          );
+                        });
+                  },
                 ),
               ),
             ],
@@ -226,9 +188,9 @@ class _UsersListViewState extends State<UsersListView> {
                 width: getScreenWidth(context) * 0.6,
                 child: _getSearchTextField(),
               ),
-              InkWell(
-                onTap: _showFilterDialog,
-                child: SvgPicture.asset(
+              IconButton(
+                onPressed: _showFilterDialog,
+                icon: SvgPicture.asset(
                   IconsAssets.filter,
                   width: AppSize.s18,
                   height: AppSize.s18,

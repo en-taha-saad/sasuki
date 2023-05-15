@@ -11,6 +11,7 @@ import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
 import 'package:sasuki/app/shared_widgets/single_activation_card.dart';
 import 'package:sasuki/domain/models/activations_reports/activations_reports.dart';
@@ -126,21 +127,14 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
             child: Column(
               children: [
                 AppSize.statusBarHeight(context),
-                Container(
-                  margin: const EdgeInsets.only(
-                    right: AppMargin.m25,
-                    left: AppMargin.m25,
-                    bottom: AppMargin.m25,
-                  ),
-                  child: _getActivationAppBar(context),
-                ),
+                getCustomAppBar(context, AppStrings.drawerReports, true),
               ],
             ),
           ),
           Container(
             color: ColorManager.whiteNeutral.withOpacity(0.2),
             padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.s20,
+              horizontal: AppSize.s25,
               vertical: AppSize.s10,
             ),
             margin: const EdgeInsets.only(
@@ -173,15 +167,12 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
                     ),
                   ],
                 ),
-                InkWell(
-                  onTap: _showFilterDialog,
-                  child: SvgPicture.asset(
+              IconButton(
+                  onPressed: _showFilterDialog,
+                  icon: SvgPicture.asset(
                     IconsAssets.filter,
-                    theme: const SvgTheme(
-                      currentColor: ColorManager.whiteNeutral,
-                    ),
-                    // ignore: deprecated_member_use
-                    color: ColorManager.whiteNeutral,
+                    width: AppSize.s18,
+                    height: AppSize.s18,
                   ),
                 ),
               ],
@@ -191,28 +182,6 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
             child: _getActivationListContent(),
           ),
         ],
-      ),
-    );
-  }
-
-  AppBar _getActivationAppBar(context) {
-    return AppBar(
-      toolbarHeight: 40,
-      titleSpacing: 0,
-      leading: Container(
-        margin: const EdgeInsets.only(
-          right: AppMargin.m30,
-        ),
-        child: IconButton(
-          icon: SvgPicture.asset(IconsAssets.back),
-          onPressed: () => Nav.popRoute(context),
-        ),
-      ),
-      title: Text(
-        AppStrings.drawerReports,
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontSize: 18,
-            ),
       ),
     );
   }
@@ -235,8 +204,8 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Future.delayed(
             Duration(seconds: Constants.oneNum.toInt()),
-                () => setState(() {
-                  hidLoadingMoreActivations =
+            () => setState(() {
+              hidLoadingMoreActivations =
                   _viewModel.totalActivations == snapshot.data?.data?.length;
             }),
           );
@@ -257,15 +226,16 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
                                 _viewModel.dataCaptcha,
                               ),
                               const SizedBox(height: AppSize.s20),
-                              !hidLoadingMoreActivations && (snapshot.data?.data?.length)! >8
+                              !hidLoadingMoreActivations &&
+                                      (snapshot.data?.data?.length)! > 8
                                   ? const Center(
-                                child: CircularProgressIndicator(
-                                  valueColor:
-                                  AlwaysStoppedAnimation<Color>(
-                                    ColorManager.whiteNeutral,
-                                  ),
-                                ),
-                              )
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          ColorManager.whiteNeutral,
+                                        ),
+                                      ),
+                                    )
                                   : Container(),
                             ],
                           )
@@ -388,7 +358,7 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
         left: Constants.zeroDouble,
         right: Constants.zeroDouble,
         top: MediaQuery.of(context).size.height * 0.1,
-        bottom: MediaQuery.of(context).size.height * 0.4,
+        bottom: MediaQuery.of(context).size.height * 0.45,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.s0),

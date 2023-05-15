@@ -6,10 +6,10 @@ import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
-import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/single_activation_card.dart';
 import 'package:sasuki/domain/models/activations_reports/activations_reports.dart';
 import 'package:intl/intl.dart' as intl;
@@ -47,27 +47,20 @@ class _SingleActivationViewState extends State<SingleActivationView> {
       decoration: const BoxDecoration(
         color: ColorManager.secondary,
       ),
-      child: Column(
-        children: [
-          Container(
-            color: ColorManager.primaryshade1,
-            child: Column(
-              children: [
-                AppSize.statusBarHeight(context),
-                Container(
-                  margin: const EdgeInsets.only(
-                    right: AppMargin.m25,
-                    left: AppMargin.m25,
-                    bottom: AppMargin.m25,
-                  ),
-                  child: _getActivationAppBar(context),
-                ),
-              ],
+      child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: Column(
+          children: [
+            Container(
+              color: ColorManager.primaryshade1,
+              child: Column(
+                children: [
+                  AppSize.statusBarHeight(context),
+                  getCustomAppBar(context, AppStrings.activationReports, true),
+                ],
+              ),
             ),
-          ),
-          SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: Container(
+            Container(
               margin: const EdgeInsets.only(
                 bottom: AppMargin.m50,
               ),
@@ -121,191 +114,172 @@ class _SingleActivationViewState extends State<SingleActivationView> {
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  AppBar _getActivationAppBar(context) {
-    return AppBar(
-     
-      toolbarHeight: 40,
-      titleSpacing: 0,
-      leading: Container(
-        margin: const EdgeInsets.only(
-          right: AppMargin.m30,
+          ],
         ),
-        child: IconButton(
-          icon: SvgPicture.asset(IconsAssets.back),
-          onPressed: () => Nav.popRoute(context),
-        ),
-      ),
-      title: Text(
-        AppStrings.activationReports,
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontSize: 18,
-            ),
       ),
     );
   }
 
   _getSingleActivationData(Activation? argument) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(
-            bottom: AppMargin.m10,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(
-                  right: AppMargin.m5,
-                ),
-                child: SvgPicture.asset(
-                  IconsAssets.information,
-                  // ignore: deprecated_member_use
-                  color: ColorManager.greyNeutral,
-                  theme: const SvgTheme(
-                    currentColor: ColorManager.greyNeutral,
+    return SingleChildScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(
+              bottom: AppMargin.m10,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(
+                    right: AppMargin.m5,
+                  ),
+                  child: SvgPicture.asset(
+                    IconsAssets.information,
+                    // ignore: deprecated_member_use
+                    color: ColorManager.greyNeutral,
+                    theme: const SvgTheme(
+                      currentColor: ColorManager.greyNeutral,
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                "Basic Info.",
-                style: StylesManager.getMediumStyle(
-                  fontSize: FontSize.sBody3,
-                  color: ColorManager.greyNeutral,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(
-            bottom: AppMargin.m25,
-          ),
-          decoration: BoxDecoration(
-            color: ColorManager.primaryshade3,
-            borderRadius: BorderRadius.circular(AppSize.s12),
-          ),
-          padding: const EdgeInsets.only(
-            top: AppPadding.p15,
-            left: AppPadding.p15,
-            right: AppPadding.p15,
-          ),
-          child: Column(
-            children: [
-              _getSingleLabeledData(
-                context,
-                "Username",
-                argument?.userDetails?.username ?? Constants.dash,
-              ),
-              _getSingleLabeledData(
-                context,
-                "Full Name",
-                "${argument?.userDetails?.firstname ?? Constants.dash} ${argument?.userDetails?.lastname ?? Constants.dash}",
-              ),
-              _getSingleLabeledData(
-                context,
-                "Manager",
-                argument?.managerDetails?.username ?? Constants.dash,
-              ),
-              _getSingleLabeledData(
-                context,
-                "Profile",
-                argument?.profileDetails?.name ?? Constants.dash,
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(
-            bottom: AppMargin.m10,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(
-                  right: AppMargin.m5,
-                ),
-                child: SvgPicture.asset(
-                  IconsAssets.documenttext1,
-                  // ignore: deprecated_member_use
-                  color: ColorManager.greyNeutral,
-                  theme: const SvgTheme(
-                    currentColor: ColorManager.greyNeutral,
+                Text(
+                  "Basic Info.",
+                  style: StylesManager.getMediumStyle(
+                    fontSize: FontSize.sBody3,
+                    color: ColorManager.greyNeutral,
                   ),
                 ),
-              ),
-              Text(
-                "Details",
-                style: StylesManager.getMediumStyle(
-                  fontSize: FontSize.sBody3,
-                  color: ColorManager.greyNeutral,
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(
+              bottom: AppMargin.m25,
+            ),
+            decoration: BoxDecoration(
+              color: ColorManager.primaryshade3,
+              borderRadius: BorderRadius.circular(AppSize.s12),
+            ),
+            padding: const EdgeInsets.only(
+              top: AppPadding.p15,
+              left: AppPadding.p15,
+              right: AppPadding.p15,
+            ),
+            child: Column(
+              children: [
+                _getSingleLabeledData(
+                  context,
+                  "Username",
+                  argument?.userDetails?.username ?? Constants.dash,
                 ),
-              ),
-            ],
+                _getSingleLabeledData(
+                  context,
+                  "Full Name",
+                  "${argument?.userDetails?.firstname ?? Constants.dash} ${argument?.userDetails?.lastname ?? Constants.dash}",
+                ),
+                _getSingleLabeledData(
+                  context,
+                  "Manager",
+                  argument?.managerDetails?.username ?? Constants.dash,
+                ),
+                _getSingleLabeledData(
+                  context,
+                  "Profile",
+                  argument?.profileDetails?.name ?? Constants.dash,
+                ),
+              ],
+            ),
           ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: ColorManager.primaryshade3,
-            borderRadius: BorderRadius.circular(AppSize.s12),
+          Container(
+            margin: const EdgeInsets.only(
+              bottom: AppMargin.m10,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(
+                    right: AppMargin.m5,
+                  ),
+                  child: SvgPicture.asset(
+                    IconsAssets.documenttext1,
+                    // ignore: deprecated_member_use
+                    color: ColorManager.greyNeutral,
+                    theme: const SvgTheme(
+                      currentColor: ColorManager.greyNeutral,
+                    ),
+                  ),
+                ),
+                Text(
+                  "Details",
+                  style: StylesManager.getMediumStyle(
+                    fontSize: FontSize.sBody3,
+                    color: ColorManager.greyNeutral,
+                  ),
+                ),
+              ],
+            ),
           ),
-          padding: const EdgeInsets.only(
-            top: AppPadding.p15,
-            left: AppPadding.p15,
-            right: AppPadding.p15,
+          Container(
+            decoration: BoxDecoration(
+              color: ColorManager.primaryshade3,
+              borderRadius: BorderRadius.circular(AppSize.s12),
+            ),
+            padding: const EdgeInsets.only(
+              top: AppPadding.p15,
+              left: AppPadding.p15,
+              right: AppPadding.p15,
+            ),
+            child: Column(
+              children: [
+                _getSingleLabeledData(
+                  context,
+                  "Price",
+                  "${_captcha?.data?.siteCurrency} ${argument?.price ?? Constants.dash}",
+                ),
+                _getSingleLabeledData(
+                  context,
+                  "Old Expiration",
+                  formatDateTime(argument?.oldExpiration ?? Constants.dash),
+                ),
+                _getSingleLabeledData(
+                  context,
+                  "New Expiration",
+                  formatDateTime(argument?.newExpiration ?? Constants.dash),
+                ),
+                _getSingleLabeledData(
+                  context,
+                  "Activation Method",
+                  argument?.activationMethod ?? Constants.dash,
+                ),
+                _getSingleLabeledData(
+                  context,
+                  "Acc. Count",
+                  argument?.userActivationsCount.toString() ?? Constants.dash,
+                ),
+                _getSingleLabeledData(
+                  context,
+                  "Status",
+                  // TODO : uncomment this
+                  "Status",
+                  // argument?.status ?? Constants.dash,
+                ),
+                _getSingleLabeledData(
+                  context,
+                  "Date",
+                  formatDateTime(argument?.createdAt ?? Constants.dash),
+                ),
+              ],
+            ),
           ),
-          child: Column(
-            children: [
-              _getSingleLabeledData(
-                context,
-                "Price",
-                "${_captcha?.data?.siteCurrency} ${argument?.price ?? Constants.dash}",
-              ),
-              _getSingleLabeledData(
-                context,
-                "Old Expiration",
-                formatDateTime(argument?.oldExpiration ?? Constants.dash),
-              ),
-              _getSingleLabeledData(
-                context,
-                "New Expiration",
-                formatDateTime(argument?.newExpiration ?? Constants.dash),
-              ),
-              _getSingleLabeledData(
-                context,
-                "Activation Method",
-                argument?.activationMethod ?? Constants.dash,
-              ),
-              _getSingleLabeledData(
-                context,
-                "Acc. Count",
-                argument?.userActivationsCount.toString() ?? Constants.dash,
-              ),
-              _getSingleLabeledData(
-                context,
-                "Status",
-                // TODO : uncomment this
-                "Status",
-                // argument?.status ?? Constants.dash,
-              ),
-              _getSingleLabeledData(
-                context,
-                "Date",
-                formatDateTime(argument?.createdAt ?? Constants.dash),
-              ),
-            ],
-          ),
-        ),
-      ],
+          const SizedBox(height: 25),
+        ],
+      ),
     );
   }
 

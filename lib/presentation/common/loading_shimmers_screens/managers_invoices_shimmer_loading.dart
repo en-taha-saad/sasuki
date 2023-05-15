@@ -4,9 +4,9 @@ import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
-import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/single_invoice_card.dart';
 
 class ManagersInvoicesShimmerLoading extends StatelessWidget {
@@ -30,14 +30,7 @@ class ManagersInvoicesShimmerLoading extends StatelessWidget {
             child: Column(
               children: [
                 AppSize.statusBarHeight(context),
-                Container(
-                  margin: const EdgeInsets.only(
-                    right: AppMargin.m25,
-                    left: AppMargin.m25,
-                    bottom: AppMargin.m25,
-                  ),
-                  child: _getInvoiceAppBar(context),
-                ),
+                getCustomAppBar(context, AppStrings.drawerReports, true),
               ],
             ),
           ),
@@ -85,28 +78,6 @@ class ManagersInvoicesShimmerLoading extends StatelessWidget {
             child: _getInvoiceListContent(),
           ),
         ],
-      ),
-    );
-  }
-
-  AppBar _getInvoiceAppBar(context) {
-    return AppBar(
-      toolbarHeight: 40,
-      titleSpacing: 0,
-      leading: Container(
-        margin: const EdgeInsets.only(
-          right: AppMargin.m30,
-        ),
-        // child: IconButton(
-        //   icon: SvgPicture.asset(IconsAssets.back),
-        //   onPressed: () {},
-        // ),
-      ),
-      title: Text(
-        AppStrings.drawerReports,
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontSize: 18,
-            ),
       ),
     );
   }

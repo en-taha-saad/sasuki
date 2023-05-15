@@ -122,6 +122,7 @@ class DashboardViewModel extends BaseViewModel
         stateRendererType: StateRendererType.fullScreenLoadingState,
       ),
     );
+    // ignore: void_checks
     return (await _dashboardDataUseCase.execute(Void)).fold(
       (failure) {
         // left -> failure

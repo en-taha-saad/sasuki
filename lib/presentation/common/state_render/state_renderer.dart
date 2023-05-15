@@ -18,6 +18,8 @@ import 'package:sasuki/presentation/common/loading_shimmers_screens/userlist_shi
 import 'package:sasuki/presentation/common/state_render/states/mobile_module_screen.dart';
 import 'package:sasuki/presentation/common/state_render/states/state_renderer_type.dart';
 
+import '../loading_shimmers_screens/activity_log_shimmer_loading.dart';
+
 // ignore: must_be_immutable
 class StateRenderer extends StatelessWidget {
   StateRendererType stateRendererType;
@@ -229,6 +231,8 @@ class StateRenderer extends StatelessWidget {
         return const ManagersInvoicesShimmerLoading();
       case MobileModuleScreen.managerJournal:
         return const ManagersInvoicesShimmerLoading();
+      case MobileModuleScreen.activityLogs:
+        return const ActivityLogViewShimmerLoading();
 
       default:
         return Container();

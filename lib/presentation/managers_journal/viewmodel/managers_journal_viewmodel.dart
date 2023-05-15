@@ -55,7 +55,7 @@ class ManagersJournalViewModel extends BaseViewModel
   Future getManagersJournal() async {
     inputState.add(
       LoadingState(
-        mobileModuleScreen: MobileModuleScreen.activationsReports,
+        mobileModuleScreen: MobileModuleScreen.managerJournal,
         stateRendererType: StateRendererType.fullScreenLoadingState,
       ),
     );

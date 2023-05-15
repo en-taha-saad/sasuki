@@ -95,16 +95,12 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             children: [
               AppSize.statusBarHeight(context),
               Container(
-                margin: const EdgeInsets.only(
-                  right: AppMargin.m25,
-                  left: AppMargin.m25,
-                  bottom: AppMargin.m25,
+                margin: const EdgeInsets.symmetric(
+                  vertical: AppMargin.m20,
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _getUserActions(context),
+                    _getAppBarWithActions(context),
                     const SizedBox(height: AppSize.s20),
                     _getStatisticsCard(context),
                   ],
@@ -124,18 +120,15 @@ class _UserDetailsViewState extends State<UserDetailsView> {
     );
   }
 
-  AppBar _getUserActions(context) {
+  AppBar _getAppBarWithActions(context) {
     return AppBar(
-      toolbarHeight: 40,
-      titleSpacing: 0,
-      leading: Container(
-        margin: const EdgeInsets.only(
-          right: AppMargin.m30,
+      leading: IconButton(
+        icon: SvgPicture.asset(
+          IconsAssets.back,
+          height: 16,
+          width: 16,
         ),
-        child: IconButton(
-          icon: SvgPicture.asset(IconsAssets.back),
-          onPressed: () => Nav.popRoute(context),
-        ),
+        onPressed: () => Nav.popRoute(context),
       ),
       title: Text(
         AppStrings.userOverviewTitle,
@@ -149,16 +142,15 @@ class _UserDetailsViewState extends State<UserDetailsView> {
               _openActions(choice, context),
           color: ColorManager.whiteNeutral,
           elevation: Constants.zeroDouble,
-          icon: Container(
-            margin: const EdgeInsets.only(left: AppMargin.m20),
-            child: SvgPicture.asset(
-              IconsAssets.actions,
-              theme: const SvgTheme(
-                currentColor: ColorManager.whiteNeutral,
-              ),
-              // ignore: deprecated_member_use
-              color: ColorManager.whiteNeutral,
+          icon: SvgPicture.asset(
+            IconsAssets.actions,
+            height: 16,
+            width: 16,
+            theme: const SvgTheme(
+              currentColor: ColorManager.whiteNeutral,
             ),
+            // ignore: deprecated_member_use
+            color: ColorManager.whiteNeutral,
           ),
           enabled: Constants.trueBool,
           surfaceTintColor: ColorManager.primaryshade3,
@@ -215,94 +207,99 @@ class _UserDetailsViewState extends State<UserDetailsView> {
   }
 
   Widget _getStatisticsCard(context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: AppSize.s8,
-                  height: AppSize.s8,
-                  margin: const EdgeInsets.only(
-                    right: AppSize.s6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: getStatusColor(
-                      getStatusString(userOverviewApiVar?.data?.status),
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppMargin.m25,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: AppSize.s8,
+                    height: AppSize.s8,
+                    margin: const EdgeInsets.only(
+                      right: AppSize.s6,
                     ),
-                    shape: BoxShape.circle,
+                    decoration: BoxDecoration(
+                      color: getStatusColor(
+                        getStatusString(userOverviewApiVar?.data?.status),
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  Text(
+                    getStatusString(userOverviewApiVar?.data?.status),
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          fontSize: FontSize.sBody1,
+                        ),
+                  ),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.only(
+                  left: AppSize.s14,
+                ),
+                child: Text(
+                  AppStrings.userOverviewStatus,
+                  style: StylesManager.getRegularStyle(
+                    color: ColorManager.greyNeutral3,
+                    fontSize: FontSize.sCaption1,
                   ),
                 ),
-                Text(
-                  getStatusString(userOverviewApiVar?.data?.status),
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontSize: FontSize.sBody1,
-                      ),
-                ),
-              ],
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                left: AppSize.s14,
               ),
-              child: Text(
-                AppStrings.userOverviewStatus,
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                userOverviewApiVar?.data?.remainingRxtx == Constants.nullValue
+                    ? Constants.dash
+                    : (userOverviewApiVar?.data?.remainingRxtx)! < 0
+                        ? "0"
+                        : "${userOverviewApiVar?.data?.remainingRxtx}",
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: FontSize.sBody1,
+                    ),
+              ),
+              Text(
+                AppStrings.userOverviewDailyTaffic,
                 style: StylesManager.getRegularStyle(
                   color: ColorManager.greyNeutral3,
                   fontSize: FontSize.sCaption1,
                 ),
               ),
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              userOverviewApiVar?.data?.remainingRxtx == Constants.nullValue
-                  ? Constants.dash
-                  : (userOverviewApiVar?.data?.remainingRxtx)! < 0
-                      ? "0"
-                      : "${userOverviewApiVar?.data?.remainingRxtx}",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: FontSize.sBody1,
-                  ),
-            ),
-            Text(
-              AppStrings.userOverviewDailyTaffic,
-              style: StylesManager.getRegularStyle(
-                color: ColorManager.greyNeutral3,
-                fontSize: FontSize.sCaption1,
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                userOverviewApiVar?.data?.remainingUptime == Constants.nullValue
+                    ? Constants.dash
+                    : (userOverviewApiVar?.data?.remainingUptime)! < 0
+                        ? "0"
+                        : "${userOverviewApiVar?.data?.remainingUptime}",
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: FontSize.sBody1,
+                    ),
               ),
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              userOverviewApiVar?.data?.remainingUptime == Constants.nullValue
-                  ? Constants.dash
-                  : (userOverviewApiVar?.data?.remainingUptime)! < 0
-                      ? "0"
-                      : "${userOverviewApiVar?.data?.remainingUptime}",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: FontSize.sBody1,
-                  ),
-            ),
-            Text(
-              AppStrings.userOverviewUptime,
-              style: StylesManager.getRegularStyle(
-                color: ColorManager.greyNeutral3,
-                fontSize: FontSize.sCaption1,
+              Text(
+                AppStrings.userOverviewUptime,
+                style: StylesManager.getRegularStyle(
+                  color: ColorManager.greyNeutral3,
+                  fontSize: FontSize.sCaption1,
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -617,11 +614,10 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         AppStrings.userActionPayDebt,
         AppStrings.payDebtInputDialogtitle,
         IconsAssets.moneyUserAction,
-        (
-                (_viewModel.paydebtInforms?.data?.total !=
-                        Constants.nullValue &&
+        ((_viewModel.paydebtInforms?.data?.total != Constants.nullValue &&
                     _viewModel.paydebtInforms?.data?.total !=
-                        Constants.zeroNum) && (_amountController.text.isNotEmpty))
+                        Constants.zeroNum) &&
+                (_amountController.text.isNotEmpty))
             ? () {
                 FocusScope.of(context).unfocus();
                 Nav.popRoute(context);

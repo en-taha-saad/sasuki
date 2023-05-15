@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';import 'package:sasuki/app/shared_widgets/custom_switch.dart';
+import 'package:sasuki/app/shared_widgets/custom_switch.dart';
 
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
@@ -13,6 +13,7 @@ import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/get_action_dialog_content.dart';
 import 'package:sasuki/app/shared_widgets/get_actions_text_field.dart';
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/shared_dropdown.dart';
 import 'package:sasuki/app/shared_widgets/showdialog.dart';
 import 'package:sasuki/app/shared_widgets/single_list_tile.dart';
@@ -171,18 +172,7 @@ class _UserActivationViewState extends State<UserActivationView> {
         Column(
           children: [
             AppSize.statusBarHeight(context),
-            AppBar(
-              leading: IconButton(
-                icon: SvgPicture.asset(IconsAssets.back),
-                onPressed: () => Nav.popRoute(context),
-              ),
-              title: Text(
-                AppStrings.activateUserTitle,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontSize: 18,
-                    ),
-              ),
-            ),
+            getCustomAppBar(context, AppStrings.activateUserTitle, true),
             Expanded(
               child: Container(
                 width: MediaQuery.of(context).size.width,

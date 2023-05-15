@@ -6,11 +6,11 @@ import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
-import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/single_journal_card.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/manager_journal/manager_journal.dart';
@@ -55,14 +55,7 @@ class _SingleJournalViewState extends State<SingleJournalView> {
               child: Column(
                 children: [
                   AppSize.statusBarHeight(context),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      right: AppMargin.m25,
-                      left: AppMargin.m25,
-                      bottom: AppMargin.m25,
-                    ),
-                    child: _getJournalAppBar(context),
-                  ),
+                  getCustomAppBar(context, AppStrings.drawerReportsInvoices, true),
                 ],
               ),
             ),
@@ -124,29 +117,6 @@ class _SingleJournalViewState extends State<SingleJournalView> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  AppBar _getJournalAppBar(context) {
-    return AppBar(
-    
-      toolbarHeight: 40,
-      titleSpacing: 0,
-      leading: Container(
-        margin: const EdgeInsets.only(
-          right: AppMargin.m30,
-        ),
-        child: IconButton(
-          icon: SvgPicture.asset(IconsAssets.back),
-          onPressed: () => Nav.popRoute(context),
-        ),
-      ),
-      title: Text(
-        AppStrings.drawerReportsInvoices,
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontSize: 18,
-            ),
       ),
     );
   }

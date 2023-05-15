@@ -6,10 +6,19 @@ import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/domain/models/activity_log_list/activity_log_list.dart';
+import 'package:sasuki/app/app_inits_funs/constants.dart';
+import 'package:sasuki/app/resources/other_managers/color_manager.dart';
+import 'package:sasuki/app/shared_widgets/text_shimmer.dart';
 
 class SingleActivityLog extends StatelessWidget {
-  const SingleActivityLog({super.key, this.activityLog});
+  const SingleActivityLog({
+    this.isShimmer,
+    this.activityLog,
+    Key? key,
+  }) : super(key: key);
   final ActivityLog? activityLog;
+  final bool? isShimmer;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +40,14 @@ class SingleActivityLog extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
+          isShimmer != Constants.nullValue &&
+              isShimmer != Constants.falseBool
+              ? const ShimmerText(
+            baseColor: ColorManager.whiteNeutral,
+            highlightColor: ColorManager.backgroundCenter,
+            width: AppSize.s50,
+          )
+              : Container(
             margin: const EdgeInsets.only(bottom: AppMargin.m10),
             child: Text(
               activityLog?.event ?? "",
@@ -55,7 +71,13 @@ class SingleActivityLog extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                isShimmer != Constants.nullValue &&
+                    isShimmer != Constants.falseBool
+                    ? const ShimmerText(
+                  baseColor: ColorManager.whiteNeutral,
+                  highlightColor: ColorManager.backgroundCenter,
+                  width: AppSize.s50,
+                ):SizedBox(
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Text(
                     activityLog?.description ?? "",
@@ -82,7 +104,13 @@ class SingleActivityLog extends StatelessWidget {
                     margin: const EdgeInsets.only(right: AppMargin.m5),
                     child: SvgPicture.asset(IconsAssets.calendar),
                   ),
-                  Text(
+                  isShimmer != Constants.nullValue &&
+                      isShimmer != Constants.falseBool
+                      ? const ShimmerText(
+                    baseColor: ColorManager.whiteNeutral,
+                    highlightColor: ColorManager.backgroundCenter,
+                    width: AppSize.s50,
+                  ):Text(
                     activityLog?.createdAt ?? "",
                     style: StylesManager.getRegularStyle(
                       fontSize: FontSize.sCaption1,
@@ -96,7 +124,13 @@ class SingleActivityLog extends StatelessWidget {
                     margin: const EdgeInsets.only(right: AppMargin.m5),
                     child: SvgPicture.asset(IconsAssets.global),
                   ),
-                  Text(
+                  isShimmer != Constants.nullValue &&
+                      isShimmer != Constants.falseBool
+                      ? const ShimmerText(
+                    baseColor: ColorManager.whiteNeutral,
+                    highlightColor: ColorManager.backgroundCenter,
+                    width: AppSize.s50,
+                  ):Text(
                     activityLog?.ip ?? "",
                     style: StylesManager.getRegularStyle(
                       fontSize: FontSize.sCaption1,

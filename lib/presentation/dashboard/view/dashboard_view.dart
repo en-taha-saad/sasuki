@@ -31,8 +31,7 @@ class DashboardView extends StatefulWidget {
   _DashboardViewState createState() => _DashboardViewState();
 }
 
-class _DashboardViewState extends State<DashboardView>
-    {
+class _DashboardViewState extends State<DashboardView> {
   final DashboardViewModel _viewModel = instance<DashboardViewModel>();
   Timer? timer;
 
@@ -60,7 +59,6 @@ class _DashboardViewState extends State<DashboardView>
     _bind();
     super.initState();
   }
-
 
   void _startTimer() {
     timer = Timer.periodic(
@@ -134,14 +132,9 @@ class _DashboardViewState extends State<DashboardView>
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        InkWell(
-                          child: Container(
-                            padding: const EdgeInsets.only(
-                              top: AppSize.s12,
-                            ),
-                            child: SvgPicture.asset(IconsAssets.menu),
-                          ),
-                          onTap: () {
+                        IconButton(
+                          icon: SvgPicture.asset(IconsAssets.menu),
+                          onPressed: () {
                             _cancelTimer();
                             Nav.navTo(context, Routes.drawerRoute);
                           },

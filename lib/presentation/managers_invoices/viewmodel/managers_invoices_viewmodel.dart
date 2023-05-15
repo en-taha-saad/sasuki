@@ -55,7 +55,7 @@ class ManagersInvoicesViewModel extends BaseViewModel
   Future getManagersInvoices() async {
     inputState.add(
       LoadingState(
-        mobileModuleScreen: MobileModuleScreen.activationsReports,
+        mobileModuleScreen: MobileModuleScreen.managerInvoices,
         stateRendererType: StateRendererType.fullScreenLoadingState,
       ),
     );
