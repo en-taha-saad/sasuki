@@ -26,6 +26,7 @@ extension ActivationResponseMapper on ActivationResponse? {
       this?.newExpiration.orEmpty() ?? Constants.emptyStr,
       this?.activationMethod.orEmpty() ?? Constants.emptyStr,
       this?.userActivationsCount.orZero() ?? Constants.zeroNum.toInt(),
+      this?.refunded,
     );
   }
 }

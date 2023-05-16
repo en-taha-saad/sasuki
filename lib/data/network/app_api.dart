@@ -199,6 +199,11 @@ abstract class AppServiceClient {
     @Field("payload") String payload,
   );
 
+  // @GET("/report/activations/{activationId}")
+  // Future<> getActivationStatus(
+  //   @Path("activationId") int activationId,
+  // );
+
   @POST("/index/ManagerInvoices")
   Future<ManagersInvoicesResponses> getManagerInvoices(
     @Field("payload") String payload,

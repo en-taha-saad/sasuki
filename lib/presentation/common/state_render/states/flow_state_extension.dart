@@ -80,9 +80,9 @@ extension FlowStateExtension on FlowState {
 
       case ErrorState:
         {
-          dismissDialog(context);
           WidgetsBinding.instance.addPostFrameCallback(
             (_) {
+              dismissDialog(context);
               dismissDialog(context);
             },
           );
@@ -105,7 +105,6 @@ extension FlowStateExtension on FlowState {
               getMessage(),
               retryActionFunction,
             );
-            dismissDialog(context);
             // show content screen
             return contentScreenWidget;
           }

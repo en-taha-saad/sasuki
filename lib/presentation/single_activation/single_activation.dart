@@ -121,6 +121,7 @@ class _SingleActivationViewState extends State<SingleActivationView> {
   }
 
   _getSingleActivationData(Activation? argument) {
+    debugPrint("argument?.refunded ${argument?.refunded}");
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
@@ -265,9 +266,7 @@ class _SingleActivationViewState extends State<SingleActivationView> {
                 _getSingleLabeledData(
                   context,
                   "Status",
-                  // TODO : uncomment this
-                  "Status",
-                  // argument?.status ?? Constants.dash,
+                  _argument?.refunded == null ? "Ok" : "Cancelled",
                 ),
                 _getSingleLabeledData(
                   context,
@@ -316,13 +315,15 @@ class _SingleActivationViewState extends State<SingleActivationView> {
           SizedBox(
             width: MediaQuery.of(context).size.width - 200,
             child: Text(
-              label == "Status" ? "Canceled" : value!,
+              value!,
               maxLines: 3,
               textAlign: TextAlign.end,
               softWrap: true,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: label == "Status"
-                        ? ColorManager.orangeAnnotations
+                        ? value == "Ok"
+                            ? ColorManager.greenAnnotations
+                            : ColorManager.orangeAnnotations
                         : ColorManager.whiteNeutral,
                   ),
             ),

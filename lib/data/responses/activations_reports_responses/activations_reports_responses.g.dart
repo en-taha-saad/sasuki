@@ -35,6 +35,7 @@ ActivationResponse _$ActivationResponseFromJson(Map<String, dynamic> json) =>
           ? null
           : ManagerDetailsResponse.fromJson(
               json['manager_details'] as Map<String, dynamic>),
+      json['refunded'] as int?,
       json['profile_details'] == null
           ? null
           : ProfileDetailsResponse.fromJson(
@@ -57,6 +58,7 @@ Map<String, dynamic> _$ActivationResponseToJson(ActivationResponse instance) =>
       'new_expiration': instance.newExpiration,
       'activation_method': instance.activationMethod,
       'user_activations_count': instance.userActivationsCount,
+      'refunded': instance.refunded,
     };
 
 UserDetailsResponse _$UserDetailsResponseFromJson(Map<String, dynamic> json) =>

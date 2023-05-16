@@ -13,7 +13,6 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
-import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/screen_width.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
@@ -251,7 +250,7 @@ class _UsersListViewState extends State<UsersListView> {
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),
-            fillColor: Color(0xff3D4E78),
+            fillColor: const Color(0xff3D4E78),
             prefixIcon: Transform.scale(
               scale: 0.35,
               child: SvgPicture.asset(
@@ -310,7 +309,11 @@ class _UsersListViewState extends State<UsersListView> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Future.delayed(
           Duration(seconds: Constants.oneNum.toInt()),
-          () => setState(() => loadFilteredUsers = Constants.falseBool),
+          () {
+            if (mounted) {
+              setState(() => loadFilteredUsers = Constants.falseBool);
+            }
+          },
         );
       });
     }
@@ -555,7 +558,6 @@ class _UsersListViewState extends State<UsersListView> {
               child: DropDownComponent<SingleParentData?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,
-                
                 items: parentList ?? [],
                 doOtherThings: (val) {
                   selectedparent = val;
@@ -593,7 +595,6 @@ class _UsersListViewState extends State<UsersListView> {
               child: DropDownComponent<StatusFilterList?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersStatusAny,
-               
                 items: statusFilterList ?? [],
                 doOtherThings: (val) {
                   selectedstatusFilter = val;
@@ -631,7 +632,6 @@ class _UsersListViewState extends State<UsersListView> {
               child: DropDownComponent<ConnectionFilterList?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersStatusAny,
-               
                 items: connectionFilterList ?? [],
                 doOtherThings: (val) {
                   selectedconnectionFilter = val;
@@ -671,7 +671,6 @@ class _UsersListViewState extends State<UsersListView> {
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,
                 items: profileList ?? [],
-               
                 doOtherThings: (val) {
                   selectedprofile = val;
                 },

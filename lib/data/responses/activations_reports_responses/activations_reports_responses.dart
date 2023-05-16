@@ -38,13 +38,15 @@ class ActivationResponse {
   String activationMethod;
   @JsonKey(name: 'user_activations_count')
   int userActivationsCount;
-
+  @JsonKey(name: 'refunded')
+  int? refunded;
   ActivationResponse(
     this.id,
     this.price,
     this.createdAt,
     this.userDetails,
     this.managerDetails,
+    this.refunded,
     this.profileDetails,
     this.oldExpiration,
     this.newExpiration,

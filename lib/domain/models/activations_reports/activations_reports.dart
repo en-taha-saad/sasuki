@@ -16,6 +16,7 @@ class Activation {
   String newExpiration;
   String activationMethod;
   int userActivationsCount;
+  int? refunded;
 
   Activation(
     this.id,
@@ -28,6 +29,7 @@ class Activation {
     this.newExpiration,
     this.activationMethod,
     this.userActivationsCount,
+    this.refunded,
   );
 }
 
