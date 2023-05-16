@@ -196,7 +196,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),
-            fillColor: ColorManager.greyshade1,
+            fillColor: const Color(0xff3D4E78),
             prefixIcon: Transform.scale(
               scale: 0.35,
               child: SvgPicture.asset(
@@ -251,27 +251,18 @@ class _ActivityLogViewState extends State<ActivityLogView> {
     return StreamBuilder<ActivityLogList?>(
       stream: _activityLogViewModel.outputActivityLogListData,
       builder: (context, snapshot) {
-        // ignore: prefer_is_empty
-        if (snapshot.data?.data?.length == Constants.oneNum ||
-            snapshot.data?.data?.length == Constants.zeroNum) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Future.delayed(
-              Duration(seconds: Constants.oneNum.toInt()),
-              () => setState(
-                  () => loadFilteredActivityLogs = Constants.falseBool),
-            );
-          });
-        }
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          Future.delayed(
-            Duration(seconds: Constants.oneNum.toInt()),
-            () => setState(() {
-              hidLoadingMoreActivityLogs =
-                  _activityLogViewModel.totalActivityLogs ==
-                      snapshot.data?.data?.length;
-            }),
-          );
-        });
+      Future.delayed(
+        Duration(seconds: Constants.oneNum.toInt()),
+        () {
+          setState(() {
+            loadFilteredActivityLogs = Constants.falseBool;
+            hidLoadingMoreActivityLogs =
+                _activityLogViewModel.totalActivityLogs == snapshot.data?.data?.length;
+          });
+        },
+      );
+    });
         return !loadFilteredActivityLogs
             // ignore: prefer_is_empty
             ? snapshot.data?.data?.length != Constants.zeroNum
@@ -510,13 +501,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
               child: DropDownComponent<ActivityLogEvent?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.allEventsHint,
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x26ffffff),
-                    width: 1.0,
-                  ),
-                  borderRadius: RadiusSizes.radius12,
-                ),
+                
                 items: activityLogEvents ?? [],
                 doOtherThings: (val) {
                   selectedActivityLogEvent = val;

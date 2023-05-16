@@ -111,7 +111,7 @@ ThemeData getApplicationTheme() {
     inputDecorationTheme: InputDecorationTheme(
       filled: Constants.trueBool,
       isDense: Constants.trueBool,
-      fillColor: const Color(0xff273A69),
+      fillColor: const Color(0xff1B2A52),
       border: OutlineInputBorder(
         borderRadius: RadiusSizes.radius12,
         borderSide: BorderSide.none,

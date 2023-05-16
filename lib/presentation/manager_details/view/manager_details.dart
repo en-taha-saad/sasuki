@@ -131,6 +131,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
         PopupMenuButton<SingleManagerAction>(
           onSelected: (SingleManagerAction choice) =>
               _openActions(choice, context),
+          color: ColorManager.whiteNeutral,
           elevation: Constants.zeroDouble,
           icon: SvgPicture.asset(
             IconsAssets.actions,

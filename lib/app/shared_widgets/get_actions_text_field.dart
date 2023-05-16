@@ -34,12 +34,24 @@ Widget getActionTextFieldInput(
         autofocus: autoFocus ?? Constants.falseBool,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: ColorManager.greyNeutral.withOpacity(0.25),
+            borderSide: const BorderSide(
+              color: ColorManager.greyNeutral,
             ),
             borderRadius: RadiusSizes.radius12,
           ),
-          fillColor: ColorManager.greyNeutral.withOpacity(0.25),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: const Color(0xff929EAE).withOpacity(0.50),
+            ),
+            borderRadius: RadiusSizes.radius12,
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: const Color(0xff929EAE).withOpacity(0.50),
+            ),
+            borderRadius: RadiusSizes.radius12,
+          ),
+          fillColor: ColorManager.transparent,
           errorText: isRequiredValidation != Constants.nullValue &&
                   isRequiredValidation != Constants.trueBool
               ? AppStrings.inputIsEmpty

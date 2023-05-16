@@ -56,7 +56,7 @@ class SingleUserCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(AppPadding.p12),
                 decoration: BoxDecoration(
-                  color: const Color(0xff1B2A52),
+                  color: ColorManager.secondary,
                   borderRadius: RadiusSizes.radius12,
                 ),
                 child: SvgPicture.asset(

@@ -7,7 +7,7 @@ class ColorManager {
 
   static const Color primaryshade2 = Color.fromRGBO(9, 97, 145, 0.5);
   static const Color primaryshade3 = Color.fromRGBO(9, 97, 145, 0.25);
-  static const Color secondary = Color(0xff1B2A52);
+  static const Color secondary = Color(0xff273A69);
   static const Color redAnnotations = Color.fromRGBO(222, 82, 54, 1);
   static const Color greenAnnotations = Color.fromRGBO(61, 131, 139, 1);
   static const Color greenAnnotations2 = Color.fromRGBO(38, 189, 161, 1);

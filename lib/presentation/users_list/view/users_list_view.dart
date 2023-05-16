@@ -251,7 +251,7 @@ class _UsersListViewState extends State<UsersListView> {
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),
-            fillColor: ColorManager.greyshade1,
+            fillColor: Color(0xff3D4E78),
             prefixIcon: Transform.scale(
               scale: 0.35,
               child: SvgPicture.asset(
@@ -339,7 +339,7 @@ class _UsersListViewState extends State<UsersListView> {
                       hidLoadingMoreItems: hidLoadingMoreUsers,
                       context: context,
                       singleItem: _singleUser,
-                      data: snapshot.data,
+                      data: snapshot.data ?? [],
                     ),
                   )
                 : getEmptyStateWidget(
@@ -555,13 +555,7 @@ class _UsersListViewState extends State<UsersListView> {
               child: DropDownComponent<SingleParentData?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x26ffffff),
-                    width: 1.0,
-                  ),
-                  borderRadius: RadiusSizes.radius12,
-                ),
+                
                 items: parentList ?? [],
                 doOtherThings: (val) {
                   selectedparent = val;
@@ -599,13 +593,7 @@ class _UsersListViewState extends State<UsersListView> {
               child: DropDownComponent<StatusFilterList?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersStatusAny,
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x26ffffff),
-                    width: 1.0,
-                  ),
-                  borderRadius: RadiusSizes.radius12,
-                ),
+               
                 items: statusFilterList ?? [],
                 doOtherThings: (val) {
                   selectedstatusFilter = val;
@@ -643,13 +631,7 @@ class _UsersListViewState extends State<UsersListView> {
               child: DropDownComponent<ConnectionFilterList?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersStatusAny,
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x26ffffff),
-                    width: 1.0,
-                  ),
-                  borderRadius: RadiusSizes.radius12,
-                ),
+               
                 items: connectionFilterList ?? [],
                 doOtherThings: (val) {
                   selectedconnectionFilter = val;
@@ -689,13 +671,7 @@ class _UsersListViewState extends State<UsersListView> {
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,
                 items: profileList ?? [],
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x26ffffff),
-                    width: 1.0,
-                  ),
-                  borderRadius: RadiusSizes.radius12,
-                ),
+               
                 doOtherThings: (val) {
                   selectedprofile = val;
                 },

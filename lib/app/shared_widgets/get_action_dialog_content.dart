@@ -13,8 +13,9 @@ Widget getActionDialogContent(
   String buttonText,
   String dialogTitle,
   String dialogTitleIcon,
-  Function()? onPressed,
-) {
+  Function()? onPressed, [
+  ButtonStyle? style,
+]) {
   return SingleChildScrollView(
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -80,6 +81,7 @@ Widget getActionDialogContent(
               ElevatedButtonWidget(
                 name: buttonText,
                 onPressed: onPressed,
+                style: style,
               ),
             ],
           ),

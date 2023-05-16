@@ -6,7 +6,8 @@ import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 
-Container getCustomAppBar(context, String title, bool isScreenSecondary) {
+Container getCustomAppBar(context, String title, bool isScreenSecondary,
+    [bool? isDashboard]) {
   return Container(
     color: ColorManager.primaryshade1,
     child: Stack(
@@ -38,9 +39,11 @@ Container getCustomAppBar(context, String title, bool isScreenSecondary) {
           child: Center(
             child: Text(
               title,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: 18,
-                  ),
+              style: isDashboard == true
+                  ? Theme.of(context).textTheme.displayMedium
+                  : Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontSize: 18,
+                      ),
             ),
           ),
         ),

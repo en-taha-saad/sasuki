@@ -163,7 +163,7 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
               bottom: AppMargin.m25,
             ),
             decoration: BoxDecoration(
-              color: ColorManager.primaryshade3,
+              color: const Color(0xff21325E),
               borderRadius: BorderRadius.circular(AppSize.s12),
             ),
             padding: const EdgeInsets.only(
@@ -229,7 +229,7 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: ColorManager.primaryshade3,
+              color: const Color(0xff21325E),
               borderRadius: BorderRadius.circular(AppSize.s12),
             ),
             padding: const EdgeInsets.only(

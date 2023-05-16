@@ -98,6 +98,7 @@ extension FlowStateExtension on FlowState {
             return contentScreenWidget;
           } else {
             // show toast retry screen error
+
             showSnackBar(
               context,
               getStateRendererType(),
@@ -173,11 +174,7 @@ extension FlowStateExtension on FlowState {
           initLoginModule();
           WidgetsBinding.instance.addPostFrameCallback(
             (_) {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                Routes.loginRoute,
-                (Route<dynamic> route) => true,
-              );
+              Nav.replaceTo(context, Routes.loginRoute);
             },
           );
           return;

@@ -145,7 +145,7 @@ class _ManagersListViewState extends State<ManagersListView> {
                   horizontal: AppPadding.p25,
                 ),
                 child: StreamBuilder<ManagerListDetails?>(
-                  stream: _managersListViewModel.outputManagersList,
+                  stream: _managersListViewModel.outputManagersListData,
                   builder: (context, snapshot) {
                     return SingleManagerCardStatistics(
                       isShimmer: Constants.falseBool,
@@ -168,14 +168,14 @@ class _ManagersListViewState extends State<ManagersListView> {
                 width: getScreenWidth(context) * 0.6,
                 child: _getSearchTextField(),
               ),
-             IconButton(
-                  onPressed: _showFilterDialog,
-                  icon: SvgPicture.asset(
-                    IconsAssets.filter,
-                    width: AppSize.s18,
-                    height: AppSize.s18,
-                  ),
+              IconButton(
+                onPressed: _showFilterDialog,
+                icon: SvgPicture.asset(
+                  IconsAssets.filter,
+                  width: AppSize.s18,
+                  height: AppSize.s18,
                 ),
+              ),
               InkWell(
                 onTap: () {
                   _managersListViewModel.isThereAddManagerCreationPermission
@@ -233,7 +233,7 @@ class _ManagersListViewState extends State<ManagersListView> {
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),
-            fillColor: ColorManager.greyshade1,
+            fillColor: const Color(0xff3D4E78),
             prefixIcon: Transform.scale(
               scale: 0.35,
               child: SvgPicture.asset(
@@ -286,24 +286,19 @@ class _ManagersListViewState extends State<ManagersListView> {
 
   _prepareManagersList(List<SingleManagerDetails>? data) {
     // ignore: prefer_is_empty
-    if (data?.length == Constants.oneNum || data?.length == Constants.zeroNum) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Future.delayed(
-          Duration(seconds: Constants.oneNum.toInt()),
-          () => setState(() => loadFilteredManagers = Constants.trueBool),
-        );
-      });
-    }
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(
         Duration(seconds: Constants.oneNum.toInt()),
         () {
-          setState(() => hidLoadingMoreManagers =
-              _managersListViewModel.totalManagers == data?.length);
+          setState(() {
+            loadFilteredManagers = Constants.falseBool;
+            hidLoadingMoreManagers =
+                _managersListViewModel.totalManagers == data?.length;
+          });
         },
       );
     });
+    debugPrint("hidLoadingMoreManagers $hidLoadingMoreManagers");
   }
 
   Widget _getManagersList() {
@@ -322,7 +317,7 @@ class _ManagersListViewState extends State<ManagersListView> {
                       hidLoadingMoreItems: hidLoadingMoreManagers,
                       context: context,
                       singleItem: _singleManager,
-                      data: snapshot.data?.data,
+                      data: snapshot.data?.data ?? [],
                     ),
                   )
                 : getEmptyStateWidget(
@@ -411,7 +406,7 @@ class _ManagersListViewState extends State<ManagersListView> {
         left: Constants.zeroDouble,
         right: Constants.zeroDouble,
         top: MediaQuery.of(context).size.height * 0.1,
-        bottom: MediaQuery.of(context).size.height * 0.4,
+        bottom: MediaQuery.of(context).size.height * 0.3,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.s0),
@@ -546,13 +541,6 @@ class _ManagersListViewState extends State<ManagersListView> {
               child: DropDownComponent<SingleManagerData?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x26ffffff),
-                    width: 1.0,
-                  ),
-                  borderRadius: RadiusSizes.radius12,
-                ),
                 items: parentManagerList ?? [],
                 doOtherThings: (val) {
                   selectedparentManager = val;
@@ -592,14 +580,7 @@ class _ManagersListViewState extends State<ManagersListView> {
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.managersAclPermissionHint,
                 items: aclPermissionGroupList ?? [],
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x26ffffff),
-                    width: 1.0,
-                  ),
-                  borderRadius: RadiusSizes.radius12,
-                ),
-                doOtherThings: (val) {
+                 doOtherThings: (val) {
                   selectedAclPermissionGroup = val;
                 },
                 displayFn: (item) =>

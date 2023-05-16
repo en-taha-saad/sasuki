@@ -12,7 +12,7 @@ Widget getCardTitle(
   return Container(
     color: color != ColorManager.whiteNeutral
         ? ColorManager.transparent
-        : const Color(0xff2D3B60),
+        : const Color(0xff3D4E78),
     padding: const EdgeInsets.symmetric(
       horizontal: AppSize.s25,
       vertical: AppSize.s10,

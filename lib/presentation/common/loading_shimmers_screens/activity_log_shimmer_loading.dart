@@ -126,7 +126,7 @@ class ActivityLogViewShimmerLoading extends StatelessWidget {
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),
-            fillColor: ColorManager.greyshade1,
+            fillColor: const Color(0xff3D4E78),
             prefixIcon: Transform.scale(
               scale: 0.35,
               child: SvgPicture.asset(

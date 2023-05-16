@@ -10,10 +10,12 @@ class ElevatedButtonWidget extends StatelessWidget {
   final String? assetName;
   final String? name;
   final MainAxisSize? mainAxisSize;
+  final ButtonStyle? style;
   const ElevatedButtonWidget({
     this.onPressed,
     this.assetName,
     this.name,
+    this.style,
     this.mainAxisSize,
     super.key,
   });
@@ -23,6 +25,7 @@ class ElevatedButtonWidget extends StatelessWidget {
     return SizedBox(
       height: AppSize.s48,
       child: ElevatedButton(
+        style: style,
         onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

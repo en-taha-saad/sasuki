@@ -135,7 +135,7 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
             color: ColorManager.whiteNeutral.withOpacity(0.2),
             padding: const EdgeInsets.symmetric(
               horizontal: AppSize.s25,
-              vertical: AppSize.s10,
+              // vertical: AppSize.s10,
             ),
             margin: const EdgeInsets.only(
               bottom: AppSize.s20,
@@ -167,7 +167,7 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
                     ),
                   ],
                 ),
-              IconButton(
+                IconButton(
                   onPressed: _showFilterDialog,
                   icon: SvgPicture.asset(
                     IconsAssets.filter,
@@ -190,27 +190,18 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
     return StreamBuilder<ActivationsReports>(
       stream: _viewModel.outputReportsActivations,
       builder: (context, snapshot) {
-        // ignore: prefer_is_empty
-        if (snapshot.data?.data?.length == Constants.oneNum ||
-            snapshot.data?.data?.length == Constants.zeroNum) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Future.delayed(
-              Duration(seconds: Constants.oneNum.toInt()),
-              () =>
-                  setState(() => loadFilteredActivations = Constants.falseBool),
-            );
-          });
-        }
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Future.delayed(
             Duration(seconds: Constants.oneNum.toInt()),
-            () => setState(() {
-              hidLoadingMoreActivations =
-                  _viewModel.totalActivations == snapshot.data?.data?.length;
-            }),
+            () {
+              setState(() {
+                loadFilteredActivations = Constants.falseBool;
+                hidLoadingMoreActivations =
+                    _viewModel.totalActivations == snapshot.data?.data?.length;
+              });
+            },
           );
         });
-
         return !loadFilteredActivations
             // ignore: prefer_is_empty
             ? snapshot.data?.data?.length != Constants.zeroNum
@@ -484,13 +475,6 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
               child: DropDownComponent<ProfileData?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.usersParentHint,
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0x26ffffff),
-                    width: 1.0,
-                  ),
-                  borderRadius: RadiusSizes.radius12,
-                ),
                 items: profileList ?? [],
                 doOtherThings: (val) {
                   selectedprofile = val;

@@ -15,6 +15,7 @@ import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/dashboard_list_tile.dart';
+import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/dashboard/auth.dart';
 import 'package:sasuki/domain/models/dashboard/dashboard.dart';
@@ -109,51 +110,29 @@ class _DashboardViewState extends State<DashboardView> {
 
   Widget _getContentWidget() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
           color: ColorManager.primaryshade1,
           child: Column(
             children: [
               AppSize.statusBarHeight(context),
+              getCustomAppBar(
+                context,
+                _viewModel.selectedServer?.name ?? Constants.emptyStr,
+                false,
+                true,
+              ),
               Container(
                 margin: const EdgeInsets.only(
                   right: AppMargin.m25,
                   left: AppMargin.m25,
-                  top: AppMargin.m20,
                   bottom: AppMargin.m25,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        IconButton(
-                          icon: SvgPicture.asset(IconsAssets.menu),
-                          onPressed: () {
-                            _cancelTimer();
-                            Nav.navTo(context, Routes.drawerRoute);
-                          },
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.7,
-                          child: Text(
-                            _viewModel.selectedServer?.name ??
-                                Constants.emptyStr,
-                            softWrap: true,
-                            textAlign: TextAlign.center,
-                            maxLines: 3,
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
-                        ),
-                        Container(),
-                      ],
-                    ),
-                    const SizedBox(height: AppSize.s20),
+                    Container(),
                     Text(
                       AppStrings.welcome,
                       style: StylesManager.getRegularStyle(

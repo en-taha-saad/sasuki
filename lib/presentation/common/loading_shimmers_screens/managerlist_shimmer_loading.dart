@@ -107,7 +107,7 @@ class ManagerListShimmerLoading extends StatelessWidget {
           enabled: Constants.falseBool,
           decoration: const InputDecoration(
             hintText: AppStrings.usersSearchusers,
-            fillColor: ColorManager.greyshade1,
+            fillColor: Color(0xff3D4E78),
           ),
         ),
         Container(

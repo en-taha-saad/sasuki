@@ -459,12 +459,19 @@ class _UserDetailsViewState extends State<UserDetailsView> {
               isThisServersDropdown: Constants.falseBool,
               isThisActionDropdown: Constants.trueBool,
               hintStr: AppStrings.changeProfileHint,
+              border: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color(0xff929EAE),
+                  width: 1.0,
+                ),
+                borderRadius: RadiusSizes.radius12,
+              ),
               items: profileList ?? [],
               doOtherThings: (val) {
                 selectedprofile = val;
               },
               displayFn: (item) => (item as ProfileData).name,
-              dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
+              dropdownColor: ColorManager.transparent,
               textAndHintColor: ColorManager.blackNeutral,
             );
           },
@@ -629,6 +636,10 @@ class _UserDetailsViewState extends State<UserDetailsView> {
                 _commentController.clear();
               }
             : null,
+        ElevatedButton.styleFrom(
+          disabledForegroundColor: const Color(0xff616161),
+          disabledBackgroundColor: const Color(0xffE4E7EB),
+        ),
       ),
     );
   }
