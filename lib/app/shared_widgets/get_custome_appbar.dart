@@ -7,7 +7,7 @@ import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 
 Container getCustomAppBar(context, String title, bool isScreenSecondary,
-    [bool? isDashboard]) {
+    [bool? isDashboard, cancelTimer]) {
   return Container(
     color: ColorManager.primaryshade1,
     child: Stack(
@@ -26,7 +26,10 @@ Container getCustomAppBar(context, String title, bool isScreenSecondary,
                     isScreenSecondary ? IconsAssets.back : IconsAssets.menu),
                 onPressed: isScreenSecondary
                     ? () => Nav.popRoute(context)
-                    : () => Nav.navTo(context, Routes.drawerRoute),
+                    : () {
+                        cancelTimer;
+                        Nav.navTo(context, Routes.drawerRoute);
+                      },
               ),
               Container(),
             ],

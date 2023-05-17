@@ -78,7 +78,6 @@ class _UserDetailsViewState extends State<UserDetailsView> {
               _getScreenView(context),
               () async {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                await _viewModel.getUserDataStreamingly();
               },
             ) ??
             _getScreenView(context);

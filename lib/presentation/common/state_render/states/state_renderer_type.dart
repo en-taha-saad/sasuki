@@ -3,10 +3,10 @@ enum StateRendererType {
   popupLoadingState,
   popupErrorState,
   popupSuccessState,
+  toastErrorState,
 
   // full screen states
   fullScreenLoadingState,
-  toastErrorState,
   fullScreenEmptyState,
 
   // general

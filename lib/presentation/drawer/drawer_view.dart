@@ -272,7 +272,7 @@ class DrawerView extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: _getDrawerContent(context),
-            decoration: const BoxDecoration(color: ColorManager.secondary),
+            decoration: const BoxDecoration(color: Color.fromARGB(255, 25, 39, 74)),
           ),
         ),
       ],

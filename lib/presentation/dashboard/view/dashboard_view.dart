@@ -118,6 +118,7 @@ class _DashboardViewState extends State<DashboardView> {
                 _viewModel.selectedServer?.name ?? Constants.emptyStr,
                 false,
                 true,
+                _cancelTimer,
               ),
               Container(
                 margin: const EdgeInsets.only(

@@ -176,8 +176,6 @@ class UserDetailsViewModel extends BaseViewModel
   @override
   void start() {}
 
-  @override
-  void dispose() {}
 
   @override
   getUserApiOverview(int userId) async {
