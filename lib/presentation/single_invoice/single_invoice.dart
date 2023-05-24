@@ -56,7 +56,8 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
               child: Column(
                 children: [
                   AppSize.statusBarHeight(context),
-                  getCustomAppBar(context, AppStrings.drawerReportsInvoices, true),
+                  getCustomAppBar(
+                      context, AppStrings.drawerReportsInvoices, true),
                 ],
               ),
             ),
@@ -72,7 +73,7 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
                     Container(
                       color: ColorManager.whiteNeutral.withOpacity(0.2),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.s20,
+                        horizontal: AppSize.s25,
                         vertical: AppSize.s10,
                       ),
                       margin: const EdgeInsets.only(
@@ -126,6 +127,7 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
     return SingleChildScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             margin: const EdgeInsets.only(
@@ -163,7 +165,7 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
               bottom: AppMargin.m25,
             ),
             decoration: BoxDecoration(
-              color: const Color(0xff21325E),
+              color: const Color(0xff2A4079),
               borderRadius: BorderRadius.circular(AppSize.s12),
             ),
             padding: const EdgeInsets.only(
@@ -229,7 +231,8 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: const Color(0xff21325E),
+              
+              color: const Color(0xff2A4079),
               borderRadius: BorderRadius.circular(AppSize.s12),
             ),
             padding: const EdgeInsets.only(
@@ -315,26 +318,21 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: AppMargin.m25,
-            ),
-            child: Text(
-              argument?.description ?? Constants.dash,
-              maxLines: 3,
-              textAlign: TextAlign.start,
-              softWrap: true,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ColorManager.whiteNeutral,
-                  ),
-            ),
+          Text(
+            argument?.description != "" &&
+                    argument?.description != Constants.nullValue
+                ? (argument?.description)!
+                : "No description added",
+            maxLines: 3,
+            textAlign: TextAlign.start,
+            softWrap: true,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ColorManager.whiteNeutral,
+                ),
           ),
-          Container(
-            margin: const EdgeInsets.only(bottom: AppMargin.m15),
-            child: Divider(
-              color: ColorManager.greyNeutral.withOpacity(
-                AppSize.s0point25,
-              ),
+          Divider(
+            color: ColorManager.greyNeutral.withOpacity(
+              AppSize.s0point25,
             ),
           ),
 
@@ -370,22 +368,17 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: AppMargin.m25,
-            ),
-            child: Text(
-              argument?.comments != "" ||
-                      argument?.comments != Constants.nullValue
-                  ? (argument?.comments)!
-                  : "No comment added",
-              maxLines: 3,
-              textAlign: TextAlign.start,
-              softWrap: true,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ColorManager.whiteNeutral,
-                  ),
-            ),
+          Text(
+            argument?.comments != "" &&
+                    argument?.comments != Constants.nullValue
+                ? (argument?.comments)!
+                : "No comment added",
+            maxLines: 3,
+            textAlign: TextAlign.start,
+            softWrap: true,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ColorManager.whiteNeutral,
+                ),
           ),
           Container(
             margin: const EdgeInsets.only(bottom: AppMargin.m15),

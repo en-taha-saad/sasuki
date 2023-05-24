@@ -6,6 +6,6 @@ Image getScreenSmallLogo() {
   return Image.asset(
     ImageAssets.mainLogo,
     width: AppSize.s120,
-    height: AppSize.s80,
+    height: AppSize.s60,
   );
 }

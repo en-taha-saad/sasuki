@@ -167,6 +167,9 @@ class ManagerDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (managerOverviewApi0) async {
         // right -> success (data)
@@ -191,6 +194,9 @@ class ManagerDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (auth0) {
         // right -> success (data)
@@ -260,6 +266,9 @@ class ManagerDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
         debugPrint("getManagerDataStreamingly failure = ${failure.message}");
       },
       (managerOverviewApi0) async {
@@ -299,6 +308,9 @@ class ManagerDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (managerOverviewApi0) async {
         // right -> success (data)
@@ -337,6 +349,9 @@ class ManagerDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (managerOverviewApi0) async {
         // right -> success (data)
@@ -383,6 +398,9 @@ class ManagerDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (ManagerAction managerAction) async {
         // right -> success (data)
@@ -427,6 +445,9 @@ class ManagerDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (ManagerAction managerAction) async {
         // right -> success (data)
@@ -457,6 +478,9 @@ class ManagerDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (Captcha dataCaptcha0) {
         // right -> success (data)

@@ -20,7 +20,7 @@ ThemeData getApplicationTheme() {
     appBarTheme: AppBarTheme(
       backgroundColor: ColorManager.primaryshade1,
       elevation: AppSize.s0,
-      toolbarHeight: 35,
+      toolbarHeight: 34,
       titleSpacing: 0,
       centerTitle: Constants.trueBool,
       titleTextStyle: StylesManager.getMediumStyle(
@@ -111,7 +111,7 @@ ThemeData getApplicationTheme() {
     inputDecorationTheme: InputDecorationTheme(
       filled: Constants.trueBool,
       isDense: Constants.trueBool,
-      fillColor: const Color(0xff1B2A52),
+      fillColor: const Color(0xff1D2D58),
       border: OutlineInputBorder(
         borderRadius: RadiusSizes.radius12,
         borderSide: BorderSide.none,

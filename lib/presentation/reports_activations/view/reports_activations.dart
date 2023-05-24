@@ -132,8 +132,9 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
           ),
           Container(
             color: ColorManager.whiteNeutral.withOpacity(0.2),
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSize.s25,
+            padding: const EdgeInsets.only(
+              left: AppSize.s25,
+              right: AppSize.s10,
               // vertical: AppSize.s10,
             ),
             margin: const EdgeInsets.only(
@@ -168,11 +169,7 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
                 ),
                 IconButton(
                   onPressed: _showFilterDialog,
-                  icon: SvgPicture.asset(
-                    IconsAssets.filter,
-                    width: AppSize.s18,
-                    height: AppSize.s18,
-                  ),
+                  icon: SvgPicture.asset(IconsAssets.filter),
                 ),
               ],
             ),
@@ -347,8 +344,9 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
       insetPadding: EdgeInsets.only(
         left: Constants.zeroDouble,
         right: Constants.zeroDouble,
-        top: MediaQuery.of(context).size.height * 0.1,
-        bottom: MediaQuery.of(context).size.height * 0.45,
+               top: MediaQuery.of(context).size.height * 0.08,
+        bottom: MediaQuery.of(context).size.height * 0.5,
+
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.s0),
@@ -364,7 +362,7 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: const Color(0xff2D3B60),
+          color: const Color(0xff2F3E65),
           boxShadow: [
             BoxShadow(
               color: const Color(0xff000000).withOpacity(0.25),
@@ -408,8 +406,8 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                  onPressed: _resetFilters,
+                InkWell(
+                  onTap: _resetFilters,
                   child: Text(
                     AppStrings.usersReset,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(

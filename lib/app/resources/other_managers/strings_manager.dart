@@ -144,6 +144,7 @@ class AppStrings {
   static const usersOnline = "Online";
   static const searchError = "Search is required";
   static const usersSearchusers = "Search users";
+  static const usersSearchActivityLog = "Search activity log";
   static const usersSearchmanagers = "Search managers";
   static const noUsersFound = "No records found";
 
@@ -226,7 +227,7 @@ class AppStrings {
   static const userActionWithdrawal = "Withdrawal";
   static const userActionPayDebt = "Pay";
   static const userActionPay = "Pay Debt";
-  static const userActionDeleteDialogTitle = "Delete User";
+  static const userActionDeleteDialogTitle = "Delete Server";
   static const managerActionDeleteDialogTitle = "Delete Manager";
   static const userActionDelete = "Delete";
 

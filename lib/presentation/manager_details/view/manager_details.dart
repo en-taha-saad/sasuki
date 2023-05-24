@@ -90,10 +90,11 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
           color: ColorManager.primaryshade1,
           child: Column(
             children: [
-              AppSize.statusBarHeight(context),
+              const SizedBox(height: 12),
+              // AppSize.statusBarHeight(context),
               Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: AppMargin.m20,
+                margin: const EdgeInsets.only(
+                  bottom: AppMargin.m20,
                 ),
                 child: _getAppBarWithActions(context),
               ),

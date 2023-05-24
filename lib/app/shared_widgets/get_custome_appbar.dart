@@ -11,10 +11,13 @@ Container getCustomAppBar(context, String title, bool isScreenSecondary,
   return Container(
     color: ColorManager.primaryshade1,
     child: Stack(
+      alignment: isDashboard == true
+          ? Alignment.center
+          : AlignmentDirectional.topStart,
       children: [
         Container(
           margin: const EdgeInsets.only(
-            left: AppMargin.m10,
+            left: AppMargin.m14,
             top: AppMargin.m8,
           ),
           child: Row(

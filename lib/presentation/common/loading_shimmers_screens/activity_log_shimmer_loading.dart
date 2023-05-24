@@ -122,7 +122,7 @@ class ActivityLogViewShimmerLoading extends StatelessWidget {
                 color: ColorManager.whiteNeutral,
               ),
           decoration: InputDecoration(
-            hintText: AppStrings.usersSearchusers,
+            hintText: AppStrings.usersSearchActivityLog,
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),

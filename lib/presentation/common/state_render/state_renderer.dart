@@ -62,10 +62,31 @@ class StateRenderer extends StatelessWidget {
     );
   }
 
+  _showLoadingPopupWidget(
+    Widget child, {
+    double? height,
+    double? width,
+  }) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      shadowColor: Colors.transparent,
+      child: Container(
+        height: 100,
+        width: 100,
+        decoration: const BoxDecoration(
+          color: ColorManager.whiteNeutral,
+          shape: BoxShape.circle,
+        ),
+        child: child,
+      ),
+    );
+  }
+
   Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.popupLoadingState:
-        return _showPopupWidget(
+        return _showLoadingPopupWidget(
           Column(children: [_getAnimatedImage(JsonAssets.loading)]),
           height: 160,
           width: 150,

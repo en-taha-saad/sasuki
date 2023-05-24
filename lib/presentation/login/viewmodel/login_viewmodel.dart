@@ -107,6 +107,7 @@ class LoginViewModel extends BaseViewModel
   }
 
   _getRememberMe() async {
+    inputState.add(ContentState());
     rememberMe = await _appPrefs.getRememberMe();
     if (rememberMe != null || rememberMe == true) {
       _getLoginObject();
@@ -308,6 +309,9 @@ class LoginViewModel extends BaseViewModel
               failure.message,
             ),
           );
+          Future.delayed(const Duration(seconds: 1), () {
+            inputState.add(ContentState());
+          });
         }
       },
       (data) async {

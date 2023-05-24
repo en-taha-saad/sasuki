@@ -80,15 +80,21 @@ extension FlowStateExtension on FlowState {
 
       case ErrorState:
         {
-          dismissDialog(context);
-          WidgetsBinding.instance.addPostFrameCallback(
-            (_) {
-              dismissDialog(context);
-            },
-          );
+          // dismissDialog(context);
+          // WidgetsBinding.instance.addPostFrameCallback(
+          //   (_) {
+          //     dismissDialog(context);
+          //   },
+          // );
 
           if (getStateRendererType() == StateRendererType.popupErrorState) {
             // show popup error
+                dismissDialog(context);
+            WidgetsBinding.instance.addPostFrameCallback(
+              (_) {
+                dismissDialog(context);
+              },
+            );
             showPopup(
               context,
               getStateRendererType(),
@@ -98,6 +104,12 @@ extension FlowStateExtension on FlowState {
             return contentScreenWidget;
           } else {
             // show toast retry screen error
+            WidgetsBinding.instance.addPostFrameCallback(
+              (_) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                dismissDialog(context);
+              },
+            );
 
             showSnackBar(
               context,
@@ -105,7 +117,6 @@ extension FlowStateExtension on FlowState {
               getMessage(),
               retryActionFunction,
             );
-            dismissDialog(context);
             // show content screen
             return contentScreenWidget;
           }

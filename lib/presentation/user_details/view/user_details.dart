@@ -78,6 +78,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
               _getScreenView(context),
               () async {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                await _viewModel.getUserDataStreamingly();
               },
             ) ??
             _getScreenView(context);
@@ -92,10 +93,11 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           color: ColorManager.primaryshade1,
           child: Column(
             children: [
-              AppSize.statusBarHeight(context),
+              const SizedBox(height: 12),
+              // AppSize.statusBarHeight(context),
               Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: AppMargin.m20,
+                margin: const EdgeInsets.only(
+                  bottom: AppMargin.m20,
                 ),
                 child: Column(
                   children: [

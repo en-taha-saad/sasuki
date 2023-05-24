@@ -176,6 +176,8 @@ class UserDetailsViewModel extends BaseViewModel
   @override
   void start() {}
 
+  @override
+  void dispose() {}
 
   @override
   getUserApiOverview(int userId) async {
@@ -198,6 +200,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (userOverviewApi0) async {
         // right -> success (data)
@@ -223,6 +228,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (auth0) {
         // right -> success (data)
@@ -320,6 +328,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
         debugPrint("getUserDataStreamingly failure = ${failure.message}");
       },
       (userOverviewApi0) async {
@@ -360,6 +371,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (userOverviewApi0) async {
         // right -> success (data)
@@ -397,6 +411,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (userOverviewApi0) async {
         // right -> success (data)
@@ -428,6 +445,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (profileList0) async {
         // right -> success (data)
@@ -466,6 +486,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (userOverviewApi0) async {
         // right -> success (data)
@@ -519,6 +542,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (UserAction userAction) async {
         // right -> success (data)
@@ -563,6 +589,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (UserAction userAction) async {
         // right -> success (data)
@@ -593,6 +622,9 @@ class UserDetailsViewModel extends BaseViewModel
           ),
         );
         debugPrint("getPayDebtInforms failure = ${failure.message}");
+      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (paydebtInforms0) async {
         // right -> success (data)
@@ -639,6 +671,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (UserAction userAction) async {
         // right -> success (data)
@@ -680,6 +715,9 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
+      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
       (Captcha dataCaptcha0) {
         // right -> success (data)

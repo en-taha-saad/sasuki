@@ -228,7 +228,7 @@ class _ManagersListViewState extends State<ManagersListView> {
                 color: ColorManager.whiteNeutral,
               ),
           decoration: InputDecoration(
-            hintText: AppStrings.usersSearchusers,
+            hintText: AppStrings.usersSearchmanagers,
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),
@@ -404,7 +404,7 @@ class _ManagersListViewState extends State<ManagersListView> {
       insetPadding: EdgeInsets.only(
         left: Constants.zeroDouble,
         right: Constants.zeroDouble,
-        top: MediaQuery.of(context).size.height * 0.1,
+        top: MediaQuery.of(context).size.height * 0.08,
         bottom: MediaQuery.of(context).size.height * 0.3,
       ),
       shape: RoundedRectangleBorder(
@@ -421,7 +421,7 @@ class _ManagersListViewState extends State<ManagersListView> {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: const Color(0xff2D3B60),
+          color: const Color(0xff2F3E65),
           boxShadow: [
             BoxShadow(
               color: const Color(0xff000000).withOpacity(0.25),
@@ -468,8 +468,8 @@ class _ManagersListViewState extends State<ManagersListView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                  onPressed: _resetFilters,
+                InkWell(
+                  onTap: _resetFilters,
                   child: Text(
                     AppStrings.usersReset,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(

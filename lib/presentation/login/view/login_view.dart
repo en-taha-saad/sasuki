@@ -171,7 +171,7 @@ class _LoginViewState extends State<LoginView> {
             "${_viewModel.selectedServer?.name}",
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          const SizedBox(height: AppSize.s50),
+          const SizedBox(height: AppSize.s35),
           StreamBuilder<bool>(
             stream: _viewModel.outputIs2AuthRequiredValid,
             builder: (context, snapshot) {
@@ -221,7 +221,7 @@ class _LoginViewState extends State<LoginView> {
         ),
         const SizedBox(height: AppSize.s25),
         _getLoginContentWidget(),
-        const SizedBox(height: 44),
+        const SizedBox(height: AppSize.s50),
         StreamBuilder<bool>(
           stream: _viewModel.outputAreAllInputsValid,
           builder: (context, snapshot) {
@@ -256,7 +256,7 @@ class _LoginViewState extends State<LoginView> {
             onTap: () {},
             onFieldSubmitted: (value) {},
           ),
-          const SizedBox(height: AppSize.s15),
+          const SizedBox(height: AppSize.s25),
           PasswordTextInput(
             stream: _viewModel.outputIsPasswordValid,
             controller: _userPasswordController,

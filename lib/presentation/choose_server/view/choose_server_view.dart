@@ -69,7 +69,7 @@ class _ChooseServerViewState extends State<ChooseServerView> {
               children: [
                 const SizedBox(height: AppSize.s100),
                 getScreenSmallLogo(),
-                const SizedBox(height: AppSize.s50),
+                const SizedBox(height: AppSize.s35),
                 getScreenContent(context),
               ],
             ),
@@ -129,36 +129,30 @@ class _ChooseServerViewState extends State<ChooseServerView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: AppSize.s10),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.39,
-                        child: Divider(
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width - 50,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Divider(
                           color: ColorManager.greyNeutral.withOpacity(
                             AppSize.s0point25,
                           ),
                           thickness: AppSize.s1,
                         ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: AppSize.s10,
-                        ),
-                        child: Text(
-                          AppStrings.or,
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.39,
-                        child: Divider(
-                          color: ColorManager.greyNeutral.withOpacity(
-                            AppSize.s0point25,
+                        Container(
+                          alignment: Alignment.center,
+                          width: 15,
+                          decoration: const BoxDecoration(
+                            color: ColorManager.secondary,
                           ),
-                          thickness: AppSize.s1,
+                          child: Text(
+                            AppStrings.or,
+                            style: Theme.of(context).textTheme.labelSmall,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const SizedBox(height: AppSize.s10),
                 ],

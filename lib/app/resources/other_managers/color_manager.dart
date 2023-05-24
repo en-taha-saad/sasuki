@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class ColorManager {
   static const Color backgroundCorners = Color(0xFF096191);
   static const Color backgroundCenter = Color.fromRGBO(15, 22, 68, 1);
-  static const Color primaryshade1 = Color.fromRGBO(9, 97, 145, 1);
+  static const Color primaryshade1 = Color(0xff16558F);
+  //  Color.fromRGBO(9, 97, 145, 1);
+
 
   static const Color primaryshade2 = Color.fromRGBO(9, 97, 145, 0.5);
   static const Color primaryshade3 = Color.fromRGBO(9, 97, 145, 0.25);

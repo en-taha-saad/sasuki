@@ -189,11 +189,7 @@ class _UsersListViewState extends State<UsersListView> {
               ),
               IconButton(
                 onPressed: _showFilterDialog,
-                icon: SvgPicture.asset(
-                  IconsAssets.filter,
-                  width: AppSize.s18,
-                  height: AppSize.s18,
-                ),
+                icon: SvgPicture.asset(IconsAssets.filter),
               ),
               InkWell(
                 onTap: _usersListViewModel.isThereAddUserCreationPermission
@@ -435,7 +431,7 @@ class _UsersListViewState extends State<UsersListView> {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: const Color(0xff2D3B60),
+          color: const Color(0xff2F3E65),
           boxShadow: [
             BoxShadow(
               color: const Color(0xff000000).withOpacity(0.25),
@@ -482,8 +478,8 @@ class _UsersListViewState extends State<UsersListView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                  onPressed: _resetFilters,
+                InkWell(
+                  onTap: _resetFilters,
                   child: Text(
                     AppStrings.usersReset,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(

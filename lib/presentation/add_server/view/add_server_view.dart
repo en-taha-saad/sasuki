@@ -44,14 +44,14 @@ class _AddServerViewState extends State<AddServerView> {
 
   @override
   void dispose() {
-        changeStatusBarColor();
+    changeStatusBarColor();
     _viewModel.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
-        changeStatusBarColor();
+    changeStatusBarColor();
     _bind();
     super.initState();
   }
@@ -72,9 +72,9 @@ class _AddServerViewState extends State<AddServerView> {
         SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: AppSize.s56),
+              const SizedBox(height: AppSize.s100),
               getScreenSmallLogo(),
-              const SizedBox(height: AppSize.s25),
+              const SizedBox(height: AppSize.s35),
               getScreenContent(context),
               const SizedBox(height: 205),
             ],

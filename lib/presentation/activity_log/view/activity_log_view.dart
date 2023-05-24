@@ -93,15 +93,15 @@ class _ActivityLogViewState extends State<ActivityLogView> {
       builder: (context, AsyncSnapshot<FlowState> snapshot) {
         return snapshot.data?.getScreenWidget(
               context,
-              _getScreenView(),
+              _getScreenView(context),
               () async {},
             ) ??
-            _getScreenView();
+            _getScreenView(context);
       },
     );
   }
 
-  Widget _getScreenView() {
+  Widget _getScreenView(context) {
     return RefreshIndicator(
       onRefresh: () async => _activityLogViewModel.refreshActivityLogListData(),
       triggerMode: RefreshIndicatorTriggerMode.anywhere,
@@ -117,12 +117,12 @@ class _ActivityLogViewState extends State<ActivityLogView> {
             },
           );
         },
-        child: _getContentWidget(),
+        child: _getContentWidget(context),
       ),
     );
   }
 
-  Widget _getContentWidget() {
+  Widget _getContentWidget(context) {
     return Container(
       decoration: const BoxDecoration(
         color: Color(0xff1B2A52),
@@ -140,25 +140,34 @@ class _ActivityLogViewState extends State<ActivityLogView> {
           ),
           const SizedBox(height: AppSize.s15),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: AppPadding.p25),
+            margin: const EdgeInsets.only(
+              left: AppPadding.p25,
+              right: AppPadding.p15,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  width: getScreenWidth(context) * 0.7,
+                  width: MediaQuery.of(context).size.width * 0.75,
                   child: _getSearchTextField(),
                 ),
-                IconButton(
-                  onPressed: _showFilterDialog,
-                  icon: SvgPicture.asset(
-                    IconsAssets.filter,
-                    width: AppSize.s18,
-                    height: AppSize.s18,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.1,
+                  child: IconButton(
+                    onPressed: _showFilterDialog,
+                    icon: SvgPicture.asset(IconsAssets.filter),
                   ),
                 ),
               ],
             ),
           ),
+
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   children: [
+          //   ],
+          // ),
           const SizedBox(height: AppSize.s15),
           Expanded(
             child: _getActivityLogsList(),
@@ -191,7 +200,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
                 color: ColorManager.whiteNeutral,
               ),
           decoration: InputDecoration(
-            hintText: AppStrings.usersSearchusers,
+            hintText: AppStrings.usersSearchActivityLog,
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),
@@ -251,17 +260,18 @@ class _ActivityLogViewState extends State<ActivityLogView> {
       stream: _activityLogViewModel.outputActivityLogListData,
       builder: (context, snapshot) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(
-        Duration(seconds: Constants.oneNum.toInt()),
-        () {
-          setState(() {
-            loadFilteredActivityLogs = Constants.falseBool;
-            hidLoadingMoreActivityLogs =
-                _activityLogViewModel.totalActivityLogs == snapshot.data?.data?.length;
-          });
-        },
-      );
-    });
+          Future.delayed(
+            Duration(seconds: Constants.oneNum.toInt()),
+            () {
+              setState(() {
+                loadFilteredActivityLogs = Constants.falseBool;
+                hidLoadingMoreActivityLogs =
+                    _activityLogViewModel.totalActivityLogs ==
+                        snapshot.data?.data?.length;
+              });
+            },
+          );
+        });
         return !loadFilteredActivityLogs
             // ignore: prefer_is_empty
             ? snapshot.data?.data?.length != Constants.zeroNum
@@ -386,7 +396,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: const Color(0xff2D3B60),
+          color: const Color(0xff2F3E65),
           boxShadow: [
             BoxShadow(
               color: const Color(0xff000000).withOpacity(0.25),
@@ -430,8 +440,8 @@ class _ActivityLogViewState extends State<ActivityLogView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                  onPressed: _resetFilters,
+                InkWell(
+                  onTap: _resetFilters,
                   child: Text(
                     AppStrings.usersReset,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -500,7 +510,6 @@ class _ActivityLogViewState extends State<ActivityLogView> {
               child: DropDownComponent<ActivityLogEvent?>(
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.allEventsHint,
-                
                 items: activityLogEvents ?? [],
                 doOtherThings: (val) {
                   selectedActivityLogEvent = val;

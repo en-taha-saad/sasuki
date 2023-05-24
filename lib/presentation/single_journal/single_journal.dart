@@ -71,7 +71,7 @@ class _SingleJournalViewState extends State<SingleJournalView> {
                     Container(
                       color: ColorManager.whiteNeutral.withOpacity(0.2),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.s20,
+                        horizontal: AppSize.s25,
                         vertical: AppSize.s10,
                       ),
                       margin: const EdgeInsets.only(
@@ -162,7 +162,7 @@ class _SingleJournalViewState extends State<SingleJournalView> {
               bottom: AppMargin.m25,
             ),
             decoration: BoxDecoration(
-              color: const Color(0xff21325E),
+              color: const Color(0xff2A4079),
               borderRadius: BorderRadius.circular(AppSize.s12),
             ),
             padding: const EdgeInsets.only(
@@ -228,7 +228,7 @@ class _SingleJournalViewState extends State<SingleJournalView> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: const Color(0xff21325E),
+              color: const Color(0xff2A4079),
               borderRadius: BorderRadius.circular(AppSize.s12),
             ),
             padding: const EdgeInsets.only(
