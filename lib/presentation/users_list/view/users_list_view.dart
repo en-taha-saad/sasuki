@@ -416,17 +416,28 @@ class _UsersListViewState extends State<UsersListView> {
   }
 
   _filterDialog(BuildContext context) {
-    return Dialog(
-      insetAnimationCurve: Curves.fastLinearToSlowEaseIn,
-      insetPadding: const EdgeInsets.only(
-        left: Constants.zeroDouble,
-        right: Constants.zeroDouble,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppSize.s0),
-      ),
-      backgroundColor: ColorManager.backgroundCenter,
-      child: _filterDialogContent(context),
+    return LayoutBuilder(
+      builder: (context, constraint) {
+        print("constraint.maxHeight = ${constraint.maxHeight}");
+        return Dialog(
+          insetAnimationCurve: Curves.fastLinearToSlowEaseIn,
+          insetPadding: EdgeInsets.only(
+            left: Constants.zeroDouble,
+            right: Constants.zeroDouble,
+            top: MediaQuery.of(context).size.height * 0.08,
+            bottom: constraint.maxHeight > 750
+                ? constraint.maxHeight > 800
+                    ? MediaQuery.of(context).size.height * 0.25
+                    : MediaQuery.of(context).size.height * 0.19
+                : 0,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSize.s0),
+          ),
+          backgroundColor: ColorManager.backgroundCenter,
+          child: _filterDialogContent(context),
+        );
+      },
     );
   }
 
