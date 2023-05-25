@@ -379,6 +379,7 @@ class _EditManagerState extends State<EditManager> {
                               Constants.trueBool,
                               Constants.trueBool,
                               Constants.falseBool,
+                              const Color(0xff41527B),
                             ),
                           ),
                           Container(

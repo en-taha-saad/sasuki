@@ -240,6 +240,7 @@ class _EditUserState extends State<EditUser> {
                     Constants.trueBool,
                     Constants.trueBool,
                     Constants.falseBool,
+                    const Color(0xff41527B),
                   ),
                 ),
                 Container(

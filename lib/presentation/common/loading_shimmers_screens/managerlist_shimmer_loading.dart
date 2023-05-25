@@ -6,6 +6,7 @@ import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/single_manager_card.dart';
 import 'package:sasuki/app/shared_widgets/single_manager_card_statistics.dart';
@@ -105,9 +106,13 @@ class ManagerListShimmerLoading extends StatelessWidget {
                 color: ColorManager.whiteNeutral,
               ),
           enabled: Constants.falseBool,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: RadiusSizes.radius12,
+            ),
             hintText: AppStrings.usersSearchmanagers,
-            fillColor: Color(0xff3D4E78),
+            fillColor: const Color(0xff3D4E78),
           ),
         ),
         Container(

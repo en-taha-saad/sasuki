@@ -88,17 +88,20 @@ class _SplashViewState extends State<SplashView> {
       decoration: const BoxDecoration(
         color: Color(0xff16558F),
       ),
-      child: Column(
+      child: Stack(
         children: [
-          const Spacer(),
-          Image.asset(
-            ImageAssets.mainLogo,
-            height : 75,
-            width: 144.96,
-
+          Align(
+            alignment: Alignment.center,
+            child: Image.asset(
+              ImageAssets.mainLogo,
+              height: 75,
+              width: 144.96,
+            ),
           ),
-          const Spacer(),
-          getScreenFooter(),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: getScreenFooter(),
+          ),
         ],
       ),
     );

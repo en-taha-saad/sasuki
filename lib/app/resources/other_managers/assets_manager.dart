@@ -58,6 +58,7 @@ class IconsAssets {
   static const String documenttext1 =
       "${ImagePaths.sharedIconsPath}documenttext1.svg";
   static const String add = "${ImagePaths.sharedIconsPath}add.svg";
+  static const String addServer = "${ImagePaths.sharedIconsPath}add_server.svg";
   static const String minus = "${ImagePaths.sharedIconsPath}minus.svg";
   static const String dropdown = "${ImagePaths.sharedIconsPath}dropdown.svg";
   static const String exit = "${ImagePaths.sharedIconsPath}exit.svg";

@@ -15,6 +15,7 @@ Widget getAddEditTextFieldInput(
   bool? isRequiredValidation,
   bool isRequired = Constants.falseBool,
   bool isEnabled = Constants.trueBool,
+  Color? fillColor,
 ]) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
@@ -53,6 +54,7 @@ Widget getAddEditTextFieldInput(
                   isRequiredValidation != Constants.trueBool
               ? AppStrings.inputIsEmpty
               : Constants.nullValue,
+              fillColor: fillColor,
         ),
         onEditingComplete: () => FocusScope.of(context).unfocus(),
         onFieldSubmitted: onFieldSubmitted,

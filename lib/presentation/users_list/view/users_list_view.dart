@@ -1,3 +1,4 @@
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/get_loading_state_widget.dart';
 import 'package:sasuki/app/shared_widgets/load_more.dart';
@@ -243,6 +244,10 @@ class _UsersListViewState extends State<UsersListView> {
               ),
           decoration: InputDecoration(
             hintText: AppStrings.usersSearchusers,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: RadiusSizes.radius12,
+            ),
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),

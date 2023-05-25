@@ -8,6 +8,7 @@ import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
@@ -122,57 +123,52 @@ class _ActivityLogViewState extends State<ActivityLogView> {
   }
 
   Widget _getContentWidget(context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xff1B2A52),
-      ),
-      child: Column(
-        children: [
-          Container(
-            color: ColorManager.primaryshade1,
-            child: Column(
-              children: [
-                AppSize.statusBarHeight(context),
-                getCustomAppBar(context, AppStrings.drawerActivityLog, false),
-              ],
-            ),
+    return Column(
+      children: [
+        Container(
+          color: ColorManager.primaryshade1,
+          child: Column(
+            children: [
+              AppSize.statusBarHeight(context),
+              getCustomAppBar(context, AppStrings.drawerActivityLog, false),
+            ],
           ),
-          const SizedBox(height: AppSize.s15),
-          Container(
-            margin: const EdgeInsets.only(
-              left: AppPadding.p25,
-              right: AppPadding.p15,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.75,
-                  child: _getSearchTextField(),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.1,
-                  child: IconButton(
-                    onPressed: _showFilterDialog,
-                    icon: SvgPicture.asset(IconsAssets.filter),
-                  ),
-                ),
-              ],
-            ),
+        ),
+        const SizedBox(height: AppSize.s15),
+        Container(
+          margin: const EdgeInsets.only(
+            left: AppPadding.p25,
+            right: AppPadding.p15,
           ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.75,
+                child: _getSearchTextField(),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.1,
+                child: IconButton(
+                  onPressed: _showFilterDialog,
+                  icon: SvgPicture.asset(IconsAssets.filter),
+                ),
+              ),
+            ],
+          ),
+        ),
 
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   crossAxisAlignment: CrossAxisAlignment.center,
-          //   children: [
-          //   ],
-          // ),
-          const SizedBox(height: AppSize.s15),
-          Expanded(
-            child: _getActivityLogsList(),
-          ),
-        ],
-      ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   crossAxisAlignment: CrossAxisAlignment.center,
+        //   children: [
+        //   ],
+        // ),
+        const SizedBox(height: AppSize.s15),
+        Expanded(
+          child: _getActivityLogsList(),
+        ),
+      ],
     );
   }
 
@@ -200,6 +196,10 @@ class _ActivityLogViewState extends State<ActivityLogView> {
               ),
           decoration: InputDecoration(
             hintText: AppStrings.usersSearchActivityLog,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: RadiusSizes.radius12,
+            ),
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),

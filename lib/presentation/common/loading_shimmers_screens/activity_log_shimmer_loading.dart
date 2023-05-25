@@ -4,6 +4,7 @@ import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
 import 'package:sasuki/app/resources/values_manager/app_padding.dart';
@@ -126,6 +127,10 @@ class ActivityLogViewShimmerLoading extends StatelessWidget {
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
                 ),
+                  enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: RadiusSizes.radius12,
+            ),
             fillColor: const Color(0xff3D4E78),
             prefixIcon: Transform.scale(
               scale: 0.35,

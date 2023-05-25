@@ -1,3 +1,4 @@
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/app/shared_widgets/get_loading_state_widget.dart';
 import 'package:sasuki/app/shared_widgets/load_more.dart';
@@ -228,6 +229,10 @@ class _ManagersListViewState extends State<ManagersListView> {
                 color: ColorManager.whiteNeutral,
               ),
           decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: RadiusSizes.radius12,
+            ),
             hintText: AppStrings.usersSearchmanagers,
             hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ColorManager.greyNeutral3,
@@ -579,7 +584,7 @@ class _ManagersListViewState extends State<ManagersListView> {
                 isThisServersDropdown: Constants.falseBool,
                 hintStr: AppStrings.managersAclPermissionHint,
                 items: aclPermissionGroupList ?? [],
-                 doOtherThings: (val) {
+                doOtherThings: (val) {
                   selectedAclPermissionGroup = val;
                 },
                 displayFn: (item) =>

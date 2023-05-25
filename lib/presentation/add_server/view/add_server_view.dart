@@ -94,7 +94,7 @@ class _AddServerViewState extends State<AddServerView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                IconsAssets.add,
+                IconsAssets.addServer,
                 theme: const SvgTheme(
                   currentColor: ColorManager.greyNeutral,
                 ),

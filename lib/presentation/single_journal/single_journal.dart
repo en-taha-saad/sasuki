@@ -43,332 +43,327 @@ class _SingleJournalViewState extends State<SingleJournalView> {
   }
 
   Widget _getContentWidget() {
-    return Container(
-      decoration: const BoxDecoration(
-        color: ColorManager.secondary,
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              color: ColorManager.primaryshade1,
+    return Stack(
+      alignment: AlignmentDirectional.topCenter,
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            color: ColorManager.secondary,
+          ),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Container(
+              margin: EdgeInsets.only(
+                bottom: AppMargin.m50,
+                top: MediaQuery.of(context).viewPadding.top + 63,
+              ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  AppSize.statusBarHeight(context),
-                  getCustomAppBar(context, AppStrings.drawerReportsInvoices, true),
+                  Container(
+                    color: ColorManager.whiteNeutral.withOpacity(0.2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSize.s25,
+                      vertical: AppSize.s10,
+                    ),
+                    margin: const EdgeInsets.only(
+                      bottom: AppSize.s20,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(right: AppSize.s10),
+                          child: SvgPicture.asset(
+                            IconsAssets.reciepttext,
+                            theme: const SvgTheme(
+                              currentColor: ColorManager.whiteNeutral,
+                            ),
+                            // ignore: deprecated_member_use
+                            color: ColorManager.whiteNeutral,
+                          ),
+                        ),
+                        Text(
+                          _argument?.credit ?? Constants.dash,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                color: ColorManager.whiteNeutral,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: AppMargin.m25,
+                      right: AppMargin.m25,
+                    ),
+                    child: _getSingleJournal(_argument),
+                  ),
                 ],
               ),
             ),
-            SingleChildScrollView(
-              child: Container(
-                margin: const EdgeInsets.only(
-                  bottom: AppMargin.m50,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      color: ColorManager.whiteNeutral.withOpacity(0.2),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSize.s25,
-                        vertical: AppSize.s10,
-                      ),
-                      margin: const EdgeInsets.only(
-                        bottom: AppSize.s20,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: AppSize.s10),
-                            child: SvgPicture.asset(
-                              IconsAssets.reciepttext,
-                              theme: const SvgTheme(
-                                currentColor: ColorManager.whiteNeutral,
-                              ),
-                              // ignore: deprecated_member_use
-                              color: ColorManager.whiteNeutral,
-                            ),
-                          ),
-                          Text(
-                            _argument?.credit ?? Constants.dash,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(
-                                  color: ColorManager.whiteNeutral,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        left: AppMargin.m25,
-                        right: AppMargin.m25,
-                      ),
-                      child: _getSingleJournal(_argument),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+        Container(
+          height: 64,
+          margin: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
+          child:
+              getCustomAppBar(context, AppStrings.drawerReportsJournal, true),
+        ),
+      ],
     );
   }
 
   _getSingleJournal(ManagerJournalData? argument) {
-    return SingleChildScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: AppMargin.m10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    right: AppMargin.m5,
-                  ),
-                  child: SvgPicture.asset(
-                    IconsAssets.information,
-                    // ignore: deprecated_member_use
-                    color: ColorManager.greyNeutral,
-                    theme: const SvgTheme(
-                      currentColor: ColorManager.greyNeutral,
-                    ),
-                  ),
-                ),
-                Text(
-                  "Basic Info.",
-                  style: StylesManager.getMediumStyle(
-                    fontSize: FontSize.sBody3,
-                    color: ColorManager.greyNeutral,
-                  ),
-                ),
-              ],
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(
+            bottom: AppMargin.m10,
           ),
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: AppMargin.m25,
-            ),
-            decoration: BoxDecoration(
-              color: const Color(0xff324677),
-              borderRadius: BorderRadius.circular(AppSize.s12),
-            ),
-            padding: const EdgeInsets.only(
-              top: AppPadding.p15,
-              left: AppPadding.p15,
-              right: AppPadding.p15,
-            ),
-            child: Column(
-              children: [
-                _getSingleLabeledData(
-                  context,
-                  AppStrings.userOverviewCredit,
-                  argument?.credit ?? Constants.dash,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                  right: AppMargin.m5,
                 ),
-                _getSingleLabeledData(
-                  context,
-                  AppStrings.userNameDebt,
-                  argument?.debt ?? Constants.dash,
-                ),
-                _getSingleLabeledData(
-                  context,
-                  "Amount",
-                  "${_captcha?.data?.siteCurrency} ${intl.NumberFormat.decimalPattern().format(double.parse((argument?.amount)!))}",
-                ),
-                _getSingleLabeledData(
-                  context,
-                  AppStrings.reportBalance,
-                  argument?.balance ?? Constants.dash,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: AppMargin.m10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    right: AppMargin.m5,
-                  ),
-                  child: SvgPicture.asset(
-                    IconsAssets.documenttext1,
-                    // ignore: deprecated_member_use
-                    color: ColorManager.greyNeutral,
-                    theme: const SvgTheme(
-                      currentColor: ColorManager.greyNeutral,
-                    ),
+                child: SvgPicture.asset(
+                  IconsAssets.information,
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral,
+                  theme: const SvgTheme(
+                    currentColor: ColorManager.greyNeutral,
                   ),
                 ),
-                Text(
-                  "Details",
-                  style: StylesManager.getMediumStyle(
-                    fontSize: FontSize.sBody3,
-                    color: ColorManager.greyNeutral,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: const Color(0xff324677),
-              borderRadius: BorderRadius.circular(AppSize.s12),
-            ),
-            padding: const EdgeInsets.only(
-              top: AppPadding.p15,
-              left: AppPadding.p15,
-              right: AppPadding.p15,
-            ),
-            margin: const EdgeInsets.only(
-              bottom: AppMargin.m25,
-            ),
-            child: Column(
-              children: [
-                _getSingleLabeledData(
-                  context,
-                  "Operation",
-                  argument?.operation ?? Constants.dash,
-                ),
-                _getSingleLabeledData(
-                  context,
-                  "Date",
-                  formatDateTime(argument?.createdAt ?? Constants.dash),
-                ),
-              ],
-            ),
-          ),
-
-          ///
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: AppMargin.m10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    right: AppMargin.m5,
-                  ),
-                  child: SvgPicture.asset(
-                    IconsAssets.messagetext1,
-                    // ignore: deprecated_member_use
-                    color: ColorManager.greyNeutral,
-                    theme: const SvgTheme(
-                      currentColor: ColorManager.greyNeutral,
-                    ),
-                  ),
-                ),
-                Text(
-                  "Description",
-                  style: StylesManager.getMediumStyle(
-                    fontSize: FontSize.sBody3,
-                    color: ColorManager.greyNeutral,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: AppMargin.m25,
-            ),
-            child: Text(
-              argument?.description ?? Constants.dash,
-              maxLines: 3,
-              textAlign: TextAlign.start,
-              softWrap: true,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ColorManager.whiteNeutral,
-                  ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: AppMargin.m15),
-            child: Divider(
-              color: ColorManager.greyNeutral.withOpacity(
-                AppSize.s0point25,
               ),
-            ),
-          ),
-
-          ///
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: AppMargin.m10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    right: AppMargin.m5,
-                  ),
-                  child: SvgPicture.asset(
-                    IconsAssets.messages2,
-                    // ignore: deprecated_member_use
-                    color: ColorManager.greyNeutral,
-                    theme: const SvgTheme(
-                      currentColor: ColorManager.greyNeutral,
-                    ),
-                  ),
+              Text(
+                "Basic Info.",
+                style: StylesManager.getMediumStyle(
+                  fontSize: FontSize.sBody3,
+                  color: ColorManager.greyNeutral,
                 ),
-                Text(
-                  "Comment",
-                  style: StylesManager.getMediumStyle(
-                    fontSize: FontSize.sBody3,
-                    color: ColorManager.greyNeutral,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: AppMargin.m25,
-            ),
-            child: Text(
-              argument?.comment != "" ||
-                      argument?.comment != Constants.nullValue
-                  ? (argument?.comment)!
-                  : "No comment added",
-              maxLines: 3,
-              textAlign: TextAlign.start,
-              softWrap: true,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ColorManager.whiteNeutral,
-                  ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: AppMargin.m15),
-            child: Divider(
-              color: ColorManager.greyNeutral.withOpacity(
-                AppSize.s0point25,
               ),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(
+            bottom: AppMargin.m25,
+          ),
+          decoration: BoxDecoration(
+            color: const Color(0xff324677),
+            borderRadius: BorderRadius.circular(AppSize.s12),
+          ),
+          padding: const EdgeInsets.only(
+            top: AppPadding.p15,
+            left: AppPadding.p15,
+            right: AppPadding.p15,
+          ),
+          child: Column(
+            children: [
+              _getSingleLabeledData(
+                context,
+                AppStrings.userOverviewCredit,
+                argument?.credit ?? Constants.dash,
+              ),
+              _getSingleLabeledData(
+                context,
+                AppStrings.userNameDebt,
+                argument?.debt ?? Constants.dash,
+              ),
+              _getSingleLabeledData(
+                context,
+                "Amount",
+                "${_captcha?.data?.siteCurrency} ${intl.NumberFormat.decimalPattern().format(double.parse((argument?.amount)!))}",
+              ),
+              _getSingleLabeledData(
+                context,
+                AppStrings.reportBalance,
+                argument?.balance ?? Constants.dash,
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(
+            bottom: AppMargin.m10,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                  right: AppMargin.m5,
+                ),
+                child: SvgPicture.asset(
+                  IconsAssets.documenttext1,
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral,
+                  theme: const SvgTheme(
+                    currentColor: ColorManager.greyNeutral,
+                  ),
+                ),
+              ),
+              Text(
+                "Details",
+                style: StylesManager.getMediumStyle(
+                  fontSize: FontSize.sBody3,
+                  color: ColorManager.greyNeutral,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color(0xff324677),
+            borderRadius: BorderRadius.circular(AppSize.s12),
+          ),
+          padding: const EdgeInsets.only(
+            top: AppPadding.p15,
+            left: AppPadding.p15,
+            right: AppPadding.p15,
+          ),
+          margin: const EdgeInsets.only(
+            bottom: AppMargin.m25,
+          ),
+          child: Column(
+            children: [
+              _getSingleLabeledData(
+                context,
+                "Operation",
+                argument?.operation ?? Constants.dash,
+              ),
+              _getSingleLabeledData(
+                context,
+                "Date",
+                formatDateTime(argument?.createdAt ?? Constants.dash),
+              ),
+            ],
+          ),
+        ),
+
+        ///
+        Container(
+          margin: const EdgeInsets.only(
+            bottom: AppMargin.m10,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                  right: AppMargin.m5,
+                ),
+                child: SvgPicture.asset(
+                  IconsAssets.messagetext1,
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral,
+                  theme: const SvgTheme(
+                    currentColor: ColorManager.greyNeutral,
+                  ),
+                ),
+              ),
+              Text(
+                "Description",
+                style: StylesManager.getMediumStyle(
+                  fontSize: FontSize.sBody3,
+                  color: ColorManager.greyNeutral,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(
+            bottom: AppMargin.m25,
+          ),
+          child: Text(
+            argument?.description ?? Constants.dash,
+            maxLines: 3,
+            textAlign: TextAlign.start,
+            softWrap: true,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ColorManager.whiteNeutral,
+                ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m15),
+          child: Divider(
+            color: ColorManager.greyNeutral.withOpacity(
+              AppSize.s0point25,
             ),
           ),
-        ],
-      ),
+        ),
+
+        ///
+        Container(
+          margin: const EdgeInsets.only(
+            bottom: AppMargin.m10,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                  right: AppMargin.m5,
+                ),
+                child: SvgPicture.asset(
+                  IconsAssets.messages2,
+                  // ignore: deprecated_member_use
+                  color: ColorManager.greyNeutral,
+                  theme: const SvgTheme(
+                    currentColor: ColorManager.greyNeutral,
+                  ),
+                ),
+              ),
+              Text(
+                "Comment",
+                style: StylesManager.getMediumStyle(
+                  fontSize: FontSize.sBody3,
+                  color: ColorManager.greyNeutral,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(
+            bottom: AppMargin.m25,
+          ),
+          child: Text(
+            argument?.comment != "" || argument?.comment != Constants.nullValue
+                ? (argument?.comment)!
+                : "No comment added",
+            maxLines: 3,
+            textAlign: TextAlign.start,
+            softWrap: true,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: ColorManager.whiteNeutral,
+                ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(bottom: AppMargin.m15),
+          child: Divider(
+            color: ColorManager.greyNeutral.withOpacity(
+              AppSize.s0point25,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
