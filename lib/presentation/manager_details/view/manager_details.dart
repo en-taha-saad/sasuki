@@ -303,7 +303,7 @@ class _ManagerDetailsViewState extends State<ManagerDetailsView> {
   Widget _getDeleteDialogContent() {
     return Text(
       "${AppStrings.actionDeleteManagerdialogTitle} ${managerOverviewApiVar?.data?.username}?",
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
             color: ColorManager.blackNeutral,
           ),
     );

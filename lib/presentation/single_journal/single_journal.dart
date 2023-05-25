@@ -162,7 +162,7 @@ class _SingleJournalViewState extends State<SingleJournalView> {
               bottom: AppMargin.m25,
             ),
             decoration: BoxDecoration(
-              color: const Color(0xff2A4079),
+              color: const Color(0xff324677),
               borderRadius: BorderRadius.circular(AppSize.s12),
             ),
             padding: const EdgeInsets.only(
@@ -228,7 +228,7 @@ class _SingleJournalViewState extends State<SingleJournalView> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: const Color(0xff2A4079),
+              color: const Color(0xff324677),
               borderRadius: BorderRadius.circular(AppSize.s12),
             ),
             padding: const EdgeInsets.only(

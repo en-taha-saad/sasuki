@@ -158,7 +158,7 @@ class _SingleActivationViewState extends State<SingleActivationView> {
             bottom: AppMargin.m25,
           ),
           decoration: BoxDecoration(
-            color: const Color(0xff2A4079),
+            color: const Color(0xff324677),
             borderRadius: BorderRadius.circular(AppSize.s12),
           ),
           padding: const EdgeInsets.only(
@@ -224,7 +224,7 @@ class _SingleActivationViewState extends State<SingleActivationView> {
         ),
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xff2A4079),
+            color: const Color(0xff324677),
             borderRadius: BorderRadius.circular(AppSize.s12),
           ),
           padding: const EdgeInsets.only(

@@ -38,7 +38,7 @@ class SingleManagerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xff2A4079),
+        color: const Color(0xff324677),
         borderRadius: RadiusSizes.radius12,
       ),
       margin: const EdgeInsets.only(

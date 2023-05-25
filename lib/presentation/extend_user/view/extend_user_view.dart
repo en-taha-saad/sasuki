@@ -6,6 +6,7 @@ import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
@@ -240,8 +241,15 @@ class _ExtendUserViewState extends State<ExtendUserView> {
                 doOtherThings: (val) {
                   selectedActivationMethod = val;
                 },
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Color(0xff929EAE),
+                    width: 1.0,
+                  ),
+                  borderRadius: RadiusSizes.radius12,
+                ),
                 displayFn: (item) => (item as ActivationMethod).method,
-                dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
+                dropdownColor: ColorManager.transparent,
                 textAndHintColor: ColorManager.blackNeutral,
               ),
             ),
@@ -257,13 +265,20 @@ class _ExtendUserViewState extends State<ExtendUserView> {
             DropDownComponent<Extension>(
               isThisServersDropdown: Constants.falseBool,
               hintStr: AppStrings.changeProfileHint,
+              border: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color(0xff929EAE),
+                  width: 1.0,
+                ),
+                borderRadius: RadiusSizes.radius12,
+              ),
               items: listOfExtensionValue ?? [],
               doOtherThings: (val) {
                 extensionValue = val;
               },
               displayFn: (item) =>
                   (item as Extension).name ?? Constants.emptyStr,
-              dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
+              dropdownColor: ColorManager.transparent,
               textAndHintColor: ColorManager.blackNeutral,
             )
           ],

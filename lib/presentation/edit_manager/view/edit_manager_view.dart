@@ -429,6 +429,7 @@ class _EditManagerState extends State<EditManager> {
                                   builder: (BuildContext context,
                                       StateSetter setState) {
                                     return CustomSwitch(
+                                      color: Colors.white,
                                       value: isChecked,
                                       onChanged: (value) {
                                         setState(() {

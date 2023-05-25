@@ -57,7 +57,7 @@ class _DropDownComponentState<T> extends State<DropDownComponent> {
               ),
         ),
         AppStrings.userActionDelete,
-        AppStrings.userActionDeleteDialogTitle,
+        AppStrings.userActionDeleteServerDialogTitle,
         IconsAssets.trashUserAction,
         () => _deleteServer(value),
       ),

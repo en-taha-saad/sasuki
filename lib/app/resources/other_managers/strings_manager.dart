@@ -227,7 +227,8 @@ class AppStrings {
   static const userActionWithdrawal = "Withdrawal";
   static const userActionPayDebt = "Pay";
   static const userActionPay = "Pay Debt";
-  static const userActionDeleteDialogTitle = "Delete Server";
+  static const userActionDeleteServerDialogTitle = "Delete Server";
+  static const userActionDeleteDialogTitle = "Delete User";
   static const managerActionDeleteDialogTitle = "Delete Manager";
   static const userActionDelete = "Delete";
 

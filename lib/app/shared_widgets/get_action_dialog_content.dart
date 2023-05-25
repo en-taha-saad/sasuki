@@ -58,19 +58,13 @@ Widget getActionDialogContent(
             )),
         child,
         Container(
-          margin: const EdgeInsets.only(top: AppMargin.m15),
+          margin: const EdgeInsets.only(top: AppMargin.m25),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.transparent,
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  elevation: 0,
-                ),
-                onPressed: () => Nav.popRoute(context),
+              InkWell(
+                onTap: () => Nav.popRoute(context),
                 child: Text(
                   AppStrings.cancelButton,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(

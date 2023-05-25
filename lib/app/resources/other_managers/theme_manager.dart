@@ -142,6 +142,14 @@ ThemeData getApplicationTheme() {
           width: AppSize.s1point5,
         ),
       ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: RadiusSizes.radius12,
+        borderSide:  BorderSide(
+          color: ColorManager.whiteNeutral.withOpacity(0.08),
+          width: AppSize.s1point5,
+        ),
+      ),
+
       focusedBorder: OutlineInputBorder(
         borderRadius: RadiusSizes.radius12,
         borderSide: const BorderSide(

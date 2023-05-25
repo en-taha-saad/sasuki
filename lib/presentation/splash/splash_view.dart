@@ -84,13 +84,23 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Spacer(),
-        Image.asset(ImageAssets.mainLogo),
-        const Spacer(),
-        getScreenFooter(),
-      ],
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color(0xff16558F),
+      ),
+      child: Column(
+        children: [
+          const Spacer(),
+          Image.asset(
+            ImageAssets.mainLogo,
+            height : 75,
+            width: 144.96,
+
+          ),
+          const Spacer(),
+          getScreenFooter(),
+        ],
+      ),
     );
   }
 }

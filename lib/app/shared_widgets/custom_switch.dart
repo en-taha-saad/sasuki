@@ -4,11 +4,12 @@ import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 class CustomSwitch extends StatefulWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
-
+  final Color? color;
   const CustomSwitch({
     Key? key,
     required this.value,
     required this.onChanged,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -39,7 +40,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
         height: 18,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: const Color(0xff929EAE).withOpacity(0.25),
+          color: widget.color ?? const Color(0xff929EAE).withOpacity(0.25),
         ),
         child: AnimatedAlign(
           alignment: _value ? Alignment.centerRight : Alignment.centerLeft,

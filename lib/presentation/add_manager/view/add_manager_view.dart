@@ -171,7 +171,6 @@ class _AddManagerState extends State<AddManager> {
     );
   }
 
-
   managers_list.SingleManagerData? _getParentManagerUsername(
       parentManagerUsername) {
     return parentManagerList
@@ -393,6 +392,7 @@ class _AddManagerState extends State<AddManager> {
                                   builder: (BuildContext context,
                                       StateSetter setState) {
                                     return CustomSwitch(
+                                      color: Colors.white,
                                       value: isChecked,
                                       onChanged: (value) {
                                         setState(() {

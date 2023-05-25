@@ -51,7 +51,7 @@ class _ExpandableReportsState extends State<ExpandableReports> {
         Container(
           width: double.infinity,
           decoration: const BoxDecoration(
-            color: ColorManager.primaryshade3,
+            color: Color(0xff324677),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

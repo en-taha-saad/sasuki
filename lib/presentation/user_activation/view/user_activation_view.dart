@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/shared_widgets/custom_switch.dart';
 
 import 'package:sasuki/app/app_inits_funs/constants.dart';
@@ -271,6 +272,13 @@ class _UserActivationViewState extends State<UserActivationView> {
                   isThisServersDropdown: Constants.falseBool,
                   hintStr: AppStrings.changeProfileHint,
                   items: activationMethods,
+                   border: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color(0xff929EAE),
+                  width: 1.0,
+                ),
+                borderRadius: RadiusSizes.radius12,
+              ),
                   doOtherThings: (val) {
                     selectedActivationMethod = val;
                     setState(() {
@@ -285,7 +293,7 @@ class _UserActivationViewState extends State<UserActivationView> {
                     // _activateUser(context);
                   },
                   displayFn: (item) => (item as ActivationMethod).method,
-                  dropdownColor: ColorManager.greyNeutral.withOpacity(0.25),
+                  dropdownColor: ColorManager.transparent,
                   textAndHintColor: ColorManager.blackNeutral,
                 ),
               ),
