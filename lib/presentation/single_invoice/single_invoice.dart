@@ -148,7 +148,7 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
                 "Basic Info.",
                 style: StylesManager.getMediumStyle(
                   fontSize: FontSize.sBody3,
-                  color: ColorManager.greyNeutral,
+                  color: ColorManager.greyNeutral2,
                 ),
               ),
             ],
@@ -217,7 +217,7 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
                 "Details",
                 style: StylesManager.getMediumStyle(
                   fontSize: FontSize.sBody3,
-                  color: ColorManager.greyNeutral,
+                  color: ColorManager.greyNeutral2,
                 ),
               ),
             ],
@@ -412,7 +412,7 @@ class _SingleInvoiceViewState extends State<SingleInvoiceView> {
             textAlign: TextAlign.start,
             style: StylesManager.getMediumStyle(
               fontSize: FontSize.sCaption1,
-              color: ColorManager.greyNeutral,
+              color: ColorManager.greyNeutral3,
             ),
           ),
           SizedBox(

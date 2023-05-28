@@ -5,17 +5,14 @@ import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 
-import 'package:sasuki/app/resources/values_manager/app_margin.dart';
-
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 
-
 Container getEmptyStateWidget(
-    BuildContext context,
-    void Function()? onPressed,
-    ) {
+  BuildContext context,
+  void Function()? onPressed,
+) {
   return Container(
-    margin: const EdgeInsets.only(top: AppMargin.m38),
+    margin: const EdgeInsets.only(bottom: 80),
     child: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

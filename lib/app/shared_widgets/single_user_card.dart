@@ -139,7 +139,7 @@ class SingleUserCard extends StatelessWidget {
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       fontWeight: FontWeight.w400,
-                                      color: ColorManager.greyNeutral,
+                                      color: ColorManager.greyNeutral3,
                                     ),
                             maxLines: Constants.oneNum.toInt(),
                             overflow: TextOverflow.ellipsis,

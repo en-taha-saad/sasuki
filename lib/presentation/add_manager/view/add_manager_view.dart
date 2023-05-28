@@ -201,18 +201,18 @@ class _AddManagerState extends State<AddManager> {
                   Container(
                     margin: const EdgeInsets.only(right: AppSize.s10),
                     child: SvgPicture.asset(
-                      IconsAssets.add,
+                      IconsAssets.addServer,
                       theme: const SvgTheme(
-                        currentColor: ColorManager.whiteNeutral,
+                        currentColor: ColorManager.greyNeutral,
                       ),
                       // ignore: deprecated_member_use
-                      color: ColorManager.whiteNeutral,
+                      color: ColorManager.greyNeutral,
                     ),
                   ),
                   Text(
                     AppStrings.addManagerTitle,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: ColorManager.whiteNeutral,
+                          color: ColorManager.greyNeutral,
                         ),
                   ),
                 ],

@@ -13,6 +13,7 @@ import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/dashboard_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/managerlist_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/managers_invoices_shimmer_loading.dart';
+import 'package:sasuki/presentation/common/loading_shimmers_screens/managers_journal_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/reports_activations_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/loading_shimmers_screens/userlist_shimmer_loading.dart';
 import 'package:sasuki/presentation/common/state_render/states/mobile_module_screen.dart';
@@ -152,14 +153,17 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getSnackBarMessage(String message, BuildContext context) {
-    return Text(
-      message,
-      style: StylesManager.getRegularStyle(
-        color: ColorManager.blackNeutral,
-        fontSize: FontSize.sSubtitle5,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.6,
+      child: Text(
+        message,
+        style: StylesManager.getRegularStyle(
+          color: ColorManager.blackNeutral,
+          fontSize: FontSize.sSubtitle5,
+        ),
+        softWrap: true,
+        maxLines: 2,
       ),
-      softWrap: true,
-      maxLines: 2,
     );
   }
 
@@ -251,7 +255,7 @@ class StateRenderer extends StatelessWidget {
       case MobileModuleScreen.managerInvoices:
         return const ManagersInvoicesShimmerLoading();
       case MobileModuleScreen.managerJournal:
-        return const ManagersInvoicesShimmerLoading();
+        return const ManagersJournalShimmerLoading();
       case MobileModuleScreen.activityLogs:
         return const ActivityLogViewShimmerLoading();
 

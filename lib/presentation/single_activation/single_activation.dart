@@ -147,7 +147,7 @@ class _SingleActivationViewState extends State<SingleActivationView> {
                 "Basic Info.",
                 style: StylesManager.getMediumStyle(
                   fontSize: FontSize.sBody3,
-                  color: ColorManager.greyNeutral,
+                  color: ColorManager.greyNeutral2,
                 ),
               ),
             ],
@@ -216,7 +216,7 @@ class _SingleActivationViewState extends State<SingleActivationView> {
                 "Details",
                 style: StylesManager.getMediumStyle(
                   fontSize: FontSize.sBody3,
-                  color: ColorManager.greyNeutral,
+                  color: ColorManager.greyNeutral2,
                 ),
               ),
             ],
@@ -304,7 +304,7 @@ class _SingleActivationViewState extends State<SingleActivationView> {
             textAlign: TextAlign.start,
             style: StylesManager.getMediumStyle(
               fontSize: FontSize.sCaption1,
-              color: ColorManager.greyNeutral,
+              color: ColorManager.greyNeutral3,
             ),
           ),
           label == "Profile"
@@ -338,8 +338,8 @@ class _SingleActivationViewState extends State<SingleActivationView> {
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: label == "Status"
                               ? value == "Ok"
-                                  ? ColorManager.greenAnnotations
-                                  : ColorManager.orangeAnnotations
+                                  ? const Color(0xff23D7B5)
+                                  : const Color(0xffF8AE6D)
                               : ColorManager.whiteNeutral,
                         ),
                   ),

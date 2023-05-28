@@ -16,6 +16,7 @@ Widget getAddEditTextFieldInput(
   bool isRequired = Constants.falseBool,
   bool isEnabled = Constants.trueBool,
   Color? fillColor,
+  Color? textColor,
 ]) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
@@ -54,11 +55,13 @@ Widget getAddEditTextFieldInput(
                   isRequiredValidation != Constants.trueBool
               ? AppStrings.inputIsEmpty
               : Constants.nullValue,
-              fillColor: fillColor,
+          fillColor: fillColor,
         ),
         onEditingComplete: () => FocusScope.of(context).unfocus(),
         onFieldSubmitted: onFieldSubmitted,
-        style: Theme.of(context).textTheme.bodyLarge,
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: textColor ?? ColorManager.whiteNeutral,
+            ),
       ),
     ],
   );

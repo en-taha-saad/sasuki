@@ -44,7 +44,7 @@ class DashboardListTile extends StatelessWidget {
                           Text(
                             e.subtitle,
                             style: StylesManager.getRegularStyle(
-                              color: ColorManager.greyNeutral,
+                              color: ColorManager.greyNeutral2,
                               fontSize: FontSize.sSubtitle5,
                               // height: AppSize.s1,
                             ),

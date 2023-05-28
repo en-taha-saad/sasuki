@@ -109,7 +109,13 @@ class SingleActivityLog extends StatelessWidget {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(right: AppMargin.m5),
-                    child: SvgPicture.asset(IconsAssets.calendar),
+                    child: SvgPicture.asset(
+                      IconsAssets.calendar,
+                      color: ColorManager.greyNeutral3,
+                      theme: SvgTheme(
+                        currentColor: ColorManager.greyNeutral3,
+                      ),
+                    ),
                   ),
                   isShimmer != Constants.nullValue &&
                           isShimmer != Constants.falseBool
@@ -122,6 +128,7 @@ class SingleActivityLog extends StatelessWidget {
                           formatDateTime((activityLog?.createdAt)!),
                           style: StylesManager.getRegularStyle(
                             fontSize: FontSize.sCaption1,
+                            color: ColorManager.greyNeutral3,
                           ),
                         ),
                 ],
@@ -130,7 +137,13 @@ class SingleActivityLog extends StatelessWidget {
                 children: [
                   Container(
                     margin: const EdgeInsets.only(right: AppMargin.m5),
-                    child: SvgPicture.asset(IconsAssets.global),
+                    child: SvgPicture.asset(
+                      IconsAssets.global,
+                      color: ColorManager.greyNeutral3,
+                      theme: SvgTheme(
+                        currentColor: ColorManager.greyNeutral3,
+                      ),
+                    ),
                   ),
                   isShimmer != Constants.nullValue &&
                           isShimmer != Constants.falseBool
@@ -143,6 +156,7 @@ class SingleActivityLog extends StatelessWidget {
                           activityLog?.ip ?? "",
                           style: StylesManager.getRegularStyle(
                             fontSize: FontSize.sCaption1,
+                            color: ColorManager.greyNeutral3,
                           ),
                         ),
                 ],

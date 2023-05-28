@@ -89,7 +89,7 @@ extension FlowStateExtension on FlowState {
 
           if (getStateRendererType() == StateRendererType.popupErrorState) {
             // show popup error
-                dismissDialog(context);
+            dismissDialog(context);
             WidgetsBinding.instance.addPostFrameCallback(
               (_) {
                 dismissDialog(context);

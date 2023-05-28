@@ -148,7 +148,7 @@ class _SingleJournalViewState extends State<SingleJournalView> {
                 "Basic Info.",
                 style: StylesManager.getMediumStyle(
                   fontSize: FontSize.sBody3,
-                  color: ColorManager.greyNeutral,
+                  color: ColorManager.greyNeutral2,
                 ),
               ),
             ],
@@ -217,7 +217,7 @@ class _SingleJournalViewState extends State<SingleJournalView> {
                 "Details",
                 style: StylesManager.getMediumStyle(
                   fontSize: FontSize.sBody3,
-                  color: ColorManager.greyNeutral,
+                  color: ColorManager.greyNeutral2,
                 ),
               ),
             ],
@@ -394,7 +394,7 @@ class _SingleJournalViewState extends State<SingleJournalView> {
             textAlign: TextAlign.start,
             style: StylesManager.getMediumStyle(
               fontSize: FontSize.sCaption1,
-              color: ColorManager.greyNeutral,
+              color: ColorManager.greyNeutral3,
             ),
           ),
           SizedBox(

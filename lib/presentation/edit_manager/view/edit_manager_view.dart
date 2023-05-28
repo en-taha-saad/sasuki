@@ -244,16 +244,16 @@ class _EditManagerState extends State<EditManager> {
                     child: SvgPicture.asset(
                       IconsAssets.edit,
                       theme: const SvgTheme(
-                        currentColor: ColorManager.whiteNeutral,
+                        currentColor: ColorManager.greyNeutral,
                       ),
                       // ignore: deprecated_member_use
-                      color: ColorManager.whiteNeutral,
+                      color: ColorManager.greyNeutral,
                     ),
                   ),
                   Text(
                     AppStrings.editManagerTitle,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: ColorManager.whiteNeutral,
+                          color: ColorManager.greyNeutral,
                         ),
                   ),
                 ],
@@ -380,6 +380,7 @@ class _EditManagerState extends State<EditManager> {
                               Constants.trueBool,
                               Constants.falseBool,
                               const Color(0xff41527B),
+                              ColorManager.greyNeutral,
                             ),
                           ),
                           Container(

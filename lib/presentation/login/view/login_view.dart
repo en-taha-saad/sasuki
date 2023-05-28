@@ -205,16 +205,16 @@ class _LoginViewState extends State<LoginView> {
             SvgPicture.asset(
               IconsAssets.login,
               theme: const SvgTheme(
-                currentColor: ColorManager.greyNeutral,
+                currentColor: ColorManager.greyNeutral2,
               ),
               // ignore: deprecated_member_use
-              color: ColorManager.greyNeutral,
+              color: ColorManager.greyNeutral2,
             ),
             const SizedBox(width: AppSize.s10),
             Text(
               AppStrings.servLoginToServer,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: ColorManager.greyNeutral,
+                    color: ColorManager.greyNeutral2,
                   ),
             ),
           ],

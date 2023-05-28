@@ -38,7 +38,7 @@ class SingleListTile extends StatelessWidget {
                           Text(
                             e.title,
                            style: StylesManager.getRegularStyle(
-                              color: ColorManager.greyNeutral,
+                              color: ColorManager.greyNeutral2,
                               fontSize: FontSize.sSubtitle5,
                               height: AppSize.s1,
                             ),

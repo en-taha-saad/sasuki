@@ -232,7 +232,7 @@ class DrawerView extends StatelessWidget {
                       AppStrings.welcome,
                       style: StylesManager.getRegularStyle(
                         color: ColorManager.greyNeutral3,
-                        fontSize: FontSize.sSubtitle5,
+                        fontSize: FontSize.sSubtitle2,
                         height: AppSize.s1_5,
                       ),
                     ),
@@ -240,7 +240,7 @@ class DrawerView extends StatelessWidget {
                       "${_viewModel.auth?.client?.firstname ?? Constants.emptyStr} ${_viewModel.auth?.client?.lastname ?? Constants.emptyStr}",
                       style: StylesManager.getMediumStyle(
                         color: ColorManager.whiteNeutral,
-                        fontSize: FontSize.sHeading4,
+                        fontSize: FontSize.sHeading5,
                         height: AppSize.s1_5,
                       ),
                     ),
@@ -248,7 +248,7 @@ class DrawerView extends StatelessWidget {
                       "${_viewModel.dataCaptcha?.data?.siteCurrency ?? Constants.emptyStr} ${_viewModel.dashboardData?.data?.balance != Constants.nullValue ? intl.NumberFormat.decimalPattern().format(_viewModel.dashboardData?.data?.balance) : Constants.emptyStr}",
                       style: StylesManager.getMediumStyle(
                         color: ColorManager.whiteNeutral,
-                        fontSize: FontSize.sHeading4,
+                        fontSize: FontSize.sHeading5,
                         height: AppSize.s1_5,
                       ),
                     ),
@@ -256,7 +256,7 @@ class DrawerView extends StatelessWidget {
                       AppStrings.availableBalance,
                       style: StylesManager.getRegularStyle(
                         color: ColorManager.greyNeutral3,
-                        fontSize: FontSize.sSubtitle5,
+                        fontSize: FontSize.sSubtitle2,
                         height: AppSize.s1_5,
                       ),
                     ),
@@ -272,7 +272,8 @@ class DrawerView extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: _getDrawerContent(context),
-            decoration: const BoxDecoration(color: Color.fromARGB(255, 25, 39, 74)),
+            decoration:
+                const BoxDecoration(color: Color.fromARGB(255, 25, 39, 74)),
           ),
         ),
       ],

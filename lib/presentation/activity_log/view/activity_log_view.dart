@@ -395,7 +395,7 @@ class _ActivityLogViewState extends State<ActivityLogView> {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: const Color(0xff2F3E65),
+          color: const Color(0xff323F63),
           boxShadow: [
             BoxShadow(
               color: const Color(0xff000000).withOpacity(0.25),

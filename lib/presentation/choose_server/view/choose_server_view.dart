@@ -91,16 +91,16 @@ class _ChooseServerViewState extends State<ChooseServerView> {
               SvgPicture.asset(
                 IconsAssets.chooseServer,
                 theme: const SvgTheme(
-                  currentColor: ColorManager.greyNeutral,
+                  currentColor: ColorManager.greyNeutral2,
                 ),
                 // ignore: deprecated_member_use
-                color: ColorManager.greyNeutral,
+                color: ColorManager.greyNeutral2,
               ),
               const SizedBox(width: AppSize.s10),
               Text(
                 AppStrings.servChooseServer,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: ColorManager.greyNeutral,
+                      color: ColorManager.greyNeutral2,
                     ),
               ),
             ],

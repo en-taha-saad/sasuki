@@ -167,7 +167,7 @@ class _AddUserState extends State<AddUser> {
                 Container(
                   margin: const EdgeInsets.only(right: AppSize.s10),
                   child: SvgPicture.asset(
-                    IconsAssets.add,
+                    IconsAssets.addServer,
                     theme: const SvgTheme(
                       currentColor: ColorManager.greyNeutral2,
                     ),

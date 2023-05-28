@@ -111,7 +111,7 @@ ThemeData getApplicationTheme() {
     inputDecorationTheme: InputDecorationTheme(
       filled: Constants.trueBool,
       isDense: Constants.trueBool,
-      fillColor: const Color(0xff1D2D58),
+      fillColor: const Color(0xff384A74),
       border: OutlineInputBorder(
         borderRadius: RadiusSizes.radius12,
         borderSide: BorderSide.none,
@@ -142,13 +142,13 @@ ThemeData getApplicationTheme() {
           width: AppSize.s1point5,
         ),
       ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: RadiusSizes.radius12,
-        borderSide:  BorderSide(
-          color: ColorManager.whiteNeutral.withOpacity(0.08),
-          width: AppSize.s1point5,
-        ),
-      ),
+      // enabledBorder: OutlineInputBorder(
+      //   borderRadius: RadiusSizes.radius12,
+      //   borderSide:  BorderSide(
+      //     color: ColorManager.whiteNeutral.withOpacity(0.08),
+      //     width: AppSize.s1point5,
+      //   ),
+      // ),
 
       focusedBorder: OutlineInputBorder(
         borderRadius: RadiusSizes.radius12,

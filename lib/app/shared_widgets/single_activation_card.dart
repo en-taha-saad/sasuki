@@ -148,7 +148,7 @@ class SingleActivationCard extends StatelessWidget {
             label!,
             style: StylesManager.getMediumStyle(
               fontSize: FontSize.sCaption1,
-              color: ColorManager.greyNeutral,
+              color: ColorManager.greyNeutral2,
             ),
           ),
         ),
