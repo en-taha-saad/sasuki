@@ -126,7 +126,7 @@ class _ReportsActivationsViewState extends State<ReportsActivationsView> {
             child: Column(
               children: [
                 AppSize.statusBarHeight(context),
-                getCustomAppBar(context, AppStrings.drawerReports, true),
+                getCustomAppBar(context, AppStrings.drawerReports, false),
               ],
             ),
           ),

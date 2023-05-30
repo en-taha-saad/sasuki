@@ -114,7 +114,7 @@ class _ManagersInvoicesViewState extends State<ManagersInvoicesView> {
             child: Column(
               children: [
                 AppSize.statusBarHeight(context),
-                getCustomAppBar(context, AppStrings.drawerReports, true),
+                getCustomAppBar(context, AppStrings.drawerReports, false),
               ],
             ),
           ),

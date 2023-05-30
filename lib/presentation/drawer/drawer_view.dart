@@ -84,6 +84,12 @@ class DrawerView extends StatelessWidget {
     // }
     listOfDrawerBars.add(
       DrawerSingleBar(
+        AppStrings.aboutTitle,
+        IconsAssets.information,
+      ),
+    );
+    listOfDrawerBars.add(
+      DrawerSingleBar(
         AppStrings.drawerLogout,
         IconsAssets.logout,
       ),
@@ -120,6 +126,9 @@ class DrawerView extends StatelessWidget {
         // case AppStrings.drawerDepositButton:
         //   _manageDrawerNavigations(Routes.depositPaymentRoute, context);
         //   break;
+        case AppStrings.aboutTitle:
+          _manageDrawerNavigations(Routes.aboutRoute, context);
+          break;
         case AppStrings.drawerLogout:
           _appPrefs.removeIsUserLoggedInStatus();
           _appPrefs.removeToken();
@@ -313,6 +322,10 @@ class DrawerView extends StatelessWidget {
                                     element.icon!,
                                     height: 16,
                                     width: 16,
+                                    color: ColorManager.whiteNeutral,
+                                    theme: const SvgTheme(
+                                      currentColor: ColorManager.whiteNeutral,
+                                    ),
                                   ),
                                   const SizedBox(width: AppSize.s20),
                                   Text(

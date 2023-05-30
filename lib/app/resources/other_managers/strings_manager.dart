@@ -246,6 +246,7 @@ class AppStrings {
   static const updateUserTitle = "Update User";
   static const updateManagerTitle = "Update Manager";
   static const addManagerTitle = "Add Manager";
+  static const aboutTitle = "About";
 
   static const usernameInputtitle = "New Username";
   static const amountInputtitle = "Amount";
