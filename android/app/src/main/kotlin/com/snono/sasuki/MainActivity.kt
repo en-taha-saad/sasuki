@@ -1,4 +1,4 @@
-package com.example.sasuki
+package com.snono.sasuki
 
 import io.flutter.embedding.android.FlutterActivity
 
