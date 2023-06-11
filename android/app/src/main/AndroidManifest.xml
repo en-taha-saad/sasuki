@@ -2,7 +2,7 @@
     package="com.snono.sasuki">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="sasuki"
+        android:label="Sas Radius"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
