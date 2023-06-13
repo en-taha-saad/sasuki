@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "130110928875",
+    "project_id": "sas-radius-af46f",
+    "storage_bucket": "sas-radius-af46f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130110928875:android:2fd2e4deb5222f2d648bae",
+        "android_client_info": {
+          "package_name": "com.snono.sasuki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130110928875-8d4nh3gv7ami3cs0mjt19hd0jhniqast.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVs0mnprSBkLbB1R2pQalgorTJRiHbRtU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130110928875-8d4nh3gv7ami3cs0mjt19hd0jhniqast.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "130110928875-bipk6tn14f6f73sqe6suik1vhdt6iosp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.snono.sasuki"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
