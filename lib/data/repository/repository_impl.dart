@@ -222,7 +222,7 @@ class RepositoryImpl implements Repository {
           "username": loginRequest.username,
           "password": loginRequest.password,
           "language": loginRequest.language,
-          "otp": loginRequest.otp,
+          if (loginRequest.otp.isNotEmpty) "otp": loginRequest.otp,
           "captcha_text": loginRequest.captchaText,
           "session_id": loginRequest.sessionId,
         })); // !D/EGL_emulation( 8442): app_time_stats:

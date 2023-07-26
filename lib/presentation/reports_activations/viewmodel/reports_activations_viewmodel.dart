@@ -102,8 +102,10 @@ class ReportsActivationsViewModel extends BaseViewModel
 
   @override
   Future getNextReportsActivations() async {
+    page == page++;
+
     activationReportsRequestObject =
-        activationReportsRequestObject.copyWith(page: page++);
+        activationReportsRequestObject.copyWith(page: page);
     // ignore: void_checks
     return (await _activationsReportsUsecase
             .execute(activationReportsRequestObject))
@@ -156,11 +158,17 @@ class ReportsActivationsViewModel extends BaseViewModel
     );
   }
 
+  resetRequestArguments() {
+    page = Constants.oneNum.toInt();
+    listOfActivations = null;
+    activationsReports = null;
+    activationReportsRequestObject =
+        activationReportsRequestObject.copyWith(page: page);
+  }
+
   @override
   Future getReportsActivationsForPull() async {
-    activationReportsRequestObject = activationReportsRequestObject.copyWith(
-      page: Constants.oneNum.toInt(),
-    );
+    resetRequestArguments();
     // ignore: void_checks
     return (await _activationsReportsUsecase
             .execute(activationReportsRequestObject))

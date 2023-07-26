@@ -27,6 +27,8 @@ class _AddServerViewState extends State<AddServerView> {
   final _ispNameController = TextEditingController();
   final _serverAddressController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool isFieldTapped = false;
+  bool isThereFooter = false;
 
   _bind() {
     _viewModel.start();
@@ -65,22 +67,34 @@ class _AddServerViewState extends State<AddServerView> {
   }
 
   Widget _getContentWidget() {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        getScreenFooter(),
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: AppSize.s100),
-              getScreenSmallLogo(),
-              const SizedBox(height: AppSize.s35),
-              getScreenContent(context),
-              const SizedBox(height: 205),
-            ],
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isFieldTapped = false;
+          isThereFooter = true;
+        });
+        FocusScope.of(context).unfocus();
+      },
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          if (isThereFooter) getScreenFooter(),
+          SingleChildScrollView(
+            physics: isFieldTapped
+                ? const AlwaysScrollableScrollPhysics()
+                : const NeverScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                const SizedBox(height: AppSize.s100),
+                getScreenSmallLogo(),
+                const SizedBox(height: AppSize.s35),
+                getScreenContent(context),
+                const SizedBox(height: 205),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -152,8 +166,18 @@ class _AddServerViewState extends State<AddServerView> {
             inputHint: AppStrings.servISPNameHint,
             errorText: AppStrings.ispError,
             autofocus: Constants.trueBool,
-            onTap: () {},
-            onFieldSubmitted: (value) {},
+            onTap: () {
+              setState(() {
+                isFieldTapped = true;
+                isThereFooter = false;
+              });
+            },
+            onFieldSubmitted: (value) {
+              setState(() {
+                isFieldTapped = false;
+                isThereFooter = true;
+              });
+            },
           ),
           const SizedBox(height: AppSize.s25),
           _getSingleTextField(
@@ -163,8 +187,18 @@ class _AddServerViewState extends State<AddServerView> {
             inputHint: AppStrings.servServerAddressHint,
             errorText: AppStrings.serverAddressError,
             autofocus: Constants.falseBool,
-            onTap: () {},
-            onFieldSubmitted: (value) {},
+            onTap: () {
+              setState(() {
+                isFieldTapped = true;
+                isThereFooter = false;
+              });
+            },
+            onFieldSubmitted: (value) {
+              setState(() {
+                isFieldTapped = false;
+                isThereFooter = true;
+              });
+            },
           ),
         ],
       ),

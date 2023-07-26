@@ -22,11 +22,9 @@ import 'package:sasuki/presentation/common/state_render/states/state_renderer_ty
 final AppPreferences _appPrefs = instance<AppPreferences>();
 
 extension FlowStateExtension on FlowState {
-  Widget getScreenWidget(
-    BuildContext context,
-    Widget contentScreenWidget,
-    Function retryActionFunction,
-  ) {
+  Widget getScreenWidget(BuildContext context, Widget contentScreenWidget,
+      Function retryActionFunction,
+      [String stringToDismissDialog = ""]) {
     switch (runtimeType) {
       case LoadingState:
         if (getStateRendererType() == StateRendererType.popupLoadingState) {
@@ -124,6 +122,10 @@ extension FlowStateExtension on FlowState {
 
       case ContentState:
         {
+          // ignore: unrelated_type_equality_checks
+          if (stringToDismissDialog != Constants.emptyStr) {
+            dismissDialog(context);
+          }
           // show full screen content
           // dismissDialog(context);
           return contentScreenWidget;

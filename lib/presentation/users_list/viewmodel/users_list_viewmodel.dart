@@ -64,10 +64,12 @@ class UsersListViewModel extends BaseViewModel
     ConnectionFilterList(Constants.twoNum, AppStrings.usersConnectionOnline),
   ];
 
-  UsersListViewModel(this._usersListUseCase,
-      this._parentListUseCase,
-      this._profileListUseCase,
-      this._authUseCase,);
+  UsersListViewModel(
+    this._usersListUseCase,
+    this._parentListUseCase,
+    this._profileListUseCase,
+    this._authUseCase,
+  );
 
   int page = Constants.oneNum.toInt();
   Captcha? dataCaptcha;
@@ -82,15 +84,14 @@ class UsersListViewModel extends BaseViewModel
 
   ///
   final StreamController _usersListController =
-  StreamController<UsersList>.broadcast();
+      StreamController<UsersList>.broadcast();
 
   @override
   Sink get inputUsersListData => _usersListController.sink;
 
   @override
-  Stream<UsersList> get outputUsersListData =>
-      _usersListController.stream.map(
-            (usersList) => usersList,
+  Stream<UsersList> get outputUsersListData => _usersListController.stream.map(
+        (usersList) => usersList,
       );
 
   @override
@@ -106,6 +107,7 @@ class UsersListViewModel extends BaseViewModel
       parentId: Constants.minusOne,
       profileId: Constants.minusOne,
     );
+
     inputState.add(
       LoadingState(
         mobileModuleScreen: MobileModuleScreen.usersList,
@@ -114,9 +116,8 @@ class UsersListViewModel extends BaseViewModel
     );
     // ignore: void_checks
     return (await _usersListUseCase.execute(userRequest)).fold(
-          (failure) {
+      (failure) {
         // left -> failure
-        debugPrint("failure getUsersListData failure = ${failure.message}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -124,29 +125,33 @@ class UsersListViewModel extends BaseViewModel
           ),
         );
       },
-          (usersList0) async {
-        debugPrint("getUsersListData failure = ${usersList0.total}");
+      (usersList0) async {
         _getAuth();
 
         // right -> success (data)
         usersList = usersList0;
         inputState.add(ContentState());
-        inputUsersListData.add(usersList);
+        // inputUsersListData.add(usersList);
         totalUsers = usersList?.total;
-        inputUsersList.add(usersList?.data);
+        // inputUsersList.add(usersList?.data);
         getUsersListForPull();
       },
     );
   }
 
+  resetRequestArguments() {
+    page = Constants.oneNum.toInt();
+    listOfUsers = [];
+    usersList = null;
+    userRequest = userRequest.copyWith(page: page);
+  }
+
   @override
   getUsersListForPull([void Function()? dashboardRequestsStart]) async {
-    userRequest = userRequest.copyWith(page: Constants.oneNum.toInt());
+    resetRequestArguments();
     // ignore: void_checks
     return (await _usersListUseCase.execute(userRequest)).fold(
-          (failure) {
-        // left -> failure
-        debugPrint("getUsersListForPull failure = ${failure.message}");
+      (failure) {
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -154,8 +159,7 @@ class UsersListViewModel extends BaseViewModel
           ),
         );
       },
-          (usersList0) async {
-        // right -> success (data)
+      (usersList0) async {
         usersList = usersList0;
         listOfUsers = usersList?.data;
         inputUsersListData.add(usersList);
@@ -173,9 +177,8 @@ class UsersListViewModel extends BaseViewModel
     userRequest = userRequest.copyWith(page: Constants.oneNum.toInt());
     // ignore: void_checks
     return (await _usersListUseCase.execute(userRequest)).fold(
-          (failure) {
+      (failure) {
         // left -> failure
-        debugPrint("getUsersListForPull failure = ${failure.message}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -183,7 +186,7 @@ class UsersListViewModel extends BaseViewModel
           ),
         );
       },
-          (usersList0) async {
+      (usersList0) async {
         // right -> success (data)
         usersList = usersList0;
         listOfUsers = usersList?.data;
@@ -198,12 +201,12 @@ class UsersListViewModel extends BaseViewModel
 
   @override
   Future getNextUsersList() async {
-    userRequest = userRequest.copyWith(page: page++);
+    page == page++;
+    userRequest = userRequest.copyWith(page: page);
     // ignore: void_checks
     return (await _usersListUseCase.execute(userRequest)).fold(
-          (failure) {
+      (failure) {
         // left -> failure
-        debugPrint("getNextUsersList failure = ${failure.message}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -211,18 +214,13 @@ class UsersListViewModel extends BaseViewModel
           ),
         );
       },
-          (usersList0) async {
+      (usersList0) async {
         // right -> success (data)
         usersList = usersList0;
-
         listOfUsers?.addAll((usersList?.data)!);
-        debugPrint("usersList?.total = ${usersList?.total}");
-        debugPrint("listOfUsers?.length = ${listOfUsers?.length}");
         totalUsers = usersList?.total;
         inputUsersListData.add(usersList);
         inputUsersList.add(listOfUsers);
-        debugPrint("users@ listOfUsers = ${listOfUsers?.length}");
-        debugPrint("users@ page = $page");
         inputState.add(ContentState());
       },
     );
@@ -247,7 +245,7 @@ class UsersListViewModel extends BaseViewModel
     );
     // ignore: void_checks
     return (await _usersListUseCase.execute(userRequest)).fold(
-          (failure) {
+      (failure) {
         // left -> failure
         debugPrint("getUserFromSearch failure = ${failure.code}");
         inputState.add(
@@ -257,7 +255,7 @@ class UsersListViewModel extends BaseViewModel
           ),
         );
       },
-          (usersList0) async {
+      (usersList0) async {
         // right -> success (data)
         usersList = usersList0;
         listOfUsers = usersList0.data;
@@ -269,7 +267,7 @@ class UsersListViewModel extends BaseViewModel
 
   /// get list of users
   final StreamController _listOfUsersController =
-  StreamController<List<UsersListData>?>.broadcast();
+      StreamController<List<UsersListData>?>.broadcast();
 
   @override
   Sink get inputUsersList => _listOfUsersController.sink;
@@ -280,7 +278,7 @@ class UsersListViewModel extends BaseViewModel
 
   /// search user
   final StreamController _searchInputController =
-  StreamController<String>.broadcast();
+      StreamController<String>.broadcast();
 
   @override
   Sink get inputSearch => _searchInputController.sink;
@@ -290,7 +288,7 @@ class UsersListViewModel extends BaseViewModel
   @override
   Stream<bool> get outputIsSearchInputValid {
     return _searchInputController.stream.map(
-          (searchInput) => _isSearchInputValid(searchInput),
+      (searchInput) => _isSearchInputValid(searchInput),
     );
   }
 
@@ -302,7 +300,7 @@ class UsersListViewModel extends BaseViewModel
 
   ///
   final StreamController _getParentListController =
-  StreamController<List<SingleParentData>>.broadcast();
+      StreamController<List<SingleParentData>>.broadcast();
 
   @override
   Sink get inputParentList => _getParentListController.sink;
@@ -315,7 +313,7 @@ class UsersListViewModel extends BaseViewModel
   Future getParentList() async {
     // ignore: void_checks
     return (await _parentListUseCase.execute(Void)).fold(
-          (failure) {
+      (failure) {
         // left -> failure
         debugPrint("getUsersListData failure = ${failure.message}");
         inputState.add(
@@ -325,7 +323,7 @@ class UsersListViewModel extends BaseViewModel
           ),
         );
       },
-          (parentList0) async {
+      (parentList0) async {
         // right -> success (data)
         List<SingleParentData> tempParentList = [];
         tempParentList.add(
@@ -345,7 +343,7 @@ class UsersListViewModel extends BaseViewModel
 
   ///
   final StreamController _getStatusListController =
-  StreamController<List<StatusFilterList>>.broadcast();
+      StreamController<List<StatusFilterList>>.broadcast();
 
   @override
   Sink get inputStatusList => _getStatusListController.sink;
@@ -356,7 +354,7 @@ class UsersListViewModel extends BaseViewModel
 
   ///
   final StreamController _getConnectionListController =
-  StreamController<List<ConnectionFilterList>>.broadcast();
+      StreamController<List<ConnectionFilterList>>.broadcast();
 
   @override
   Sink get inputConnectionList => _getConnectionListController.sink;
@@ -368,7 +366,7 @@ class UsersListViewModel extends BaseViewModel
 
   ///
   final StreamController _getProfileListController =
-  StreamController<List<ProfileData>>.broadcast();
+      StreamController<List<ProfileData>>.broadcast();
 
   @override
   Sink get inputProfileList => _getProfileListController.sink;
@@ -381,7 +379,7 @@ class UsersListViewModel extends BaseViewModel
   Future getProfileList() async {
     // ignore: void_checks
     return (await _profileListUseCase.execute(Void)).fold(
-          (failure) {
+      (failure) {
         // left -> failure
         debugPrint("getProfileList failure = ${failure.message}");
         inputState.add(
@@ -391,7 +389,7 @@ class UsersListViewModel extends BaseViewModel
           ),
         );
       },
-          (profileList0) async {
+      (profileList0) async {
         // right -> success (data)
         List<ProfileData> profileList = [];
         profileList.add(
@@ -409,7 +407,7 @@ class UsersListViewModel extends BaseViewModel
   _getAuth() async {
     // ignore: void_checks
     return (await _authUseCase.execute(Void)).fold(
-          (failure) {
+      (failure) {
         // left -> failure
         debugPrint("getAuth failure = ${failure.message}");
         inputState.add(
@@ -419,7 +417,7 @@ class UsersListViewModel extends BaseViewModel
           ),
         );
       },
-          (auth0) {
+      (auth0) {
         // right -> success (data)
         if (auth0.permissions.contains(AppStrings.userPermissionCreate)) {
           isThereAddUserCreationPermission = Constants.trueBool;
@@ -429,6 +427,4 @@ class UsersListViewModel extends BaseViewModel
       },
     );
   }
-
-
 }

@@ -111,8 +111,9 @@ class SingleActivityLog extends StatelessWidget {
                     margin: const EdgeInsets.only(right: AppMargin.m5),
                     child: SvgPicture.asset(
                       IconsAssets.calendar,
+                      // ignore: deprecated_member_use
                       color: ColorManager.greyNeutral3,
-                      theme: SvgTheme(
+                      theme: const SvgTheme(
                         currentColor: ColorManager.greyNeutral3,
                       ),
                     ),
@@ -139,8 +140,9 @@ class SingleActivityLog extends StatelessWidget {
                     margin: const EdgeInsets.only(right: AppMargin.m5),
                     child: SvgPicture.asset(
                       IconsAssets.global,
+                      // ignore: deprecated_member_use
                       color: ColorManager.greyNeutral3,
-                      theme: SvgTheme(
+                      theme: const SvgTheme(
                         currentColor: ColorManager.greyNeutral3,
                       ),
                     ),

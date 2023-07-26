@@ -120,9 +120,11 @@ class _UsersListViewState extends State<UsersListView> {
 
   Widget _getScreenView() {
     return RefreshIndicator(
-      onRefresh: () async => _usersListViewModel.getUsersListForPull(
-        _dashboardViewModel.getDataStreamingly,
-      ),
+      onRefresh: () async {
+        _usersListViewModel.getUsersListForPull(
+          _dashboardViewModel.getDataStreamingly,
+        );
+      },
       triggerMode: RefreshIndicatorTriggerMode.anywhere,
       backgroundColor: ColorManager.whiteNeutral,
       color: ColorManager.backgroundCenter,
@@ -321,8 +323,9 @@ class _UsersListViewState extends State<UsersListView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(
         Duration(seconds: Constants.oneNum.toInt()),
-        () => setState(() => hidLoadingMoreUsers =
-            _usersListViewModel.totalUsers == data?.length),
+        () => setState(() {
+          hidLoadingMoreUsers = _usersListViewModel.totalUsers == data?.length;
+        }),
       );
     });
   }
@@ -418,7 +421,6 @@ class _UsersListViewState extends State<UsersListView> {
   _filterDialog(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraint) {
-        print("constraint.maxHeight = ${constraint.maxHeight}");
         return Dialog(
           insetAnimationCurve: Curves.fastLinearToSlowEaseIn,
           insetPadding: EdgeInsets.only(

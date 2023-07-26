@@ -322,6 +322,7 @@ class DrawerView extends StatelessWidget {
                                     element.icon!,
                                     height: 16,
                                     width: 16,
+                                    // ignore: deprecated_member_use
                                     color: ColorManager.whiteNeutral,
                                     theme: const SvgTheme(
                                       currentColor: ColorManager.whiteNeutral,

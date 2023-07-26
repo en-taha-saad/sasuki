@@ -120,9 +120,16 @@ class ManagersListViewModel extends BaseViewModel
     );
   }
 
+  resetRequestArguments() {
+    page = Constants.oneNum.toInt();
+    listOfManagers = null;
+    managersList = null;
+    managerRequest = managerRequest.copyWith(page: page);
+  }
+
   @override
   getManagersListForPull() async {
-    managerRequest = managerRequest.copyWith(page: Constants.oneNum.toInt());
+    resetRequestArguments();
     // ignore: void_checks
     return (await _managersListDetailsUsecase.execute(managerRequest)).fold(
       (failure) {
@@ -174,12 +181,13 @@ class ManagersListViewModel extends BaseViewModel
 
   @override
   Future getNextManagersList() async {
-    managerRequest = managerRequest.copyWith(page: page++);
+    page == page++;
+
+    managerRequest = managerRequest.copyWith(page: page);
     // ignore: void_checks
     return (await _managersListDetailsUsecase.execute(managerRequest)).fold(
       (failure) {
         // left -> failure
-        debugPrint("getNextManagersList failure = ${failure.message}");
         inputState.add(
           ErrorState(
             StateRendererType.toastErrorState,
@@ -193,8 +201,6 @@ class ManagersListViewModel extends BaseViewModel
         listOfManagers?.data?.addAll((managersList?.data)!);
         inputManagersListData.add(managersList);
         inputManagersList.add(listOfManagers);
-        debugPrint("users@ listOfUsers = ${listOfManagers?.data?.length}");
-        debugPrint("users@ page = $page");
         totalManagers = managersList?.total;
         inputState.add(ContentState());
       },
@@ -375,7 +381,7 @@ class ManagersListViewModel extends BaseViewModel
     );
   }
 
-    _getCaptchaResponse() async {
+  _getCaptchaResponse() async {
     // ignore: void_checks
     return (await _captchaUseCase?.execute(Void))?.fold(
       (failure) {
@@ -403,5 +409,4 @@ class ManagersListViewModel extends BaseViewModel
   Stream<Captcha> get outputDataCaptcha => _captchaController.stream.map(
         (captcha) => captcha,
       );
-
 }

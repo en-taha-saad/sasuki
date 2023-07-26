@@ -86,8 +86,10 @@ class ManagersJournalViewModel extends BaseViewModel
 
   @override
   Future getNextManagersJournal() async {
+    page == page++;
+
     managerJournalRequestObject =
-        managerJournalRequestObject.copyWith(page: page++);
+        managerJournalRequestObject.copyWith(page: page);
     // ignore: void_checks
     return (await _managerJournalUsecase.execute(managerJournalRequestObject))
         .fold(
@@ -139,11 +141,17 @@ class ManagersJournalViewModel extends BaseViewModel
     );
   }
 
+  resetRequestArguments() {
+    page = Constants.oneNum.toInt();
+    listOfJournal = null;
+    managerJournal = null;
+    managerJournalRequestObject =
+        managerJournalRequestObject.copyWith(page: page);
+  }
+
   @override
   Future getManagersJournalForPull() async {
-    managerJournalRequestObject = managerJournalRequestObject.copyWith(
-      page: Constants.oneNum.toInt(),
-    );
+    resetRequestArguments();
     // ignore: void_checks
     return (await _managerJournalUsecase.execute(managerJournalRequestObject))
         .fold(

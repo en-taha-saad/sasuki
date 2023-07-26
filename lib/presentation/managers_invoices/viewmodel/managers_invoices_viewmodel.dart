@@ -86,8 +86,10 @@ class ManagersInvoicesViewModel extends BaseViewModel
 
   @override
   Future getNextManagersInvoices() async {
+    page == page++;
+
     managerInvoicesRequestObject =
-        managerInvoicesRequestObject.copyWith(page: page++);
+        managerInvoicesRequestObject.copyWith(page: page);
     // ignore: void_checks
     return (await _managerInvoicesUsecase.execute(managerInvoicesRequestObject))
         .fold(
@@ -138,11 +140,17 @@ class ManagersInvoicesViewModel extends BaseViewModel
     );
   }
 
+  resetRequestArguments() {
+    page = Constants.oneNum.toInt();
+    listOfInvoices = null;
+    managerInvoices = null;
+    managerInvoicesRequestObject =
+        managerInvoicesRequestObject.copyWith(page: page);
+  }
+
   @override
   Future getManagersInvoicesForPull() async {
-    managerInvoicesRequestObject = managerInvoicesRequestObject.copyWith(
-      page: Constants.oneNum.toInt(),
-    );
+    resetRequestArguments();
     // ignore: void_checks
     return (await _managerInvoicesUsecase.execute(managerInvoicesRequestObject))
         .fold(

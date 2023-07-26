@@ -74,7 +74,6 @@ class RouteGenerator {
         initAddServerModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: false,
             child: AddServerView(),
           ),
         );
@@ -91,7 +90,6 @@ class RouteGenerator {
         initLoginModule();
         return MaterialPageRoute(
           builder: (_) => const AppBackground(
-            resizeToAvoidBottomInset: false,
             child: LoginView(),
           ),
         );

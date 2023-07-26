@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:sasuki/app/app_inits_funs/app_prefs.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
@@ -283,6 +284,7 @@ class LoginViewModel extends BaseViewModel
     inputState.add(
       LoadingState(stateRendererType: StateRendererType.popupLoadingState),
     );
+    Logger().d("loginObject otp = ${loginObject.otp}");
     (await _loginUseCase.execute(
       LoginUseCaseInput(
         loginObject.username,

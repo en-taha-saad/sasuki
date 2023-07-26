@@ -46,6 +46,9 @@ class _LoginViewState extends State<LoginView> {
   bool showHidePassword = Constants.trueBool;
   bool showPassword = Constants.falseBool;
   LoginUseCaseInput? savedUsernamePassword;
+  String stringToDismissDialog = "2auth";
+  bool isFieldTapped = false;
+  bool isThereFooter = false;
   _bind() {
     _viewModel.start();
     _getRememberMe();
@@ -125,13 +128,10 @@ class _LoginViewState extends State<LoginView> {
       child: StreamBuilder<FlowState>(
           stream: _viewModel.outputState,
           builder: (context, AsyncSnapshot<FlowState> snapshot) {
-            return snapshot.data?.getScreenWidget(
-                  context,
-                  _getContentWidget(),
-                  () {
-                    _viewModel.login();
-                  },
-                ) ??
+            return snapshot.data?.getScreenWidget(context, _getContentWidget(),
+                    () {
+                  _viewModel.login();
+                }, stringToDismissDialog) ??
                 _getContentWidget();
           }),
     );
@@ -140,13 +140,20 @@ class _LoginViewState extends State<LoginView> {
   Widget _getContentWidget() {
     return GestureDetector(
       onTap: () {
+        setState(() {
+          isThereFooter = true;
+          isFieldTapped = false;
+        });
         FocusScope.of(context).unfocus();
       },
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          getScreenFooter(),
+          if (isThereFooter) getScreenFooter(),
           SingleChildScrollView(
+            physics: isFieldTapped
+                ? const AlwaysScrollableScrollPhysics()
+                : const NeverScrollableScrollPhysics(),
             child: Column(
               children: [
                 const SizedBox(height: AppSize.s100),
@@ -253,8 +260,18 @@ class _LoginViewState extends State<LoginView> {
             inputHint: AppStrings.servUsernameHint,
             errorText: AppStrings.servInvalidUsername,
             autofocus: Constants.trueBool,
-            onTap: () {},
-            onFieldSubmitted: (value) {},
+            onTap: () {
+              setState(() {
+                isFieldTapped = true;
+                isThereFooter = true;
+              });
+            },
+            onFieldSubmitted: (value) {
+              setState(() {
+                isFieldTapped = false;
+                isThereFooter = true;
+              });
+            },
           ),
           const SizedBox(height: AppSize.s25),
           PasswordTextInput(
@@ -266,8 +283,18 @@ class _LoginViewState extends State<LoginView> {
             errorText: AppStrings.servInvalidPassword,
             autofocus: Constants.falseBool,
             showPassword: Constants.trueBool,
-            onTap: () {},
-            onFieldSubmitted: (value) {},
+            onTap: () {
+              setState(() {
+                isFieldTapped = true;
+                isThereFooter = false;
+              });
+            },
+            onFieldSubmitted: (value) {
+              setState(() {
+                isFieldTapped = false;
+                isThereFooter = true;
+              });
+            },
           ),
           const SizedBox(height: AppSize.s15),
           _rememberMeCheckBoxWidget(),
@@ -591,6 +618,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Column _show2Auth() {
+    stringToDismissDialog = "";
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,

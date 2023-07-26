@@ -96,11 +96,16 @@ class ActivityLogViewModel extends BaseViewModel
   Stream<ActivityLogList> get outputActivityLogListData =>
       _listOfactivityLogsController.stream
           .map((listOfactivityLogs) => listOfactivityLogs);
+  resetRequestArguments() {
+    page = Constants.oneNum.toInt();
+    listOfactivityLogs = null;
+    activityLogList = null;
+    activityLogRequestObject = activityLogRequestObject.copyWith(page: page);
+  }
 
   @override
   getActivityLogListDataForPull() async {
-    activityLogRequestObject =
-        activityLogRequestObject.copyWith(page: Constants.oneNum.toInt());
+    resetRequestArguments();
     // ignore: void_checks
     return (await _activityLogListUseCase.execute(activityLogRequestObject))
         .fold(
@@ -158,7 +163,8 @@ class ActivityLogViewModel extends BaseViewModel
 
   @override
   Future getNextActivityLogListData() async {
-    activityLogRequestObject = activityLogRequestObject.copyWith(page: page++);
+    page == page++;
+    activityLogRequestObject = activityLogRequestObject.copyWith(page: page);
     // ignore: void_checks
     return (await _activityLogListUseCase.execute(activityLogRequestObject))
         .fold(

@@ -5,7 +5,8 @@ import 'package:sasuki/presentation/common/state_render/states/state_renderer_ty
 
 // content state (full screen, popup)
 class ContentState extends FlowState {
-  ContentState();
+  String? specificScreen;
+  ContentState([this.specificScreen]);
   @override
   String getMessage() => Constants.emptyStr;
 
