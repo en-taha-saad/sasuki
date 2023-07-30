@@ -13,7 +13,7 @@ class ResponseMessage {
   static const String notFound = "Not Found"; // failure, crash in server side
 
   // local status code
-  static const String connectTimeout = "Time out error, Try again later";
+  static const String connectTimeout = "Server is unreachable, Try again later";
   static const String cancel = "Request was cancelled, Try again later";
   static const String recieveTimeout = "Time out error, Try again later";
   static const String sendTimeout = "Time out error, Try again later";

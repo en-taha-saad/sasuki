@@ -24,8 +24,8 @@ class DioFactory {
     };
     dio.options = BaseOptions(
       baseUrl: "https://$serverAddress/${Constants.suffixUrl}",
-      connectTimeout: Constants.apiTimeOut,
-      receiveTimeout: Constants.apiTimeOut,
+      connectTimeout: 3000,
+      receiveTimeout: 3000,
       headers: headers,
     );
 

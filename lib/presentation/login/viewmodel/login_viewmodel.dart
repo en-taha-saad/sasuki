@@ -303,6 +303,14 @@ class LoginViewModel extends BaseViewModel
         if (failure.code == ApiInternalStatus.twoAuthStatus) {
           inputIs2AuthRequiredValid.add(Constants.trueBool);
           inputState.add(ContentState());
+        }
+        if (failure.code == ApiInternalStatus.minusOneStatusCode) {
+          inputState.add(
+            ErrorState(
+              StateRendererType.popupErrorState,
+              failure.message,
+            ),
+          );
         } else {
           inputIs2AuthRequiredValid.add(Constants.falseBool);
           inputState.add(
