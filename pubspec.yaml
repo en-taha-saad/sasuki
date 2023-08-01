@@ -52,6 +52,7 @@ flutter:
     - assets/icons/specific_screen/
     - assets/images/
     - assets/json/
+    - assets/error_strings.json
   fonts:
     - family: IBMPlexSans
       fonts:

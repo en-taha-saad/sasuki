@@ -139,12 +139,16 @@ extension FlowStateExtension on FlowState {
     }
   }
 
+  bool isStackEmpty(BuildContext context) => !Navigator.canPop(context);
+
   _isCurrentDialogShowing(BuildContext context) =>
       ModalRoute.of(context)?.isCurrent != true;
 
   dismissDialog(BuildContext context) {
-    if (_isCurrentDialogShowing(context)) {
-      Nav.popRoute(context);
+    if (isStackEmpty(context)) {
+      if (_isCurrentDialogShowing(context)) {
+        Nav.popRoute(context);
+      }
     }
   }
 

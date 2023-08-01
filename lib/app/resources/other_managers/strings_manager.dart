@@ -269,7 +269,7 @@ class AppStrings {
   static const activationPinInputtitle = "Enter pin here";
   static const activationSalePriceInputtitle = "Sale Price";
   static const profileInputDialogtitle = "Change Profile";
-  static const changeProfileDefaultValue = "Immediate";
+  static const changeProfileDefaultValue = "immediate";
   static const moneyCollectedSwitch = "Money Collected";
   static const loanSwitch = "Loan";
   static const enableManagerSwitch = "Enable Manager";

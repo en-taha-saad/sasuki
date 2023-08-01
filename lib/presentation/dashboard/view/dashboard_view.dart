@@ -69,6 +69,7 @@ class _DashboardViewState extends State<DashboardView> {
 
   void _cancelTimer() {
     timer?.cancel();
+    timer = null;
   }
 
   @override
@@ -113,13 +114,18 @@ class _DashboardViewState extends State<DashboardView> {
           child: Column(
             children: [
               AppSize.statusBarHeight(context),
-              getCustomAppBar(
-                context,
-                _viewModel.selectedServer?.name ?? Constants.emptyStr,
-                false,
-                true,
-                _cancelTimer,
-              ),
+              StreamBuilder<String?>(
+                  stream: _viewModel.outputError,
+                  builder: (context, snapshot) {
+                    return getCustomAppBar(
+                      context,
+                      _viewModel.selectedServer?.name ?? Constants.emptyStr,
+                      false,
+                      true,
+                      () => _cancelTimer(),
+                      snapshot.data,
+                    );
+                  }),
               Container(
                 margin: const EdgeInsets.only(
                   right: AppMargin.m25,

@@ -288,11 +288,13 @@ class _ExtendUserViewState extends State<ExtendUserView> {
   }
 
   _extendUserMethod() {
-    FocusScope.of(context).unfocus();
-    Nav.popRoute(context);
-    _extendUserViewModel.extendUser(
-      selectedActivationMethod ?? activationMethods.first,
-      extensionValue?.id ?? listOfExtensionValue?.first.id,
-    );
+    if (selectedActivationMethod != null) {
+      FocusScope.of(context).unfocus();
+      Nav.popRoute(context);
+      _extendUserViewModel.extendUser(
+        selectedActivationMethod ?? activationMethods.first,
+        extensionValue?.id ?? listOfExtensionValue?.first.id,
+      );
+    }
   }
 }

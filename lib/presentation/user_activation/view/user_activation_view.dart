@@ -233,7 +233,18 @@ class _UserActivationViewState extends State<UserActivationView> {
         AppStrings.userActionActivate,
         AppStrings.activateInputDialogtitle,
         IconsAssets.tickcircleUserAction,
-        _activateUserMethod,
+        () {
+          if (selectedActivationMethod != null) {
+            if (selectedActivationMethod?.method ==
+                AppStrings.activationMethod2) {
+              if (_pinController.text.isNotEmpty) {
+                _activateUserMethod();
+              }
+            } else {
+              _activateUserMethod();
+            }
+          }
+        },
       ),
     );
   }
@@ -272,13 +283,13 @@ class _UserActivationViewState extends State<UserActivationView> {
                   isThisServersDropdown: Constants.falseBool,
                   hintStr: AppStrings.changeProfileHint,
                   items: activationMethods,
-                   border: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Color(0xff929EAE),
-                  width: 1.0,
-                ),
-                borderRadius: RadiusSizes.radius12,
-              ),
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Color(0xff929EAE),
+                      width: 1.0,
+                    ),
+                    borderRadius: RadiusSizes.radius12,
+                  ),
                   doOtherThings: (val) {
                     selectedActivationMethod = val;
                     setState(() {

@@ -44,13 +44,16 @@ class SingleListTile extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: AppSize.s5),
-                          Text(
-                            e.subtitle.isNotEmpty ? e.subtitle : Constants.none,
-                            style: StylesManager.getRegularStyle(
-                              color: e.title == AppStrings.usersStatus
-                                  ? getStatusColor(e.subtitle)
-                                  : ColorManager.whiteNeutral,
-                              fontSize: FontSize.sSubtitle3,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            child: Text(
+                              e.subtitle.isNotEmpty ? e.subtitle : Constants.none,
+                              style: StylesManager.getRegularStyle(
+                                color: e.title == AppStrings.usersStatus
+                                    ? getStatusColor(e.subtitle)
+                                    : ColorManager.whiteNeutral,
+                                fontSize: FontSize.sSubtitle3,
+                              ),
                             ),
                           ),
                         ],

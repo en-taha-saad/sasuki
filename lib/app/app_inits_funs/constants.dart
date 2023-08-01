@@ -33,7 +33,7 @@ class Constants {
   static const int delay60Seconds = 60;
 
   static const int splashDelay = 2;
-  static const int snackBarDelay = 20;
+  static const int snackBarDelay = 3;
   static const String en = "en";
   static const String ar = "ar";
 }

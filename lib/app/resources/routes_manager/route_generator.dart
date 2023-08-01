@@ -18,7 +18,6 @@ import 'package:sasuki/app/init_screens_dependencies/init_reports_activations_mo
 import 'package:sasuki/app/init_screens_dependencies/init_user_activation_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_user_details_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_users_list_module.dart';
-import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/shared_funs/create_route.dart';
 import 'package:sasuki/app/shared_widgets/app_background.dart';
@@ -256,11 +255,10 @@ class RouteGenerator {
   }
 
   static Route<dynamic> unDefinedRoute() {
+    initLoginModule();
     return MaterialPageRoute(
       builder: (_) => const AppBackground(
-        child: Center(
-          child: Text(AppStrings.noRouteFound),
-        ),
+        child: LoginView(),
       ),
     );
   }

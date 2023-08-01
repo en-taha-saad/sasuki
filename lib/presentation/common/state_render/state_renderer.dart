@@ -123,7 +123,18 @@ class StateRenderer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _getSnackBarMessage(message, context),
-            _getRetryButton(AppStrings.retryAgain, context),
+            if (message.toLowerCase().contains("internet"))
+              _getRetryButton(AppStrings.retryAgain, context),
+            if (!message.toLowerCase().contains("internet"))
+              IconButton(
+                icon: const Icon(
+                  Icons.arrow_drop_down_rounded,
+                  size: AppSize.s18,
+                  color: ColorManager.orangeAnnotations,
+                ),
+                onPressed: () =>
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+              ),
           ],
         );
       case StateRendererType.fullScreenEmptyState:

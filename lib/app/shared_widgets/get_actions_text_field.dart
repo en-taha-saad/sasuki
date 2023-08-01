@@ -32,6 +32,7 @@ Widget getActionTextFieldInput(
         controller: controller,
         keyboardType: keyboardType ?? TextInputType.text,
         autofocus: autoFocus ?? Constants.falseBool,
+        enabled: onFieldSubmitted != null,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(

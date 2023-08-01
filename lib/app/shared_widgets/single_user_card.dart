@@ -167,15 +167,18 @@ class SingleUserCard extends StatelessWidget {
                             highlightColor: ColorManager.backgroundCenter,
                             width: AppSize.s20,
                           )
-                        : Text(
-                            profileName!,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelSmall
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w400,
-                                ),
-                          ),
+                        : SizedBox(
+                          width: AppSize.s150,
+                          child: Text(
+                              profileName!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                            ),
+                        ),
                   ),
                 ],
               ),

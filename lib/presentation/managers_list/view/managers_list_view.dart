@@ -302,7 +302,6 @@ class _ManagersListViewState extends State<ManagersListView> {
         },
       );
     });
-    debugPrint("hidLoadingMoreManagers $hidLoadingMoreManagers");
   }
 
   Widget _getManagersList() {

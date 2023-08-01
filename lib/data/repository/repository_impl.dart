@@ -45,6 +45,7 @@ import 'package:sasuki/data/network/models/change_profile_request.dart';
 import 'package:sasuki/data/network/models/failure.dart';
 import 'package:sasuki/data/network/models/loginrequest.dart';
 import 'package:sasuki/data/responses/servers_responses/servers_responses.dart';
+import 'package:sasuki/data/utils/json_parser.dart';
 import 'package:sasuki/domain/models/acl_permission_group_list/acl_permission_group_list.dart';
 import 'package:sasuki/domain/models/activate_method/activate_method.dart';
 import 'package:sasuki/domain/models/activation_informs/activation_informs.dart';
@@ -81,6 +82,7 @@ import 'package:sasuki/domain/repository/repository.dart';
 import 'package:sasuki/presentation/common/freezed_data_classes.dart';
 
 import '../../domain/models/choosing_server/servers.dart';
+import 'dart:convert';
 
 class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
@@ -536,10 +538,11 @@ class RepositoryImpl implements Repository {
           return Right(response.toDomain());
         } else {
           // failure return either left business error
+
           return Left(
             Failure(
               ApiInternalStatus.minusOneStatusCode,
-              AppStrings.nonDeletedError,
+              await JsonParser.getErrorMessage("${response.message}"),
             ),
           );
         }
@@ -576,7 +579,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               ApiInternalStatus.minusOneStatusCode,
-              AppStrings.alreadyNamedError,
+              await JsonParser.getErrorMessage("${response.message}"),
             ),
           );
         }
@@ -609,7 +612,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               ApiInternalStatus.minusOneStatusCode,
-              AppStrings.alreadyNamedError,
+              await JsonParser.getErrorMessage("${response.message}"),
             ),
           );
         }
@@ -681,7 +684,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               ApiInternalStatus.minusOneStatusCode,
-              AppStrings.alreadyNamedError,
+              await JsonParser.getErrorMessage("${response.message}"),
             ),
           );
         }
@@ -765,7 +768,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               ApiInternalStatus.minusOneStatusCode,
-              AppStrings.alreadyNamedError,
+              await JsonParser.getErrorMessage("${response.message}"),
             ),
           );
         }
@@ -869,7 +872,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               response.status ?? ApiInternalStatus.minusFourStatusCode,
-              response.message ?? AppStrings.invalidProfileType,
+              await JsonParser.getErrorMessage("${response.message}"),
             ),
           );
         }
@@ -970,7 +973,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               response.status!,
-              response.message!,
+              await JsonParser.getErrorMessage("${response.message}"),
             ),
           );
         }
@@ -1014,7 +1017,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               response.status!,
-              response.message!,
+              await JsonParser.getErrorMessage("${response.message}"),
             ),
           );
         }
@@ -1066,7 +1069,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               response.status!,
-              response.message!,
+              await JsonParser.getErrorMessage("${response.message}"),
             ),
           );
         }
@@ -1259,7 +1262,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               response.status!,
-              response.error!,
+              await JsonParser.getErrorMessage("${response.error}"),
             ),
           );
         }
@@ -1293,7 +1296,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               response.status!,
-              response.error!,
+              await JsonParser.getErrorMessage("${response.error}"),
             ),
           );
         }
@@ -1345,7 +1348,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               response.status!,
-              response.error!,
+              await JsonParser.getErrorMessage("${response.error}"),
             ),
           );
         }
@@ -1397,7 +1400,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               response.status!,
-              response.error!,
+              await JsonParser.getErrorMessage("${response.error}"),
             ),
           );
         }
@@ -1449,7 +1452,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               response.status!,
-              response.error!,
+              await JsonParser.getErrorMessage("${response.error}"),
             ),
           );
         }
@@ -1490,7 +1493,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               response.status!,
-              response.error!,
+              await JsonParser.getErrorMessage("${response.error}"),
             ),
           );
         }
@@ -1646,7 +1649,7 @@ class RepositoryImpl implements Repository {
           return Left(
             Failure(
               ApiInternalStatus.minusOneStatusCode,
-              AppStrings.alreadyNamedError,
+              await JsonParser.getErrorMessage("${response.message}"),
             ),
           );
         }

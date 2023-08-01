@@ -33,6 +33,7 @@ class DashboardViewModel extends BaseViewModel
   Dashboard? dashboardData;
   bool? gotInforms = false;
   Server? selectedServer;
+  String? error;
 
   DashboardViewModel(
     this._authUseCase,
@@ -97,6 +98,13 @@ class DashboardViewModel extends BaseViewModel
         ),
       ];
 
+  final StreamController _errorController =
+      StreamController<String?>.broadcast();
+  Sink get inputError => _errorController.sink;
+  Stream<String?> get outputError => _errorController.stream.map(
+        (error) => error,
+      );
+
   ///
   final StreamController _dashboardController =
       StreamController<Dashboard>.broadcast();
@@ -112,6 +120,11 @@ class DashboardViewModel extends BaseViewModel
 
   @override
   void dispose() {
+    // _dashboardController.close();
+    // _authController.close();
+    // _captchaController.close();
+    // _errorController.close();
+
   }
 
   @override
@@ -133,12 +146,14 @@ class DashboardViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        inputError.add(failure.message);
       },
       (dashboard0) async {
         // right -> success (data)
         dashboardData = dashboard0;
         debugPrint("dashboard = ${dashboard0.status}");
         _getCaptchaResponse();
+        inputError.add(null);
       },
     );
   }
@@ -241,6 +256,8 @@ class DashboardViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        inputError.add(failure.message);
+
         debugPrint("getDataStreamingly failure = ${failure.message}");
       },
       (dashboard0) async {
@@ -258,6 +275,7 @@ class DashboardViewModel extends BaseViewModel
                 failure.message,
               ),
             );
+            inputError.add(failure.message);
           },
           (auth0) async {
             // right -> success (data)
@@ -274,6 +292,7 @@ class DashboardViewModel extends BaseViewModel
                     failure.message,
                   ),
                 );
+                inputError.add(failure.message);
               },
               (Captcha dataCaptcha0) {
                 // right -> success (data)
@@ -282,6 +301,7 @@ class DashboardViewModel extends BaseViewModel
                 inputDashboardData.add(dashboardData);
                 inputDataCaptcha.add(dataCaptcha);
                 gotInforms = true;
+                inputError.add(null);
               },
             );
           },

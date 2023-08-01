@@ -4,16 +4,21 @@ part 'user_action_response.g.dart';
 
 @JsonSerializable()
 class UserActionResponse {
-  @JsonKey(name: 'message')
+  // @JsonKey(name: 'error')
   String? message;
   @JsonKey(name: 'status')
   int? status;
 
   UserActionResponse(this.status, this.message);
   Map<String, dynamic> toJson() => _$UserActionResponseToJson(this);
-  factory UserActionResponse.fromJson(Map<String, dynamic> json) =>
-      _$UserActionResponseFromJson(json);
+  factory UserActionResponse.fromJson(Map<String, dynamic> json) {
+    return UserActionResponse(
+      json['status'] as int?,
+      json['message'] as String? ?? json['error'] as String?,
+    );
+  }
 }
+
 @JsonSerializable()
 class EditUserResponse {
   @JsonKey(name: 'status')

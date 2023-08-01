@@ -186,31 +186,36 @@ class _UsersListViewState extends State<UsersListView> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: getScreenWidth(context) * 0.6,
-                child: _getSearchTextField(),
-              ),
+              if (!_usersListViewModel.isThereAddUserCreationPermission)
+                SizedBox(
+                  width: getScreenWidth(context) * 0.75,
+                  child: _getSearchTextField(),
+                ),
+              if (_usersListViewModel.isThereAddUserCreationPermission)
+                SizedBox(
+                  width: getScreenWidth(context) * 0.6,
+                  child: _getSearchTextField(),
+                ),
               IconButton(
                 onPressed: _showFilterDialog,
                 icon: SvgPicture.asset(IconsAssets.filter),
               ),
-              InkWell(
-                onTap: _usersListViewModel.isThereAddUserCreationPermission
-                    ? () => Nav.navTo(context, Routes.addUserRoute)
-                    : null,
-                child: Container(
-                  padding: const EdgeInsets.all(AppPadding.p7),
-                  decoration: const BoxDecoration(
-                    color: ColorManager.primaryshade1,
-                    shape: BoxShape.circle,
-                  ),
-                  child: SvgPicture.asset(
-                    IconsAssets.add,
-                    width: AppSize.s24,
-                    height: AppSize.s24,
+              if (_usersListViewModel.isThereAddUserCreationPermission)
+                InkWell(
+                  onTap: () => Nav.navTo(context, Routes.addUserRoute),
+                  child: Container(
+                    padding: const EdgeInsets.all(AppPadding.p7),
+                    decoration: const BoxDecoration(
+                      color: ColorManager.primaryshade1,
+                      shape: BoxShape.circle,
+                    ),
+                    child: SvgPicture.asset(
+                      IconsAssets.add,
+                      width: AppSize.s24,
+                      height: AppSize.s24,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ),
@@ -323,9 +328,14 @@ class _UsersListViewState extends State<UsersListView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(
         Duration(seconds: Constants.oneNum.toInt()),
-        () => setState(() {
-          hidLoadingMoreUsers = _usersListViewModel.totalUsers == data?.length;
-        }),
+        () {
+          if (mounted) {
+            setState(() {
+              hidLoadingMoreUsers =
+                  _usersListViewModel.totalUsers == data?.length;
+            });
+          }
+        },
       );
     });
   }

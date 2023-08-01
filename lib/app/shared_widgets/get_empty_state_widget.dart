@@ -12,7 +12,7 @@ Container getEmptyStateWidget(
   void Function()? onPressed,
 ) {
   return Container(
-    margin: const EdgeInsets.only(bottom: 80),
+    margin: const EdgeInsets.only(bottom: 20),
     child: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
