@@ -196,6 +196,7 @@ extension FlowStateExtension on FlowState {
           );
           return;
         } else {
+          debugPrint("message: $message");
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               shape: RoundedRectangleBorder(

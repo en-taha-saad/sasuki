@@ -116,7 +116,6 @@ class DashboardViewModel extends BaseViewModel
   void start() {
     _getSelectedServer();
     getDashboardData();
-    super.start();
   }
 
   @override
