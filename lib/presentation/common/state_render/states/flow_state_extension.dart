@@ -203,7 +203,7 @@ extension FlowStateExtension on FlowState {
               ),
               elevation: AppSize.s1_5,
               backgroundColor: ColorManager.greyNeutral3,
-              dismissDirection: DismissDirection.vertical,
+              dismissDirection: DismissDirection.horizontal,
               duration: const Duration(seconds: Constants.snackBarDelay),
               padding: const EdgeInsets.only(
                 left: AppPadding.p16,

@@ -30,14 +30,14 @@ Container getCustomAppBar(context, String title, bool isScreenSecondary,
                 onPressed: isScreenSecondary
                     ? () => Nav.popRoute(context)
                     : () {
-                        if (error != null) {
-                          if (error.toLowerCase().contains("internet")) {}
-                        } else {
-                          if (isDashboard == true) {
-                            cancelTimer();
-                          }
-                          Nav.navTo(context, Routes.drawerRoute);
+                        // if (error != null) {
+                        //   if (error.toLowerCase().contains("internet")) {}
+                        // } else {
+                        // }
+                        if (isDashboard == true) {
+                          cancelTimer();
                         }
+                        Nav.navTo(context, Routes.drawerRoute);
                       },
               ),
               Container(),

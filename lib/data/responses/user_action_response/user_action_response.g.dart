@@ -6,11 +6,7 @@ part of 'user_action_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserActionResponse _$UserActionResponseFromJson(Map<String, dynamic> json) =>
-    UserActionResponse(
-      json['status'] as int?,
-      json['message'] as String?,
-    );
+
 
 Map<String, dynamic> _$UserActionResponseToJson(UserActionResponse instance) =>
     <String, dynamic>{

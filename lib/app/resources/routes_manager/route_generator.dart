@@ -76,6 +76,13 @@ class RouteGenerator {
             child: AddServerView(),
           ),
         );
+      case Routes.loginRoute:
+        initLoginModule();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: LoginView(),
+          ),
+        );
       case Routes.dashboardRoute:
         initDashboardModule();
         return MaterialPageRoute(
@@ -85,13 +92,6 @@ class RouteGenerator {
           settings: settings,
         );
 
-      case Routes.loginRoute:
-        initLoginModule();
-        return MaterialPageRoute(
-          builder: (_) => const AppBackground(
-            child: LoginView(),
-          ),
-        );
       case Routes.usersListRoute:
         initUsersListModule();
         return MaterialPageRoute(

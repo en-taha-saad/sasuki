@@ -143,48 +143,50 @@ class DrawerView extends StatelessWidget {
   List<SingleReport> listOfReports = [];
 
   getListOfReports(context) {
-    if ((_viewModel.auth?.permissions.contains("prm_report_activations"))!) {
-      listOfReports.add(
-        SingleReport(
-          title: AppStrings.drawerReportsActivations,
-          action: () {
-            _manageDrawerNavigations(
-              Routes.reportsActivationsRoute,
-              context,
-            );
-          },
-        ),
-      );
-    }
+    if (_viewModel.auth?.permissions != null) {
+      if ((_viewModel.auth?.permissions.contains("prm_report_activations"))!) {
+        listOfReports.add(
+          SingleReport(
+            title: AppStrings.drawerReportsActivations,
+            action: () {
+              _manageDrawerNavigations(
+                Routes.reportsActivationsRoute,
+                context,
+              );
+            },
+          ),
+        );
+      }
 
-    if ((_viewModel.auth?.permissions
-        .contains("prm_report_managers_invoices"))!) {
-      listOfReports.add(
-        SingleReport(
-          title: AppStrings.drawerReportsInvoices,
-          action: () {
-            _manageDrawerNavigations(
-              Routes.reportsInvoicesRoute,
-              context,
-            );
-          },
-        ),
-      );
-    }
+      if ((_viewModel.auth?.permissions
+          .contains("prm_report_managers_invoices"))!) {
+        listOfReports.add(
+          SingleReport(
+            title: AppStrings.drawerReportsInvoices,
+            action: () {
+              _manageDrawerNavigations(
+                Routes.reportsInvoicesRoute,
+                context,
+              );
+            },
+          ),
+        );
+      }
 
-    if ((_viewModel.auth?.permissions
-        .contains("prm_report_managers_journal"))!) {
-      listOfReports.add(
-        SingleReport(
-          title: AppStrings.drawerReportsJournal,
-          action: () {
-            _manageDrawerNavigations(
-              Routes.reportsJournalRoute,
-              context,
-            );
-          },
-        ),
-      );
+      if ((_viewModel.auth?.permissions
+          .contains("prm_report_managers_journal"))!) {
+        listOfReports.add(
+          SingleReport(
+            title: AppStrings.drawerReportsJournal,
+            action: () {
+              _manageDrawerNavigations(
+                Routes.reportsJournalRoute,
+                context,
+              );
+            },
+          ),
+        );
+      }
     }
   }
 

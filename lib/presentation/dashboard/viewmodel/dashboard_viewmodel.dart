@@ -116,15 +116,16 @@ class DashboardViewModel extends BaseViewModel
   void start() {
     _getSelectedServer();
     getDashboardData();
+    super.start();
   }
 
   @override
   void dispose() {
-    // _dashboardController.close();
-    // _authController.close();
-    // _captchaController.close();
-    // _errorController.close();
-
+    _errorController.close();
+    _dashboardController.close();
+    _authController.close();
+    _captchaController.close();
+    super.dispose();
   }
 
   @override
