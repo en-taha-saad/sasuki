@@ -111,7 +111,9 @@ class _UsersListViewState extends State<UsersListView> {
         return snapshot.data?.getScreenWidget(
               context,
               _getScreenView(),
-              () async {},
+              () async {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              },
             ) ??
             _getScreenView();
       },

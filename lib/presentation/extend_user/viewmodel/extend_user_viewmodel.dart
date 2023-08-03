@@ -84,8 +84,7 @@ class ExtendUserViewModel extends BaseViewModel
     Constants.emptyStr,
   );
   @override
-  void start() {
-  }
+  void start() {}
 
   @override
   void dispose() {}
@@ -177,7 +176,7 @@ class ExtendUserViewModel extends BaseViewModel
             message: AppStrings.userExtendedSuccessfully,
           ),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -210,7 +209,8 @@ class ExtendUserViewModel extends BaseViewModel
             extensionsList,
           ),
         );
-        debugPrint("allowedExtersionMethods = ${allowedExtersionMethods.data?.length}");
+        debugPrint(
+            "allowedExtersionMethods = ${allowedExtersionMethods.data?.length}");
       },
     );
   }

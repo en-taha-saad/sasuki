@@ -10,7 +10,7 @@ abstract class BaseViewModel extends BaseViewModelInputs
   final StreamController _inputStreamController = BehaviorSubject<FlowState>();
   @override
   void dispose() {
-    _inputStreamController.close();
+    // _inputStreamController.close();
   }
 
   @override

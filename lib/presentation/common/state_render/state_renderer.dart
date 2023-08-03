@@ -47,11 +47,12 @@ class StateRenderer extends StatelessWidget {
   }) {
     return Dialog(
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p15,
-          vertical: AppPadding.p30,
+        padding: const EdgeInsets.only(
+          left: AppPadding.p15,
+          right: AppPadding.p15,
+          top: AppPadding.p15,
         ),
-        height: height ?? 245,
+        height: height ?? 190,
         width: width ?? double.infinity - 50,
         decoration: BoxDecoration(
           color: ColorManager.whiteNeutral,
@@ -107,7 +108,9 @@ class StateRenderer extends StatelessWidget {
           Column(
             children: [
               _getAnimatedImage(JsonAssets.success),
+              const SizedBox(height: AppSize.s12),
               _getMessage(title),
+              const SizedBox(height: AppSize.s12),
               _getRetryButton(
                 AppStrings.ok,
                 context,
@@ -152,8 +155,8 @@ class StateRenderer extends StatelessWidget {
 
   Widget _getAnimatedImage(String animationName) {
     return SizedBox(
-      height: AppSize.s100,
-      width: AppSize.s100,
+      height: AppSize.s64,
+      width: AppSize.s64,
       child: Lottie.asset(
         animationName,
         repeat: animationName != JsonAssets.loading
@@ -180,17 +183,14 @@ class StateRenderer extends StatelessWidget {
 
   Widget _getMessage(String message) {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(AppPadding.p8),
-        child: Text(
-          message,
-          textAlign: TextAlign.center,
-          style: StylesManager.getRegularStyle(
-            fontSize: FontSize.sBody3,
-            color: message == AppStrings.servNoServersFound
-                ? ColorManager.whiteNeutral
-                : ColorManager.blackNeutral,
-          ),
+      child: Text(
+        message,
+        textAlign: TextAlign.center,
+        style: StylesManager.getRegularStyle(
+          fontSize: FontSize.sBody3,
+          color: message == AppStrings.servNoServersFound
+              ? ColorManager.whiteNeutral
+              : ColorManager.blackNeutral,
         ),
       ),
     );
@@ -244,9 +244,9 @@ class StateRenderer extends StatelessWidget {
           textAlign: stateRendererType == StateRendererType.toastErrorState
               ? TextAlign.right
               : TextAlign.center,
-          style: StylesManager.getMediumStyle(
+          style: StylesManager.getBoldStyle(
             color: ColorManager.secondary,
-            fontSize: AppSize.s14,
+            fontSize: AppSize.s18,
           ),
         ),
       ),

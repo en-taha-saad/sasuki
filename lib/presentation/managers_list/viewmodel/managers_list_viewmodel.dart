@@ -22,6 +22,7 @@ import 'package:sasuki/presentation/common/state_render/states/state_renderer_ty
 import 'package:sasuki/presentation/base/base_viewmodel.dart';
 import 'package:sasuki/presentation/managers_list/viewmodel/managers_list_viewmodel_inputs.dart';
 import 'package:sasuki/presentation/managers_list/viewmodel/managers_viewmodel_outputs.dart';
+import 'package:sasuki/presentation/users_list/viewmodel/users_list_viewmodel.dart';
 
 class ManagersListViewModel extends BaseViewModel
     with ManagersListViewModelInputs, ManagersListViewModelOutputs {
@@ -141,6 +142,7 @@ class ManagersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (managersList0) async {
         // right -> success (data)
@@ -167,6 +169,7 @@ class ManagersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (managersList0) async {
         // right -> success (data)
@@ -194,6 +197,7 @@ class ManagersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (managersList0) async {
         // right -> success (data)
@@ -231,6 +235,7 @@ class ManagersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (managersList0) async {
         // right -> success (data)
@@ -287,6 +292,7 @@ class ManagersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (parentManagerList0) async {
         // right -> success (data)
@@ -327,6 +333,7 @@ class ManagersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (aclPermissionGroupList0) async {
         // right -> success (data)
@@ -369,6 +376,7 @@ class ManagersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (auth0) {
         // right -> success (data)
@@ -393,6 +401,7 @@ class ManagersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (Captcha dataCaptcha0) {
         // right -> success (data)

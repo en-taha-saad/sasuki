@@ -89,7 +89,7 @@ class AddManagerViewModel extends BaseViewModel
             message: AppStrings.managerAddedSuccess,
           ),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },

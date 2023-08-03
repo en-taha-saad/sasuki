@@ -371,17 +371,11 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
-      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
           inputState.add(ContentState());
         });
       },
       (userOverviewApi0) async {
-        // right -> success (data)
-        // inputState.add(
-        //   LoadingState(
-        //     stateRendererType: StateRendererType.popupSuccessState,
-        //   ),
-        // );
         _usersListViewModel.refreshUsersList();
         inputState.add(
           LoadingState(
@@ -389,6 +383,9 @@ class UserDetailsViewModel extends BaseViewModel
             message: AppStrings.userDeletedSuccess,
           ),
         );
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
     );
   }
@@ -425,7 +422,7 @@ class UserDetailsViewModel extends BaseViewModel
             message: AppStrings.userRenamedSuccess,
           ),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -445,7 +442,7 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
-      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -486,7 +483,7 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
-      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -500,7 +497,7 @@ class UserDetailsViewModel extends BaseViewModel
             message: AppStrings.userProfileChangedSuccess,
           ),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -542,7 +539,7 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
-      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -556,7 +553,7 @@ class UserDetailsViewModel extends BaseViewModel
             message: AppStrings.amountAddedSuccessfully,
           ),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -589,7 +586,7 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
-      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -603,7 +600,7 @@ class UserDetailsViewModel extends BaseViewModel
             message: AppStrings.amountDeductedSuccessfully,
           ),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -622,7 +619,7 @@ class UserDetailsViewModel extends BaseViewModel
           ),
         );
         debugPrint("getPayDebtInforms failure = ${failure.message}");
-      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -671,7 +668,7 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
-      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -696,7 +693,7 @@ class UserDetailsViewModel extends BaseViewModel
           Constants.zeroNum.toInt(),
           Constants.zeroNum.toInt(),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -715,7 +712,7 @@ class UserDetailsViewModel extends BaseViewModel
             failure.message,
           ),
         );
-      Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
           inputState.add(ContentState());
         });
       },

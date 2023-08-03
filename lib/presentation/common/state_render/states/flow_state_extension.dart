@@ -102,6 +102,7 @@ extension FlowStateExtension on FlowState {
             return contentScreenWidget;
           } else {
             // show toast retry screen error
+
             WidgetsBinding.instance.addPostFrameCallback(
               (_) {
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -145,7 +146,7 @@ extension FlowStateExtension on FlowState {
       ModalRoute.of(context)?.isCurrent != true;
 
   dismissDialog(BuildContext context) {
-    if (isStackEmpty(context)) {
+    if (!isStackEmpty(context)) {
       if (_isCurrentDialogShowing(context)) {
         Nav.popRoute(context);
       }

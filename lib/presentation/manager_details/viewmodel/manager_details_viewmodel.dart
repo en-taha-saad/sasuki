@@ -313,12 +313,6 @@ class ManagerDetailsViewModel extends BaseViewModel
         });
       },
       (managerOverviewApi0) async {
-        // right -> success (data)
-        // inputState.add(
-        //   LoadingState(
-        //     stateRendererType: StateRendererType.popupSuccessState,
-        //   ),
-        // );
         _managersListViewModel.refreshManagersList();
         inputState.add(
           LoadingState(
@@ -326,6 +320,9 @@ class ManagerDetailsViewModel extends BaseViewModel
             message: AppStrings.managerDeletedSuccess,
           ),
         );
+         Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
+          inputState.add(ContentState());
+        });
       },
     );
   }
@@ -363,7 +360,7 @@ class ManagerDetailsViewModel extends BaseViewModel
             message: AppStrings.managerRenamedSuccess,
           ),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -412,7 +409,7 @@ class ManagerDetailsViewModel extends BaseViewModel
             message: AppStrings.managerAmountAddedSuccessfully,
           ),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+       Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },
@@ -459,7 +456,7 @@ class ManagerDetailsViewModel extends BaseViewModel
             message: AppStrings.managerAmountDeductedSuccessfully,
           ),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },

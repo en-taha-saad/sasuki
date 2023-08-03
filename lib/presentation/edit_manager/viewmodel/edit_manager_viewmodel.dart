@@ -103,7 +103,7 @@ class EditManagerViewModel extends BaseViewModel
           ),
         );
         _managerDetailsViewModel.getManagerDataStreamingly();
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },

@@ -72,7 +72,7 @@ class DepositScreenViewModel extends BaseViewModel
             message: AppStrings.depositPaymentSuccessfully,
           ),
         );
-        Future.delayed(Duration(milliseconds: AppSize.s500.toInt()), () {
+        Future.delayed(Duration(milliseconds: AppSize.s100.toInt()), () {
           inputState.add(ContentState());
         });
       },

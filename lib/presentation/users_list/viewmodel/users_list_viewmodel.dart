@@ -23,6 +23,15 @@ import 'package:sasuki/presentation/base/base_viewmodel.dart';
 import 'package:sasuki/presentation/users_list/viewmodel/users_list_viewmodel_inputs.dart';
 import 'package:sasuki/presentation/users_list/viewmodel/users_list_viewmodel_outputs.dart';
 
+addContentStateAfterSeconds(inputState) {
+  Future.delayed(
+    const Duration(milliseconds: 3000),
+    () {
+      inputState.add(ContentState());
+    },
+  );
+}
+
 class UsersListViewModel extends BaseViewModel
     with UsersListViewModelInputs, UsersListViewModelOutputs {
   final UsersListUseCase _usersListUseCase;
@@ -79,9 +88,6 @@ class UsersListViewModel extends BaseViewModel
     await getUsersListData();
   }
 
-  @override
-  void dispose() {}
-
   ///
   final StreamController _usersListController =
       StreamController<UsersList>.broadcast();
@@ -124,6 +130,7 @@ class UsersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (usersList0) async {
         _getAuth();
@@ -158,6 +165,7 @@ class UsersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (usersList0) async {
         usersList = usersList0;
@@ -185,6 +193,7 @@ class UsersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (usersList0) async {
         // right -> success (data)
@@ -213,6 +222,7 @@ class UsersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (usersList0) async {
         // right -> success (data)
@@ -254,6 +264,7 @@ class UsersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (usersList0) async {
         // right -> success (data)
@@ -322,6 +333,7 @@ class UsersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (parentList0) async {
         // right -> success (data)
@@ -388,6 +400,7 @@ class UsersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (profileList0) async {
         // right -> success (data)
@@ -416,6 +429,7 @@ class UsersListViewModel extends BaseViewModel
             failure.message,
           ),
         );
+        addContentStateAfterSeconds(inputState);
       },
       (auth0) {
         // right -> success (data)

@@ -36,25 +36,29 @@ class _CustomSwitchState extends State<CustomSwitch> {
         });
       },
       child: Container(
-        width: 33,
-        height: 18,
+        width: 35,
+        height: 20,
         decoration: BoxDecoration(
+          border: Border.all(
+            color: _value ? ColorManager.transparent : ColorManager.greyNeutral,
+            width: 2,
+          ),
+          color: _value ? ColorManager.primaryshade1 : ColorManager.transparent,
           borderRadius: BorderRadius.circular(16),
-          color: widget.color ?? const Color(0xff929EAE).withOpacity(0.25),
         ),
         child: AnimatedAlign(
           alignment: _value ? Alignment.centerRight : Alignment.centerLeft,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
           child: Container(
-            width: 12,
-            height: 12,
+            width: 10,
+            height: 10,
             margin: const EdgeInsets.all(3.0),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: _value
-                  ? ColorManager.primaryshade1
-                  : ColorManager.blackNeutral,
+                  ? ColorManager.whiteNeutral
+                  : ColorManager.greyNeutral,
             ),
           ),
         ),

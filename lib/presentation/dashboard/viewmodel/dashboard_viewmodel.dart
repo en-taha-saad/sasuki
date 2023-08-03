@@ -118,14 +118,6 @@ class DashboardViewModel extends BaseViewModel
     getDashboardData();
   }
 
-  @override
-  void dispose() {
-    _errorController.close();
-    _dashboardController.close();
-    _authController.close();
-    _captchaController.close();
-    super.dispose();
-  }
 
   @override
   getDashboardData() async {

@@ -39,49 +39,73 @@ class DrawerView extends StatelessWidget {
         IconsAssets.dashboard,
       ),
     );
-
-    if ((_viewModel.auth?.permissions.contains("prm_users_index"))!) {
-      listOfDrawerBars.add(
+    if (_viewModel.auth?.permissions != null) {
+      if ((_viewModel.auth?.permissions.contains("prm_users_index"))!) {
+        listOfDrawerBars.add(
+          DrawerSingleBar(
+            AppStrings.drawerUsersList,
+            IconsAssets.usersList,
+          ),
+        );
+      }
+      if ((_viewModel.auth?.permissions.contains("prm_managers_index"))!) {
+        listOfDrawerBars.add(
+          DrawerSingleBar(
+            AppStrings.drawerManagers,
+            IconsAssets.managers,
+          ),
+        );
+      }
+      if ((_viewModel.auth?.permissions
+              .contains("prm_report_managers_invoices"))! ||
+          (_viewModel.auth?.permissions
+              .contains("prm_report_managers_journal"))! ||
+          (_viewModel.auth?.permissions.contains("prm_report_activations"))!) {
+        listOfDrawerBars.add(
+          DrawerSingleBar(
+            AppStrings.drawerReports,
+            IconsAssets.reports,
+          ),
+        );
+      }
+      if ((_viewModel.auth?.permissions.contains("prm_report_syslog"))!) {
+        listOfDrawerBars.add(
+          DrawerSingleBar(
+            AppStrings.drawerActivityLog,
+            IconsAssets.activityLog,
+          ),
+        );
+      }
+      // if ((_viewModel.auth?.permissions.contains("prm_managers_deposit"))!) {
+      //   DrawerSingleBar(
+      //     AppStrings.drawerDepositButton,
+      //     IconsAssets.deposit,
+      //   );
+      // }
+    } else {
+      listOfDrawerBars.addAll([
         DrawerSingleBar(
           AppStrings.drawerUsersList,
           IconsAssets.usersList,
         ),
-      );
-    }
-    if ((_viewModel.auth?.permissions.contains("prm_managers_index"))!) {
-      listOfDrawerBars.add(
         DrawerSingleBar(
           AppStrings.drawerManagers,
           IconsAssets.managers,
         ),
-      );
-    }
-    if ((_viewModel.auth?.permissions
-            .contains("prm_report_managers_invoices"))! ||
-        (_viewModel.auth?.permissions
-            .contains("prm_report_managers_journal"))! ||
-        (_viewModel.auth?.permissions.contains("prm_report_activations"))!) {
-      listOfDrawerBars.add(
         DrawerSingleBar(
           AppStrings.drawerReports,
           IconsAssets.reports,
         ),
-      );
-    }
-    if ((_viewModel.auth?.permissions.contains("prm_report_syslog"))!) {
-      listOfDrawerBars.add(
         DrawerSingleBar(
           AppStrings.drawerActivityLog,
           IconsAssets.activityLog,
         ),
-      );
+        // DrawerSingleBar(
+        //   AppStrings.drawerDepositButton,
+        //   IconsAssets.deposit,
+        // ),
+      ]);
     }
-    // if ((_viewModel.auth?.permissions.contains("prm_managers_deposit"))!) {
-    //   DrawerSingleBar(
-    //     AppStrings.drawerDepositButton,
-    //     IconsAssets.deposit,
-    //   );
-    // }
     listOfDrawerBars.add(
       DrawerSingleBar(
         AppStrings.aboutTitle,
