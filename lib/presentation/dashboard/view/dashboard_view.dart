@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:sasuki/app/app_inits_funs/constants.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_app_module.dart';
@@ -8,10 +9,13 @@ import 'package:sasuki/app/resources/other_managers/assets_manager.dart';
 import 'package:sasuki/app/resources/other_managers/color_manager.dart';
 import 'package:sasuki/app/resources/other_managers/strings_manager.dart';
 import 'package:sasuki/app/resources/other_managers/styles_manager.dart';
+import 'package:sasuki/app/resources/routes_manager/nav_funcs.dart';
+import 'package:sasuki/app/resources/routes_manager/routes.dart';
 import 'package:sasuki/app/resources/values_manager/app_margin.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_widgets/card_title.dart';
 import 'package:sasuki/app/shared_widgets/dashboard_list_tile.dart';
+import 'package:sasuki/app/shared_widgets/double_back_to_exit_snackbar.dart';
 import 'package:sasuki/app/shared_widgets/get_custome_appbar.dart';
 import 'package:sasuki/domain/models/captcha/captcha.dart';
 import 'package:sasuki/domain/models/dashboard/auth.dart';
@@ -74,8 +78,8 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => Constants.falseBool,
+    return DoubleBackToCloseApp(
+      snackBar: doubleBackToExitSnackBar(),
       child: StreamBuilder<FlowState>(
         stream: _viewModel.outputState,
         builder: (context, AsyncSnapshot<FlowState> snapshot) {

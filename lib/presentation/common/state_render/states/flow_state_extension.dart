@@ -192,6 +192,7 @@ extension FlowStateExtension on FlowState {
           initLoginModule();
           WidgetsBinding.instance.addPostFrameCallback(
             (_) {
+              Navigator.of(context).popUntil((route) => route.isFirst);
               Nav.replaceTo(context, Routes.loginRoute);
             },
           );

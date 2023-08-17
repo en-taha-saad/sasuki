@@ -47,6 +47,7 @@ class _SplashViewState extends State<SplashView> {
     if (token != Constants.nullValue) {
       goToLoginIfExpire(JwtDecoder.isExpired(token!));
     }
+    Navigator.of(context).popUntil((route) => route.isFirst);
     Nav.replaceTo(context, Routes.dashboardRoute);
     return;
   }
@@ -56,6 +57,7 @@ class _SplashViewState extends State<SplashView> {
       if (isChosedServer != Constants.nullValue) {
         initChooseServerModule();
         // navigate to login
+        Navigator.of(context).popUntil((route) => route.isFirst);
         Nav.replaceTo(context, Routes.loginRoute);
       } else {
         Nav.replaceTo(context, Routes.chooseServerRoute);
@@ -69,6 +71,7 @@ class _SplashViewState extends State<SplashView> {
       _appPrefs.removeToken();
       initChooseServerModule();
       // navigate to login
+      Navigator.of(context).popUntil((route) => route.isFirst);
       Nav.replaceTo(context, Routes.loginRoute);
       return;
     }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,6 +18,7 @@ import 'package:sasuki/app/resources/values_manager/app_radius.dart';
 import 'package:sasuki/app/resources/values_manager/app_size.dart';
 import 'package:sasuki/app/shared_funs/change_status_bar_color.dart';
 import 'package:sasuki/app/shared_funs/get_data_from_base64string.dart';
+import 'package:sasuki/app/shared_widgets/double_back_to_exit_snackbar.dart';
 import 'package:sasuki/app/shared_widgets/elevated_button_widget.dart';
 import 'package:sasuki/app/shared_widgets/footer.dart';
 import 'package:sasuki/app/shared_widgets/password_input.dart';
@@ -78,6 +80,7 @@ class _LoginViewState extends State<LoginView> {
           SchedulerBinding.instance.addPostFrameCallback(
             (_) {
               _appPrefs.setIsUserLoggedIn();
+              Navigator.of(context).popUntil((route) => route.isFirst);
               Nav.replaceTo(context, Routes.dashboardRoute);
             },
           );
@@ -123,13 +126,13 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => Constants.falseBool,
+    return DoubleBackToCloseApp(
+      snackBar: doubleBackToExitSnackBar(),
       child: StreamBuilder<FlowState>(
           stream: _viewModel.outputState,
           builder: (context, AsyncSnapshot<FlowState> snapshot) {
-            return snapshot.data?.getScreenWidget(context, _getContentWidget(),
-                    () {
+            return snapshot.data
+                    ?.getScreenWidget(context, _getContentWidget(), () {
                   _viewModel.login();
                 }, stringToDismissDialog) ??
                 _getContentWidget();

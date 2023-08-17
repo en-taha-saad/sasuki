@@ -158,6 +158,7 @@ class DrawerView extends StatelessWidget {
           _appPrefs.removeToken();
           initChooseServerModule();
           initLoginModule();
+          Navigator.of(context).popUntil((route) => route.isFirst);
           Nav.replaceTo(context, Routes.loginRoute);
           break;
       }

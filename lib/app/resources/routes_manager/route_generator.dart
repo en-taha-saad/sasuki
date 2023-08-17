@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_activity_log_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_add_manager_module.dart';
 import 'package:sasuki/app/init_screens_dependencies/init_add_server_module.dart';
@@ -250,16 +251,12 @@ class RouteGenerator {
         );
 
       default:
-        return unDefinedRoute();
+        return MaterialPageRoute(
+          builder: (_) => const AppBackground(
+            child: SplashView(),
+          ),
+          settings: settings,
+        );
     }
-  }
-
-  static Route<dynamic> unDefinedRoute() {
-    initLoginModule();
-    return MaterialPageRoute(
-      builder: (_) => const AppBackground(
-        child: LoginView(),
-      ),
-    );
   }
 }

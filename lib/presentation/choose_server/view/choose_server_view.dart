@@ -169,7 +169,10 @@ class _ChooseServerViewState extends State<ChooseServerView> {
     );
   }
 
-  _continueToLogin() => Nav.replaceTo(context, Routes.loginRoute);
+  _continueToLogin() {
+    Navigator.of(context).popUntil((route) => route.isFirst);
+    Nav.replaceTo(context, Routes.loginRoute);
+  }
 
   void _addServer() => Nav.replaceTo(context, Routes.addServerRoute);
 
